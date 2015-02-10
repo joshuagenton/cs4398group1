@@ -1,11 +1,9 @@
 package ATM;
 
-import java.awt.GridBagLayout;
 import java.awt.Rectangle;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import javax.swing.JPasswordField;
 import java.awt.Color;

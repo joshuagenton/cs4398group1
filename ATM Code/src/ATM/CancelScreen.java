@@ -1,7 +1,6 @@
 package ATM;
 
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Rectangle;
 
 import javax.swing.JPanel;

@@ -1,20 +1,37 @@
 package ATM;
 
-import java.awt.BorderLayout;
 import javax.swing.JPanel;
-import javax.swing.JFrame;
+
 import java.awt.Dimension;
 import java.awt.Color;
-import java.util.Scanner;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.io.IOException;
+import javax.swing.JTextField;
 
-import javax.swing.JButton;
 
-public class WelcomeScreen extends JFrame {
+public class WelcomeScreen extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel jContentPane = null;  //  @jve:decl-index=0:visual-constraint="194,129"
-	private JButton gotoPin = null;
+	private JTextField cardinfo = null;
+	private stuff test = new stuff();
+	public ATMUML.CardReader card = new ATMUML.CardReader();
+	
+	public String getText () {
+		return cardinfo.getText();
+		
+	}
+	class stuff extends JPanel {
+		private static final long serialVersionUID = 1L;
 
+		public void paintComponent(Graphics shapes) {
+			//super.paint(shapes);
+			shapes.setColor(Color.BLUE);
+			shapes.setFont(new Font("TimesRoman",Font.BOLD,48));
+			shapes.drawString("Welcome to First National Group1 ATM", getWidth()/4-25, getHeight()/3);
+			shapes.drawString("Please slide your card to continue", getWidth()/4+25, getHeight()/3+50);
+		}
+	}
 	/**
 	 * This is the default constructor
 	 */
@@ -29,45 +46,42 @@ public class WelcomeScreen extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setExtendedState(MAXIMIZED_BOTH);
-		this.setContentPane(getGotoPin());
+		//this.setExtendedState(MAXIMIZED_BOTH);
 		this.setBackground(new Color(0, 85, 255));
-		this.setSize(new Dimension(392, 150));
-		this.setTitle("Welcome");
+		this.add(getCardinfo());
+		this.setSize(new Dimension(527, 265));
+		//this.setTitle("Welcome");
 		this.setVisible(true);
-	}
-
-	/**
-	 * This method initializes jContentPane
-	 * 
-	 * @return javax.swing.JPanel
-	 */
-	private JPanel getJContentPane() {
-		if (jContentPane == null) {
-			jContentPane = new JPanel();
-			jContentPane.setLayout(new BorderLayout());
-		}
-		return jContentPane;
-	}
-
-	/**
-	 * This method initializes gotoPin	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
-	private JButton getGotoPin() {
-		if (gotoPin == null) {
-			gotoPin = new JButton();
-			gotoPin.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					String cardRead;
-					Scanner in = new Scanner(System.in);
-					cardRead = in.nextLine();
-					System.out.print(cardRead);
+		add(test);
+		cardinfo.requestFocusInWindow();
+		
+		cardinfo.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				System.out.println(cardinfo.getText()); // TODO Auto-generated Event stub actionPerformed()
+				try {
+					card.read(cardinfo.getText());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
-			});
-		}
-		return gotoPin;
+				cardinfo.setText("");
+			
+			}
+		});
 	}
 
-}  //  @jve:decl-index=0:visual-constraint="214,10"
+	/**
+	 * This method initializes cardinfo	
+	 * 	
+	 * @return javax.swing.JTextField	
+	 */
+	private JTextField getCardinfo() {
+		if (cardinfo == null) {
+			cardinfo = new JTextField();
+			cardinfo.setBackground(Color.lightGray);
+			cardinfo.setSize(new Dimension(527, 265));
+		}
+		return cardinfo;
+	}
+    }  //  @jve:decl-index=0:visual-constraint="0,57"
+  //  @jve:decl-index=0:visual-constraint="18,-31"

@@ -1499,6 +1499,7 @@
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_WgHM8a2UEeS87JiDPeopPw" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_WgHM8K2UEeS87JiDPeopPw" value="1"/>
       </ownedAttribute>
+      <ownedOperation xmi:id="_IetLoLMOEeSe9sOjSVtpNw" name="GetCard"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Association" xmi:id="_jVJGAK2REeS87JiDPeopPw" memberEnd="_jVJGAa2REeS87JiDPeopPw _jVJGBK2REeS87JiDPeopPw"/>
     <packagedElement xmi:type="uml:Association" xmi:id="_khEtoK2REeS87JiDPeopPw" memberEnd="_khEtoa2REeS87JiDPeopPw _khOeoK2REeS87JiDPeopPw"/>

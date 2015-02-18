@@ -5,6 +5,8 @@ package ATMUML;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 import javax.swing.JFrame;
@@ -18,7 +20,8 @@ import javax.swing.JFrame;
 public class Screens extends JFrame{
 
 	private static final long serialVersionUID = 1L;
-	public static CardReader readCard = new CardReader();
+	private static CardReader readCard = new CardReader();
+	private static String pinNum = null;
 
 	public Screens() {
 		super();
@@ -32,13 +35,31 @@ public class Screens extends JFrame{
 		while (welcome.card.done == false) {
 			Thread.sleep(500);
 		}
+		welcome.setVisible(false);
 		readCard = welcome.card;
+		welcome = null;
+		final ATM.PINScreen pin = new ATM.PINScreen(readCard.track1_cardholder);
+		mainWindow.add(pin);
+		pin.setVisible(true);
+		mainWindow.repaint();
+		while (pin.getPinNum() == null)
+		{
+			Thread.sleep(500);
+		}
+		pin.setVisible(false);
 		
-		//System.in.read();
-		//readCard.read();
-		System.out.print("OUTPUT");
-		System.out.println(readCard.track1);
+		if(pin.getPinNum().toString() == "Cancel") {
+			pinNum = pin.getPinNum().toString();
+		}
+		else {
+			pinNum = pin.getPinNum().toString();
+		}
+
+		System.out.println(pin.getPinNum());
+		System.exit(0);
+
 	}
+	
 	private void initialize() {
 		this.setExtendedState(MAXIMIZED_BOTH);
 		this.setBackground(new Color(0, 85, 255));

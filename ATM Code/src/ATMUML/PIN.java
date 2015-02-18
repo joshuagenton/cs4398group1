@@ -10,6 +10,10 @@ package ATMUML;
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class PIN extends Screens {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->

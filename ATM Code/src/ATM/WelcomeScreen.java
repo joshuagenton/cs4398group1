@@ -8,21 +8,26 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.io.IOException;
 import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.ComponentOrientation;
+import javax.swing.SwingConstants;
 
 
 public class WelcomeScreen extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JTextField cardinfo = null;
-	private stuff test = new stuff();
-	public ATMUML.CardReader card = new ATMUML.CardReader();
+	public JTextField cardinfo = null;
+//	private stuff test = null;
+	public ATMUML.CardReader card = new ATMUML.CardReader();  //  @jve:decl-index=0:
+	private JButton TestPhilip = null;
+	private JButton ChrisTest = null;
 	
 	public String getText () {
 		return cardinfo.getText();
 		
 	}
-	class stuff extends JPanel {
-		private static final long serialVersionUID = 1L;
+	//class stuff extends JPanel {
+	//	private static final long serialVersionUID = 1L;
 
 		public void paintComponent(Graphics shapes) {
 			//super.paint(shapes);
@@ -31,7 +36,7 @@ public class WelcomeScreen extends JPanel {
 			shapes.drawString("Welcome to First National Group1 ATM", getWidth()/4-25, getHeight()/3);
 			shapes.drawString("Please slide your card to continue", getWidth()/4+25, getHeight()/3+50);
 		}
-	}
+//	}
 	/**
 	 * This is the default constructor
 	 */
@@ -47,12 +52,14 @@ public class WelcomeScreen extends JPanel {
 	 */
 	private void initialize() {
 		//this.setExtendedState(MAXIMIZED_BOTH);
-		this.setBackground(new Color(0, 85, 255));
-		this.add(getCardinfo());
+		this.setBackground(new Color(122, 58, 255));
 		this.setSize(new Dimension(527, 265));
 		//this.setTitle("Welcome");
 		this.setVisible(true);
-		add(test);
+
+		this.add(getTestPhilip(), null);
+		this.add(getCardinfo(), getCardinfo().getName());
+		this.add(getChrisTest(), null);
 		cardinfo.requestFocusInWindow();
 		
 		cardinfo.addActionListener(new java.awt.event.ActionListener() {
@@ -68,6 +75,9 @@ public class WelcomeScreen extends JPanel {
 			
 			}
 		});
+		paintComponents(null);
+	//	this.add(test);
+	//	test.setVisible(true);
 	}
 
 	/**
@@ -79,9 +89,65 @@ public class WelcomeScreen extends JPanel {
 		if (cardinfo == null) {
 			cardinfo = new JTextField();
 			cardinfo.setBackground(Color.lightGray);
+			cardinfo.setPreferredSize(new Dimension(0, 0));
 			cardinfo.setSize(new Dimension(527, 265));
+
 		}
 		return cardinfo;
 	}
-    }  //  @jve:decl-index=0:visual-constraint="0,57"
+
+	/**
+	 * This method initializes TestPhilip	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getTestPhilip() {
+		if (TestPhilip == null) {
+			TestPhilip = new JButton();
+			TestPhilip.setPreferredSize(new Dimension(75, 20));
+			TestPhilip.setFont(new Font("Dialog", Font.BOLD, 8));
+			TestPhilip.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+			TestPhilip.setHorizontalAlignment(SwingConstants.LEFT);
+			TestPhilip.setText("Philip Test");
+			TestPhilip.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseClicked(java.awt.event.MouseEvent e) {
+					cardinfo.setText("%B6391480100325586  ^WATERS/PHILIP T           ^4912120?;6391480100325586=4912120?+202=034903800=00?");
+					try {
+						card.read(cardinfo.getText());
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			});
+		}
+		return TestPhilip;
+	}
+
+	/**
+	 * This method initializes ChrisTest	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getChrisTest() {
+		if (ChrisTest == null) {
+			ChrisTest = new JButton();
+			ChrisTest.setPreferredSize(new Dimension(75, 20));
+			ChrisTest.setFont(new Font("Dialog", Font.BOLD, 8));
+			ChrisTest.setText("Chris Test");
+			ChrisTest.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseClicked(java.awt.event.MouseEvent e) {
+					cardinfo.setText("%T6391480001052388  ^WELLS/CHRISTOPHER         ^4912160?;6391480001052388=4912160?+202=411558900=00?");
+					try {
+						card.read(cardinfo.getText());
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			});
+		}
+		return ChrisTest;
+	}
+    }  //  @jve:decl-index=0:visual-constraint="33,21"
   //  @jve:decl-index=0:visual-constraint="18,-31"

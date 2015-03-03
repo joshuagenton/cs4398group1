@@ -2,6 +2,8 @@ package ATMUML.View;
 
 import java.io.IOException;
 
+import ATMUML.Controller.card_reader;
+
 public class Driver {
 	
 	

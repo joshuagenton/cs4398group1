@@ -3,6 +3,7 @@
  */
 package ATMUML.View;
 
+import ATMUML.Controller.card_reader;
 import ATMUML.Model.atm_core;
 
 /** 

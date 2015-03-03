@@ -355,28 +355,6 @@
                 <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_Chl1cbPpEeSe9sOjSVtpNw" fontName="Segoe UI" showStereotype="Label"/>
                 <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Chl1crPpEeSe9sOjSVtpNw" x="1506" y="795" width="3592" height="4471"/>
               </children>
-              <children xmi:id="_fRPZcMEeEeSw-7N3OI4vAg" element="_xh0qUcEdEeSw-7N3OI4vAg">
-                <children xmi:id="_fRPZc8EeEeSw-7N3OI4vAg" type="ImageCompartment">
-                  <layoutConstraint xmi:type="notation:Size" xmi:id="_fRPZdMEeEeSw-7N3OI4vAg" width="1320" height="1320"/>
-                </children>
-                <children xmi:id="_fRPZdcEeEeSw-7N3OI4vAg" type="Stereotype"/>
-                <children xmi:id="_fRPZdsEeEeSw-7N3OI4vAg" type="Name"/>
-                <children xmi:id="_fRPZd8EeEeSw-7N3OI4vAg" type="Parent"/>
-                <children xmi:id="_fRPZeMEeEeSw-7N3OI4vAg" type="AttributeCompartment">
-                  <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_fRPZecEeEeSw-7N3OI4vAg"/>
-                </children>
-                <children xmi:id="_fRZKcMEeEeSw-7N3OI4vAg" type="OperationCompartment">
-                  <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_fRZKccEeEeSw-7N3OI4vAg"/>
-                </children>
-                <children xmi:id="_fRZKcsEeEeSw-7N3OI4vAg" visible="false" type="SignalCompartment">
-                  <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_fRZKc8EeEeSw-7N3OI4vAg"/>
-                </children>
-                <children xmi:id="_fRZKdMEeEeSw-7N3OI4vAg" visible="false" type="StructureCompartment">
-                  <styles xmi:type="umlnotation:UMLShapeCompartmentStyle" xmi:id="_fRZKdcEeEeSw-7N3OI4vAg"/>
-                </children>
-                <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_fRPZccEeEeSw-7N3OI4vAg" fontName="Segoe UI" showStereotype="Label"/>
-                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fRPZcsEeEeSw-7N3OI4vAg" x="1189" y="5842"/>
-              </children>
               <styles xmi:type="umlnotation:UMLShapeCompartmentStyle" xmi:id="_9YxnlrymEeSy7fAcRsFCVw" canonical="false"/>
             </children>
             <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_9Yn2kbymEeSy7fAcRsFCVw" fontName="Segoe UI" showStereotype="Label"/>
@@ -522,10 +500,32 @@
                 <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_WhmMsbWBEeSe9sOjSVtpNw" fontName="Segoe UI" showStereotype="Label"/>
                 <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WhmMsrWBEeSe9sOjSVtpNw" x="5545" y="158"/>
               </children>
+              <children xmi:id="_fRPZcMEeEeSw-7N3OI4vAg" element="_xh0qUcEdEeSw-7N3OI4vAg">
+                <children xmi:id="_fRPZc8EeEeSw-7N3OI4vAg" type="ImageCompartment">
+                  <layoutConstraint xmi:type="notation:Size" xmi:id="_fRPZdMEeEeSw-7N3OI4vAg" width="1320" height="1320"/>
+                </children>
+                <children xmi:id="_fRPZdcEeEeSw-7N3OI4vAg" type="Stereotype"/>
+                <children xmi:id="_fRPZdsEeEeSw-7N3OI4vAg" type="Name"/>
+                <children xmi:id="_fRPZd8EeEeSw-7N3OI4vAg" type="Parent"/>
+                <children xmi:id="_fRPZeMEeEeSw-7N3OI4vAg" type="AttributeCompartment">
+                  <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_fRPZecEeEeSw-7N3OI4vAg"/>
+                </children>
+                <children xmi:id="_fRZKcMEeEeSw-7N3OI4vAg" type="OperationCompartment">
+                  <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_fRZKccEeEeSw-7N3OI4vAg"/>
+                </children>
+                <children xmi:id="_fRZKcsEeEeSw-7N3OI4vAg" visible="false" type="SignalCompartment">
+                  <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_fRZKc8EeEeSw-7N3OI4vAg"/>
+                </children>
+                <children xmi:id="_fRZKdMEeEeSw-7N3OI4vAg" visible="false" type="StructureCompartment">
+                  <styles xmi:type="umlnotation:UMLShapeCompartmentStyle" xmi:id="_fRZKdcEeEeSw-7N3OI4vAg"/>
+                </children>
+                <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_fRPZccEeEeSw-7N3OI4vAg" fontName="Segoe UI" showStereotype="Label"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fRPZcsEeEeSw-7N3OI4vAg" x="5533" y="7713"/>
+              </children>
               <styles xmi:type="umlnotation:UMLShapeCompartmentStyle" xmi:id="_TMkrFrynEeSy7fAcRsFCVw" canonical="false"/>
             </children>
             <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_TMbhJLynEeSy7fAcRsFCVw" fontName="Segoe UI" showStereotype="Label"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TMbhJbynEeSy7fAcRsFCVw" x="1902" y="17117" width="11505" height="8597"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TMbhJbynEeSy7fAcRsFCVw" x="1585" y="7291" width="12140" height="15264"/>
           </children>
           <styles xmi:type="umlnotation:UMLDiagramStyle" xmi:id="_wNwuIq1YEeSWG9iusLNEzw"/>
           <element xsi:nil="true"/>
@@ -929,57 +929,6 @@
             <element xsi:nil="true"/>
           </contents>
         </eAnnotations>
-        <packagedElement xmi:type="uml:Class" xmi:id="_xh0qUcEdEeSw-7N3OI4vAg" name="card_reader">
-          <ownedAttribute xmi:id="_xjmzAsEdEeSw-7N3OI4vAg" name="card_holder" visibility="private">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-            <defaultValue xmi:type="uml:LiteralNull" xmi:id="_xjmzA8EdEeSw-7N3OI4vAg"/>
-          </ownedAttribute>
-          <ownedAttribute xmi:id="_xjmzBMEdEeSw-7N3OI4vAg" name="ccn" visibility="private">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-            <defaultValue xmi:type="uml:LiteralNull" xmi:id="_xjmzBcEdEeSw-7N3OI4vAg"/>
-          </ownedAttribute>
-          <ownedAttribute xmi:id="_xjmzBsEdEeSw-7N3OI4vAg" name="formatter" visibility="private">
-            <type xmi:type="uml:Class" href="mmi:///#jbintype%5Ename=java.text.DateFormat%5Bproject%5Eid=ATM%20Code%5D$uml.Class"/>
-            <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_xjmzB8EdEeSw-7N3OI4vAg">
-              <language></language>
-              <body>new SimpleDateFormat(&quot;MM/dd/yyyy&quot;)</body>
-            </defaultValue>
-          </ownedAttribute>
-          <ownedAttribute xmi:id="_xjmzCMEdEeSw-7N3OI4vAg" name="expDate" visibility="private">
-            <type xmi:type="uml:Class" href="mmi:///#jbintype%5Ename=java.util.Date%5Bproject%5Eid=ATM%20Code%5D$uml.Class"/>
-            <defaultValue xmi:type="uml:LiteralNull" xmi:id="_xjmzCcEdEeSw-7N3OI4vAg"/>
-          </ownedAttribute>
-          <ownedAttribute xmi:id="_xjmzCsEdEeSw-7N3OI4vAg" name="login_Interface" visibility="private" type="_xhX-YcEdEeSw-7N3OI4vAg"/>
-          <ownedAttribute xmi:id="_xjmzC8EdEeSw-7N3OI4vAg" name="expDateString" visibility="public" isReadOnly="true" isDerived="true">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-          </ownedAttribute>
-          <ownedAttribute xmi:id="_hscQk8EeEeSw-7N3OI4vAg" name="login_Interface2" visibility="private" type="_ChcrgLPpEeSe9sOjSVtpNw" association="_hsTGoMEeEeSw-7N3OI4vAg">
-            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_hscQlcEeEeSw-7N3OI4vAg" value="1"/>
-            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_hscQlMEeEeSw-7N3OI4vAg" value="1"/>
-          </ownedAttribute>
-          <ownedOperation xmi:id="_xjmzDMEdEeSw-7N3OI4vAg" name="card_reader" visibility="public">
-            <ownedParameter xmi:id="_xjmzDcEdEeSw-7N3OI4vAg" name="cardRead">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-            </ownedParameter>
-            <raisedException xmi:type="uml:Class" href="mmi:///#jbintype%5Ename=java.io.IOException%5Bproject%5Eid=ATM%20Code%5D$uml.Class"/>
-          </ownedOperation>
-          <ownedOperation xmi:id="_xjmzDsEdEeSw-7N3OI4vAg" name="read_card" visibility="public"/>
-          <ownedOperation xmi:id="_xjmzD8EdEeSw-7N3OI4vAg" name="read" visibility="public">
-            <raisedException xmi:type="uml:Class" href="mmi:///#jbintype%5Ename=java.io.IOException%5Bproject%5Eid=ATM%20Code%5D$uml.Class"/>
-          </ownedOperation>
-          <ownedOperation xmi:id="_xjmzEMEdEeSw-7N3OI4vAg" name="read" visibility="public">
-            <ownedParameter xmi:id="_xjmzEcEdEeSw-7N3OI4vAg" name="s">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-            </ownedParameter>
-            <raisedException xmi:type="uml:Class" href="mmi:///#jbintype%5Ename=java.io.IOException%5Bproject%5Eid=ATM%20Code%5D$uml.Class"/>
-          </ownedOperation>
-          <ownedOperation xmi:id="_xjmzEsEdEeSw-7N3OI4vAg" name="readcont" visibility="public">
-            <ownedParameter xmi:id="_xjwkAMEdEeSw-7N3OI4vAg" name="s">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-            </ownedParameter>
-            <raisedException xmi:type="uml:Class" href="mmi:///#jbintype%5Ename=java.io.IOException%5Bproject%5Eid=ATM%20Code%5D$uml.Class"/>
-          </ownedOperation>
-        </packagedElement>
         <packagedElement xmi:type="uml:Class" xmi:id="_mMgZwLPpEeSe9sOjSVtpNw" name="user_interface">
           <ownedAttribute xmi:id="_hw4agrV_EeSe9sOjSVtpNw" name="session" visibility="private" type="_ua4JYLPpEeSe9sOjSVtpNw" association="_hwvQkLV_EeSe9sOjSVtpNw">
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_hxLVcbV_EeSe9sOjSVtpNw" value="1"/>
@@ -1064,6 +1013,57 @@
         <packagedElement xmi:type="uml:Class" xmi:id="_Whh7QLWBEeSe9sOjSVtpNw" name="withdrawl">
           <generalization xmi:id="_vAaE8LWBEeSe9sOjSVtpNw" general="_e9V50LPoEeSe9sOjSVtpNw"/>
           <ownedOperation xmi:id="_XudocLWBEeSe9sOjSVtpNw" name="withdrawl"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_xh0qUcEdEeSw-7N3OI4vAg" name="card_reader">
+          <ownedAttribute xmi:id="_xjmzAsEdEeSw-7N3OI4vAg" name="card_holder" visibility="private">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+            <defaultValue xmi:type="uml:LiteralNull" xmi:id="_xjmzA8EdEeSw-7N3OI4vAg"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="_xjmzBMEdEeSw-7N3OI4vAg" name="ccn" visibility="private">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+            <defaultValue xmi:type="uml:LiteralNull" xmi:id="_xjmzBcEdEeSw-7N3OI4vAg"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="_xjmzBsEdEeSw-7N3OI4vAg" name="formatter" visibility="private">
+            <type xmi:type="uml:Class" href="mmi:///#jbintype%5Ename=java.text.DateFormat%5Bproject%5Eid=ATM%20Code%5D$uml.Class"/>
+            <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_xjmzB8EdEeSw-7N3OI4vAg">
+              <language></language>
+              <body>new SimpleDateFormat(&quot;MM/dd/yyyy&quot;)</body>
+            </defaultValue>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="_xjmzCMEdEeSw-7N3OI4vAg" name="expDate" visibility="private">
+            <type xmi:type="uml:Class" href="mmi:///#jbintype%5Ename=java.util.Date%5Bproject%5Eid=ATM%20Code%5D$uml.Class"/>
+            <defaultValue xmi:type="uml:LiteralNull" xmi:id="_xjmzCcEdEeSw-7N3OI4vAg"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="_xjmzCsEdEeSw-7N3OI4vAg" name="login_Interface" visibility="private" type="_xhX-YcEdEeSw-7N3OI4vAg"/>
+          <ownedAttribute xmi:id="_xjmzC8EdEeSw-7N3OI4vAg" name="expDateString" visibility="public" isReadOnly="true" isDerived="true">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="_hscQk8EeEeSw-7N3OI4vAg" name="login_Interface2" visibility="private" type="_ChcrgLPpEeSe9sOjSVtpNw" association="_hsTGoMEeEeSw-7N3OI4vAg">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_hscQlcEeEeSw-7N3OI4vAg" value="1"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_hscQlMEeEeSw-7N3OI4vAg" value="1"/>
+          </ownedAttribute>
+          <ownedOperation xmi:id="_xjmzDMEdEeSw-7N3OI4vAg" name="card_reader" visibility="public">
+            <ownedParameter xmi:id="_xjmzDcEdEeSw-7N3OI4vAg" name="cardRead">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+            </ownedParameter>
+            <raisedException xmi:type="uml:Class" href="mmi:///#jbintype%5Ename=java.io.IOException%5Bproject%5Eid=ATM%20Code%5D$uml.Class"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xjmzDsEdEeSw-7N3OI4vAg" name="read_card" visibility="public"/>
+          <ownedOperation xmi:id="_xjmzD8EdEeSw-7N3OI4vAg" name="read" visibility="public">
+            <raisedException xmi:type="uml:Class" href="mmi:///#jbintype%5Ename=java.io.IOException%5Bproject%5Eid=ATM%20Code%5D$uml.Class"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xjmzEMEdEeSw-7N3OI4vAg" name="read" visibility="public">
+            <ownedParameter xmi:id="_xjmzEcEdEeSw-7N3OI4vAg" name="s">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+            </ownedParameter>
+            <raisedException xmi:type="uml:Class" href="mmi:///#jbintype%5Ename=java.io.IOException%5Bproject%5Eid=ATM%20Code%5D$uml.Class"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xjmzEsEdEeSw-7N3OI4vAg" name="readcont" visibility="public">
+            <ownedParameter xmi:id="_xjwkAMEdEeSw-7N3OI4vAg" name="s">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+            </ownedParameter>
+            <raisedException xmi:type="uml:Class" href="mmi:///#jbintype%5Ename=java.io.IOException%5Bproject%5Eid=ATM%20Code%5D$uml.Class"/>
+          </ownedOperation>
         </packagedElement>
       </packagedElement>
     </packagedElement>

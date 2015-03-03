@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ATMUML.View;
+package ATMUML.Controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,6 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+
+import ATMUML.View.Login_Interface;
 
 /** 
  * <!-- begin-UML-doc -->

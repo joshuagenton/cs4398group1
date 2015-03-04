@@ -1147,6 +1147,9 @@
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dxrTAMIBEeSpLsUXWKAT5w" value="*"/>
             <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dxqr8MIBEeSpLsUXWKAT5w"/>
           </ownedAttribute>
+          <ownedAttribute xmi:id="_gbXcoMICEeSRruxOKpgK-A" name="connectionString" visibility="private">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedAttribute>
           <ownedOperation xmi:id="_a00SkMH8EeSpLsUXWKAT5w" name="validate_user"/>
           <ownedOperation xmi:id="_dKnsUMH8EeSpLsUXWKAT5w" name="balance"/>
           <ownedOperation xmi:id="_n6w1IMH8EeSpLsUXWKAT5w" name="deposit"/>

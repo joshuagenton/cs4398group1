@@ -11,7 +11,6 @@ import ATMUML.Controller.data_basecontroller;
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->
  * @author CSWells
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class atm_core {
 	/** 
@@ -20,7 +19,7 @@ public class atm_core {
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	private Object account_number;
-
+	private Integer PIN;
 	/** 
 	 * @return the account_number
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
@@ -161,9 +160,7 @@ public class atm_core {
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public data_basecontroller getData_baseinterface() {
-		// begin-user-code
 		return data_baseinterface;
-		// end-user-code
 	}
 
 	/** 
@@ -171,9 +168,8 @@ public class atm_core {
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public void setData_baseinterface(data_basecontroller data_baseinterface) {
-		// begin-user-code
 		this.data_baseinterface = data_baseinterface;
-		// end-user-code
+		data_baseinterface.validate_user(account_number, PIN);
 	}
 
 	/** 
@@ -182,10 +178,11 @@ public class atm_core {
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public void start_login() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		setLogin_Interface(new Login_Interface()); 
+		account_number = getLogin_Interface().getAccount_number();
+		PIN = getLogin_Interface().get_PIN();
+		
+		setData_baseinterface(new data_basecontroller());
 	}
 
 	/** 

@@ -3,6 +3,10 @@
  */
 package ATMUML.View;
 
+import java.io.IOException;
+import java.util.Date;
+import java.util.Scanner;
+
 import ATMUML.Controller.card_reader;
 import ATMUML.Model.atm_core;
 
@@ -12,6 +16,11 @@ import ATMUML.Model.atm_core;
  * @author CSWells
  */
 public class Login_Interface {
+	
+	public Login_Interface() {
+		read_card();
+		set_pin();
+	}	
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
@@ -127,9 +136,7 @@ public class Login_Interface {
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public Object getAccount_number() {
-		// begin-user-code
 		return account_number;
-		// end-user-code
 	}
 
 	/** 
@@ -137,9 +144,7 @@ public class Login_Interface {
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public void setAccount_number(Object account_number) {
-		// begin-user-code
 		this.account_number = account_number;
-		// end-user-code
 	}
 
 	/** 
@@ -148,23 +153,38 @@ public class Login_Interface {
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public void read_card() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		Scanner cardin = new Scanner(System.in);
+		card_reader cardRead = null;
+		//String test = "%T6391480001052388  ^WELLS/CHRISTOPHER         ^4912160?;6391480001052388=4912160?+202=411558900=00?";
+		System.out.println("Scan your Card: ");
+		try {
+			cardRead = new card_reader(cardin.nextLine());
+			setLogin_start_time(new Date());
+		} catch (IOException e) {
+			System.out.println("Card Read Error: " + e.getMessage());
+		}
+		System.out.println("Cardholder: " + cardRead.getCard_holder());
+		System.out.println("CCN: " + cardRead.getCcn());
+		System.out.println("EXP: " + cardRead.getExpDateString());
+		System.out.println(getLogin_start_time().toString());
+		
+		setAccount_number(cardRead.getCcn());
 	}
-
+	private Integer PIN;
+	
+	public void set_pin() {
+		Scanner pinIn = new Scanner(System.in);
+		System.out.println("Enter PIN: ");
+		this.PIN = pinIn.nextInt();
+	}
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void get_pin() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public Integer get_PIN() {
+		return this.PIN;
 	}
+
 
 	/** 
 	 * <!-- begin-UML-doc -->

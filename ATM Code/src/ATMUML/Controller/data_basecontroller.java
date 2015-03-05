@@ -4,14 +4,22 @@
 package ATMUML.Controller;
 
 import java.util.Set;
+import java.sql.*;
 
 /** 
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->
  * @author CSWells
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class data_basecontroller {
+	
+	   // JDBC driver name and database URL
+	   static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
+	   static final String DB_URL = "jdbc:mysql://localhost/EMP";
+
+	   //  Database credentials
+	   static final String USER = "username";
+	   static final String PASS = "password";
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
@@ -46,13 +54,13 @@ public class data_basecontroller {
 	 *     collection_type="ATMUML.Model.atm_core"
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private Set atm_core;
+	private Set<?> atm_core;
 
 	/** 
 	 * @return the atm_core
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public Set getAtm_core() {
+	public Set<?> getAtm_core() {
 		// begin-user-code
 		return atm_core;
 		// end-user-code
@@ -62,7 +70,7 @@ public class data_basecontroller {
 	 * @param atm_core the atm_core to set
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void setAtm_core(Set atm_core) {
+	public void setAtm_core(Set<?> atm_core) {
 		// begin-user-code
 		this.atm_core = atm_core;
 		// end-user-code
@@ -98,12 +106,29 @@ public class data_basecontroller {
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 * @!generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void validate_user() {
+	public int validate_user(Object account, Integer PIN) {
 		// begin-user-code
-		// TODO Auto-generated method stub
-
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+			Class.forName(JDBC_DRIVER);
+			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			stmt = conn.createStatement();
+			String query = "SELECT ACCOUNT(COUNT(1) AS BIT) FROM ACCTINFO WHERE ACCOUNTNO = '" + account + "' AND PINNO = "+ PIN;
+			ResultSet rs= stmt.executeQuery(query);
+			
+			return rs.getInt("BIT");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+		
 		// end-user-code
 	}
 

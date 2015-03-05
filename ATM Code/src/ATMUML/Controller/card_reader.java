@@ -25,6 +25,27 @@ public class card_reader {
 	private String card_holder = null;
 	private String ccn = null;
 	private DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+
+	/** 
+	 * @return the formatter
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
+	public DateFormat getFormatter() {
+		// begin-user-code
+		return formatter;
+		// end-user-code
+	}
+
+	/** 
+	 * @param formatter the formatter to set
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
+	public void setFormatter(DateFormat formatter) {
+		// begin-user-code
+		this.formatter = formatter;
+		// end-user-code
+	}
+
 	private Date expDate = null;
 
 	public card_reader(String cardRead) throws IOException {
@@ -265,10 +286,47 @@ public class card_reader {
 		return expDate;
 	}
 
+	/** 
+	 * @param expDate the expDate to set
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
+	public void setExpDate(Date expDate) {
+		// begin-user-code
+		this.expDate = expDate;
+		// end-user-code
+	}
+
 	public String getExpDateString() {
 
 		Calendar cdr = new GregorianCalendar();
 		cdr.setTime(getExpDate());
 		return ((cdr.get(Calendar.MONTH) + 1) + "/" + cdr.get(Calendar.YEAR));
+	}
+
+	/** 
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
+	private Login_Interface login_Interface2;
+
+	/** 
+	 * @return the login_Interface2
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
+	public Login_Interface getLogin_Interface2() {
+		// begin-user-code
+		return login_Interface2;
+		// end-user-code
+	}
+
+	/** 
+	 * @param login_Interface2 the login_Interface2 to set
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
+	public void setLogin_Interface2(Login_Interface login_Interface2) {
+		// begin-user-code
+		this.login_Interface2 = login_Interface2;
+		// end-user-code
 	}
 }

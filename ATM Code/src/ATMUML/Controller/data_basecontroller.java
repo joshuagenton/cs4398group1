@@ -1,11 +1,9 @@
 /**
  * 
  */
-package ATMUML.Model;
+package ATMUML.Controller;
 
-import ATMUML.View.Login_Interface;
-import ATMUML.Controller.account_operation;
-import ATMUML.Controller.data_basecontroller;
+import java.util.Set;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -13,85 +11,60 @@ import ATMUML.Controller.data_basecontroller;
  * @author CSWells
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
-public class atm_core {
+public class data_basecontroller {
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private Object account_number;
+	private Object session_timeout_length;
 
 	/** 
-	 * @return the account_number
+	 * @return the session_timeout_length
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public Object getAccount_number() {
+	public Object getSession_timeout_length() {
 		// begin-user-code
-		return account_number;
+		return session_timeout_length;
 		// end-user-code
 	}
 
 	/** 
-	 * @param account_number the account_number to set
+	 * @param session_timeout_length the session_timeout_length to set
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void setAccount_number(Object account_number) {
+	public void setSession_timeout_length(Object session_timeout_length) {
 		// begin-user-code
-		this.account_number = account_number;
-		// end-user-code
-	}
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private Object account_validated;
-
-	/** 
-	 * @return the account_validated
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public Object getAccount_validated() {
-		// begin-user-code
-		return account_validated;
-		// end-user-code
-	}
-
-	/** 
-	 * @param account_validated the account_validated to set
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setAccount_validated(Object account_validated) {
-		// begin-user-code
-		this.account_validated = account_validated;
+		this.session_timeout_length = session_timeout_length;
 		// end-user-code
 	}
 
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
+	 * @uml.annotations for <code>atm_core</code>
+	 *     collection_type="ATMUML.Model.atm_core"
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private Login_Interface login_Interface;
+	private Set atm_core;
 
 	/** 
-	 * @return the login_Interface
+	 * @return the atm_core
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public Login_Interface getLogin_Interface() {
+	public Set getAtm_core() {
 		// begin-user-code
-		return login_Interface;
+		return atm_core;
 		// end-user-code
 	}
 
 	/** 
-	 * @param login_Interface the login_Interface to set
+	 * @param atm_core the atm_core to set
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void setLogin_Interface(Login_Interface login_Interface) {
+	public void setAtm_core(Set atm_core) {
 		// begin-user-code
-		this.login_Interface = login_Interface;
+		this.atm_core = atm_core;
 		// end-user-code
 	}
 
@@ -100,52 +73,25 @@ public class atm_core {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private account_operation account_interface;
+	private String connectionString;
 
 	/** 
-	 * @return the account_interface
+	 * @return the connectionString
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public account_operation getAccount_interface() {
+	public String getConnectionString() {
 		// begin-user-code
-		return account_interface;
+		return connectionString;
 		// end-user-code
 	}
 
 	/** 
-	 * @param account_interface the account_interface to set
+	 * @param connectionString the connectionString to set
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void setAccount_interface(account_operation account_interface) {
+	public void setConnectionString(String connectionString) {
 		// begin-user-code
-		this.account_interface = account_interface;
-		// end-user-code
-	}
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private Session session;
-
-	/** 
-	 * @return the session
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public Session getSession() {
-		// begin-user-code
-		return session;
-		// end-user-code
-	}
-
-	/** 
-	 * @param session the session to set
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setSession(Session session) {
-		// begin-user-code
-		this.session = session;
+		this.connectionString = connectionString;
 		// end-user-code
 	}
 
@@ -154,34 +100,7 @@ public class atm_core {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private data_basecontroller data_baseinterface;
-
-	/** 
-	 * @return the data_baseinterface
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public data_basecontroller getData_baseinterface() {
-		// begin-user-code
-		return data_baseinterface;
-		// end-user-code
-	}
-
-	/** 
-	 * @param data_baseinterface the data_baseinterface to set
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setData_baseinterface(data_basecontroller data_baseinterface) {
-		// begin-user-code
-		this.data_baseinterface = data_baseinterface;
-		// end-user-code
-	}
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void start_login() {
+	public void validate_user() {
 		// begin-user-code
 		// TODO Auto-generated method stub
 
@@ -193,7 +112,67 @@ public class atm_core {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void start_session() {
+	public void balance() {
+		// begin-user-code
+		// TODO Auto-generated method stub
+
+		// end-user-code
+	}
+
+	/** 
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
+	public void deposit() {
+		// begin-user-code
+		// TODO Auto-generated method stub
+
+		// end-user-code
+	}
+
+	/** 
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
+	public void withdrawl() {
+		// begin-user-code
+		// TODO Auto-generated method stub
+
+		// end-user-code
+	}
+
+	/** 
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
+	public void transfer() {
+		// begin-user-code
+		// TODO Auto-generated method stub
+
+		// end-user-code
+	}
+
+	/** 
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
+	public void transaction_history() {
+		// begin-user-code
+		// TODO Auto-generated method stub
+
+		// end-user-code
+	}
+
+	/** 
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
+	public void renew_session() {
 		// begin-user-code
 		// TODO Auto-generated method stub
 

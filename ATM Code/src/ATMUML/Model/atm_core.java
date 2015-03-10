@@ -18,13 +18,13 @@ public class atm_core {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private Object account_number;
-	private Integer PIN;
+	private String account_number;
+	private String PIN;
 	/** 
 	 * @return the account_number
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public Object getAccount_number() {
+	public String getAccount_number() {
 		// begin-user-code
 		return account_number;
 		// end-user-code
@@ -34,7 +34,7 @@ public class atm_core {
 	 * @param account_number the account_number to set
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void setAccount_number(Object account_number) {
+	public void setAccount_number(String account_number) {
 		// begin-user-code
 		this.account_number = account_number;
 		// end-user-code
@@ -45,13 +45,13 @@ public class atm_core {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private Object account_validated;
+	private String account_validated;
 
 	/** 
 	 * @return the account_validated
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public Object getAccount_validated() {
+	public String getAccount_validated() {
 		// begin-user-code
 		return account_validated;
 		// end-user-code
@@ -61,7 +61,7 @@ public class atm_core {
 	 * @param account_validated the account_validated to set
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void setAccount_validated(Object account_validated) {
+	public void setAccount_validated(String account_validated) {
 		// begin-user-code
 		this.account_validated = account_validated;
 		// end-user-code

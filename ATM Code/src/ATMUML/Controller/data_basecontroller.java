@@ -25,7 +25,7 @@ public class data_basecontroller {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private Object session_timeout_length;
+	private Object session_timeout_length = 60;
 
 	/** 
 	 * @return the session_timeout_length
@@ -34,16 +34,6 @@ public class data_basecontroller {
 	public Object getSession_timeout_length() {
 		// begin-user-code
 		return session_timeout_length;
-		// end-user-code
-	}
-
-	/** 
-	 * @param session_timeout_length the session_timeout_length to set
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setSession_timeout_length(Object session_timeout_length) {
-		// begin-user-code
-		this.session_timeout_length = session_timeout_length;
 		// end-user-code
 	}
 
@@ -57,58 +47,19 @@ public class data_basecontroller {
 	private Set<?> atm_core;
 
 	/** 
-	 * @return the atm_core
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public Set<?> getAtm_core() {
-		// begin-user-code
-		return atm_core;
-		// end-user-code
-	}
-
-	/** 
-	 * @param atm_core the atm_core to set
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setAtm_core(Set<?> atm_core) {
-		// begin-user-code
-		this.atm_core = atm_core;
-		// end-user-code
-	}
-
-	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	private String connectionString;
 
-	/** 
-	 * @return the connectionString
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public String getConnectionString() {
-		// begin-user-code
-		return connectionString;
-		// end-user-code
-	}
-
-	/** 
-	 * @param connectionString the connectionString to set
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setConnectionString(String connectionString) {
-		// begin-user-code
-		this.connectionString = connectionString;
-		// end-user-code
-	}
 
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
 	 * @!generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public int validate_user(Object account, Integer PIN) {
+	public int validate_user(Object account, String PIN) {
 		// begin-user-code
 		Connection conn = null;
 		Statement stmt = null;
@@ -137,9 +88,17 @@ public class data_basecontroller {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void balance() {
+	public void balance(Object account, Integer session_id) {
 		// begin-user-code
-		// TODO Auto-generated method stub
+		boolean account_found = false;
+		session_id = 12345;
+		int error_code = 0; 
+		int test = 0;
+		if (account_found == true) { 
+			return new Quartet<int, boolean, int, int>(error_code, account_found, session_id, test);
+		} else {
+			
+		}
 
 		// end-user-code
 	}

@@ -542,7 +542,7 @@
                   <styles xmi:type="umlnotation:UMLShapeCompartmentStyle" xmi:id="_WCt1gcH8EeSpLsUXWKAT5w"/>
                 </children>
                 <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_WCo9AcH8EeSpLsUXWKAT5w" fontName="Segoe UI" showStereotype="Label"/>
-                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WCo9AsH8EeSpLsUXWKAT5w" x="189" y="118"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WCo9AsH8EeSpLsUXWKAT5w" x="-393" y="133"/>
               </children>
               <styles xmi:type="umlnotation:UMLShapeCompartmentStyle" xmi:id="_TMkrFrynEeSy7fAcRsFCVw" canonical="false"/>
             </children>
@@ -707,7 +707,7 @@
             </children>
             <children xmi:id="_kGQWdLV_EeSe9sOjSVtpNw" type="ToMultiplicityLabel" element="_kF80crV_EeSe9sOjSVtpNw">
               <children xmi:id="_kGQWdrV_EeSe9sOjSVtpNw" type="ToMultiplicity"/>
-              <layoutConstraint xmi:type="notation:Location" xmi:id="_kGQWdbV_EeSe9sOjSVtpNw" y="396"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_kGQWdbV_EeSe9sOjSVtpNw" x="-395" y="-176"/>
             </children>
             <children xmi:id="_kGQWd7V_EeSe9sOjSVtpNw" visible="false" type="ToRoleLabel" element="_kF80crV_EeSe9sOjSVtpNw">
               <children xmi:id="_kGQWebV_EeSe9sOjSVtpNw" type="ToRole"/>

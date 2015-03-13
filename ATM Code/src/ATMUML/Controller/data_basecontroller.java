@@ -3,7 +3,6 @@
  */
 package ATMUML.Controller;
 
-import java.util.Set;
 import java.sql.*;
 
 /** 
@@ -15,11 +14,14 @@ public class data_basecontroller {
 	
 	   // JDBC driver name and database URL
 	   static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	   static final String DB_URL = "jdbc:mysql://localhost/EMP";
+	   static final String DB_URL = "jdbc:mysql://db4free.net/cs4398atm";
 
 	   //  Database credentials
-	   static final String USER = "username";
-	   static final String PASS = "password";
+	   static final String USER = "cs4398group1";
+	   static final String PASS = "cs4398group1";
+	   
+	   Connection conn = null;
+	   Statement stmt = null;
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
@@ -37,14 +39,6 @@ public class data_basecontroller {
 		// end-user-code
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @uml.annotations for <code>atm_core</code>
-	 *     collection_type="ATMUML.Model.atm_core"
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private Set<?> atm_core;
 
 	/** 
 	 * <!-- begin-UML-doc -->
@@ -67,9 +61,10 @@ public class data_basecontroller {
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
 			stmt = conn.createStatement();
-			String query = "SELECT ACCOUNT(COUNT(1) AS BIT) FROM ACCTINFO WHERE ACCOUNTNO = '" + account + "' AND PINNO = "+ PIN;
+			String query = "SELECT COUNT(1) AS BIT FROM Users WHERE CCN = '" + account + "' AND PIN = '"+ PIN+"'";
 			ResultSet rs= stmt.executeQuery(query);
-			
+			if(rs.next())
+				System.out.println(query + "\nreturned: "+ rs.getInt("BIT"));
 			return rs.getInt("BIT");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -94,11 +89,11 @@ public class data_basecontroller {
 		session_id = 12345;
 		int error_code = 0; 
 		int test = 0;
-		if (account_found == true) { 
-			return new Quartet<int, boolean, int, int>(error_code, account_found, session_id, test);
-		} else {
-			
-		}
+//		if (account_found == true) { 
+//			return new Quartet<int, boolean, int, int>(error_code, account_found, session_id, test);
+//		} else {
+//			
+//		}
 
 		// end-user-code
 	}

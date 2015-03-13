@@ -129,13 +129,13 @@ public class Login_Interface {
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
 	 */
-	private Object account_number;
+	private String account_number;
 
 	/** 
 	 * @return the account_number
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public Object getAccount_number() {
+	public String getAccount_number() {
 		return account_number;
 	}
 
@@ -143,7 +143,7 @@ public class Login_Interface {
 	 * @param account_number the account_number to set
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void setAccount_number(Object account_number) {
+	public void setAccount_number(String account_number) {
 		this.account_number = account_number;
 	}
 
@@ -170,18 +170,18 @@ public class Login_Interface {
 
 		setAccount_number(cardRead.getCcn());
 	}
-	private Integer PIN;
+	private String PIN;
 	
 	public void set_pin() {
 		Scanner pinIn = new Scanner(System.in);
 		System.out.println("Enter PIN: ");
-		this.PIN = pinIn.nextInt();
+		this.PIN = pinIn.next();
 	}
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
 	 */
-	public Integer get_PIN() {
+	public String get_PIN() {
 		return this.PIN;
 	}
 

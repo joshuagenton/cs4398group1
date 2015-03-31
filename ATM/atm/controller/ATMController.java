@@ -10,7 +10,7 @@ public class ATMController extends AbstractController{
 	private String selection;
 		
 	public ATMController() {}
-	
+
 	// 
 	public void operation(String opt) {
 		if (opt == SelectionView.Transfer) {

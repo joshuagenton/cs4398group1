@@ -19,7 +19,7 @@ import java.util.GregorianCalendar;
  * @author CSWells
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
-public class card_reader extends AbstractModel {
+public class CardReaderModel extends AbstractModel {
 	private String card_holder = null;
 	private String ccn = null;
 	private DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
@@ -46,12 +46,12 @@ public class card_reader extends AbstractModel {
 
 	private Date expDate = null;
 
-	public card_reader(String cardRead) throws IOException {
+	public CardReaderModel(String cardRead) throws IOException {
 		readcont(cardRead);
 	}
 
 
-	public card_reader() {
+	public CardReaderModel() {
 	}
 
 	/** 

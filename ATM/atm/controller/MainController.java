@@ -8,7 +8,6 @@ public class MainController extends AbstractController {
 	private Integer cardNo;
 	private String pin;
 	private Date timeDate;
-	private Arrays actions;
 	
 	public MainController() {}
 	
@@ -33,7 +32,7 @@ public class MainController extends AbstractController {
 	
 	
 	// SESSION
-	public void sesssion(Date timeDate, Arrays actions) {
+	public void sesssion(Date timeDate) {
 		
 	}
 

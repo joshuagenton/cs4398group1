@@ -23,7 +23,7 @@ import atm.controller.Controller;
 import atm.controller.MainController;
 import atm.model.Model;
 import atm.model.ModelEvent;
-import atm.model.atm_core;
+import atm.model.ATMCoreModel;
 
 public class LoginView extends JFrameView {
 
@@ -159,7 +159,7 @@ public class LoginView extends JFrameView {
 		return cardinfo;
 	}
 	public static void main(String[] args) {
-		final atm_core account = new atm_core();
+		final ATMCoreModel account = new ATMCoreModel();
 		final ATMController contr = new ATMController();
 		contr.setModel(account);
 	    SwingUtilities.invokeLater(new Runnable() {

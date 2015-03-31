@@ -9,7 +9,7 @@ import atm.controller.ATMController;
 import atm.controller.Controller;
 import atm.model.Model;
 import atm.model.ModelEvent;
-import atm.model.atm_core;
+import atm.model.ATMCoreModel;
 
 public class Test extends JFrameView{
 
@@ -32,7 +32,7 @@ public class Test extends JFrameView{
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		final atm_core account = new atm_core();
+		final ATMCoreModel account = new ATMCoreModel();
 		final ATMController contr = new ATMController();
 		contr.setModel(account);
 		EventQueue.invokeLater(new Runnable() {

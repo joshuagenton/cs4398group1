@@ -4,14 +4,24 @@ import java.awt.Rectangle;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
 import java.awt.GridBagConstraints;
+
 import javax.swing.JPasswordField;
+
 import java.awt.Color;
+
 import javax.swing.JTextPane;
+
+import atm.controller.Controller;
+import atm.model.Model;
+import atm.model.ModelEvent;
+import atm.model.atm_core;
+
 import java.awt.Font;
 
-public class PINScreen extends JPanel {
-
+public class PINScreen extends JFrameView {
+	
 	private static final long serialVersionUID = 1L;
 	private JButton num1 = null;
 	private JButton num2 = null;
@@ -36,17 +46,12 @@ public class PINScreen extends JPanel {
 	/**
 	 * This is the default constructor
 	 */
-	public PINScreen() {
-		super();
-		initialize();
-	}
-	
-	public PINScreen(String name) {
-		
-		super();
+	public PINScreen(Model model, Controller controller) {
+		super(model, controller);
 		int i = 0;
 		Boolean mark = false;
 		String first = null, last = null;
+		String name = ((atm_core)getModel()).getName();
 		for (char c : name.toCharArray())
 		{
 			if(mark == false)
@@ -66,6 +71,7 @@ public class PINScreen extends JPanel {
 		lastname= last.replaceAll("\\s+", "");
 		initialize();
 	}
+
 	
 	private JButton getNum1() {
 		if (num1 == null) {
@@ -387,6 +393,12 @@ public class PINScreen extends JPanel {
 
 	public char[] getPinNum() {
 		return pinNum;
+	}
+
+	@Override
+	public void modelChanged(ModelEvent me) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="-518,13"

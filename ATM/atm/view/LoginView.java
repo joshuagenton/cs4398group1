@@ -85,10 +85,11 @@ public class LoginView extends JFrameView {
 	@Override
 	public void modelChanged(ModelEvent me) {
 		//change to PIN Screen
-		this.getParent().remove(this);
-		this.add(new PINScreen());
-		this.revalidate();
-		this.repaint();
+		PINScreen pin = new PINScreen(getModel(),getController());
+		removeAll();
+		add(pin);
+		revalidate();
+		repaint();
 	}
 
 	

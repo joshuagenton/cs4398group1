@@ -1,13 +1,9 @@
 package atm.model;
 
-
-import atm.controller.*;
-import atm.view.*;
-
 public class ModelEvent {
 	
 	public enum EventKind {
-		BalanceUpdate, AmountTransferredUpdate, AmountWithdrawUpdate
+		BalanceUpdate, AmountTransferredUpdate, AmountWithdrawUpdate, Login
 	}
 	
 	private EventKind kind;

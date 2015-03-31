@@ -8,10 +8,7 @@ public class ATMController extends AbstractController{
 	private Integer accountNo;
 	private Double amount;
 	private String selection;
-	
-	
-	
-	
+		
 	public ATMController() {}
 	
 	// 

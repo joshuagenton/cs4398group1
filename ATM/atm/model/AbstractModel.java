@@ -3,9 +3,6 @@ package atm.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import atm.controller.*;
-import atm.view.*;
-
 public abstract class AbstractModel implements Model {
 	
 	private List<ModelListener> listeners = new ArrayList<ModelListener>(5);

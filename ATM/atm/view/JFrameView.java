@@ -5,6 +5,10 @@ import atm.controller.*;
 import atm.model.*;
 
 public abstract class JFrameView extends JFrame implements View, ModelListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Model model;
 	private Controller controller;
 	/**

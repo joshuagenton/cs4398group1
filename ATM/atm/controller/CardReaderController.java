@@ -3,13 +3,13 @@ package atm.controller;
 import java.io.IOException;
 
 import atm.model.Model;
-import atm.model.atm_core;
-import atm.model.card_reader;
+import atm.model.ATMCoreModel;
+import atm.model.CardReaderModel;
 
 public class CardReaderController extends AbstractController {
 
 	private Integer cardNo;
-	private card_reader card = new card_reader();
+	private CardReaderModel card = new CardReaderModel();
 
 	public CardReaderController(){}
 	
@@ -25,7 +25,7 @@ public class CardReaderController extends AbstractController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		((atm_core)getModel()).setAccount_info(card.getCcn(),card.getCard_holder());
+		((ATMCoreModel)getModel()).setAccount_info(card.getCcn(),card.getCard_holder());
 		return null;
 	}
 

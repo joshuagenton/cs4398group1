@@ -10,7 +10,7 @@ import java.sql.*;
  * <!-- end-UML-doc -->
  * @author CSWells
  */
-public class data_basecontroller {
+public class DatabaseController {
 	
 	   // JDBC driver name and database URL
 	   static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  

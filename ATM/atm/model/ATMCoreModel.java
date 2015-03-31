@@ -5,14 +5,14 @@ package atm.model;
 
 import javax.swing.SwingUtilities;
 
-import atm.controller.data_basecontroller;
+import atm.controller.DatabaseController;
 
 /** 
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->
  * @author CSWells
  */
-public class atm_core extends AbstractModel{
+public class ATMCoreModel extends AbstractModel{
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
@@ -92,13 +92,13 @@ public class atm_core extends AbstractModel{
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private data_basecontroller data_baseinterface;
+	private DatabaseController data_baseinterface;
 
 	/** 
 	 * @return the data_baseinterface
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public data_basecontroller getData_baseinterface() {
+	public DatabaseController getData_baseinterface() {
 		return data_baseinterface;
 	}
 
@@ -106,7 +106,7 @@ public class atm_core extends AbstractModel{
 	 * @param data_baseinterface the data_baseinterface to set
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void setData_baseinterface(data_basecontroller data_baseinterface) {
+	public void setData_baseinterface(DatabaseController data_baseinterface) {
 		this.data_baseinterface = data_baseinterface;
 		data_baseinterface.validate_user(account_number, PIN);
 	}

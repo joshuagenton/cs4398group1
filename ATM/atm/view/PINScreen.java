@@ -16,7 +16,7 @@ import javax.swing.JTextPane;
 import atm.controller.Controller;
 import atm.model.Model;
 import atm.model.ModelEvent;
-import atm.model.atm_core;
+import atm.model.ATMCoreModel;
 
 import java.awt.Font;
 
@@ -51,7 +51,7 @@ public class PINScreen extends JFrameView {
 		int i = 0;
 		Boolean mark = false;
 		String first = null, last = null;
-		String name = ((atm_core)getModel()).getName();
+		String name = ((ATMCoreModel)getModel()).getName();
 		for (char c : name.toCharArray())
 		{
 			if(mark == false)

@@ -1,10 +1,11 @@
 package atm.view;
 
-import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 import atm.controller.*;
 import atm.model.*;
 
-public abstract class JFrameView extends JFrame implements View, ModelListener {
+public abstract class JFrameView extends JPanel implements View, ModelListener {
 	/**
 	 * 
 	 */
@@ -50,7 +51,7 @@ public abstract class JFrameView extends JFrame implements View, ModelListener {
 	 */
 	public void setModel(Model model) {
 		this.model = model;
-		registerWithModel();
+		//registerWithModel();
 	}
 
 }

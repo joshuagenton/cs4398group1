@@ -39,16 +39,9 @@ public class LoginView extends JFrameView {
 	
 	public LoginView(Model model, Controller controller) {
 		super(model, controller);
-		this.getContentPane().add(initialize());
+		initialize();
 		this.setBounds(100, 100, 450, 300);
 	//	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		addWindowListener(new java.awt.event.WindowAdapter() {
-		    public void windowClosing(java.awt.event.WindowEvent evt) {
-		        dispose();
-		        System.exit(0);
-		    }
-		});
 	}
 
 	
@@ -57,17 +50,17 @@ public class LoginView extends JFrameView {
 	 * 
 	 * @return void
 	 */
-	private Component initialize() {
+	private void initialize() {
 		//this.setExtendedState(MAXIMIZED_BOTH);
-		JPanel login = new JPanel();
-		login.setBackground(new Color(122, 58, 255));
-		login.setSize(new Dimension(527, 265));
+		//JPanel login = new JPanel();
+		setBackground(new Color(122, 58, 255));
+		setSize(new Dimension(527, 265));
 		//this.setTitle("Welcome");
-		login.setVisible(true);
+		setVisible(true);
 
-		login.add(getTestPhilip(), null);
-		login.add(getCardinfo(), getCardinfo().getName());
-		login.add(getChrisTest(), null);
+		add(getTestPhilip(), null);
+		add(getCardinfo(), getCardinfo().getName());
+		add(getChrisTest(), null);
 		cardinfo.requestFocusInWindow();
 		
 		cardinfo.addActionListener(new java.awt.event.ActionListener() {
@@ -80,15 +73,12 @@ public class LoginView extends JFrameView {
 		});
 	//	this.add(test);
 	//	test.setVisible(true);
-		return login;
 	}
 	@Override
 	public void modelChanged(ModelEvent me) {
 		//change to PIN Screen
 		PINScreen pin = new PINScreen(getModel(),getController());
-		removeAll();
 		add(pin);
-		revalidate();
 		repaint();
 	}
 

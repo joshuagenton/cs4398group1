@@ -86,6 +86,7 @@ public class LoginView extends JFrameView {
 	private class Handler implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
 			((ATMController)getController()).operation(evt.getActionCommand());
+			System.out.println(evt.getActionCommand());
 		}
 	}
 	/**
@@ -102,6 +103,7 @@ public class LoginView extends JFrameView {
 			TestPhilip.setHorizontalAlignment(SwingConstants.LEFT);
 			TestPhilip.setText("Philip Test");
 			TestPhilip.addActionListener(handler);
+			
 			TestPhilip.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {
 					cardinfo.setText("%B6391480100325586  ^WATERS/PHILIP T           ^4912120?;6391480100325586=4912120?+202=034903800=00?");

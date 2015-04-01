@@ -48,7 +48,7 @@ public class ATMCoreModel extends AbstractModel{
 		// begin-user-code
 		this.account_number = account_number;
 		this.name = name;
-		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.Login, 1, AgentStatus.NA);
+		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.Login, 1, AgentStatus.NeedPIN);
 		SwingUtilities.invokeLater(
 				new Runnable() {
 				    public void run() {

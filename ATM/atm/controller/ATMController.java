@@ -1,5 +1,6 @@
 package atm.controller;
 
+import atm.model.ATMCoreModel;
 import atm.view.SelectionView;
 
 public class ATMController extends AbstractController{
@@ -13,7 +14,11 @@ public class ATMController extends AbstractController{
 
 	// 
 	public void operation(String opt) {
-		if (opt == SelectionView.Transfer) {
+		
+		if (opt == SelectionView.Start){
+			((ATMCoreModel)getModel()).start();
+		}
+		else if (opt == SelectionView.Transfer) {
 
 			
 		}
@@ -25,12 +30,32 @@ public class ATMController extends AbstractController{
 			
 			
 		}
+		else if (opt == SelectionView.Cancel) {
+			((ATMCoreModel)getModel()).cancel();
+		}
+		else if (opt == SelectionView.Enter){
+
+		}
+		
 		else {
 			System.out.println("Operation isn't defined");
+			System.out.println(opt);
 		}
-	
+		
 	}
 	
+	public void start(){
+		
+	}
+	public boolean login(char[] cs){
+		((ATMCoreModel)getModel()).waiting();
+		DatabaseController db = new DatabaseController();
+		db.validate_user(((ATMCoreModel)getModel()).getAccount_number(), String.valueOf(cs));
+		System.out.println("LOGIN");
+		System.out.println("PIN: " + String.valueOf(cs));
+		return false;
+		
+	}
 	// TRANSFER
 	public boolean transferFunds(Double amount) {
 		return false;

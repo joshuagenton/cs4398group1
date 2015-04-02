@@ -3,7 +3,6 @@ package atm.view;
 import java.awt.Rectangle;
 
 import javax.swing.JButton;
-import javax.swing.JPanel;
 
 import java.awt.GridBagConstraints;
 
@@ -13,12 +12,15 @@ import java.awt.Color;
 
 import javax.swing.JTextPane;
 
+import atm.controller.ATMController;
 import atm.controller.Controller;
 import atm.model.Model;
 import atm.model.ModelEvent;
 import atm.model.ATMCoreModel;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PINScreen extends JFrameView {
 	
@@ -43,6 +45,7 @@ public class PINScreen extends JFrameView {
 	private JTextPane NameInfo = null;
 	static final int MAX_CHARS = 4;
 	private char[] pinNum = null;  //  @jve:decl-index=0:
+	private Handler handler = new Handler();
 	/**
 	 * This is the default constructor
 	 */
@@ -71,7 +74,13 @@ public class PINScreen extends JFrameView {
 		lastname= last.replaceAll("\\s+", "");
 		initialize();
 	}
-
+	
+	private class Handler implements ActionListener {
+		public void actionPerformed(ActionEvent evt) {
+			((ATMController)getController()).operation(evt.getActionCommand());
+			System.out.println(evt.getActionCommand());
+		}
+	}
 	
 	private JButton getNum1() {
 		if (num1 == null) {
@@ -313,7 +322,8 @@ public class PINScreen extends JFrameView {
 			Cancel.setBounds(new Rectangle(870, 87, 136, 51));
 			Cancel.setBackground(Color.red);
 			Cancel.setText("Cancel");
-			Cancel.setActionCommand("CancelScreen()");
+			Cancel.setActionCommand("Cancel");
+			Cancel.addActionListener(handler);
 			Cancel.addActionListener(new java.awt.event.ActionListener() {
 				@Override
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -357,14 +367,17 @@ public class PINScreen extends JFrameView {
 		if (Enter == null) {
 			Enter = new JButton();
 			Enter.setBounds(new Rectangle(870, 324, 136, 51));
-			Enter.setActionCommand("CancelScreen()");
+			Enter.setActionCommand("Enter");
 			Enter.setText("Enter");
 			Enter.setBackground(Color.green);
+			
+			Enter.addActionListener(handler);
 			Enter.addActionListener(new java.awt.event.ActionListener() {
 				@Override
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					pinNum = PIN.getPassword();		
-				}
+					pinNum = PIN.getPassword();	
+					((ATMController)getController()).login(PIN.getPassword());
+					}
 			});
 		}
 		return Enter;

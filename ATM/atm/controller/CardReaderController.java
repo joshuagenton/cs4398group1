@@ -8,7 +8,7 @@ import atm.model.CardReaderModel;
 
 public class CardReaderController extends AbstractController {
 
-	private Integer cardNo;
+	//private Integer cardNo;
 	private CardReaderModel card = new CardReaderModel();
 
 	public CardReaderController(){}

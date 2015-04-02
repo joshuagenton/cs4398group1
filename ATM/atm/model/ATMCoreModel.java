@@ -22,6 +22,15 @@ public class ATMCoreModel extends AbstractModel{
 	private String PIN;
 	private String name;
 	
+	public void start(){
+		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.Start, AgentStatus.Start);
+		SwingUtilities.invokeLater(
+				new Runnable() {
+				    public void run() {
+				    	notifyChanged(me);
+				    }
+				});
+	}
 	/** 
 	 * @return the account_number
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
@@ -48,7 +57,7 @@ public class ATMCoreModel extends AbstractModel{
 		// begin-user-code
 		this.account_number = account_number;
 		this.name = name;
-		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.Login, 1, AgentStatus.NeedPIN);
+		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.Login, AgentStatus.NeedPIN);
 		SwingUtilities.invokeLater(
 				new Runnable() {
 				    public void run() {
@@ -58,7 +67,30 @@ public class ATMCoreModel extends AbstractModel{
 		notifyAll();
 		// end-user-code
 	}
-
+	
+	public synchronized void waiting(){
+		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.Wait, AgentStatus.Wait);
+		SwingUtilities.invokeLater(
+				new Runnable() {
+				    public void run() {
+				    	notifyChanged(me);
+				    }
+				});
+		notifyAll();
+	}
+	public synchronized void cancel() {
+		// begin-user-code
+		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.Cancel, AgentStatus.Cancel);
+		SwingUtilities.invokeLater(
+				new Runnable() {
+				    public void run() {
+				    	notifyChanged(me);
+				    }
+				});
+		notifyAll();
+		// end-user-code
+	}
+	
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->

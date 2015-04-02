@@ -1,18 +1,12 @@
 package atm.view;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -20,7 +14,6 @@ import javax.swing.SwingUtilities;
 import atm.controller.ATMController;
 import atm.controller.CardReaderController;
 import atm.controller.Controller;
-import atm.controller.MainController;
 import atm.model.Model;
 import atm.model.ModelEvent;
 import atm.model.ATMCoreModel;
@@ -102,6 +95,7 @@ public class LoginView extends JFrameView {
 			TestPhilip.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 			TestPhilip.setHorizontalAlignment(SwingConstants.LEFT);
 			TestPhilip.setText("Philip Test");
+			TestPhilip.setActionCommand("Login");
 			TestPhilip.addActionListener(handler);
 			
 			TestPhilip.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -125,6 +119,7 @@ public class LoginView extends JFrameView {
 			ChrisTest.setPreferredSize(new Dimension(75, 20));
 			ChrisTest.setFont(new Font("Dialog", Font.BOLD, 8));
 			ChrisTest.setText("Chris Test");
+			ChrisTest.setActionCommand("Login");
 			ChrisTest.addActionListener(handler);
 			ChrisTest.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {

@@ -20,6 +20,7 @@ public class SelectionView extends JFrameView {
 	public final static String Cancel = "Cancel";
 	public final static String Enter = "Enter";
 	public static final String Start = "Start";
+	public static final String Logout = "Logout";
 	
 	
 	public SelectionView(Model model, Controller controller) {

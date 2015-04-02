@@ -31,6 +31,13 @@ public class ATMCoreModel extends AbstractModel{
 				    }
 				});
 	}
+	
+	public void reset(){
+		account_number = null;
+		PIN = null;
+		name = null;
+		start();
+	}
 	/** 
 	 * @return the account_number
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
@@ -96,25 +103,35 @@ public class ATMCoreModel extends AbstractModel{
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private String account_validated;
+	private int account_validated;
 
 	/** 
 	 * @return the account_validated
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public String getAccount_validated() {
+	public int getAccount_validated() {
 		// begin-user-code
 		return account_validated;
 		// end-user-code
 	}
 
 	/** 
-	 * @param account_validated the account_validated to set
+	 * @param i the account_validated to set
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void setAccount_validated(String account_validated) {
-		// begin-user-code
-		this.account_validated = account_validated;
+	public synchronized void setAccount_validated(int i) {
+		this.account_validated = i;
+		
+		if (i > 0){
+		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.SelectAccount, AgentStatus.SelectFromAccount);
+		SwingUtilities.invokeLater(
+				new Runnable() {
+				    public void run() {
+				    	notifyChanged(me);
+				    }
+				});
+		}
+		notifyAll();
 		// end-user-code
 	}
 

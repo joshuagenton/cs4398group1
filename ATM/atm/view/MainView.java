@@ -3,6 +3,7 @@ package atm.view;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import atm.controller.ATMController;
@@ -15,8 +16,13 @@ import atm.model.ATMCoreModel;
 import atm.model.ModelListener;
 
 public class MainView extends JFrame implements View, ModelListener{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Model model;
 	private Controller controller;
+	LoginView login;
 	/**
 	 * Constructor for JFrameView
 	 * @param model - model to be set to view.
@@ -30,32 +36,8 @@ public class MainView extends JFrame implements View, ModelListener{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setModel(model);
 		setController(controller);
-		
+		((ATMController)getController()).operation("Start");
 	}
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		final ATMCoreModel account = new ATMCoreModel();
-		final ATMController contr = new ATMController();
-		contr.setModel(account);
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainView window = new MainView(account, contr);
-					window.add(new LoginView(account, contr));
-					window.setVisible(true);
-					System.out.println("Started");
-			    	  contr.setView(window);
-			    	  window.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 
 	/**
 	 * Initialize the contents of the frame.
@@ -64,11 +46,29 @@ public class MainView extends JFrame implements View, ModelListener{
 		frame = new JPanel();
 		frame.setBounds(100, 100, 450, 300);
 	}
-
+	PINScreen PIN;
 	public void modelChanged(ModelEvent me) {
 		this.getContentPane().removeAll();
-		if (me.getAgStatus() == AgentStatus.NeedPIN)
-			this.add(new PINScreen(getModel(), getController()));
+		if (me.getAgStatus() == AgentStatus.Start){
+			login = new LoginView(getModel(), getController());
+			add(login);		
+		}
+		else if (me.getAgStatus() == AgentStatus.NeedPIN){
+			PIN = new PINScreen(getModel(), getController());
+			add(PIN);
+		}
+		else if (me.getAgStatus() == AgentStatus.Cancel){
+			Misc cancel = new Misc(getModel(), getController());
+			cancel.logout();
+			add(cancel);
+		}
+		else if (me.getAgStatus() == AgentStatus.Wait){
+			Misc wait = new Misc(getModel(), getController());
+			wait.waiting();
+			add(wait);
+			System.out.println("Waiting");
+		}
+		this.revalidate();
 		this.repaint();
 	}
 	/**
@@ -103,6 +103,25 @@ public class MainView extends JFrame implements View, ModelListener{
 		this.model = model;
 		registerWithModel();
 	}
-
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		final ATMCoreModel account = new ATMCoreModel();
+		final ATMController contr = new ATMController();
+		contr.setModel(account);
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MainView window = new MainView(account, contr);
+					window.setVisible(true);
+    		    	  contr.setView(window);
+			    	  window.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 }

@@ -26,7 +26,7 @@ public class AccountModel extends AbstractModel {
 		
 		balance = newB;
 		
-		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.BalanceUpdate, balance, AgentStatus.NA);
+		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.BalanceUpdate, AgentStatus.NA);
 		
 		SwingUtilities.invokeLater(
 			new Runnable() {

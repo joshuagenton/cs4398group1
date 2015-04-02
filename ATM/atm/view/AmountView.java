@@ -10,6 +10,11 @@ import atm.model.ModelEvent;
 
 public class AmountView extends JFrameView {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public AmountView(Model model, Controller controller) {
 		super(model, controller);
 		// TODO Auto-generated constructor stub

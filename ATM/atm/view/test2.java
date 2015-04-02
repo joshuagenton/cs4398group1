@@ -25,7 +25,7 @@ public class test2 extends JFrameView {
 			public void run() {
 				try {
 					test2 window = new test2(account, contr);
-					window.frame.setContentPane(new LoginView(account, contr));
+					window.frame.setContentPane(new AccountSelectView(account, contr));
 					window.frame.setVisible(true);
 
 				} catch (Exception e) {

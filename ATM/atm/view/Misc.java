@@ -7,6 +7,7 @@ import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import atm.controller.ATMController;
 import atm.controller.Controller;
 import atm.controller.MainController;
 import atm.model.Model;
@@ -35,6 +36,8 @@ public class Misc extends JFrameView {
 		add(label, BorderLayout.CENTER);
 		setVisible(true);
 		repaint();
+		((ATMController)getController()).operation("Logout");
+		
 	}
 	public void waiting(){
 		setBackground(new Color(0, 0, 255));

@@ -36,7 +36,14 @@ public class ATMController extends AbstractController{
 		else if (opt == SelectionView.Enter){
 
 		}
-		
+		else if (opt == SelectionView.Logout){
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			((ATMCoreModel)getModel()).reset();
+		}
 		else {
 			System.out.println("Operation isn't defined");
 			System.out.println(opt);
@@ -50,7 +57,7 @@ public class ATMController extends AbstractController{
 	public boolean login(char[] cs){
 		((ATMCoreModel)getModel()).waiting();
 		DatabaseController db = new DatabaseController();
-		db.validate_user(((ATMCoreModel)getModel()).getAccount_number(), String.valueOf(cs));
+		((ATMCoreModel)getModel()).setAccount_validated(db.validate_user(((ATMCoreModel)getModel()).getAccount_number(), String.valueOf(cs)));
 		System.out.println("LOGIN");
 		System.out.println("PIN: " + String.valueOf(cs));
 		return false;

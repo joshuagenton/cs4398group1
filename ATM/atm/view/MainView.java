@@ -3,7 +3,6 @@ package atm.view;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import atm.controller.ATMController;
@@ -49,6 +48,7 @@ public class MainView extends JFrame implements View, ModelListener{
 	PINScreen PIN;
 	public void modelChanged(ModelEvent me) {
 		this.getContentPane().removeAll();
+		System.out.println("CHANGE TO VIEW: " + me.getAgStatus());
 		if (me.getAgStatus() == AgentStatus.Start){
 			login = new LoginView(getModel(), getController());
 			add(login);		
@@ -67,6 +67,9 @@ public class MainView extends JFrame implements View, ModelListener{
 			wait.waiting();
 			add(wait);
 			System.out.println("Waiting");
+		}
+		else if (me.getAgStatus() == AgentStatus.SelectFromAccount){
+			add(new AccountSelectView(getModel(), getController()));
 		}
 		this.revalidate();
 		this.repaint();

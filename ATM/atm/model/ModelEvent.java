@@ -3,7 +3,7 @@ package atm.model;
 public class ModelEvent {
 	
 	public enum EventKind {
-		BalanceUpdate, AmountTransferredUpdate, AmountWithdrawUpdate, Login, Cancel, Wait,Start
+		BalanceUpdate, AmountTransferredUpdate, AmountWithdrawUpdate, Login, Cancel, Wait,Start, SelectAccount
 	}
 	
 	private EventKind kind;

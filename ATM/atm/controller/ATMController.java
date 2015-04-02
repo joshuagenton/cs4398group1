@@ -9,11 +9,14 @@ public class ATMController extends AbstractController{
 	private Integer accountNo;
 	private Double amount;
 	private String selection;
-		
+	private IdleTimeController timer = new IdleTimeController();
+	
 	public ATMController() {}
 
 	// 
 	public void operation(String opt) {
+		
+		timer.runTimer(15);
 		
 		if (opt == SelectionView.Start){
 			((ATMCoreModel)getModel()).start();
@@ -37,6 +40,7 @@ public class ATMController extends AbstractController{
 
 		}
 		else if (opt == SelectionView.Logout){
+			timer.cancelTimer();
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {

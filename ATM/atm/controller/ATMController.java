@@ -155,7 +155,5 @@ public class ATMController extends AbstractController{
 
 	public void setSelection(String selection) {
 		this.selection = selection;
-	}
-	
-	
+	}	
 }

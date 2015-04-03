@@ -40,12 +40,10 @@ public class PINScreen extends JFrameView {
 	private JButton Cancel = null;
 	private JButton Clear = null;
 	private JButton Enter = null;
-	private String pinNumber = null;
 	private String firstname = null;
 	private String lastname = null;
 	private JTextPane NameInfo = null;
 	static final int MAX_CHARS = 4;
-	private char[] pinNum = null;  //  @jve:decl-index=0:
 	private Handler handler = new Handler();
 	/**
 	 * This is the default constructor
@@ -338,9 +336,7 @@ public class PINScreen extends JFrameView {
 			Cancel.addActionListener(new java.awt.event.ActionListener() {
 				@Override
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					pinNum = "Cancel".toCharArray();
 					IdleTimeController.runTimer((ATMController)getController());
-					
 				}
 			});
 		}
@@ -388,17 +384,12 @@ public class PINScreen extends JFrameView {
 			Enter.addActionListener(new java.awt.event.ActionListener() {
 				@Override
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					pinNum = PIN.getPassword();	
 					((ATMController)getController()).login(PIN.getPassword());
 					IdleTimeController.runTimer((ATMController)getController());
 				}
 			});
 		}
 		return Enter;
-	}
-
-	public String getPinNumber() {
-		return pinNumber;
 	}
 
 	/**
@@ -417,10 +408,6 @@ public class PINScreen extends JFrameView {
 		return NameInfo;
 	}
 
-
-	public char[] getPinNum() {
-		return pinNum;
-	}
 
 	@Override
 	public void modelChanged(ModelEvent me) {

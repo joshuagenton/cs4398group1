@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 import atm.controller.ATMController;
 import atm.controller.Controller;
 import atm.controller.MainController;
+import atm.controller.Results;
 import atm.model.ATMCoreModel;
 import atm.model.Model;
 import atm.model.ModelEvent;
@@ -39,13 +40,13 @@ public class BalanceView extends JFrameView {
 		//this.setTitle("Welcome");
 		setVisible(true);
 		
-		Entry<String, Double> account = ((ATMCoreModel)getModel()).getFromAccount();
+		Results account = ((ATMCoreModel)getModel()).getFromAccount();
 		DecimalFormat dec = new DecimalFormat("'$'0.00");
-		JLabel lblAccount = new JLabel("Account: " + account.getKey());
+		JLabel lblAccount = new JLabel("Account: " + account.getName());
 		lblAccount.setBounds(500, 81, 400, 50);
 		add(lblAccount);
 		
-		JLabel lblBalance = new JLabel("Balance: " + dec.format(account.getValue()));
+		JLabel lblBalance = new JLabel("Balance: " + dec.format(account.getBalance()));
 		lblBalance.setBounds(500, 133, 400, 50);
 		add(lblBalance);
 		

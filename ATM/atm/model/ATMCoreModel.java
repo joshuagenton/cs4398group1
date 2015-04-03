@@ -5,10 +5,12 @@ package atm.model;
 
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.swing.SwingUtilities;
 
 import atm.controller.DatabaseController;
+import atm.controller.Results;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -24,7 +26,7 @@ public class ATMCoreModel extends AbstractModel{
 	private String account_number;
 	private String PIN;
 	private String name;
-	private Entry<String, Double> fromAccount;
+	private Results fromAccount;
 	private Entry<String,Double> toAccount;
 	public TransactionTypes type;
 	
@@ -65,12 +67,12 @@ public class ATMCoreModel extends AbstractModel{
 				});
 	}
 	
-	public synchronized void accountSelect(Entry<String, Double> account){
+	public synchronized void accountSelect(Results account){
 		if (type == TransactionTypes.Balance)
 			checkBalance(account);
 	}
 	
-	public synchronized void checkBalance(Entry<String, Double> account){
+	public synchronized void checkBalance(Results account){
 		fromAccount = account;
 
 		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.CheckBalance, AgentStatus.CheckBalance);
@@ -82,7 +84,7 @@ public class ATMCoreModel extends AbstractModel{
 				});
 		notifyAll();
 	}
-	public synchronized void setFromAccount(Entry<String, Double> a){
+	public synchronized void setFromAccount(Results a){
 		fromAccount = a;
 		if (type == TransactionTypes.Balance){
 			final ModelEvent me = new ModelEvent(ModelEvent.EventKind.CheckBalance, AgentStatus.CheckBalance);
@@ -97,7 +99,7 @@ public class ATMCoreModel extends AbstractModel{
 		notifyAll();
 	}
 	
-	public Entry<String, Double> getFromAccount(){
+	public Results getFromAccount(){
 		return fromAccount;
 	}
 	public void reset(){
@@ -248,11 +250,11 @@ public class ATMCoreModel extends AbstractModel{
 
 		// end-user-code
 	}
-	private Map<String, Double> accounts;
-	public void setAccounts(Map<String, Double> accounts) {
-		this.accounts = accounts;	
+	private Set<Results> accounts;
+	public void setAccounts(Set<Results> set) {
+		this.accounts = set;	
 	}
-	public Map<String,Double> getAccounts(){
+	public Set<Results> getAccounts(){
 		return accounts;
 	}
 }

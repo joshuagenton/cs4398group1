@@ -4,6 +4,7 @@
 package atm.model;
 
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.SwingUtilities;
 
@@ -23,7 +24,21 @@ public class ATMCoreModel extends AbstractModel{
 	private String account_number;
 	private String PIN;
 	private String name;
+	private Entry<String, Double> fromAccount;
+	private Entry<String,Double> toAccount;
+	public TransactionTypes type;
 	
+	public void setTranType(TransactionTypes incoming){
+		type = incoming;
+		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.SelectAccount, AgentStatus.SelectFromAccount);
+		SwingUtilities.invokeLater(
+				new Runnable() {
+				    public void run() {
+				    	notifyChanged(me);
+				    }
+				});
+		notifyAll();
+	}
 	public void start(){
 		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.Start, AgentStatus.Start);
 		SwingUtilities.invokeLater(
@@ -34,10 +49,46 @@ public class ATMCoreModel extends AbstractModel{
 				});
 	}
 	
+	public void accountSelect(Entry<String, Double> account){
+		if (type == TransactionTypes.Balance)
+			checkBalance(account);
+	}
+	
+	public void checkBalance(Entry<String, Double> account){
+		fromAccount = account;
+
+		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.CheckBalance, AgentStatus.CheckBalance);
+		SwingUtilities.invokeLater(
+				new Runnable() {
+				    public void run() {
+				    	notifyChanged(me);
+				    }
+				});
+		notifyAll();
+	}
+	public void setFromAccount(Entry<String, Double> a){
+		fromAccount = a;
+		if (type == TransactionTypes.Balance){
+			final ModelEvent me = new ModelEvent(ModelEvent.EventKind.CheckBalance, AgentStatus.CheckBalance);
+			SwingUtilities.invokeLater(
+					new Runnable() {
+					    public void run() {
+					    	notifyChanged(me);
+					    }
+					});
+		}
+		
+		notifyAll();
+	}
+	
+	public Entry<String, Double> getFromAccount(){
+		return fromAccount;
+	}
 	public void reset(){
 		account_number = null;
 		PIN = null;
 		name = null;
+		type = null;
 		start();
 	}
 	/** 
@@ -97,6 +148,7 @@ public class ATMCoreModel extends AbstractModel{
 	}
 	
 	public synchronized void transfer(){
+		type = TransactionTypes.Transfer;
 		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.SelectAccount, AgentStatus.Transfer);
 		SwingUtilities.invokeLater(
 				new Runnable() {

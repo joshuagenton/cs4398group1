@@ -70,10 +70,14 @@ public class MainView extends JFrame implements View, ModelListener{
 		else if (me.getAgStatus() == AgentStatus.Verified){
 			add(new TransactionTypeView(getModel(), getController()));
 		}
-		else if (me.getAgStatus() == AgentStatus.Transfer){
+		else if (me.getAgStatus() == AgentStatus.SelectFromAccount){
 			AccountSelectView account = new AccountSelectView(getModel(), getController());
 			account.SelectFrom();
 			add(account);
+		}
+		else if (me.getAgStatus() == AgentStatus.CheckBalance){
+			BalanceView balance = new BalanceView(getModel(), getController());
+			add(balance);
 		}
 		this.revalidate();
 		this.repaint();

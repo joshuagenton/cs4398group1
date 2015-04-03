@@ -4,8 +4,10 @@
 package atm.controller;
 
 import java.sql.*;
+import java.util.Collection;
 import java.util.Dictionary;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -18,6 +20,7 @@ import com.sun.org.apache.xalan.internal.xsltc.runtime.Hashtable;
  */
 public class DatabaseController {
 	
+
 	   // JDBC driver name and database URL
 	   static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
 	   static final String DB_URL = "jdbc:mysql://db4free.net/cs4398atm";
@@ -28,6 +31,7 @@ public class DatabaseController {
 	   
 	   Connection conn = null;
 	   Statement stmt = null;
+	   
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
@@ -54,16 +58,17 @@ public class DatabaseController {
 	private String connectionString;
 	private String CCN;
 	
-	public Map<String, Double> getAccounts(){
-		Map<String, Double> accounts = new HashMap<String, Double>();
-		String query = "Select a.name,a.account_bal from account a, Users u, User_Accounts ua Where ua.CCN = u.CCN AND ua.user_accounts_key = a.account_key AND u.CCN = '" + CCN +"'";
+	public Set<Results> getAccounts(){
+		Set<Results> accounts = new HashSet<Results>();
+		String query = "Select a.name,a.account_bal,a.account_num from account a, Users u, User_Accounts ua Where ua.CCN = u.CCN AND ua.user_accounts_key = a.account_key AND u.CCN = '" + CCN +"'";
 		try {
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
 			stmt = conn.createStatement();
 			ResultSet rs= stmt.executeQuery(query); 
-			while(rs.next())
-				accounts.put(rs.getString("name"), rs.getDouble("account_bal"));
+			while(rs.next()){
+				accounts.add(new Results(rs.getString("name"), rs.getInt("account_num"),rs.getDouble("account_bal")));
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -4,6 +4,12 @@
 package atm.controller;
 
 import java.sql.*;
+import java.util.Dictionary;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import com.sun.org.apache.xalan.internal.xsltc.runtime.Hashtable;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -46,7 +52,29 @@ public class DatabaseController {
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	private String connectionString;
-
+	private String CCN;
+	
+	public Map<String, Double> getAccounts(){
+		Map<String, Double> accounts = new HashMap<String, Double>();
+		String query = "Select a.name,a.account_bal from account a, Users u, User_Accounts ua Where ua.CCN = u.CCN AND ua.user_accounts_key = a.account_key AND u.CCN = '" + CCN +"'";
+		try {
+			Class.forName(JDBC_DRIVER);
+			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			stmt = conn.createStatement();
+			ResultSet rs= stmt.executeQuery(query); 
+			while(rs.next())
+				accounts.put(rs.getString("name"), rs.getDouble("account_bal"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("DB CONTROLLER ACCOUNTS SIZE: " + accounts.size());
+		return accounts;
+		
+	}
 
 	/** 
 	 * <!-- begin-UML-doc -->
@@ -57,6 +85,7 @@ public class DatabaseController {
 		// begin-user-code
 		Connection conn = null;
 		Statement stmt = null;
+		CCN = (String) account;
 		try {
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);

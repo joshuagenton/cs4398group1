@@ -8,18 +8,16 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.swing.JButton;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 
 import atm.controller.ATMController;
-import atm.controller.CardReaderController;
 import atm.controller.Controller;
+import atm.model.ATMCoreModel;
 import atm.model.Model;
 import atm.model.ModelEvent;
-import atm.model.ATMCoreModel;
 
 
 public class AccountSelectView extends JFrameView {
@@ -50,13 +48,16 @@ public class AccountSelectView extends JFrameView {
 	}
 
 	public void addButtons (){
-		for(int i=0; i<3;i++){//((ATMCoreModel)getModel()).getAccount_validated(); i++){
+		Map<String,Double> accounts = ((ATMCoreModel)getModel()).getAccounts();
+		System.out.println("SIZE: " + accounts.size());
+		int i = 0;
+		for(Map.Entry<String,Double> a : accounts.entrySet()){
 			JButton Account = new JButton();
 			Account.setPreferredSize(new Dimension(200, 200));
 			Account.setFont(new Font("Dialog", Font.BOLD, 14));
 			Account.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 			Account.setHorizontalAlignment(SwingConstants.LEFT);
-			Account.setText("Rodion's Bribe Fund " + i);
+			Account.setText(a.getKey());
 			Account.setActionCommand("SelectAccount");
 			Account.addActionListener(handler);
 			Account.setBounds(new Rectangle(i%2*300+350, (i/2)* 300+150, 250, 150));
@@ -65,6 +66,7 @@ public class AccountSelectView extends JFrameView {
 
 				}
 			});
+			i++;
 			add(Account);
 		}
 	}

@@ -14,6 +14,7 @@ import javax.swing.JTextPane;
 
 import atm.controller.ATMController;
 import atm.controller.Controller;
+import atm.controller.IdleTimeController;
 import atm.model.Model;
 import atm.model.ModelEvent;
 import atm.model.ATMCoreModel;
@@ -79,6 +80,7 @@ public class PINScreen extends JFrameView {
 		public void actionPerformed(ActionEvent evt) {
 			((ATMController)getController()).operation(evt.getActionCommand());
 			System.out.println(evt.getActionCommand());
+			IdleTimeController.runTimer((ATMController)getController());
 		}
 	}
 	
@@ -90,6 +92,7 @@ public class PINScreen extends JFrameView {
 			num1.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					PIN.setText(String.valueOf(PIN.getPassword())+"1");
+					IdleTimeController.runTimer((ATMController)getController());
 				}
 			});
 		}
@@ -109,6 +112,7 @@ public class PINScreen extends JFrameView {
 			num4.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					PIN.setText(String.valueOf(PIN.getPassword())+"4");
+					IdleTimeController.runTimer((ATMController)getController());
 				}
 			});
 		}
@@ -128,6 +132,7 @@ public class PINScreen extends JFrameView {
 			num2.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					PIN.setText(String.valueOf(PIN.getPassword())+"2");
+					IdleTimeController.runTimer((ATMController)getController());
 				}
 			});
 		}
@@ -147,6 +152,7 @@ public class PINScreen extends JFrameView {
 			num3.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					PIN.setText(String.valueOf(PIN.getPassword())+"3");
+					IdleTimeController.runTimer((ATMController)getController());
 				}
 			});
 		}
@@ -166,6 +172,7 @@ public class PINScreen extends JFrameView {
 			num5.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					PIN.setText(String.valueOf(PIN.getPassword())+"5");
+					IdleTimeController.runTimer((ATMController)getController());
 				}
 			});
 		}
@@ -185,6 +192,7 @@ public class PINScreen extends JFrameView {
 			num6.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					PIN.setText(String.valueOf(PIN.getPassword())+"6");
+					IdleTimeController.runTimer((ATMController)getController());
 				}
 			});
 		}
@@ -204,6 +212,7 @@ public class PINScreen extends JFrameView {
 			num7.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					PIN.setText(String.valueOf(PIN.getPassword())+"7");
+					IdleTimeController.runTimer((ATMController)getController());
 				}
 			});
 		}
@@ -223,6 +232,7 @@ public class PINScreen extends JFrameView {
 			num8.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					PIN.setText(String.valueOf(PIN.getPassword())+"8");
+					IdleTimeController.runTimer((ATMController)getController());
 				}
 			});
 		}
@@ -242,6 +252,7 @@ public class PINScreen extends JFrameView {
 			num9.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					PIN.setText(String.valueOf(PIN.getPassword())+"9");
+					IdleTimeController.runTimer((ATMController)getController());
 				}
 			});
 		}
@@ -261,6 +272,7 @@ public class PINScreen extends JFrameView {
 			num0.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					PIN.setText(String.valueOf(PIN.getPassword())+"0");
+					IdleTimeController.runTimer((ATMController)getController());
 				}
 			});
 		}
@@ -328,6 +340,7 @@ public class PINScreen extends JFrameView {
 				@Override
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					pinNum = "Cancel".toCharArray();
+					IdleTimeController.runTimer((ATMController)getController());
 					
 				}
 			});
@@ -351,6 +364,7 @@ public class PINScreen extends JFrameView {
 				@Override
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					PIN.setText("");
+					IdleTimeController.runTimer((ATMController)getController());
 					
 				}
 			});
@@ -377,7 +391,8 @@ public class PINScreen extends JFrameView {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					pinNum = PIN.getPassword();	
 					((ATMController)getController()).login(PIN.getPassword());
-					}
+					IdleTimeController.runTimer((ATMController)getController());
+				}
 			});
 		}
 		return Enter;

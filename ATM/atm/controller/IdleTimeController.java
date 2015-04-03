@@ -7,29 +7,27 @@ public class IdleTimeController extends TimerTask {
 	
 	public IdleTimeController() {}
 	
-	//static Toolkit toolkit;
 	static Timer timer;
 	static TimerTask timerTask;
 	static ATMController controller;
 
-	// If no events happen trigger timer.  
-	//TODO When we are idle, call runTimer(15) to start.
-	public static void runTimer(int seconds, ATMController cont) {
+	// Any time an action is performed, reset the timer to 15 seconds
+	public static void runTimer(ATMController cont) {
 		controller = cont;
+		if(timer != null)
+			cancelTimer();
 		timerTask = new IdleTimeController();
 		timer = new Timer();
-		timer.schedule(timerTask, seconds * 1000);
+		timer.schedule(timerTask, 15000);
 	}
 
 	// If there is an action we need to cancel the timer.
-	public void cancelTimer() {
+	public static void cancelTimer() {
 		timer.cancel();
 	}
 	
+	//  This function is automatically run by the timer when it runs out
   	public void run() {
-  		// Log user out of the system and save changes.
-  		//MainController mc = new MainController();
-  		//mc.logout();
   		controller.operation("Logout");
     }
  }

@@ -9,14 +9,13 @@ public class ATMController extends AbstractController{
 	private Integer accountNo;
 	private Double amount;
 	private String selection;
-	private IdleTimeController timer = new IdleTimeController();
 	
 	public ATMController() {}
 
 	// 
 	public void operation(String opt) {
 		
-		IdleTimeController.runTimer(15, this);
+		IdleTimeController.runTimer(this);
 		
 		if (opt == SelectionView.Start){
 			((ATMCoreModel)getModel()).start();
@@ -40,7 +39,7 @@ public class ATMController extends AbstractController{
 
 		}
 		else if (opt == SelectionView.Logout){
-			timer.cancelTimer();
+			IdleTimeController.cancelTimer();
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -52,6 +51,11 @@ public class ATMController extends AbstractController{
 			System.out.println("Operation isn't defined");
 			System.out.println(opt);
 		}
+		
+		//  Reset the timer in case switching views takes a long time
+		//if (opt != SelectionView.Logout)
+		//	IdleTimeController.runTimer(15, this);
+		
 		
 	}
 	

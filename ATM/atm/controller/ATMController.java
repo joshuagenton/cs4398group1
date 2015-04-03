@@ -1,6 +1,10 @@
 package atm.controller;
 
+import java.util.Map;
+import java.util.Map.Entry;
+
 import atm.model.ATMCoreModel;
+import atm.model.TransactionTypes;
 import atm.view.SelectionView;
 
 public class ATMController extends AbstractController{
@@ -26,7 +30,7 @@ public class ATMController extends AbstractController{
 			
 		}
 		else if (opt == SelectionView.Balance) {
-			
+			((ATMCoreModel)getModel()).setTranType(TransactionTypes.Balance);
 			
 		}
 		else if (opt == SelectionView.Cancel) {
@@ -48,7 +52,6 @@ public class ATMController extends AbstractController{
 			
 		}
 		else if (opt == SelectionView.Transfer){
-			System.out.println("IN CONTROLLER TRANSFER");
 			((ATMCoreModel)getModel()).transfer();
 		}
 		else {
@@ -140,7 +143,9 @@ public class ATMController extends AbstractController{
 		return selection;
 	}
 
-
+	public void SetFromAccount(Entry<String, Double> a){
+		((ATMCoreModel)getModel()).setFromAccount(a);
+	}
 
 	public void setSelection(String selection) {
 		this.selection = selection;

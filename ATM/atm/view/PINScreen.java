@@ -79,7 +79,6 @@ public class PINScreen extends JFrameView {
 	private class Handler implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
 			((ATMController)getController()).operation(evt.getActionCommand());
-			System.out.println(evt.getActionCommand());
 			IdleTimeController.runTimer((ATMController)getController());
 		}
 	}

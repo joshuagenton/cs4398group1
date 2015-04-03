@@ -88,6 +88,8 @@ public class DatabaseController {
 	 */
 	public int validate_user(Object account, String PIN) {
 		// begin-user-code
+		// returns 0 if account not found.
+		// returns 1+ if account(s) found.
 		Connection conn = null;
 		Statement stmt = null;
 		CCN = (String) account;
@@ -117,30 +119,39 @@ public class DatabaseController {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void balance(Object account, Integer session_id) {
-		// begin-user-code
-		boolean account_found = false;
-		session_id = 12345;
-		int error_code = 0; 
-		int test = 0;
-//		if (account_found == true) { 
-//			return new Quartet<int, boolean, int, int>(error_code, account_found, session_id, test);
-//		} else {
-//			
-//		}
-
-		// end-user-code
-	}
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void deposit() {
+	public int deposit(Integer account, Integer amount) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-
+		//SELECT account_bal FROM account WHERE account_num = 1112
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+			Class.forName(JDBC_DRIVER);
+			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			stmt = conn.createStatement();
+			//get current account balance
+			String query = "SELECT account_bal AS CURBAL FROM account WHERE account_num = '" + account + "'";
+			ResultSet rs= stmt.executeQuery(query);
+			if(rs.next())
+				System.out.println(query + "\nreturned: "+ rs.getInt("CURBAL"));
+				int curBal = rs.getInt("CURBAL");
+			int newBal = amount + curBal;
+			String query1 = "UPDATE account SET account_bal " + newBal +"'";
+			ResultSet rs1 = stmt.executeQuery(query1);
+			String query2 = "SELECT account_bal AS CURBAL FROM account WHERE account_num = '" + account + "'";
+			ResultSet rs2= stmt.executeQuery(query2);
+			if(rs2.next())
+				System.out.println(query2 + "\nreturned: "+ rs2.getInt("CURBAL"));
+				int finBal = rs2.getInt("CURBAL");
+			return finBal;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
 		// end-user-code
 	}
 

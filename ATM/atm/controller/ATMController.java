@@ -25,6 +25,9 @@ public class ATMController extends AbstractController{
 		if (opt == SelectionView.Start){
 			((ATMCoreModel)getModel()).start();
 		}
+		else if (opt == "newTransaction"){
+			((ATMCoreModel)getModel()).newTransaction();
+		}
 		else if (opt == SelectionView.Withdraw) {
 			
 			

@@ -175,9 +175,9 @@ public class TransferAmountView extends JFrameView {
 
 	@Override
 	public void modelChanged(ModelEvent me) {
-		WithdrawView wv = new WithdrawView(getModel(),getController());
+		TransferView tv = new TransferView(getModel(),getController());
 
-		add(wv);
+		add(tv);
 		repaint();	
 	}	
 }

@@ -10,9 +10,6 @@ import atm.model.ModelEvent;
 
 public class SelectionView extends JFrameView {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public final static String Transfer = "Transfer";
 	public final static String Balance = "Balance";
@@ -21,7 +18,7 @@ public class SelectionView extends JFrameView {
 	public final static String Enter = "Enter";
 	public static final String Start = "Start";
 	public static final String Logout = "Logout";
-	
+	public static final String SelectAccount = "SelectAccount";
 	
 	public SelectionView(Model model, Controller controller) {
 		super(model, controller);

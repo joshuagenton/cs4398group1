@@ -18,6 +18,7 @@ import atm.controller.Controller;
 import atm.model.ATMCoreModel;
 import atm.model.Model;
 import atm.model.ModelEvent;
+import javax.swing.JLabel;
 
 
 public class AccountSelectView extends JFrameView {
@@ -31,6 +32,8 @@ public class AccountSelectView extends JFrameView {
 	public AccountSelectView(Model model, Controller controller) {
 		super(model, controller);
 		setLayout(null);
+		
+
 		start();
 	}
 	
@@ -61,14 +64,18 @@ public class AccountSelectView extends JFrameView {
 			Account.setActionCommand("SelectAccount");
 			Account.addActionListener(handler);
 			Account.setBounds(new Rectangle(i%2*300+350, (i/2)* 300+150, 250, 150));
-			Account.addMouseListener(new java.awt.event.MouseAdapter() {
-				public void mouseClicked(java.awt.event.MouseEvent e) {
-
-				}
-			});
 			i++;
 			add(Account);
 		}
+	}
+	
+	public void SelectFrom(){
+		JLabel lblSelectFromAccount = new JLabel("Select From Account");
+		
+		lblSelectFromAccount.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 24));
+		lblSelectFromAccount.setForeground(new Color(255, 0, 0));
+		lblSelectFromAccount.setBounds(74, 27, 300, 50);
+		add(lblSelectFromAccount);
 	}
 	@Override
 	public void modelChanged(ModelEvent me) {
@@ -82,5 +89,4 @@ public class AccountSelectView extends JFrameView {
 			System.out.println(evt.getActionCommand());
 		}
 	}
-
 }

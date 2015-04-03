@@ -21,10 +21,6 @@ public class ATMController extends AbstractController{
 		if (opt == SelectionView.Start){
 			((ATMCoreModel)getModel()).start();
 		}
-		else if (opt == SelectionView.Transfer) {
-
-			
-		}
 		else if (opt == SelectionView.Withdraw) {
 			
 			
@@ -47,6 +43,13 @@ public class ATMController extends AbstractController{
 				e.printStackTrace();
 			}
 			((ATMCoreModel)getModel()).reset();
+		}
+		else if (opt == SelectionView.SelectAccount){
+			
+		}
+		else if (opt == SelectionView.Transfer){
+			System.out.println("IN CONTROLLER TRANSFER");
+			((ATMCoreModel)getModel()).transfer();
 		}
 		else {
 			System.out.println("Operation isn't defined");

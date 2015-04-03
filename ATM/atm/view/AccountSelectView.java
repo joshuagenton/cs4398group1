@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -16,6 +17,7 @@ import javax.swing.SwingConstants;
 import atm.controller.ATMController;
 import atm.controller.Controller;
 import atm.controller.IdleTimeController;
+import atm.controller.Results;
 import atm.model.ATMCoreModel;
 import atm.model.Model;
 import atm.model.ModelEvent;
@@ -53,16 +55,16 @@ public class AccountSelectView extends JFrameView {
 	}
 
 	public void addButtons (){
-		Map<String,Double> accounts = ((ATMCoreModel)getModel()).getAccounts();
+		Set<Results> accounts = ((ATMCoreModel)getModel()).getAccounts();
 		System.out.println("SIZE: " + accounts.size());
 		int i = 0;
-		for(final Map.Entry<String,Double> a : accounts.entrySet()){
+		for(final Results a : accounts){
 			JButton Account = new JButton();
 			Account.setPreferredSize(new Dimension(200, 200));
 			Account.setFont(new Font("Dialog", Font.BOLD, 14));
 			Account.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 			Account.setHorizontalAlignment(SwingConstants.LEFT);
-			Account.setText(a.getKey());
+			Account.setText(a.getName());
 			Account.setActionCommand("SelectAccount");
 			Account.addActionListener(handler);
 			Account.setBounds(new Rectangle(i%2*300+350, (i/2)* 300+150, 250, 150));

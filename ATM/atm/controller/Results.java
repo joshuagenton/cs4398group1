@@ -13,4 +13,15 @@ public class Results{
 		accountNum = num;
 		balance = b;
 	}
+	
+	public String getName(){
+		return name;
+	}
+	
+	public Integer getAccountNum(){
+		return accountNum;
+	}
+	public Double getBalance(){
+		return balance;
+	}
 }

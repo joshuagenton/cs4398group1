@@ -32,6 +32,7 @@ public class AccountSelectView extends JFrameView {
 	
 	public AccountSelectView(Model model, Controller controller) {
 		super(model, controller);
+		setLayout(null);
 		start();
 	}
 	
@@ -51,14 +52,14 @@ public class AccountSelectView extends JFrameView {
 	public void addButtons (){
 		for(int i=0; i<3;i++){//((ATMCoreModel)getModel()).getAccount_validated(); i++){
 			JButton Account = new JButton();
-			Account.setPreferredSize(new Dimension(75, 20));
-			Account.setFont(new Font("Dialog", Font.BOLD, 8));
+			Account.setPreferredSize(new Dimension(200, 200));
+			Account.setFont(new Font("Dialog", Font.BOLD, 14));
 			Account.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 			Account.setHorizontalAlignment(SwingConstants.LEFT);
-			Account.setText("Account " + i);
+			Account.setText("Rodion's Bribe Fund " + i);
 			Account.setActionCommand("SelectAccount");
 			Account.addActionListener(handler);
-			Account.setBounds(new Rectangle(i%2*50+50, i * 83, 100, 100));
+			Account.setBounds(new Rectangle(i%2*300+350, (i/2)* 300+150, 250, 150));
 			Account.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {
 

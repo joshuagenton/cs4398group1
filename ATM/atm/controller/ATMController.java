@@ -74,8 +74,14 @@ public class ATMController extends AbstractController{
 	public boolean login(char[] cs){
 		((ATMCoreModel)getModel()).waiting();
 		db = new DatabaseController();
-		((ATMCoreModel)getModel()).setAccount_validated(db.validate_user(((ATMCoreModel)getModel()).getAccount_number(), String.valueOf(cs)));
-		getAccounts();
+		int num = db.validate_user(((ATMCoreModel)getModel()).getAccount_number(), String.valueOf(cs));
+		if (num > 0){
+			((ATMCoreModel)getModel()).setAccount_validated(num);
+			getAccounts();
+		}
+		else {
+			operation("Logout");
+		}
 		return false;
 		
 	}

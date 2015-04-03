@@ -3,6 +3,8 @@
  */
 package atm.model;
 
+import java.util.Map;
+
 import javax.swing.SwingUtilities;
 
 import atm.controller.DatabaseController;
@@ -77,12 +79,7 @@ public class ATMCoreModel extends AbstractModel{
 	
 	public synchronized void waiting(){
 		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.Wait, AgentStatus.Wait);
-		SwingUtilities.invokeLater(
-				new Runnable() {
-				    public void run() {
-				    	notifyChanged(me);
-				    }
-				});
+    	notifyChanged(me);
 		notifyAll();
 	}
 	public synchronized void cancel() {
@@ -171,5 +168,12 @@ public class ATMCoreModel extends AbstractModel{
 		// TODO Auto-generated method stub
 
 		// end-user-code
+	}
+	private Map<String, Double> accounts;
+	public void setAccounts(Map<String, Double> accounts) {
+		this.accounts = accounts;	
+	}
+	public Map<String,Double> getAccounts(){
+		return accounts;
 	}
 }

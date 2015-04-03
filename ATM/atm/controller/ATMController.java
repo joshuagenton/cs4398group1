@@ -6,16 +6,17 @@ import atm.view.SelectionView;
 public class ATMController extends AbstractController{
 
 	private Integer userID;
-	private Integer accountNo;
+	private String accountNo;
 	private Double amount;
 	private String selection;
+	private IdleTimeController timer = new IdleTimeController();
 	
 	public ATMController() {}
 
 	// 
 	public void operation(String opt) {
 		
-		IdleTimeController.runTimer(this);
+		IdleTimeController.runTimer(15);
 		
 		if (opt == SelectionView.Start){
 			((ATMCoreModel)getModel()).start();
@@ -39,7 +40,7 @@ public class ATMController extends AbstractController{
 
 		}
 		else if (opt == SelectionView.Logout){
-			IdleTimeController.cancelTimer();
+			timer.cancelTimer();
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -52,22 +53,17 @@ public class ATMController extends AbstractController{
 			System.out.println(opt);
 		}
 		
-		//  Reset the timer in case switching views takes a long time
-		//if (opt != SelectionView.Logout)
-		//	IdleTimeController.runTimer(15, this);
-		
-		
 	}
 	
 	public void start(){
 		
 	}
+	DatabaseController db;
 	public boolean login(char[] cs){
 		((ATMCoreModel)getModel()).waiting();
-		DatabaseController db = new DatabaseController();
+		db = new DatabaseController();
 		((ATMCoreModel)getModel()).setAccount_validated(db.validate_user(((ATMCoreModel)getModel()).getAccount_number(), String.valueOf(cs)));
-		System.out.println("LOGIN");
-		System.out.println("PIN: " + String.valueOf(cs));
+		getAccounts();
 		return false;
 		
 	}
@@ -113,14 +109,14 @@ public class ATMController extends AbstractController{
 
 
 
-	public Integer getAccountNo() {
+	public String getAccountNo() {
 		return accountNo;
 	}
 
 
 
-	public void setAccountNo(Integer accountNo) {
-		this.accountNo = accountNo;
+	public void getAccounts() {
+		((ATMCoreModel)getModel()).setAccounts(db.getAccounts());
 	}
 
 

@@ -16,6 +16,7 @@ import atm.model.Model;
 import atm.model.ModelEvent;
 
 import javax.swing.JLabel;
+import javax.swing.JButton;
 
 public class BalanceView extends JFrameView {
 
@@ -23,7 +24,7 @@ public class BalanceView extends JFrameView {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	private Handler handler = new Handler();
 	public BalanceView(Model model, Controller controller) {
 		super(model, controller);
 		setLayout(null);
@@ -31,7 +32,7 @@ public class BalanceView extends JFrameView {
 		//this.setExtendedState(MAXIMIZED_BOTH);
 		//JPanel login = new JPanel();
 		setBackground(new Color(122, 58, 255));
-		setSize(new Dimension(527, 265));
+		setSize(new Dimension(894, 441));
 		
 
 		
@@ -47,6 +48,23 @@ public class BalanceView extends JFrameView {
 		JLabel lblBalance = new JLabel("Balance: " + dec.format(account.getValue()));
 		lblBalance.setBounds(500, 133, 400, 50);
 		add(lblBalance);
+		
+		JButton btnOk = new JButton("YES");
+		btnOk.setActionCommand("newTransaction");
+		btnOk.addActionListener(handler);
+		btnOk.setBounds(500, 227, 89, 23);
+		add(btnOk);
+		
+		JLabel lblWouldYouLike = new JLabel("Would you like to peform another transaction?");
+		lblWouldYouLike.setBounds(210, 231, 268, 14);
+		
+		add(lblWouldYouLike);
+		
+		JButton btnNo = new JButton("No");
+		btnNo.setActionCommand("Logout");
+		btnNo.addActionListener(handler);
+		btnNo.setBounds(618, 227, 89, 23);
+		add(btnNo);
 		start();
 	}
 	
@@ -66,5 +84,4 @@ public class BalanceView extends JFrameView {
 			((ATMController)getController()).operation(evt.getActionCommand());
 		}
 	}
-
 }

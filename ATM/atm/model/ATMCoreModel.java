@@ -82,6 +82,7 @@ public class ATMCoreModel extends AbstractModel{
     	notifyChanged(me);
 		notifyAll();
 	}
+	
 	public synchronized void cancel() {
 		// begin-user-code
 		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.Cancel, AgentStatus.Cancel);
@@ -95,6 +96,16 @@ public class ATMCoreModel extends AbstractModel{
 		// end-user-code
 	}
 	
+	public synchronized void transfer(){
+		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.SelectAccount, AgentStatus.Transfer);
+		SwingUtilities.invokeLater(
+				new Runnable() {
+				    public void run() {
+				    	notifyChanged(me);
+				    }
+				});
+		notifyAll();
+	}
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
@@ -120,7 +131,7 @@ public class ATMCoreModel extends AbstractModel{
 		this.account_validated = i;
 		
 		if (i > 0){
-		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.SelectAccount, AgentStatus.SelectFromAccount);
+		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.Verified, AgentStatus.Verified);
 		SwingUtilities.invokeLater(
 				new Runnable() {
 				    public void run() {

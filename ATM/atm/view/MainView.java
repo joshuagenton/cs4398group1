@@ -66,10 +66,14 @@ public class MainView extends JFrame implements View, ModelListener{
 			Misc wait = new Misc(getModel(), getController());
 			wait.waiting();
 			add(wait);
-			System.out.println("Waiting");
 		}
-		else if (me.getAgStatus() == AgentStatus.SelectFromAccount){
-			add(new AccountSelectView(getModel(), getController()));
+		else if (me.getAgStatus() == AgentStatus.Verified){
+			add(new TransactionTypeView(getModel(), getController()));
+		}
+		else if (me.getAgStatus() == AgentStatus.Transfer){
+			AccountSelectView account = new AccountSelectView(getModel(), getController());
+			account.SelectFrom();
+			add(account);
 		}
 		this.revalidate();
 		this.repaint();

@@ -51,6 +51,7 @@ public class Misc extends JFrameView {
 		setVisible(true);
 		repaint();
 	}
+
 	@Override
 	public void modelChanged(ModelEvent me) {
 		// TODO Auto-generated method stub

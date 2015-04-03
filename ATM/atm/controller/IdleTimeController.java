@@ -17,7 +17,7 @@ public class IdleTimeController extends AbstractController {
 	  
 		toolkit = Toolkit.getDefaultToolkit();
 		timer = new Timer();
-		timer.schedule(idleLogout(), seconds * 1000);
+		//timer.schedule(idleLogout(), seconds * 1000);
 	}
 
 	// If there is an action we need to cancel the timer.

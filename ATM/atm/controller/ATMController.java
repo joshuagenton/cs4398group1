@@ -16,7 +16,7 @@ public class ATMController extends AbstractController{
 	// 
 	public void operation(String opt) {
 		
-		IdleTimeController.runTimer(15);
+		//IdleTimeController.runTimer(15);
 		
 		if (opt == SelectionView.Start){
 			((ATMCoreModel)getModel()).start();

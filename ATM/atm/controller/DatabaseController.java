@@ -38,24 +38,6 @@ public class DatabaseController {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private Object session_timeout_length = 60;
-
-	/** 
-	 * @return the session_timeout_length
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public Object getSession_timeout_length() {
-		// begin-user-code
-		return session_timeout_length;
-		// end-user-code
-	}
-
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	private String connectionString;
 	private String CCN;
 	
@@ -123,7 +105,6 @@ public class DatabaseController {
 	public int deposit(Integer account, Integer amount) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		//SELECT account_bal FROM account WHERE account_num = 1112
 		Connection conn = null;
 		Statement stmt = null;
 		try {
@@ -136,9 +117,12 @@ public class DatabaseController {
 			if(rs.next())
 				System.out.println(query + "\nreturned: "+ rs.getInt("CURBAL"));
 				int curBal = rs.getInt("CURBAL");
+			//calculate new balance
 			int newBal = amount + curBal;
+			//set new balance
 			String query1 = "UPDATE account SET account_bal " + newBal +"'";
 			ResultSet rs1 = stmt.executeQuery(query1);
+			//confirm & return new balance
 			String query2 = "SELECT account_bal AS CURBAL FROM account WHERE account_num = '" + account + "'";
 			ResultSet rs2= stmt.executeQuery(query2);
 			if(rs2.next())
@@ -161,10 +145,49 @@ public class DatabaseController {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void withdrawl() {
+	public int withdrawl(Integer account, Integer amount) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-
+		//returns new balance if current balance - amount is >= 0
+		//returns -1 if new balance would be < 0 after withdrawl
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+			Class.forName(JDBC_DRIVER);
+			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			stmt = conn.createStatement();
+			//get current account balance
+			int curBal = -1;
+			int	newBal = -1;
+			int	finBal = -1;
+			String query = "SELECT account_bal AS CURBAL FROM account WHERE account_num = '" + account + "'";
+			ResultSet rs= stmt.executeQuery(query);
+			if(rs.next()){
+				System.out.println(query + "\nreturned: "+ rs.getInt("CURBAL"));
+				curBal = rs.getInt("CURBAL");
+			}
+			//calculate new balance
+			newBal = curBal - amount;
+			if (newBal < 0){return -1;}
+			//set new balance
+			String query1 = "UPDATE account SET account_bal " + newBal +"'";
+			ResultSet rs1 = stmt.executeQuery(query1);
+			//confirm & return new balance
+			String query2 = "SELECT account_bal AS CURBAL FROM account WHERE account_num = '" + account + "'";
+			ResultSet rs2= stmt.executeQuery(query2);
+			if(rs2.next()){
+				System.out.println(query2 + "\nreturned: "+ rs2.getInt("CURBAL"));
+				finBal = rs2.getInt("CURBAL");
+			}
+			return finBal;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
 		// end-user-code
 	}
 
@@ -173,10 +196,21 @@ public class DatabaseController {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void transfer() {
+	public Set<Results> transfer(Integer account1, Integer account2, Integer amount) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-
+		// returns set of accounts in Results class. 
+		Set<Results> accounts = new HashSet<Results>();
+		// Withdrawal funds 
+		Integer account1Bal = withdrawl(account1, amount);
+		if (account1Bal >= 0){
+			deposit(account2, amount);
+			accounts = getAccounts();
+			return accounts;}
+		//If transfer amount is not available to transfer	
+		accounts.add(new Results("-1",-1,1d));		
+		return accounts;
+		
 		// end-user-code
 	}
 
@@ -186,18 +220,6 @@ public class DatabaseController {
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public void transaction_history() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void renew_session() {
 		// begin-user-code
 		// TODO Auto-generated method stub
 

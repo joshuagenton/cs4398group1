@@ -23,8 +23,8 @@ public class DatabaseController {
 
 	   // JDBC driver name and database URL
 	   static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	   static final String DB_URL = "jdbc:mysql://db4free.net/cs4398atm";
-	   //static final String DB_URL = "jdbc:mysql://commo.de/cs4398atm";
+	   //static final String DB_URL = "jdbc:mysql://db4free.net/cs4398atm";
+	   static final String DB_URL = "jdbc:mysql://commo.de/cs4398atm";
 
 	   //  Database credentials
 	   static final String USER = "cs4398group1";

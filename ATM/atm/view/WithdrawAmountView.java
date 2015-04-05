@@ -10,6 +10,7 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -17,8 +18,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import atm.controller.ATMController;
+import atm.controller.DatabaseController;
 import atm.controller.CardReaderController;
 import atm.controller.Controller;
+import atm.controller.IdleTimeController;
 import atm.model.ATMCoreModel;
 import atm.model.Model;
 import atm.model.ModelEvent;
@@ -129,7 +132,7 @@ public class WithdrawAmountView extends JFrameView {
 	
 	
 	
-	
+	DecimalFormat dec = new DecimalFormat("'$'0.00");
 	
 	private JLabel getLblAmount(){
 		if(lblAmount == null){
@@ -140,6 +143,9 @@ public class WithdrawAmountView extends JFrameView {
 		return lblAmount;
 	}
 	
+	private void setAmount(){
+	
+	}
 	private JTextField getTextAmount() {
 		if (textAmount == null) {
 			textAmount = new JTextField();
@@ -152,7 +158,13 @@ public class WithdrawAmountView extends JFrameView {
 	private JButton getWithdrawButton(){
 		if(withdrawButton == null){
 			withdrawButton = new JButton(WITHDRAW);
+			withdrawButton.setActionCommand("processWithdraw");
 			withdrawButton.addActionListener(handler);
+			withdrawButton.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					((ATMController)getController()).withdrawFunds(((ATMCoreModel)getModel()).getFromAccount(), Double.parseDouble(getTextAmount().getText()));;
+				}
+			});
 		}
 		return withdrawButton;
 	}
@@ -160,6 +172,7 @@ public class WithdrawAmountView extends JFrameView {
 	private JButton getCancelButton(){
 		if(cancelButton == null){
 			cancelButton = new JButton(CANCEL);
+			cancelButton.setActionCommand("Cancel");
 			cancelButton.addActionListener(handler);
 		}
 		return cancelButton;

@@ -30,6 +30,41 @@ public class ATMCoreModel extends AbstractModel{
 	private Entry<String,Double> toAccount;
 	public TransactionTypes type;
 	private int pinTries = 0;
+	
+	public synchronized void withdrawComplete(){
+		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.AmountWithdrawUpdate, AgentStatus.WithdrawComplete);
+		SwingUtilities.invokeLater(
+				new Runnable() {
+				    public void run() {
+				    	notifyChanged(me);
+				    }
+				});
+		notifyAll();
+	}
+	
+	public synchronized void withdraw(){
+		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.AmountWithdrawUpdate, AgentStatus.Withdraw);
+		SwingUtilities.invokeLater(
+				new Runnable() {
+				    public void run() {
+				    	notifyChanged(me);
+				    }
+				});
+		notifyAll();
+	}
+	
+	public synchronized void doTransType(){
+		if(type == TransactionTypes.Withdraw){
+			final ModelEvent me = new ModelEvent(ModelEvent.EventKind.AmountWithdrawUpdate, AgentStatus.Withdraw);
+			SwingUtilities.invokeLater(
+					new Runnable() {
+					    public void run() {
+					    	notifyChanged(me);
+					    }
+					});
+		}
+	}
+	
 	public synchronized void setTranType(TransactionTypes incoming){
 		type = incoming;
 		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.SelectAccount, AgentStatus.SelectFromAccount);

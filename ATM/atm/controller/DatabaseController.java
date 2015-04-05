@@ -145,7 +145,7 @@ public class DatabaseController {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public int withdrawl(Integer account, Integer amount) {
+	public double withdrawl(Integer account, double d) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 		//returns new balance if current balance - amount is >= 0
@@ -157,9 +157,9 @@ public class DatabaseController {
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
 			stmt = conn.createStatement();
 			//get current account balance
-			int curBal = -1;
-			int	newBal = -1;
-			int	finBal = -1;
+			double curBal = -1;
+			double	newBal = -1;
+			double	finBal = -1;
 			String query = "SELECT account_bal AS CURBAL FROM account WHERE account_num = '" + account + "'";
 			ResultSet rs= stmt.executeQuery(query);
 			if(rs.next()){
@@ -167,11 +167,12 @@ public class DatabaseController {
 				curBal = rs.getInt("CURBAL");
 			}
 			//calculate new balance
-			newBal = curBal - amount;
+			newBal = curBal - d;
 			if (newBal < 0){return -1;}
 			//set new balance
-			String query1 = "UPDATE account SET account_bal " + newBal +"'";
-			ResultSet rs1 = stmt.executeQuery(query1);
+			String query1 = "UPDATE account SET account_bal = '" + newBal +"' Where account_num = '" +account+"'"  ;
+			System.out.println(query1);
+			stmt.executeUpdate(query1);
 			//confirm & return new balance
 			String query2 = "SELECT account_bal AS CURBAL FROM account WHERE account_num = '" + account + "'";
 			ResultSet rs2= stmt.executeQuery(query2);
@@ -202,7 +203,7 @@ public class DatabaseController {
 		// returns set of accounts in Results class. 
 		Set<Results> accounts = new HashSet<Results>();
 		// Withdrawal funds 
-		Integer account1Bal = withdrawl(account1, amount);
+		double account1Bal = withdrawl(account1, amount);
 		if (account1Bal >= 0){
 			deposit(account2, amount);
 			accounts = getAccounts();

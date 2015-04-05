@@ -34,8 +34,7 @@ public class ATMController extends AbstractController{
 			
 		}
 		else if (opt == SelectionView.Withdraw) {
-			
-			
+			((ATMCoreModel)getModel()).setTranType(TransactionTypes.Withdraw);
 		}
 		else if (opt == SelectionView.Balance) {
 			((ATMCoreModel)getModel()).setTranType(TransactionTypes.Balance);
@@ -57,7 +56,7 @@ public class ATMController extends AbstractController{
 			((ATMCoreModel)getModel()).reset();
 		}
 		else if (opt == SelectionView.SelectAccount){
-			
+			((ATMCoreModel)getModel()).doTransType();
 		}
 		else if (opt == SelectionView.Transfer){
 			((ATMCoreModel)getModel()).transfer();
@@ -105,10 +104,11 @@ public class ATMController extends AbstractController{
 	}
 	
 	// WITHDRAW
-	public boolean withdrawFunds(Double amount) {
-		return false;
-		
-		
+	public void withdrawFunds(Results account, Double amount) {
+		((ATMCoreModel)getModel()).waiting();
+		db = new DatabaseController();
+		db.withdrawl(account.getAccountNum(), amount);
+		((ATMCoreModel)getModel()).withdrawComplete();
 	}
 	
 	// SUFFICIENT FUNDS

@@ -27,6 +27,12 @@ public class ATMController extends AbstractController{
 		else if (opt == "newTransaction"){
 			((ATMCoreModel)getModel()).newTransaction();
 		}
+		else if (opt == "InvalidPIN"){
+			((ATMCoreModel)getModel()).invalidPIN();
+		}
+		else if (opt == "PIN"){
+			
+		}
 		else if (opt == SelectionView.Withdraw) {
 			
 			
@@ -80,7 +86,7 @@ public class ATMController extends AbstractController{
 			getAccounts();
 		}
 		else {
-			operation("Logout");
+			operation("InvalidPIN");
 		}
 		return false;
 		

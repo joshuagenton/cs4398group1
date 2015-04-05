@@ -67,6 +67,19 @@ public class MainView extends JFrame implements View, ModelListener{
 			wait.waiting();
 			add(wait);
 		}
+		else if (me.getAgStatus() == AgentStatus.InvalidPIN){
+			Misc misc = new Misc(getModel(), getController());
+			misc.invalidPIN();
+			add(misc);
+			this.revalidate();
+			this.repaint();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			((ATMController)getController()).operation("newTransaction");
+		}
 		else if (me.getAgStatus() == AgentStatus.Verified){
 			add(new TransactionTypeView(getModel(), getController()));
 		}

@@ -29,7 +29,7 @@ public class ATMCoreModel extends AbstractModel{
 	private Results fromAccount;
 	private Entry<String,Double> toAccount;
 	public TransactionTypes type;
-	
+	private int pinTries = 0;
 	public synchronized void setTranType(TransactionTypes incoming){
 		type = incoming;
 		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.SelectAccount, AgentStatus.SelectFromAccount);
@@ -41,7 +41,21 @@ public class ATMCoreModel extends AbstractModel{
 				});
 		notifyAll();
 	}
-	
+	public synchronized void invalidPIN(){
+		if (pinTries < 3){
+			pinTries ++;
+			final ModelEvent me = new ModelEvent(ModelEvent.EventKind.invalidPIN, AgentStatus.InvalidPIN);
+			SwingUtilities.invokeLater(
+					new Runnable() {
+					    public void run() {
+					    	notifyChanged(me);
+					    }
+					});
+		}
+		else cancel();
+		notifyAll();
+				
+	}
 	public synchronized void newTransaction(){
 		PIN = null;
 		fromAccount = null;
@@ -107,6 +121,7 @@ public class ATMCoreModel extends AbstractModel{
 		PIN = null;
 		name = null;
 		type = null;
+		pinTries = 0;
 		start();
 	}
 	/** 

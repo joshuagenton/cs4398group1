@@ -46,7 +46,7 @@ public class AccountSelectView extends JFrameView {
 	public void start(){
 		//this.setExtendedState(MAXIMIZED_BOTH);
 		//JPanel login = new JPanel();
-		setBackground(new Color(122, 58, 255));
+		//setBackground(new Color(122, 58, 255));
 		setSize(new Dimension(527, 265));
 		//this.setTitle("Welcome");
 		addButtons();

@@ -23,7 +23,7 @@ public class LogoutView extends JFrameView {
 
 	public LogoutView(Model model, Controller controller) {
 		super(model, controller);
-		setBackground(new Color(0, 0, 255));
+		//setBackground(new Color(0, 0, 255));
 		setLayout(new BorderLayout(0, 0));
 		
 		Label label = new Label("You have been logged out");

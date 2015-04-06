@@ -32,7 +32,7 @@ public class BalanceView extends JFrameView {
 		
 		//this.setExtendedState(MAXIMIZED_BOTH);
 		//JPanel login = new JPanel();
-		setBackground(new Color(122, 58, 255));
+		//setBackground(new Color(122, 58, 255));
 		setSize(new Dimension(894, 441));
 		
 

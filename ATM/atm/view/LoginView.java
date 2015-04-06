@@ -17,6 +17,7 @@ import atm.controller.Controller;
 import atm.model.Model;
 import atm.model.ModelEvent;
 import atm.model.ATMCoreModel;
+import javax.swing.JLabel;
 
 public class LoginView extends JFrameView {
 
@@ -29,6 +30,7 @@ public class LoginView extends JFrameView {
 	public JTextField cardinfo = null;
 	public CardReaderController card = new CardReaderController(getModel()); 
 	private Handler handler = new Handler();
+	private JLabel lblNewLabel;
 	
 	public LoginView(Model model, Controller controller) {
 		super(model, controller);
@@ -46,14 +48,16 @@ public class LoginView extends JFrameView {
 	private void initialize() {
 		//this.setExtendedState(MAXIMIZED_BOTH);
 		//JPanel login = new JPanel();
-		setBackground(new Color(122, 58, 255));
+		//setBackground(new Color(122, 58, 255));
 		setSize(new Dimension(527, 265));
 		//this.setTitle("Welcome");
 		setVisible(true);
+		setLayout(null);
+		add(getLblNewLabel());
 
-		add(getTestPhilip(), null);
-		add(getCardinfo(), getCardinfo().getName());
-		add(getChrisTest(), null);
+		add(getTestPhilip());
+		add(getCardinfo());
+		add(getChrisTest());
 		cardinfo.requestFocusInWindow();
 		
 		cardinfo.addActionListener(new java.awt.event.ActionListener() {
@@ -90,6 +94,7 @@ public class LoginView extends JFrameView {
 	private JButton getTestPhilip() {
 		if (TestPhilip == null) {
 			TestPhilip = new JButton();
+			TestPhilip.setBounds(10, 11, 75, 20);
 			TestPhilip.setPreferredSize(new Dimension(75, 20));
 			TestPhilip.setFont(new Font("Dialog", Font.BOLD, 8));
 			TestPhilip.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
@@ -116,6 +121,7 @@ public class LoginView extends JFrameView {
 	private JButton getChrisTest() {
 		if (ChrisTest == null) {
 			ChrisTest = new JButton();
+			ChrisTest.setBounds(95, 11, 75, 20);
 			ChrisTest.setPreferredSize(new Dimension(75, 20));
 			ChrisTest.setFont(new Font("Dialog", Font.BOLD, 8));
 			ChrisTest.setText("Chris Test");
@@ -138,6 +144,7 @@ public class LoginView extends JFrameView {
 	private JTextField getCardinfo() {
 		if (cardinfo == null) {
 			cardinfo = new JTextField();
+			cardinfo.setLocation(250, 15);
 			cardinfo.setBackground(Color.lightGray);
 			cardinfo.setPreferredSize(new Dimension(0, 0));
 			cardinfo.setSize(new Dimension(0, 0));
@@ -157,4 +164,17 @@ public class LoginView extends JFrameView {
 	      }
 	    });
 	  }
+	private JLabel getLblNewLabel() {
+		if (lblNewLabel == null) {
+			lblNewLabel = new JLabel("<html>Group 1 ATM<br>Scan Card to Continue</html>");
+			lblNewLabel.setLocation(0, 0);
+			lblNewLabel.setSize(450, 300);
+			lblNewLabel.setAlignmentX(java.awt.Component.CENTER_ALIGNMENT);
+			lblNewLabel.setAlignmentY(java.awt.Component.CENTER_ALIGNMENT);
+			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			lblNewLabel.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 24));
+			lblNewLabel.setForeground(new Color(255, 0, 0));
+		}
+		return lblNewLabel;
+	}
 }

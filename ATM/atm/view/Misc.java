@@ -26,7 +26,7 @@ public class Misc extends JFrameView {
 	}
 
 	public void logout(){
-		setBackground(new Color(0, 0, 255));
+		//setBackground(new Color(0, 0, 255));
 		setLayout(new BorderLayout(0, 0));
 		
 		Label label = new Label("You have been logged out");
@@ -40,7 +40,7 @@ public class Misc extends JFrameView {
 		
 	}
 	public void waiting(){
-		setBackground(new Color(0, 0, 255));
+		//setBackground(new Color(0, 0, 255));
 		setLayout(new BorderLayout(0, 0));
 		
 		Label label = new Label("Please Wait...");
@@ -53,10 +53,23 @@ public class Misc extends JFrameView {
 	}
 
 	public void invalidPIN(){
-		setBackground(new Color(0, 0, 255));
+		//setBackground(new Color(0, 0, 255));
 		setLayout(new BorderLayout(0, 0));
 		
 		Label label = new Label("Invalid PIN");
+		label.setAlignment(Label.CENTER);
+		label.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 24));
+		label.setForeground(new Color(255, 0, 0));
+		add(label, BorderLayout.CENTER);
+		setVisible(true);
+		repaint();
+	}
+	
+	public void transComplete(){
+		//setBackground(new Color(0, 0, 255));
+		setLayout(new BorderLayout(0, 0));
+		
+		Label label = new Label("Thank you for using Group1 ATM");
 		label.setAlignment(Label.CENTER);
 		label.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 24));
 		label.setForeground(new Color(255, 0, 0));

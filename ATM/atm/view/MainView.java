@@ -32,6 +32,8 @@ public class MainView extends JFrame implements View, ModelListener{
 		super();
 		initialize();
 		this.setBounds(100, 100, 450, 300);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		setUndecorated(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setModel(model);
 		setController(controller);

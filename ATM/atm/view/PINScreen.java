@@ -3,6 +3,7 @@ package atm.view;
 import java.awt.Rectangle;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 import java.awt.GridBagConstraints;
 
@@ -42,7 +43,7 @@ public class PINScreen extends JFrameView {
 	private JButton Enter = null;
 	private String firstname = null;
 	private String lastname = null;
-	private JTextPane NameInfo = null;
+	private JLabel NameInfo = null;
 	static final int MAX_CHARS = 4;
 	private Handler handler = new Handler();
 	/**
@@ -397,10 +398,10 @@ public class PINScreen extends JFrameView {
 	 * 	
 	 * @return javax.swing.JTextPane	
 	 */
-	private JTextPane getNameInfo() {
+	private JLabel getNameInfo() {
 		if (NameInfo == null) {
-			NameInfo = new JTextPane();
-			NameInfo.setBounds(new Rectangle(120, 83, 306, 174));
+			NameInfo = new JLabel();
+			NameInfo.setBounds(67, 83, 407, 174);
 			NameInfo.setBackground(new Color(238, 238, 238));
 			NameInfo.setFont(new Font("Californian FB", Font.PLAIN, 24));
 			NameInfo.setText("Welcome, " + firstname + " " + lastname);

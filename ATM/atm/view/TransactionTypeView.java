@@ -38,6 +38,7 @@ public class TransactionTypeView extends JFrameView {
 		gbc_btnTransfer.gridy = 2;
 		add(btnTransfer, gbc_btnTransfer);
 		
+		/*
 		JButton btnDeposit = new JButton("Deposit");
 		btnDeposit.addActionListener(handler);
 		btnDeposit.setActionCommand("Deposit");
@@ -47,6 +48,7 @@ public class TransactionTypeView extends JFrameView {
 		gbc_btnDeposit.gridx = 4;
 		gbc_btnDeposit.gridy = 2;
 		add(btnDeposit, gbc_btnDeposit);
+		*/
 		
 		JButton btnWithdraw = new JButton("Withdraw");
 		btnWithdraw.addActionListener(handler);

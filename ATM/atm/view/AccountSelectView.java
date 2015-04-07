@@ -8,7 +8,6 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Set;
 
 import javax.swing.JButton;
@@ -76,16 +75,26 @@ public class AccountSelectView extends JFrameView {
 				}
 			});
 			i++;
+			if(a == ((ATMCoreModel)getModel()).getFromAccount()) Account.setEnabled(false);
 			add(Account);
 		}
 	}
 	
 	public void SelectFrom(){
-		JLabel lblSelectFromAccount = new JLabel("Select From Account");
+		JLabel lblSelectFromAccount = new JLabel("Select Account");
 		
 		lblSelectFromAccount.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 24));
 		lblSelectFromAccount.setForeground(new Color(255, 0, 0));
 		lblSelectFromAccount.setBounds(74, 27, 300, 50);
+		add(lblSelectFromAccount);
+	}
+	
+	public void SelectTo(){
+		JLabel lblSelectFromAccount = new JLabel("Select the account to transfer to");
+		
+		lblSelectFromAccount.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 24));
+		lblSelectFromAccount.setForeground(new Color(255, 0, 0));
+		lblSelectFromAccount.setBounds(74, 27, 450, 50);
 		add(lblSelectFromAccount);
 	}
 	@Override

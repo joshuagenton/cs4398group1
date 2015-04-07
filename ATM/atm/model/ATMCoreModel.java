@@ -3,8 +3,6 @@
  */
 package atm.model;
 
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.swing.SwingUtilities;
@@ -26,8 +24,8 @@ public class ATMCoreModel extends AbstractModel{
 	private String account_number;
 	private String PIN;
 	private String name;
-	private Results fromAccount;
-	private Entry<String,Double> toAccount;
+	private Results fromAccount = null;
+	private Results toAccount = null;
 	public TransactionTypes type;
 	private int pinTries = 0;
 	
@@ -62,7 +60,27 @@ public class ATMCoreModel extends AbstractModel{
 					    	notifyChanged(me);
 					    }
 					});
-		}
+			}
+			
+		else if (type == TransactionTypes.Transfer && toAccount == null){
+			final ModelEvent me = new ModelEvent(ModelEvent.EventKind.SelectAccount, AgentStatus.SelectToAccount);
+			SwingUtilities.invokeLater(
+				new Runnable() {
+					public void run() {
+						notifyChanged(me);
+						}
+					});
+			}
+		else if (type == TransactionTypes.Transfer){
+			final ModelEvent me = new ModelEvent(ModelEvent.EventKind.AmountTransferredUpdate, AgentStatus.Transfer);
+			SwingUtilities.invokeLater(
+				new Runnable() {
+					public void run() {
+						notifyChanged(me);
+						}
+					});
+			}
+		notifyAll();
 	}
 	
 	public synchronized void setTranType(TransactionTypes incoming){
@@ -134,7 +152,9 @@ public class ATMCoreModel extends AbstractModel{
 		notifyAll();
 	}
 	public synchronized void setFromAccount(Results a){
-		fromAccount = a;
+		if (fromAccount == null)
+			fromAccount = a;
+		else toAccount = a;
 		if (type == TransactionTypes.Balance){
 			final ModelEvent me = new ModelEvent(ModelEvent.EventKind.CheckBalance, AgentStatus.CheckBalance);
 			SwingUtilities.invokeLater(
@@ -217,7 +237,7 @@ public class ATMCoreModel extends AbstractModel{
 	
 	public synchronized void transfer(){
 		type = TransactionTypes.Transfer;
-		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.SelectAccount, AgentStatus.Transfer);
+		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.SelectAccount, AgentStatus.SelectFromAccount);
 		SwingUtilities.invokeLater(
 				new Runnable() {
 				    public void run() {

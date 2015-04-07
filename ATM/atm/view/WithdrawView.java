@@ -15,8 +15,10 @@ import javax.swing.JPanel;
 import atm.controller.ATMController;
 import atm.controller.CardReaderController;
 import atm.controller.Controller;
+import atm.model.ATMCoreModel;
 import atm.model.Model;
 import atm.model.ModelEvent;
+import atm.model.TransactionTypes;
 
 public class WithdrawView extends JFrameView {
 
@@ -102,7 +104,8 @@ public class WithdrawView extends JFrameView {
 			textPanel = new JPanel();
 			textPanel.setBounds(125, 111, 200, 106);
 			textPanel.setLayout(new GridBagLayout());
-			textPanel.add(getTakeCashLabel(), bl);		
+			if (((ATMCoreModel)getModel()).type == TransactionTypes.Withdraw) textPanel.add(getTakeCashLabel(), bl);		
+			else if (((ATMCoreModel)getModel()).type == TransactionTypes.Transfer) textPanel.add(getTransferCompleteLabel(), bl);
 		}
 		return textPanel;
 	}
@@ -111,7 +114,14 @@ public class WithdrawView extends JFrameView {
 	
 	
 	
-	
+	private JLabel getTransferCompleteLabel(){
+		if(takeCashLabel == null){
+			takeCashLabel = new JLabel();
+			takeCashLabel.setText("Transfer Complete");
+			takeCashLabel.setPreferredSize(new Dimension(200, 20));
+		}
+		return takeCashLabel;
+	}
 	
 	
 	private JLabel getTakeCashLabel(){

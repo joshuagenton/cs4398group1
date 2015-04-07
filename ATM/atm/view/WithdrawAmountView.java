@@ -25,12 +25,14 @@ import atm.controller.IdleTimeController;
 import atm.model.ATMCoreModel;
 import atm.model.Model;
 import atm.model.ModelEvent;
+import atm.model.TransactionTypes;
 
 public class WithdrawAmountView extends JFrameView {
 
 	private static final long serialVersionUID = 1L;
 
 	public final static String WITHDRAW = "Withdraw";
+	public final static String TRANSFER = "Transfer";
 	public final static String CANCEL = "Cancel";
 
 	
@@ -157,8 +159,14 @@ public class WithdrawAmountView extends JFrameView {
 	
 	private JButton getWithdrawButton(){
 		if(withdrawButton == null){
-			withdrawButton = new JButton(WITHDRAW);
-			withdrawButton.setActionCommand("processWithdraw");
+			if (((ATMCoreModel)getModel()).type == TransactionTypes.Withdraw){
+				withdrawButton = new JButton(WITHDRAW);
+				withdrawButton.setActionCommand("processWithdraw");
+			}
+			else if (((ATMCoreModel)getModel()).type == TransactionTypes.Transfer){
+				withdrawButton = new JButton(TRANSFER);
+				withdrawButton.setActionCommand("processTransfer");
+			}
 			withdrawButton.addActionListener(handler);
 			withdrawButton.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {

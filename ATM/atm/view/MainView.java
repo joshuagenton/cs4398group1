@@ -90,6 +90,11 @@ public class MainView extends JFrame implements View, ModelListener{
 			account.SelectFrom();
 			add(account);
 		}
+		else if (me.getAgStatus() == AgentStatus.SelectToAccount){
+			AccountSelectView account = new AccountSelectView(getModel(), getController());
+			account.SelectTo();
+			add(account);
+		}
 		else if (me.getAgStatus() == AgentStatus.CheckBalance){
 			BalanceView balance = new BalanceView(getModel(), getController());
 			add(balance);
@@ -99,6 +104,9 @@ public class MainView extends JFrame implements View, ModelListener{
 		}
 		else if (me.getAgStatus() == AgentStatus.WithdrawComplete){
 			add (new WithdrawView(getModel(), getController()));
+		}
+		else if (me.getAgStatus() == AgentStatus.Transfer){
+			add (new WithdrawAmountView(getModel(), getController()));
 		}
 		this.revalidate();
 		this.repaint();

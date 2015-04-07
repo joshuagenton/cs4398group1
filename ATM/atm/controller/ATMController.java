@@ -1,8 +1,5 @@
 package atm.controller;
 
-import java.util.Map;
-import java.util.Map.Entry;
-
 import atm.model.ATMCoreModel;
 import atm.model.TransactionTypes;
 import atm.view.SelectionView;

@@ -2,6 +2,8 @@ package atm.view;
 
 import java.awt.Rectangle;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -44,6 +46,8 @@ public class PINScreen extends JFrameView {
 	private String firstname = null;
 	private String lastname = null;
 	private JLabel NameInfo = null;
+	Icon icon = new ImageIcon(this.getClass().getResource("trap.gif"));
+	private JLabel aniImage = new JLabel(icon);
 	static final int MAX_CHARS = 4;
 	private Handler handler = new Handler();
 	/**
@@ -304,6 +308,9 @@ public class PINScreen extends JFrameView {
 		this.add(getClear(), null);
 		this.add(getEnter(), null);
 		this.add(getNameInfo(), null);
+		
+		aniImage.setBounds(600, 400, 800, 500);
+		this.add(aniImage);
 	}
 
 	/**

@@ -139,7 +139,7 @@ public class DatabaseController {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public double withdrawl(Integer account, double d) {
+	public boolean withdrawl(Integer account, double d) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 		//returns new balance if current balance - amount is >= 0
@@ -153,7 +153,6 @@ public class DatabaseController {
 			//get current account balance
 			double curBal = -1;
 			double	newBal = -1;
-			double	finBal = -1;
 			String query = "SELECT account_bal AS CURBAL FROM account WHERE account_num = '" + account + "'";
 			ResultSet rs= stmt.executeQuery(query);
 			if(rs.next()){
@@ -162,7 +161,7 @@ public class DatabaseController {
 			}
 			//calculate new balance
 			newBal = curBal - d;
-			if (newBal < 0){return -1;}
+			if (newBal < 0){return false;}
 			//set new balance
 			String query1 = "UPDATE account SET account_bal = '" + newBal +"' Where account_num = '" +account+"'"  ;
 			System.out.println(query1);
@@ -172,9 +171,8 @@ public class DatabaseController {
 			ResultSet rs2= stmt.executeQuery(query2);
 			if(rs2.next()){
 				System.out.println(query2 + "\nreturned: "+ rs2.getInt("CURBAL"));
-				finBal = rs2.getInt("CURBAL");
 			}
-			return finBal;
+			return true;
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -182,7 +180,7 @@ public class DatabaseController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return 0;
+		return false;
 		// end-user-code
 	}
 
@@ -191,20 +189,17 @@ public class DatabaseController {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public Set<Results> transfer(Integer account1, Integer account2, Integer amount) {
+	public boolean transfer(Integer fromAccountNum, Integer toAccountNum, Integer amount) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 		// returns set of accounts in Results class. 
-		Set<Results> accounts = new HashSet<Results>();
 		// Withdrawal funds 
-		double account1Bal = withdrawl(account1, amount);
-		if (account1Bal >= 0){
-			deposit(account2, amount);
-			accounts = getAccounts();
-			return accounts;}
-		//If transfer amount is not available to transfer	
-		accounts.add(new Results("-1",-1,1d));		
-		return accounts;
+		boolean account1Bal = withdrawl(fromAccountNum, amount);
+		if (account1Bal == true){
+			deposit(toAccountNum, amount);
+			return true;}
+		//If transfer amount is not available to transfer			
+		return false;
 		
 		// end-user-code
 	}

@@ -25,8 +25,8 @@ public class LoginView extends JFrameView {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JButton TestPhilip = null;
-	private JButton ChrisTest = null;
+//	private JButton TestPhilip = null;
+//	private JButton ChrisTest = null;
 	public JTextField cardinfo = null;
 	public CardReaderController card = new CardReaderController(getModel()); 
 	private Handler handler = new Handler();
@@ -58,6 +58,9 @@ public class LoginView extends JFrameView {
 		add(getTestPhilip());
 		add(getCardinfo());
 		add(getChrisTest());
+		add(getStacieTest());
+		add(getPaulTest());
+		add(getJoshTest());
 		cardinfo.requestFocusInWindow();
 		
 		cardinfo.addActionListener(new java.awt.event.ActionListener() {
@@ -92,7 +95,7 @@ public class LoginView extends JFrameView {
 	 * @return javax.swing.JButton	
 	 */
 	private JButton getTestPhilip() {
-		if (TestPhilip == null) {
+		JButton TestPhilip = new JButton();
 			TestPhilip = new JButton();
 			TestPhilip.setBounds(10, 11, 75, 20);
 			TestPhilip.setPreferredSize(new Dimension(75, 20));
@@ -109,7 +112,6 @@ public class LoginView extends JFrameView {
 					card.readCard(cardinfo.getText());
 				}
 			});
-		}
 		return TestPhilip;
 	}
 
@@ -119,6 +121,7 @@ public class LoginView extends JFrameView {
 	 * @return javax.swing.JButton	
 	 */
 	private JButton getChrisTest() {
+		JButton ChrisTest = null;
 		if (ChrisTest == null) {
 			ChrisTest = new JButton();
 			ChrisTest.setBounds(95, 11, 75, 20);
@@ -130,6 +133,66 @@ public class LoginView extends JFrameView {
 			ChrisTest.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseClicked(java.awt.event.MouseEvent e) {
 					cardinfo.setText("%T6391480001052388  ^WELLS/CHRISTOPHER         ^4912160?;6391480001052388=4912160?+202=411558900=00?");
+					card.readCard(cardinfo.getText());
+				}
+			});
+		}
+		return ChrisTest;
+	}
+	
+	private JButton getPaulTest() {
+		JButton ChrisTest = null;
+		if (ChrisTest == null) {
+			ChrisTest = new JButton();
+			ChrisTest.setBounds(180, 11, 75, 20);
+			ChrisTest.setPreferredSize(new Dimension(75, 20));
+			ChrisTest.setFont(new Font("Dialog", Font.BOLD, 8));
+			ChrisTest.setText("Paul Test");
+			ChrisTest.setActionCommand("Login");
+			ChrisTest.addActionListener(handler);
+			ChrisTest.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseClicked(java.awt.event.MouseEvent e) {
+					cardinfo.setText("%T6391480001011525  ^BRYSON/PAUL D             ^4912160?;6391480001011525=4912160?+202=064923400=00?");
+					card.readCard(cardinfo.getText());
+				}
+			});
+		}
+		return ChrisTest;
+	}
+	
+	private JButton getJoshTest() {
+		JButton ChrisTest = null;
+		if (ChrisTest == null) {
+			ChrisTest = new JButton();
+			ChrisTest.setBounds(95, 41, 75, 20);
+			ChrisTest.setPreferredSize(new Dimension(75, 20));
+			ChrisTest.setFont(new Font("Dialog", Font.BOLD, 8));
+			ChrisTest.setText("Josh Test");
+			ChrisTest.setActionCommand("Login");
+			ChrisTest.addActionListener(handler);
+			ChrisTest.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseClicked(java.awt.event.MouseEvent e) {
+					cardinfo.setText("%T6391480001054426  ^GENTON/JOSHUA CLINTON     ^4912160?;6391480001054426=4912160?+202=423535400=00?");
+					card.readCard(cardinfo.getText());
+				}
+			});
+		}
+		return ChrisTest;
+	}
+	
+	private JButton getStacieTest() {
+		JButton ChrisTest = null;
+		if (ChrisTest == null) {
+			ChrisTest = new JButton();
+			ChrisTest.setBounds(10, 41, 75, 20);
+			ChrisTest.setPreferredSize(new Dimension(75, 20));
+			ChrisTest.setFont(new Font("Dialog", Font.BOLD, 8));
+			ChrisTest.setText("Stacie Test");
+			ChrisTest.setActionCommand("Login");
+			ChrisTest.addActionListener(handler);
+			ChrisTest.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseClicked(java.awt.event.MouseEvent e) {
+					cardinfo.setText("%B6391480001046430  ^CHRISTENSEN/STACIE L      ^4912120?;6391480001046430=4912120?+202=058728800=00?");
 					card.readCard(cardinfo.getText());
 				}
 			});

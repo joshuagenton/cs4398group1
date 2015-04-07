@@ -64,7 +64,19 @@ public class Misc extends JFrameView {
 		setVisible(true);
 		repaint();
 	}
-	
+
+	public void cancelled(){
+		//setBackground(new Color(0, 0, 255));
+		setLayout(new BorderLayout(0, 0));
+		
+		Label label = new Label("Invalid PIN");
+		label.setAlignment(Label.CENTER);
+		label.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 24));
+		label.setForeground(new Color(255, 0, 0));
+		add(label, BorderLayout.CENTER);
+		setVisible(true);
+		repaint();
+	}
 	public void transComplete(){
 		//setBackground(new Color(0, 0, 255));
 		setLayout(new BorderLayout(0, 0));

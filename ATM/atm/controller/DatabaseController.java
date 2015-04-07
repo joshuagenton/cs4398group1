@@ -4,14 +4,8 @@
 package atm.controller;
 
 import java.sql.*;
-import java.util.Collection;
-import java.util.Dictionary;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
-
-import com.sun.org.apache.xalan.internal.xsltc.runtime.Hashtable;
 
 /** 
  * <!-- begin-UML-doc -->

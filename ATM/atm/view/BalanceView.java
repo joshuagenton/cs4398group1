@@ -1,16 +1,11 @@
 package atm.view;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import atm.controller.ATMController;
 import atm.controller.Controller;
-import atm.controller.MainController;
 import atm.controller.Results;
 import atm.model.ATMCoreModel;
 import atm.model.Model;

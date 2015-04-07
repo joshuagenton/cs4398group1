@@ -3,7 +3,6 @@ package atm.view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import atm.controller.ATMController;
 import atm.controller.Controller;
 import atm.controller.MainController;
 import atm.model.Model;

@@ -1,13 +1,12 @@
 package atm.controller;
 
-import java.util.Arrays;
 import java.util.Date;
 
 public class MainController extends AbstractController {
 
-	private Integer cardNo;
-	private String pin;
-	private Date timeDate;
+//	private Integer cardNo;
+//	private String pin;
+//	private Date timeDate;
 	
 	public MainController() {}
 	

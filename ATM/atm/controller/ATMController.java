@@ -45,6 +45,7 @@ public class ATMController extends AbstractController{
 		}
 		else if (opt == SelectionView.Logout){
 			IdleTimeController.cancelTimer();
+			((ATMCoreModel)getModel()).waiting();
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {

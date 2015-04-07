@@ -29,6 +29,7 @@ public class IdleTimeController extends TimerTask {
 	//  This function is automatically run by the timer when it runs out
   	public void run() {
   		controller.operation("Logout");
+  		timer.cancel();
     }
  }
 

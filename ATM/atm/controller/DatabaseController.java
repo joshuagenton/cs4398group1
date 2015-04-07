@@ -37,7 +37,7 @@ public class DatabaseController {
 	
 	public Set<Results> getAccounts(){
 		Set<Results> accounts = new HashSet<Results>();
-		String query = "Select a.name,a.account_bal,a.account_num from account a, Users u, User_Accounts ua Where ua.CCN = u.CCN AND ua.user_accounts_key = a.account_key AND u.CCN = '" + CCN +"'";
+		String query = "Select a.name,a.account_bal,a.account_num from account a, Users u, User_Accounts ua Where ua.CCN = u.CCN AND ua.account_num = a.account_num AND u.CCN = '" + CCN +"'";
 		try {
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);

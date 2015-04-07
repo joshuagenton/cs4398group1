@@ -1,9 +1,6 @@
 package atm.view;
 
-import java.awt.Color;
-import java.awt.ComponentOrientation;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -18,10 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import atm.controller.ATMController;
-import atm.controller.DatabaseController;
 import atm.controller.CardReaderController;
 import atm.controller.Controller;
-import atm.controller.IdleTimeController;
 import atm.model.ATMCoreModel;
 import atm.model.Model;
 import atm.model.ModelEvent;
@@ -145,9 +140,6 @@ public class WithdrawAmountView extends JFrameView {
 		return lblAmount;
 	}
 	
-	private void setAmount(){
-	
-	}
 	private JTextField getTextAmount() {
 		if (textAmount == null) {
 			textAmount = new JTextField();

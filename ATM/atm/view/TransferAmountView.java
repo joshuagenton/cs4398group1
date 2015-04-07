@@ -1,9 +1,6 @@
 package atm.view;
 
-import java.awt.Color;
-import java.awt.ComponentOrientation;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -19,7 +16,6 @@ import javax.swing.JTextField;
 import atm.controller.ATMController;
 import atm.controller.CardReaderController;
 import atm.controller.Controller;
-import atm.model.ATMCoreModel;
 import atm.model.Model;
 import atm.model.ModelEvent;
 

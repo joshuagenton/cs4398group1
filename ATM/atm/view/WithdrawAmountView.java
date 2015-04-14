@@ -21,6 +21,10 @@ import atm.model.ATMCoreModel;
 import atm.model.Model;
 import atm.model.ModelEvent;
 import atm.model.TransactionTypes;
+import javax.swing.JLayeredPane;
+import javax.swing.BoxLayout;
+import java.awt.Font;
+import java.awt.Color;
 
 public class WithdrawAmountView extends JFrameView {
 
@@ -29,9 +33,6 @@ public class WithdrawAmountView extends JFrameView {
 	public final static String WITHDRAW = "Withdraw";
 	public final static String TRANSFER = "Transfer";
 	public final static String CANCEL = "Cancel";
-
-	
-	private JPanel topPanel;
 	private JPanel textPanel;
 	private JPanel buttonPanel;
 	
@@ -49,10 +50,11 @@ public class WithdrawAmountView extends JFrameView {
 	
 	public WithdrawAmountView(Model model, Controller controller) {
 		super(model, controller);
+		setLayout(null);
+		setBackground(Color.WHITE);
 		
-		this.setBounds(100, 100, 450, 300);
-		add(getContent());
-		
+		this.setBounds(100, 100, 847, 588);	
+				
 		
 		Toolkit toolkit =  Toolkit.getDefaultToolkit();
 		Dimension dim = toolkit.getScreenSize();
@@ -60,45 +62,23 @@ public class WithdrawAmountView extends JFrameView {
 		int x = (int) ((dim.getWidth() - this.getWidth()) * 0.5f);
 	    int y = (int) ((dim.getHeight() - this.getHeight()) * 0.5f);
 	    this.setLocation(x, y);
+	    add(getButtonPanel());
+	    add(getTextFieldPanel());
+	    add(getLblAmount());
+	    
 	    
 	}
-
 	
-	private JPanel getContent() {
-		if (topPanel == null) {
-			topPanel = new JPanel();
-			GridLayout layout = new GridLayout(0, 1);
-			topPanel.setLayout(layout);
-			//topPanel.setPreferredSize(new Dimension(300, 100));
-			GridBagConstraints ps = new GridBagConstraints();
-			ps.gridx = 0;
-			ps.gridy = 3;
-			ps.fill = GridBagConstraints.HORIZONTAL;
-			
-			GridBagConstraints bs = new GridBagConstraints();
-			bs.gridx = 0;
-			bs.gridy = 3;
-			topPanel.add(getTextFieldPanel(), null);
-			topPanel.add(getButtonPanel(), null);
-		}
-		return topPanel;
-	}
+
 	
 	private JPanel getButtonPanel()
 	{
 		if(buttonPanel == null){
-			GridBagConstraints wButtonCtr = new GridBagConstraints();
-			wButtonCtr.gridx = 0;
-			wButtonCtr.gridy = 1;
-			
-			GridBagConstraints cButtonCtr = new GridBagConstraints();
-			cButtonCtr.gridx = 1;
-			cButtonCtr.gridy = 1;
-			
 			buttonPanel = new JPanel();
-			buttonPanel.setLayout(new GridBagLayout());
-			buttonPanel.add(getWithdrawButton(), wButtonCtr);
-			buttonPanel.add(getCancelButton(), cButtonCtr);
+			buttonPanel.setBounds(450, 361, 300, 100);
+			buttonPanel.add(getWithdrawButton());
+			buttonPanel.setLayout(null);
+			buttonPanel.add(getCancelButton());
 		}
 		
 		return buttonPanel;
@@ -107,19 +87,13 @@ public class WithdrawAmountView extends JFrameView {
 	private JPanel getTextFieldPanel()
 	{
 		if(textPanel == null){
-			GridBagConstraints bl = new GridBagConstraints();
-			bl.gridx = 0;
-			bl.gridy = 0;
-			
-			GridBagConstraints bf = new GridBagConstraints();
-			bf.gridx = 0;
-			bf.gridy = 1;
 			
 			
 			textPanel = new JPanel();
-			textPanel.setLayout(new GridBagLayout());
-			textPanel.add(getLblAmount(), bl);
-			textPanel.add(getTextAmount(), bf);			
+			textPanel.setBackground(new Color(224, 255, 255));
+			textPanel.setBounds(450, 250, 300, 100);
+			textPanel.setLayout(null);
+			textPanel.add(getTextAmount());			
 		}
 		return textPanel;
 	}
@@ -134,7 +108,9 @@ public class WithdrawAmountView extends JFrameView {
 	private JLabel getLblAmount(){
 		if(lblAmount == null){
 			lblAmount = new JLabel();
-			lblAmount.setText("Amount:");
+			lblAmount.setBounds(450, 209, 176, 29);
+			lblAmount.setFont(new Font("Tahoma", Font.PLAIN, 20));
+			lblAmount.setText("Enter an amount:");
 			lblAmount.setPreferredSize(new Dimension(200, 20));
 		}
 		return lblAmount;
@@ -143,6 +119,10 @@ public class WithdrawAmountView extends JFrameView {
 	private JTextField getTextAmount() {
 		if (textAmount == null) {
 			textAmount = new JTextField();
+			textAmount.setBackground(new Color(224, 255, 255));
+			textAmount.setBorder(null);
+			textAmount.setFont(new Font("Tahoma", Font.PLAIN, 32));
+			textAmount.setBounds(90, 24, 158, 42);
 			textAmount.setText("$0.00");
 			textAmount.setColumns(10);
 		}
@@ -153,10 +133,14 @@ public class WithdrawAmountView extends JFrameView {
 		if(withdrawButton == null){
 			if (((ATMCoreModel)getModel()).type == TransactionTypes.Withdraw){
 				withdrawButton = new JButton(WITHDRAW);
+				withdrawButton.setBackground(new Color(0, 128, 0));
+				withdrawButton.setBounds(0, 0, 140, 75);
 				withdrawButton.setActionCommand("processWithdraw");
 			}
 			else if (((ATMCoreModel)getModel()).type == TransactionTypes.Transfer){
 				withdrawButton = new JButton(TRANSFER);
+				withdrawButton.setBackground(new Color(0, 128, 0));
+				withdrawButton.setBounds(0, 0, 140, 75);
 				withdrawButton.setActionCommand("processTransfer");
 			}
 			withdrawButton.addActionListener(handler);
@@ -172,6 +156,10 @@ public class WithdrawAmountView extends JFrameView {
 	private JButton getCancelButton(){
 		if(cancelButton == null){
 			cancelButton = new JButton(CANCEL);
+			cancelButton.setForeground(new Color(102, 0, 0));
+			cancelButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			cancelButton.setBackground(new Color(255, 51, 51));
+			cancelButton.setBounds(160, 0, 140, 75);
 			cancelButton.setActionCommand("Cancel");
 			cancelButton.addActionListener(handler);
 		}

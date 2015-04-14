@@ -12,6 +12,10 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Font;
+import java.awt.Cursor;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 
 public class TransactionTypeView extends JFrameView {
 
@@ -21,22 +25,15 @@ public class TransactionTypeView extends JFrameView {
 	
 	public TransactionTypeView(Model model, Controller controller) {
 		super(model, controller);
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{56, 79, 73, 69, 101, 0};
-		gridBagLayout.rowHeights = new int[]{23, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		setLayout(gridBagLayout);
 		
 		JButton btnTransfer = new JButton("Transfer");
+		btnTransfer.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnTransfer.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		btnTransfer.setBounds(169, 133, 200, 200);
 		btnTransfer.addActionListener(handler);
+		setLayout(null);
 		btnTransfer.setActionCommand("Transfer");
-		GridBagConstraints gbc_btnTransfer = new GridBagConstraints();
-		gbc_btnTransfer.anchor = GridBagConstraints.NORTHWEST;
-		gbc_btnTransfer.insets = new Insets(0, 0, 5, 5);
-		gbc_btnTransfer.gridx = 2;
-		gbc_btnTransfer.gridy = 2;
-		add(btnTransfer, gbc_btnTransfer);
+		add(btnTransfer);
 		
 		/*
 		JButton btnDeposit = new JButton("Deposit");
@@ -50,24 +47,22 @@ public class TransactionTypeView extends JFrameView {
 		add(btnDeposit, gbc_btnDeposit);
 		*/
 		
-		JButton btnWithdraw = new JButton("Withdraw");
+		JButton btnWithdraw = new JButton("");
+		btnWithdraw.setIcon(new ImageIcon(TransactionTypeView.class.getResource("/atm/view/button_Withdraw.png")));
+		btnWithdraw.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnWithdraw.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		btnWithdraw.setBounds(386, 133, 200, 200);
 		btnWithdraw.addActionListener(handler);
 		btnWithdraw.setActionCommand("Withdraw");
-		GridBagConstraints gbc_btnWithdraw = new GridBagConstraints();
-		gbc_btnWithdraw.anchor = GridBagConstraints.NORTHWEST;
-		gbc_btnWithdraw.insets = new Insets(0, 0, 0, 5);
-		gbc_btnWithdraw.gridx = 2;
-		gbc_btnWithdraw.gridy = 4;
-		add(btnWithdraw, gbc_btnWithdraw);
+		add(btnWithdraw);
 		
-		JButton btnCheckBalance = new JButton("Check Balance");
+		JButton btnCheckBalance = new JButton("<html>Check<br>Balance</html>");
+		btnCheckBalance.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnCheckBalance.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		btnCheckBalance.setBounds(602, 133, 200, 200);
 		btnCheckBalance.addActionListener(handler);
 		btnCheckBalance.setActionCommand("Balance");
-		GridBagConstraints gbc_btnCheckBalance = new GridBagConstraints();
-		gbc_btnCheckBalance.anchor = GridBagConstraints.NORTHWEST;
-		gbc_btnCheckBalance.gridx = 4;
-		gbc_btnCheckBalance.gridy = 4;
-		add(btnCheckBalance, gbc_btnCheckBalance);
+		add(btnCheckBalance);
 		// TODO Auto-generated constructor stub
 	}
 

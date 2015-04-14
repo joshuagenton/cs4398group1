@@ -68,6 +68,7 @@ public class LoginView extends JFrameView {
 		
 		add(TestJosh);
 	//	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 	}
 
 	
@@ -96,12 +97,13 @@ public class LoginView extends JFrameView {
 		
 		cardinfo.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-				System.out.println(cardinfo.getText()); // TODO Auto-generated Event stub actionPerformed()
+				System.out.println(cardinfo.getText()); 
 				card.readCard(cardinfo.getText());
 				cardinfo.setText("");
 			
 			}
 		});
+		cardinfo.requestFocus();
 	//	this.add(test);
 	//	test.setVisible(true);
 	}
@@ -241,8 +243,8 @@ public class LoginView extends JFrameView {
 			cardinfo.setLocation(250, 15);
 			cardinfo.setBackground(Color.lightGray);
 			cardinfo.setPreferredSize(new Dimension(0, 0));
-			cardinfo.setSize(new Dimension(0, 0));
-
+			cardinfo.requestFocus();
+			cardinfo.addAncestorListener(new RequestFocusListener());
 		}
 		return cardinfo;
 	}

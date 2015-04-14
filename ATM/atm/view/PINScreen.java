@@ -436,5 +436,4 @@ public class PINScreen extends JFrameView {
 		// TODO Auto-generated method stub
 		
 	}
-
 }  //  @jve:decl-index=0:visual-constraint="-518,13"

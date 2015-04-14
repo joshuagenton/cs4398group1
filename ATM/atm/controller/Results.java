@@ -1,5 +1,7 @@
 package atm.controller;
 
+import java.util.Comparator;
+
 
 public class Results{
 	
@@ -24,4 +26,13 @@ public class Results{
 	public Double getBalance(){
 		return balance;
 	}
+	
+
+}
+class AccountCompare implements Comparator<Results> {
+	@Override
+	public int compare(Results o1, Results o2) {
+		return o1.getAccountNum().compareTo(o2.getAccountNum());
+	}
+	
 }

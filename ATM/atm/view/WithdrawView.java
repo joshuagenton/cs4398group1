@@ -44,7 +44,7 @@ public class WithdrawView extends JFrameView {
 		
 		this.setBounds(100, 100, 450, 300);
 		setLayout(null);
-		add(getContent());
+		//add(getContent());
 		
 		
 		Toolkit toolkit =  Toolkit.getDefaultToolkit();
@@ -59,7 +59,7 @@ public class WithdrawView extends JFrameView {
 	}
 
 	
-	private JPanel getContent() {
+/*	private JPanel getContent() {
 		if (topPanel == null) {
 			topPanel = new JPanel();
 			topPanel.setBounds(125, 5, 200, 106);
@@ -76,7 +76,7 @@ public class WithdrawView extends JFrameView {
 			bs.gridy = 3;
 		}
 		return topPanel;
-	}
+	}*/
 	
 	private JPanel getButtonPanel()
 	{

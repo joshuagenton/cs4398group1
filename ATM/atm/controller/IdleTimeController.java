@@ -18,7 +18,7 @@ public class IdleTimeController extends TimerTask {
 			cancelTimer();
 		timerTask = new IdleTimeController();
 		timer = new Timer();
-		timer.schedule(timerTask, 15000);
+		timer.schedule(timerTask, 45000);
 	}
 
 	// If there is an action we need to cancel the timer.

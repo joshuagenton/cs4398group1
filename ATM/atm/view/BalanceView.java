@@ -13,6 +13,12 @@ import atm.model.ModelEvent;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Component;
+import javax.swing.JTextPane;
+import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
 
 public class BalanceView extends JFrameView {
 
@@ -23,6 +29,10 @@ public class BalanceView extends JFrameView {
 	private Handler handler = new Handler();
 	public BalanceView(Model model, Controller controller) {
 		super(model, controller);
+		initGUI();
+	}
+	private void initGUI() {
+		setBackground(new Color(255, 255, 255));
 		setLayout(null);
 		
 		//this.setExtendedState(MAXIMIZED_BOTH);
@@ -30,36 +40,42 @@ public class BalanceView extends JFrameView {
 		//setBackground(new Color(122, 58, 255));
 		setSize(new Dimension(894, 441));
 		
-
-		
-		//this.setTitle("Welcome");
-		setVisible(true);
-		
 		Results account = ((ATMCoreModel)getModel()).getFromAccount();
 		DecimalFormat dec = new DecimalFormat("'$'0.00");
-		JLabel lblAccount = new JLabel("Account: " + account.getName());
+		JTextField lblAccount = new JTextField("Account: " + account.getName());
+		lblAccount.setEditable(false);
+		lblAccount.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblAccount.setBorder(null);
+		lblAccount.setForeground(new Color(0, 128, 0));
+		lblAccount.setBackground(new Color(255, 255, 255));
 		lblAccount.setBounds(500, 81, 400, 50);
 		add(lblAccount);
 		
 		JLabel lblBalance = new JLabel("Balance: " + dec.format(account.getBalance()));
+		lblBalance.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblBalance.setBounds(500, 133, 400, 50);
 		add(lblBalance);
 		
 		JButton btnOk = new JButton("YES");
+		btnOk.setBackground(new Color(30, 144, 255));
 		btnOk.setActionCommand("newTransaction");
 		btnOk.addActionListener(handler);
-		btnOk.setBounds(500, 227, 89, 23);
+		btnOk.setBounds(500, 227, 100, 100);
 		add(btnOk);
 		
 		JLabel lblWouldYouLike = new JLabel("Would you like to peform another transaction?");
-		lblWouldYouLike.setBounds(210, 231, 268, 14);
+		lblWouldYouLike.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblWouldYouLike.setBounds(90, 253, 400, 48);
 		
 		add(lblWouldYouLike);
 		
 		JButton btnNo = new JButton("No");
+		btnNo.setBorder(new BevelBorder(BevelBorder.RAISED, new Color(0, 0, 0), new Color(0, 0, 0), null, null));
+		btnNo.setForeground(Color.BLACK);
+		btnNo.setBackground(Color.RED);
 		btnNo.setActionCommand("Logout");
 		btnNo.addActionListener(handler);
-		btnNo.setBounds(618, 227, 89, 23);
+		btnNo.setBounds(602, 227, 100, 100);
 		add(btnNo);
 		start();
 	}

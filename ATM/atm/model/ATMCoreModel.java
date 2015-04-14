@@ -39,7 +39,16 @@ public class ATMCoreModel extends AbstractModel{
 				});
 		notifyAll();
 	}
-	
+	public synchronized void insufficientFunds(){
+		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.AmountWithdrawUpdate, AgentStatus.InsufFunds);
+		SwingUtilities.invokeLater(
+				new Runnable() {
+				    public void run() {
+				    	notifyChanged(me);
+				    }
+				});
+		notifyAll();
+	}
 	public synchronized void withdraw(){
 		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.AmountWithdrawUpdate, AgentStatus.Withdraw);
 		SwingUtilities.invokeLater(

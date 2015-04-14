@@ -105,8 +105,10 @@ public class ATMController extends AbstractController{
 	public void withdrawFunds(Results account, Double amount) {
 		((ATMCoreModel)getModel()).waiting();
 		db = new DatabaseController();
-		db.withdrawl(account.getAccountNum(), amount);
-		((ATMCoreModel)getModel()).withdrawComplete();
+		if(db.withdrawl(account.getAccountNum(), amount))		
+			((ATMCoreModel)getModel()).withdrawComplete();
+		else
+			((ATMCoreModel)getModel()).insufficientFunds();
 	}
 	
 	// SUFFICIENT FUNDS

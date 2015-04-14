@@ -55,6 +55,7 @@ public class PINScreen extends JFrameView {
 	 */
 	public PINScreen(Model model, Controller controller) {
 		super(model, controller);
+		setBackground(new Color(255, 255, 255));
 		int i = 0;
 		Boolean mark = false;
 		String first = null, last = null;
@@ -89,6 +90,7 @@ public class PINScreen extends JFrameView {
 	private JButton getNum1() {
 		if (num1 == null) {
 			num1 = new JButton();
+			num1.setFont(new Font("Tahoma", Font.PLAIN, 24));
 			num1.setText("1");
 			num1.setBounds(new Rectangle(538, 83, 100, 100));
 			num1.addActionListener(new java.awt.event.ActionListener() {
@@ -109,6 +111,7 @@ public class PINScreen extends JFrameView {
 	private JButton getNum4() {
 		if (num4 == null) {
 			num4 = new JButton();
+			num4.setFont(new Font("Tahoma", Font.PLAIN, 24));
 			num4.setText("4");
 			num4.setBounds(new Rectangle(538, 183, 100, 100));
 			num4.addActionListener(new java.awt.event.ActionListener() {
@@ -129,6 +132,7 @@ public class PINScreen extends JFrameView {
 	private JButton getNum2() {
 		if (num2 == null) {
 			num2 = new JButton();
+			num2.setFont(new Font("Tahoma", Font.PLAIN, 24));
 			num2.setText("2");
 			num2.setBounds(new Rectangle(638, 83, 100, 100));
 			num2.addActionListener(new java.awt.event.ActionListener() {
@@ -149,6 +153,7 @@ public class PINScreen extends JFrameView {
 	private JButton getNum3() {
 		if (num3 == null) {
 			num3 = new JButton();
+			num3.setFont(new Font("Tahoma", Font.PLAIN, 24));
 			num3.setText("3");
 			num3.setBounds(new Rectangle(738, 83, 100, 100));
 			num3.addActionListener(new java.awt.event.ActionListener() {
@@ -169,6 +174,7 @@ public class PINScreen extends JFrameView {
 	private JButton getNum5() {
 		if (num5 == null) {
 			num5 = new JButton();
+			num5.setFont(new Font("Tahoma", Font.PLAIN, 24));
 			num5.setText("5");
 			num5.setBounds(new Rectangle(638, 183, 100, 100));
 			num5.addActionListener(new java.awt.event.ActionListener() {
@@ -189,6 +195,7 @@ public class PINScreen extends JFrameView {
 	private JButton getNum6() {
 		if (num6 == null) {
 			num6 = new JButton();
+			num6.setFont(new Font("Tahoma", Font.PLAIN, 24));
 			num6.setText("6");
 			num6.setBounds(new Rectangle(738, 183, 100, 100));
 			num6.addActionListener(new java.awt.event.ActionListener() {
@@ -209,6 +216,7 @@ public class PINScreen extends JFrameView {
 	private JButton getNum7() {
 		if (num7 == null) {
 			num7 = new JButton();
+			num7.setFont(new Font("Tahoma", Font.PLAIN, 24));
 			num7.setText("7");
 			num7.setBounds(new Rectangle(538, 283, 100, 100));
 			num7.addActionListener(new java.awt.event.ActionListener() {
@@ -229,6 +237,7 @@ public class PINScreen extends JFrameView {
 	private JButton getNum8() {
 		if (num8 == null) {
 			num8 = new JButton();
+			num8.setFont(new Font("Tahoma", Font.PLAIN, 24));
 			num8.setText("8");
 			num8.setBounds(new Rectangle(638, 283, 100, 100));
 			num8.addActionListener(new java.awt.event.ActionListener() {
@@ -249,6 +258,7 @@ public class PINScreen extends JFrameView {
 	private JButton getNum9() {
 		if (num9 == null) {
 			num9 = new JButton();
+			num9.setFont(new Font("Tahoma", Font.PLAIN, 24));
 			num9.setText("9");
 			num9.setBounds(new Rectangle(738, 283, 100, 100));
 			num9.addActionListener(new java.awt.event.ActionListener() {
@@ -269,6 +279,7 @@ public class PINScreen extends JFrameView {
 	private JButton getNum0() {
 		if (num0 == null) {
 			num0 = new JButton();
+			num0.setFont(new Font("Tahoma", Font.PLAIN, 24));
 			num0.setText("0");
 			num0.setBounds(new Rectangle(638, 383, 100, 100));
 			num0.addActionListener(new java.awt.event.ActionListener() {
@@ -321,7 +332,7 @@ public class PINScreen extends JFrameView {
 	private JPasswordField getPIN() {
 		if (PIN == null) {
 			PIN = new JPasswordField();
-			PIN.setBounds(new Rectangle(299, 324, 158, 45));
+			PIN.setBounds(new Rectangle(538, 27, 300, 45));
 			PIN.setFont(new Font("Dialog", Font.PLAIN, 36));
 
 		}
@@ -336,9 +347,10 @@ public class PINScreen extends JFrameView {
 	private JButton getCancel() {
 		if (Cancel == null) {
 			Cancel = new JButton();
-			Cancel.setBounds(new Rectangle(870, 87, 136, 51));
+			Cancel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+			Cancel.setBounds(new Rectangle(50, 500, 200, 150));
 			Cancel.setBackground(Color.red);
-			Cancel.setText("Cancel");
+			Cancel.setText("End Transaction");
 			Cancel.setActionCommand("Cancel");
 			Cancel.addActionListener(handler);
 			Cancel.addActionListener(new java.awt.event.ActionListener() {
@@ -359,7 +371,8 @@ public class PINScreen extends JFrameView {
 	private JButton getClear() {
 		if (Clear == null) {
 			Clear = new JButton();
-			Clear.setBounds(new Rectangle(870, 172, 136, 51));
+			Clear.setFont(new Font("Tahoma", Font.PLAIN, 21));
+			Clear.setBounds(new Rectangle(538, 383, 100, 100));
 			Clear.setActionCommand("CancelScreen()");
 			Clear.setText("Clear");
 			Clear.setBackground(Color.yellow);
@@ -383,7 +396,8 @@ public class PINScreen extends JFrameView {
 	private JButton getEnter() {
 		if (Enter == null) {
 			Enter = new JButton();
-			Enter.setBounds(new Rectangle(870, 324, 136, 51));
+			Enter.setFont(new Font("Tahoma", Font.PLAIN, 21));
+			Enter.setBounds(new Rectangle(738, 383, 100, 100));
 			Enter.setActionCommand("Enter");
 			Enter.setText("Enter");
 			Enter.setBackground(Color.green);

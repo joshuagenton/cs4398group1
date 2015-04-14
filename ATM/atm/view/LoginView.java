@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -17,7 +19,13 @@ import atm.controller.Controller;
 import atm.model.Model;
 import atm.model.ModelEvent;
 import atm.model.ATMCoreModel;
+
 import javax.swing.JLabel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import java.awt.Button;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class LoginView extends JFrameView {
 
@@ -31,11 +39,34 @@ public class LoginView extends JFrameView {
 	public CardReaderController card = new CardReaderController(getModel()); 
 	private Handler handler = new Handler();
 	private JLabel lblNewLabel;
+	Icon icon = new ImageIcon(this.getClass().getResource("pos_mag_swipe_reader_msr.jpg"));
+	private JLabel readerImage = new JLabel(icon);
+	private final JLabel lblNewLabel_1 = new JLabel("readerImage");
+	private final JButton TestJosh = new JButton();
 	
 	public LoginView(Model model, Controller controller) {
 		super(model, controller);
+		setBackground(new Color(255, 255, 255));
 		initialize();
 		this.setBounds(100, 100, 450, 300);
+		lblNewLabel_1.setIcon(new ImageIcon(LoginView.class.getResource("/atm/view/pos_mag_swipe_reader_msr.jpg")));
+		lblNewLabel_1.setBounds(400, 20, 244, 241);
+		
+		add(lblNewLabel_1);
+		TestJosh.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+			}
+		});
+		TestJosh.setText("Josh Test");
+		TestJosh.setPreferredSize(new Dimension(75, 20));
+		TestJosh.setHorizontalAlignment(SwingConstants.LEFT);
+		TestJosh.setFont(new Font("Dialog", Font.BOLD, 8));
+		TestJosh.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		TestJosh.setActionCommand("Login");
+		TestJosh.setBounds(95, 11, 75, 20);
+		
+		add(TestJosh);
 	//	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
@@ -49,7 +80,7 @@ public class LoginView extends JFrameView {
 		//this.setExtendedState(MAXIMIZED_BOTH);
 		//JPanel login = new JPanel();
 		//setBackground(new Color(122, 58, 255));
-		setSize(new Dimension(527, 265));
+		setSize(new Dimension(619, 487));
 		//this.setTitle("Welcome");
 		setVisible(true);
 		setLayout(null);

@@ -8,6 +8,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,6 +19,14 @@ import atm.controller.CardReaderController;
 import atm.controller.Controller;
 import atm.model.Model;
 import atm.model.ModelEvent;
+
+import javax.swing.SwingConstants;
+
+import java.awt.Font;
+import java.awt.Color;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.BevelBorder;
+import java.awt.Cursor;
 
 public class TransferView extends JFrameView {
 
@@ -39,6 +49,7 @@ public class TransferView extends JFrameView {
 	
 	public TransferView(Model model, Controller controller) {
 		super(model, controller);
+		setBackground(new Color(255, 255, 255));
 		
 		this.setBounds(100, 100, 450, 300);
 		add(getContent());
@@ -78,11 +89,19 @@ public class TransferView extends JFrameView {
 	{
 		if(buttonPanel == null){
 			GridBagConstraints wButtonCtr = new GridBagConstraints();
+			wButtonCtr.fill = GridBagConstraints.VERTICAL;
+			wButtonCtr.gridheight = 2;
 			wButtonCtr.gridx = 0;
-			wButtonCtr.gridy = 1;
+			wButtonCtr.gridy = 0;
 			
 			buttonPanel = new JPanel();
-			buttonPanel.setLayout(new GridBagLayout());
+			buttonPanel.setBackground(new Color(255, 255, 255));
+			GridBagLayout gbl_buttonPanel = new GridBagLayout();
+			gbl_buttonPanel.rowHeights = new int[]{0, 72};
+			gbl_buttonPanel.columnWidths = new int[]{185};
+			gbl_buttonPanel.columnWeights = new double[]{1.0};
+			gbl_buttonPanel.rowWeights = new double[]{1.0, 0.0};
+			buttonPanel.setLayout(gbl_buttonPanel);
 			buttonPanel.add(getLogoutButton(), wButtonCtr);
 		}
 		
@@ -97,7 +116,13 @@ public class TransferView extends JFrameView {
 			bl.gridy = 0;
 			
 			textPanel = new JPanel();
-			textPanel.setLayout(new GridBagLayout());
+			textPanel.setBackground(new Color(255, 255, 255));
+			GridBagLayout gbl_textPanel = new GridBagLayout();
+			gbl_textPanel.rowHeights = new int[]{46};
+			gbl_textPanel.rowWeights = new double[]{0.0};
+			gbl_textPanel.columnWidths = new int[]{169};
+			gbl_textPanel.columnWeights = new double[]{0.0};
+			textPanel.setLayout(gbl_textPanel);
 			textPanel.add(getTransferCompleteLabel(), bl);		
 		}
 		return textPanel;
@@ -113,16 +138,22 @@ public class TransferView extends JFrameView {
 	private JLabel getTransferCompleteLabel(){
 		if(transferCompleteLabel == null){
 			transferCompleteLabel = new JLabel();
+			transferCompleteLabel.setForeground(new Color(84,120,38));
+			transferCompleteLabel.setFont(new Font("Georgia", Font.PLAIN, 48));
+			transferCompleteLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			transferCompleteLabel.setText("Transfer Complete");
-			transferCompleteLabel.setPreferredSize(new Dimension(200, 20));
 		}
 		return transferCompleteLabel;
 	}
 	
 	private JButton getLogoutButton(){
 		if(logoutButton == null){
-			logoutButton = new JButton(LOGOUT);
-			logoutButton.addActionListener(handler);
+			logoutButton = new JButton(new ImageIcon(TransferView.class.getResource("/atm/view/button.png")));
+			logoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			logoutButton.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, new Color(0, 0, 0), null));
+			logoutButton.setBackground(new Color(255, 255, 255));
+			logoutButton.setForeground(new Color(255, 255, 255));
+			logoutButton.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		}
 		return logoutButton;
 	}

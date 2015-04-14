@@ -2,6 +2,7 @@ package atm.view;
 
 import java.awt.Color;
 import java.awt.ComponentOrientation;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Rectangle;
@@ -10,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Set;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
@@ -46,7 +48,7 @@ public class AccountSelectView extends JFrameView {
 		//this.setExtendedState(MAXIMIZED_BOTH);
 		//JPanel login = new JPanel();
 		//setBackground(new Color(122, 58, 255));
-		setSize(new Dimension(527, 265));
+		setSize(new Dimension(738, 569));
 		//this.setTitle("Welcome");
 		addButtons();
 		setVisible(true);
@@ -63,7 +65,7 @@ public class AccountSelectView extends JFrameView {
 			Account.setFont(new Font("Dialog", Font.BOLD, 14));
 			Account.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 			Account.setHorizontalAlignment(SwingConstants.LEFT);
-			Account.setText(a.getName());
+			Account.setText("<html>" + a.getName() +"<br>$"+ a.getBalance() +"</html>");
 			Account.setActionCommand("SelectAccount");
 			Account.addActionListener(handler);
 			Account.setBounds(new Rectangle(i%2*300+350, (i/2)* 300+150, 250, 150));
@@ -78,6 +80,35 @@ public class AccountSelectView extends JFrameView {
 			if(a == ((ATMCoreModel)getModel()).getFromAccount()) Account.setEnabled(false);
 			add(Account);
 		}
+		JButton btnTransfer = new JButton("Transfer");
+		btnTransfer.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnTransfer.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		btnTransfer.setBounds(49, 131, 200, 200);
+		btnTransfer.addActionListener(handler);
+		setLayout(null);
+		btnTransfer.setActionCommand("Transfer");
+		add(btnTransfer);
+		
+		/*
+		JButton btnDeposit = new JButton("Deposit");
+		btnDeposit.addActionListener(handler);
+		btnDeposit.setActionCommand("Deposit");
+		GridBagConstraints gbc_btnDeposit = new GridBagConstraints();
+		gbc_btnDeposit.anchor = GridBagConstraints.NORTHWEST;
+		gbc_btnDeposit.insets = new Insets(0, 0, 5, 0);
+		gbc_btnDeposit.gridx = 4;
+		gbc_btnDeposit.gridy = 2;
+		add(btnDeposit, gbc_btnDeposit);
+		*/
+		
+		JButton btnWithdraw = new JButton("");
+		btnWithdraw.setIcon(new ImageIcon(TransactionTypeView.class.getResource("/atm/view/button_Withdraw.png")));
+		btnWithdraw.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnWithdraw.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		btnWithdraw.setBounds(49, 358, 200, 200);
+		btnWithdraw.addActionListener(handler);
+		btnWithdraw.setActionCommand("Withdraw");
+		add(btnWithdraw);
 	}
 	
 	public void SelectFrom(){

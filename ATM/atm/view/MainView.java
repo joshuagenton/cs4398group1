@@ -83,7 +83,7 @@ public class MainView extends JFrame implements View, ModelListener{
 			((ATMController)getController()).operation("newTransaction");
 		}
 		else if (me.getAgStatus() == AgentStatus.Verified){
-			add(new TransactionTypeView(getModel(), getController()));
+			add(new AccountSelectView(getModel(), getController()));
 		}
 		else if (me.getAgStatus() == AgentStatus.SelectFromAccount){
 			AccountSelectView account = new AccountSelectView(getModel(), getController());

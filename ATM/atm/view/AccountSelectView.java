@@ -48,7 +48,7 @@ public class AccountSelectView extends JFrameView {
 		//this.setExtendedState(MAXIMIZED_BOTH);
 		//JPanel login = new JPanel();
 		//setBackground(new Color(122, 58, 255));
-		setSize(new Dimension(738, 569));
+		setSize(new Dimension(738, 679));
 		//this.setTitle("Welcome");
 		addButtons();
 		setVisible(true);
@@ -83,12 +83,21 @@ public class AccountSelectView extends JFrameView {
 		JButton btnTransfer = new JButton("Transfer");
 		btnTransfer.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnTransfer.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		btnTransfer.setBounds(49, 131, 200, 200);
+		btnTransfer.setBounds(49, 232, 200, 200);
 		btnTransfer.addActionListener(handler);
 		setLayout(null);
 		btnTransfer.setActionCommand("Transfer");
 		add(btnTransfer);
 		
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setBackground(Color.RED);
+		btnCancel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		btnCancel.setBounds(49, 20, 200, 200);
+		btnCancel.addActionListener(handler);
+		setLayout(null);
+		btnCancel.setActionCommand("Cancel");
+		add(btnCancel);
 		/*
 		JButton btnDeposit = new JButton("Deposit");
 		btnDeposit.addActionListener(handler);
@@ -105,7 +114,7 @@ public class AccountSelectView extends JFrameView {
 		btnWithdraw.setIcon(new ImageIcon(TransactionTypeView.class.getResource("/atm/view/button_Withdraw.png")));
 		btnWithdraw.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnWithdraw.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		btnWithdraw.setBounds(49, 358, 200, 200);
+		btnWithdraw.setBounds(49, 443, 200, 200);
 		btnWithdraw.addActionListener(handler);
 		btnWithdraw.setActionCommand("Withdraw");
 		add(btnWithdraw);

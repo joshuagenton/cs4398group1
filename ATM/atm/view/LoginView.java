@@ -38,36 +38,18 @@ public class LoginView extends JFrameView {
 	public JTextField cardinfo = null;
 	public CardReaderController card = new CardReaderController(getModel()); 
 	private Handler handler = new Handler();
-	private JLabel lblNewLabel;
-	Icon icon = new ImageIcon(this.getClass().getResource("pos_mag_swipe_reader_msr.jpg"));
-	private JLabel readerImage = new JLabel(icon);
-	private final JLabel lblNewLabel_1 = new JLabel("readerImage");
-	private final JButton TestJosh = new JButton();
+	private JLabel lblWelcome;
+	private JLabel readerImage;
+	private JLabel lblScanCard;
+	
 	
 	public LoginView(Model model, Controller controller) {
 		super(model, controller);
 		setBackground(new Color(255, 255, 255));
 		initialize();
-		this.setBounds(100, 100, 450, 300);
-		lblNewLabel_1.setIcon(new ImageIcon(LoginView.class.getResource("/atm/view/pos_mag_swipe_reader_msr.jpg")));
-		lblNewLabel_1.setBounds(400, 20, 244, 241);
-		
-		add(lblNewLabel_1);
-		TestJosh.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-			}
-		});
-		TestJosh.setText("Josh Test");
-		TestJosh.setPreferredSize(new Dimension(75, 20));
-		TestJosh.setHorizontalAlignment(SwingConstants.LEFT);
-		TestJosh.setFont(new Font("Dialog", Font.BOLD, 8));
-		TestJosh.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		TestJosh.setActionCommand("Login");
-		TestJosh.setBounds(95, 11, 75, 20);
-		
-		add(TestJosh);
-	//	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setBounds(100, 100, 800, 600);
+
+		//	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}
 
@@ -81,13 +63,14 @@ public class LoginView extends JFrameView {
 		//this.setExtendedState(MAXIMIZED_BOTH);
 		//JPanel login = new JPanel();
 		//setBackground(new Color(122, 58, 255));
-		setSize(new Dimension(619, 487));
-		//this.setTitle("Welcome");
-		setVisible(true);
+		setSize(new Dimension(835, 518));
 		setLayout(null);
-		add(getLblNewLabel());
+	    add(getLblWelcome());
+	    add(getLblReaderImage());
+	    add(getLblScanCard());
 
 		add(getTestPhilip());
+		add(getLblScanCard());
 		add(getCardinfo());
 		add(getChrisTest());
 		add(getStacieTest());
@@ -128,7 +111,8 @@ public class LoginView extends JFrameView {
 	 * @return javax.swing.JButton	
 	 */
 	private JButton getTestPhilip() {
-		JButton TestPhilip = new JButton();
+		JButton TestPhilip = null;
+		if (TestPhilip == null) {
 			TestPhilip = new JButton();
 			TestPhilip.setBounds(10, 11, 75, 20);
 			TestPhilip.setPreferredSize(new Dimension(75, 20));
@@ -145,6 +129,7 @@ public class LoginView extends JFrameView {
 					card.readCard(cardinfo.getText());
 				}
 			});
+		}
 		return TestPhilip;
 	}
 
@@ -260,17 +245,36 @@ public class LoginView extends JFrameView {
 	      }
 	    });
 	  }
-	private JLabel getLblNewLabel() {
-		if (lblNewLabel == null) {
-			lblNewLabel = new JLabel("<html>Group 1 ATM<br>Scan Card to Continue</html>");
-			lblNewLabel.setLocation(0, 0);
-			lblNewLabel.setSize(450, 300);
-			lblNewLabel.setAlignmentX(java.awt.Component.CENTER_ALIGNMENT);
-			lblNewLabel.setAlignmentY(java.awt.Component.CENTER_ALIGNMENT);
-			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 24));
-			lblNewLabel.setForeground(new Color(255, 0, 0));
+	private JLabel getLblWelcome() {
+		if (lblWelcome == null) {
+			lblWelcome = new JLabel("Welcome to Group 1's ATM");
+			lblWelcome.setHorizontalAlignment(SwingConstants.LEFT);
+			lblWelcome.setBackground(Color.CYAN);
+			lblWelcome.setSize(650, 150);
+			lblWelcome.setLocation(408, 26);
+			lblWelcome.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 32));
+			lblWelcome.setForeground(new Color(255, 0, 0));
 		}
-		return lblNewLabel;
+		return lblWelcome;
+	}
+	
+	private JLabel getLblReaderImage() {
+		if (readerImage == null) {
+			readerImage = new JLabel();
+			readerImage.setIcon(new ImageIcon(LoginView.class.getResource("/atm/view/pos_mag_swipe_reader_msr.jpg")));
+			readerImage.setBounds(800, 300, 244, 241);	
+		}
+		return readerImage;
+	}
+
+		
+	private JLabel getLblScanCard() {
+		if (lblScanCard == null) {
+			lblScanCard = new JLabel("Scan card to continue...");
+			lblScanCard.setBounds(520, 424, 348, 50);
+			lblScanCard.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 21));
+			lblScanCard.setForeground(new Color(255, 0, 0));
+		}
+		return lblScanCard;
 	}
 }

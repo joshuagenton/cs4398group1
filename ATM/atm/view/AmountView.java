@@ -26,7 +26,7 @@ import javax.swing.BoxLayout;
 import java.awt.Font;
 import java.awt.Color;
 
-public class WithdrawAmountView extends JFrameView {
+public class AmountView extends JFrameView {
 
 	private static final long serialVersionUID = 1L;
 
@@ -40,7 +40,7 @@ public class WithdrawAmountView extends JFrameView {
 	
 	private JTextField textAmount;
 	
-	private JButton withdrawButton;
+	private JButton submitButton;
 	private JButton cancelButton;
 	
 	public CardReaderController card = new CardReaderController(getModel()); 
@@ -48,7 +48,7 @@ public class WithdrawAmountView extends JFrameView {
 	
 	
 	
-	public WithdrawAmountView(Model model, Controller controller) {
+	public AmountView(Model model, Controller controller) {
 		super(model, controller);
 		setLayout(null);
 		setBackground(Color.WHITE);
@@ -76,7 +76,7 @@ public class WithdrawAmountView extends JFrameView {
 		if(buttonPanel == null){
 			buttonPanel = new JPanel();
 			buttonPanel.setBounds(450, 361, 300, 100);
-			buttonPanel.add(getWithdrawButton());
+			buttonPanel.add(getSubmitButton());
 			buttonPanel.setLayout(null);
 			buttonPanel.add(getCancelButton());
 		}
@@ -129,28 +129,28 @@ public class WithdrawAmountView extends JFrameView {
 		return textAmount;
 	}
 	
-	private JButton getWithdrawButton(){
-		if(withdrawButton == null){
+	private JButton getSubmitButton(){
+		if(submitButton == null){
 			if (((ATMCoreModel)getModel()).type == TransactionTypes.Withdraw){
-				withdrawButton = new JButton(WITHDRAW);
-				withdrawButton.setBackground(new Color(0, 128, 0));
-				withdrawButton.setBounds(0, 0, 140, 75);
-				withdrawButton.setActionCommand("processWithdraw");
+				submitButton = new JButton(WITHDRAW);
+				submitButton.setBackground(new Color(0, 128, 0));
+				submitButton.setBounds(0, 0, 140, 75);
+				submitButton.setActionCommand("processWithdraw");
 			}
 			else if (((ATMCoreModel)getModel()).type == TransactionTypes.Transfer){
-				withdrawButton = new JButton(TRANSFER);
-				withdrawButton.setBackground(new Color(0, 128, 0));
-				withdrawButton.setBounds(0, 0, 140, 75);
-				withdrawButton.setActionCommand("processTransfer");
+				submitButton = new JButton(TRANSFER);
+				submitButton.setBackground(new Color(0, 128, 0));
+				submitButton.setBounds(0, 0, 140, 75);
+				submitButton.setActionCommand("processTransfer");
 			}
-			withdrawButton.addActionListener(handler);
-			withdrawButton.addActionListener(new java.awt.event.ActionListener() {
+			submitButton.addActionListener(handler);
+			submitButton.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					((ATMController)getController()).withdrawFunds(((ATMCoreModel)getModel()).getFromAccount(), Double.parseDouble(getTextAmount().getText()));;
 				}
 			});
 		}
-		return withdrawButton;
+		return submitButton;
 	}
 	
 	private JButton getCancelButton(){

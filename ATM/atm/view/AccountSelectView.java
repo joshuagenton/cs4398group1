@@ -48,7 +48,7 @@ public class AccountSelectView extends JFrameView {
 		//this.setExtendedState(MAXIMIZED_BOTH);
 		//JPanel login = new JPanel();
 		//setBackground(new Color(122, 58, 255));
-		setSize(new Dimension(738, 679));
+		setSize(new Dimension(1002, 679));
 		//this.setTitle("Welcome");
 		addButtons();
 		setVisible(true);
@@ -66,6 +66,7 @@ public class AccountSelectView extends JFrameView {
 			Account.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 			Account.setHorizontalAlignment(SwingConstants.LEFT);
 			Account.setText("<html>" + a.getName() +"<br>$"+ a.getBalance() +"</html>");
+			Account.setFont(new Font("Tahoma", Font.PLAIN, 22));
 			Account.setActionCommand("SelectAccount");
 			Account.addActionListener(handler);
 			Account.setBounds(new Rectangle(i%2*300+350, (i/2)* 300+150, 250, 150));
@@ -93,7 +94,7 @@ public class AccountSelectView extends JFrameView {
 		btnCancel.setBackground(Color.RED);
 		btnCancel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		btnCancel.setBounds(49, 20, 200, 200);
+		btnCancel.setBounds(1025, 537, 275, 106);
 		btnCancel.addActionListener(handler);
 		setLayout(null);
 		btnCancel.setActionCommand("Cancel");
@@ -125,7 +126,7 @@ public class AccountSelectView extends JFrameView {
 		
 		lblSelectFromAccount.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 24));
 		lblSelectFromAccount.setForeground(new Color(255, 0, 0));
-		lblSelectFromAccount.setBounds(74, 27, 300, 50);
+		lblSelectFromAccount.setBounds(500, 27, 300, 50);
 		add(lblSelectFromAccount);
 	}
 	
@@ -134,7 +135,7 @@ public class AccountSelectView extends JFrameView {
 		
 		lblSelectFromAccount.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 24));
 		lblSelectFromAccount.setForeground(new Color(255, 0, 0));
-		lblSelectFromAccount.setBounds(74, 27, 450, 50);
+		lblSelectFromAccount.setBounds(500, 27, 450, 50);
 		add(lblSelectFromAccount);
 	}
 	@Override

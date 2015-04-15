@@ -100,13 +100,13 @@ public class MainView extends JFrame implements View, ModelListener{
 			add(balance);
 		}
 		else if (me.getAgStatus() == AgentStatus.Withdraw) {
-			add(new WithdrawAmountView(getModel(), getController()));
+			add(new AmountView(getModel(), getController()));
 		}
 		else if (me.getAgStatus() == AgentStatus.WithdrawComplete){
 			add (new WithdrawView(getModel(), getController()));
 		}
 		else if (me.getAgStatus() == AgentStatus.Transfer){
-			add (new WithdrawAmountView(getModel(), getController()));
+			add (new AmountView(getModel(), getController()));
 		}
 		else if (me.getAgStatus() == AgentStatus.InsufFunds){
 			Misc misc = new Misc(getModel(), getController());

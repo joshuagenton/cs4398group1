@@ -1,5 +1,6 @@
 package atm.view;
 
+import java.awt.Cursor;
 import java.awt.Rectangle;
 
 import javax.swing.Icon;
@@ -320,7 +321,7 @@ public class PINScreen extends JFrameView {
 		this.add(getEnter(), null);
 		this.add(getNameInfo(), null);
 		
-		aniImage.setBounds(600, 400, 800, 500);
+		aniImage.setBounds(50, 400, 800, 500);
 		this.add(aniImage);
 	}
 
@@ -347,10 +348,11 @@ public class PINScreen extends JFrameView {
 	private JButton getCancel() {
 		if (Cancel == null) {
 			Cancel = new JButton();
-			Cancel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-			Cancel.setBounds(new Rectangle(50, 500, 200, 150));
-			Cancel.setBackground(Color.red);
-			Cancel.setText("End Transaction");
+			Cancel.setBackground(Color.RED);
+			Cancel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			Cancel.setFont(new Font("Tahoma", Font.PLAIN, 40));
+			Cancel.setBounds(1025, 537, 275, 106);
+			Cancel.setText("Cancel");
 			Cancel.setActionCommand("Cancel");
 			Cancel.addActionListener(handler);
 			Cancel.addActionListener(new java.awt.event.ActionListener() {

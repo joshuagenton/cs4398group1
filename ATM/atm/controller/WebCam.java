@@ -30,7 +30,6 @@ public class WebCam implements Runnable {
 		}
 
 		webcam.close();
-		webcam.
 		
 		System.out.println(" this thread is running ... ");
 	}

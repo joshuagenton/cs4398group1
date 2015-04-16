@@ -185,6 +185,8 @@ public class ATMCoreModel extends AbstractModel{
 		PIN = null;
 		name = null;
 		type = null;
+		fromAccount = null;
+		toAccount = null;
 		pinTries = 0;
 		start();
 	}

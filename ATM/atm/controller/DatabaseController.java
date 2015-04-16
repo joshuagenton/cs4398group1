@@ -96,7 +96,7 @@ public class DatabaseController {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public int deposit(Integer account, Integer amount) {
+	public int deposit(Integer account, double amount) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 		Connection conn = null;
@@ -112,7 +112,7 @@ public class DatabaseController {
 				System.out.println(query + "\nreturned: "+ rs.getInt("CURBAL"));
 				int curBal = rs.getInt("CURBAL");
 			//calculate new balance
-			int newBal = amount + curBal;
+			double newBal = amount + curBal;
 			//set new balance
 			String query1 = "UPDATE account SET account_bal " + newBal +"'";
 			ResultSet rs1 = stmt.executeQuery(query1);
@@ -189,7 +189,7 @@ public class DatabaseController {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public boolean transfer(Integer fromAccountNum, Integer toAccountNum, Integer amount) {
+	public boolean transfer(Integer fromAccountNum, Integer toAccountNum, double amount) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 		// returns set of accounts in Results class. 

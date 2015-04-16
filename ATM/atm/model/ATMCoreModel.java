@@ -103,6 +103,10 @@ public class ATMCoreModel extends AbstractModel{
 				});
 		notifyAll();
 	}
+	
+	public synchronized TransactionTypes getTransType(){
+		return type;
+	}
 	public synchronized void invalidPIN(){
 		if (pinTries < 3){
 			pinTries ++;
@@ -179,6 +183,10 @@ public class ATMCoreModel extends AbstractModel{
 	
 	public Results getFromAccount(){
 		return fromAccount;
+	}
+	
+	public Results getToAccount(){
+		return toAccount;
 	}
 	public void reset(){
 		account_number = null;

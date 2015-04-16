@@ -61,10 +61,25 @@ public class AmountView extends JFrameView {
 	    add(getTextFieldPanel());
 	    add(getLblAmount());
 	    
+	    add (accountLabel());
+	    
 	    
 	}
 	
-
+	public JLabel accountLabel(){
+		StringBuilder label = new StringBuilder();
+		label.append (((ATMCoreModel)getModel()).getFromAccount().getName());
+		if (((ATMCoreModel)getModel()).getTransType() == TransactionTypes.Transfer){
+			label.append(" to " +((ATMCoreModel)getModel()).getToAccount().getName() );
+		}
+		JLabel lbl= new JLabel("TEST:");
+		
+		lbl.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 24));
+		lbl.setText(label.toString());
+		lbl.setForeground(new Color(255, 0, 0));
+		lbl.setBounds(10, 23, 879, 50);
+		return lbl;
+	}
 	
 	private JPanel getButtonPanel()
 	{

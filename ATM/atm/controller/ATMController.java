@@ -85,12 +85,16 @@ public class ATMController extends AbstractController{
 		else {
 			operation("InvalidPIN");
 		}
-		return false;
-		
+		return false;	
 	}
 	// TRANSFER
-	public boolean transferFunds(Double amount) {
-		return false;
+	public void transferFunds(Results account1, Results account2, Double amount) {
+		((ATMCoreModel)getModel()).waiting();
+		db = new DatabaseController();
+		if(db.transfer(account1.getAccountNum(), account2.getAccountNum(), amount))		
+			((ATMCoreModel)getModel()).withdrawComplete();
+		else
+			((ATMCoreModel)getModel()).insufficientFunds();
 		
 		
 	}

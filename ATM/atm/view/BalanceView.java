@@ -15,8 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Component;
-import javax.swing.JTextPane;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 

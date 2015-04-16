@@ -8,6 +8,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -33,9 +35,12 @@ public class WithdrawView extends JFrameView {
 	private JLabel takeCashLabel;
 	
 	private JButton logoutButton;
+	private JLabel moneyGif;
 	
 	public CardReaderController card = new CardReaderController(getModel()); 
 	private Handler handler = new Handler();
+	
+	
 	
 	
 	
@@ -86,7 +91,7 @@ public class WithdrawView extends JFrameView {
 			wButtonCtr.gridy = 1;
 			
 			buttonPanel = new JPanel();
-			buttonPanel.setBounds(125, 236, 200, 53);
+			buttonPanel.setBounds(125, 400, 200, 53);
 			buttonPanel.setLayout(new GridBagLayout());
 			buttonPanel.add(getLogoutButton(), wButtonCtr);
 		}
@@ -102,9 +107,12 @@ public class WithdrawView extends JFrameView {
 			bl.gridy = 0;
 			
 			textPanel = new JPanel();
-			textPanel.setBounds(125, 111, 200, 106);
+			textPanel.setBounds(125, 300, 200, 106);
 			textPanel.setLayout(new GridBagLayout());
-			if (((ATMCoreModel)getModel()).type == TransactionTypes.Withdraw) textPanel.add(getTakeCashLabel(), bl);		
+			if (((ATMCoreModel)getModel()).type == TransactionTypes.Withdraw) {
+				textPanel.add(getTakeCashLabel(), bl);
+				add(getLblMoneyGif());
+			}
 			else if (((ATMCoreModel)getModel()).type == TransactionTypes.Transfer) textPanel.add(getTransferCompleteLabel(), bl);
 		}
 		return textPanel;
@@ -129,6 +137,7 @@ public class WithdrawView extends JFrameView {
 			takeCashLabel = new JLabel();
 			takeCashLabel.setText("Please Take Your Cash");
 			takeCashLabel.setPreferredSize(new Dimension(200, 20));
+			
 		}
 		return takeCashLabel;
 	}
@@ -139,6 +148,15 @@ public class WithdrawView extends JFrameView {
 			logoutButton.addActionListener(handler);
 		}
 		return logoutButton;
+	}
+	
+	private JLabel getLblMoneyGif() {
+		if (moneyGif == null) {
+			moneyGif = new JLabel();
+			moneyGif.setIcon(new ImageIcon(LoginView.class.getResource("/atm/view/moneyDispensed.gif")));
+			moneyGif.setBounds(500, 300, 250, 150);	
+		}
+		return moneyGif;
 	}
 	
 	

@@ -14,8 +14,6 @@ import javax.swing.JPasswordField;
 
 import java.awt.Color;
 
-import javax.swing.JTextPane;
-
 import atm.controller.ATMController;
 import atm.controller.Controller;
 import atm.controller.IdleTimeController;

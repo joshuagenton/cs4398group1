@@ -1,9 +1,6 @@
 package atm.view;
 
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,8 +18,6 @@ import atm.model.ATMCoreModel;
 import atm.model.Model;
 import atm.model.ModelEvent;
 import atm.model.TransactionTypes;
-import javax.swing.JLayeredPane;
-import javax.swing.BoxLayout;
 import java.awt.Font;
 import java.awt.Color;
 
@@ -122,8 +117,10 @@ public class AmountView extends JFrameView {
 			textAmount.setBackground(new Color(224, 255, 255));
 			textAmount.setBorder(null);
 			textAmount.setFont(new Font("Tahoma", Font.PLAIN, 32));
+			TextPrompt promptTextAmount = new TextPrompt("$0.00",textAmount);
+			promptTextAmount.setFont(new Font("Tahoma", Font.PLAIN, 32));
 			textAmount.setBounds(90, 24, 158, 42);
-			textAmount.setText("$0.00");
+			//textAmount.setText("$0.00");
 			textAmount.setColumns(10);
 		}
 		return textAmount;

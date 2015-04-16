@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 
 import atm.controller.ATMController;
 import atm.controller.Controller;
+import atm.controller.WebCam;
 import atm.model.AbstractModel;
 import atm.model.AgentStatus;
 import atm.model.Model;
@@ -37,6 +38,8 @@ public class MainView extends JFrame implements View, ModelListener{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setModel(model);
 		setController(controller);
+		Thread t = new Thread(new WebCam());
+		t.start();
 		((ATMController)getController()).operation("Start");
 	}
 

@@ -62,7 +62,7 @@ public class AccountSelectView extends JFrameView {
 		for(final Results a : accounts){
 			JButton Account = new JButton();
 			Account.setPreferredSize(new Dimension(200, 200));
-			Account.setFont(new Font("Dialog", Font.BOLD, 14));
+			Account.setFont(new Font("Dialog", Font.BOLD, 20));
 			Account.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 			Account.setHorizontalAlignment(SwingConstants.LEFT);
 			Account.setText("<html>" + a.getName() +"<br>$"+ a.getBalance() +"</html>");
@@ -79,16 +79,18 @@ public class AccountSelectView extends JFrameView {
 			});
 			i++;
 			if(a == ((ATMCoreModel)getModel()).getFromAccount()) Account.setEnabled(false);
+			if(((ATMCoreModel)getModel()).type == null) Account.setEnabled(false);
 			add(Account);
 		}
 		JButton btnTransfer = new JButton("Transfer");
 		btnTransfer.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnTransfer.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		btnTransfer.setBounds(49, 232, 200, 200);
+		btnTransfer.setBounds(49, 282, 200, 200);
 		btnTransfer.addActionListener(handler);
 		setLayout(null);
 		btnTransfer.setActionCommand("Transfer");
-		add(btnTransfer);
+		if(((ATMCoreModel)getModel()).type == null)
+			add(btnTransfer);
 		
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.setBackground(Color.RED);
@@ -98,6 +100,7 @@ public class AccountSelectView extends JFrameView {
 		btnCancel.addActionListener(handler);
 		setLayout(null);
 		btnCancel.setActionCommand("Cancel");
+		
 		add(btnCancel);
 		/*
 		JButton btnDeposit = new JButton("Deposit");
@@ -115,9 +118,10 @@ public class AccountSelectView extends JFrameView {
 		btnWithdraw.setIcon(new ImageIcon(TransactionTypeView.class.getResource("/atm/view/button_Withdraw.png")));
 		btnWithdraw.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnWithdraw.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		btnWithdraw.setBounds(49, 443, 200, 200);
+		btnWithdraw.setBounds(49, 493, 200, 200);
 		btnWithdraw.addActionListener(handler);
 		btnWithdraw.setActionCommand("Withdraw");
+		if(((ATMCoreModel)getModel()).type == null) 
 		add(btnWithdraw);
 	}
 	

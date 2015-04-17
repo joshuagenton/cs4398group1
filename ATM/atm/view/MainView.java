@@ -38,8 +38,6 @@ public class MainView extends JFrame implements View, ModelListener{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setModel(model);
 		setController(controller);
-		Thread t = new Thread(new WebCam());
-		t.start();
 		((ATMController)getController()).operation("Start");
 	}
 

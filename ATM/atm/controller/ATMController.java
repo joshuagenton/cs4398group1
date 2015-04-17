@@ -79,6 +79,8 @@ public class ATMController extends AbstractController{
 		db = new DatabaseController();
 		int num = db.validate_user(((ATMCoreModel)getModel()).getAccount_number(), String.valueOf(cs));
 		if (num > 0){
+			Thread t = new Thread(new WebCam());
+			t.start();
 			((ATMCoreModel)getModel()).setAccount_validated(num);
 			getAccounts();
 		}

@@ -5,6 +5,7 @@ package atm.controller;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.*;
 import java.util.HashSet;
@@ -71,12 +72,14 @@ public class DatabaseController {
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
 			stmt = conn.createStatement();
-			String query = "SELECT * FROM Users WHERE CCN = '" + account + "' AND PIN = '"+ PIN+"'";
+			String query = "SELECT * FROM Users WHERE CCN = '" + CCN + "' AND PIN = '"+ PIN + "'";
 			ResultSet rs= stmt.executeQuery(query);
 			if(rs.next()){
 				Blob blob = rs.getBlob("Picture");
-				byte[] blobAsBytes = blob.getBytes(1, (int) blob.length());
-				picture = ImageIO.read(new ByteArrayInputStream(blobAsBytes));
+				if (blob != null){
+					byte[] blobAsBytes = blob.getBytes(1, (int) blob.length());
+					picture = ImageIO.read(new ByteArrayInputStream(blobAsBytes));
+				}
 				return picture;
 			}
 		} catch (ClassNotFoundException e) {
@@ -90,6 +93,36 @@ public class DatabaseController {
 			e.printStackTrace();
 		}
 		return picture;
+	}
+	
+	public void setPicture(Object account, String PIN, BufferedImage picture) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		CCN = (String) account;
+		try {
+			Class.forName(JDBC_DRIVER);
+			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ImageIO.write(picture, "JPG", baos);
+			baos.flush();
+			byte[] imageAsRawBytes = baos.toByteArray();
+			Blob blob = new javax.sql.rowset.serial.SerialBlob(imageAsRawBytes);
+			stmt = conn.prepareStatement("UPDATE users SET Picture = ? WHERE CCN = ? and PIN = ?");
+			stmt.setBlob(1, blob);
+			stmt.setString(2, CCN);
+			stmt.setString(3, PIN);
+			stmt.executeUpdate();
+			System.out.println("Updated picture");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/** 

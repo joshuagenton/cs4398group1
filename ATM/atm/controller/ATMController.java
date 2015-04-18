@@ -22,9 +22,9 @@ public class ATMController extends AbstractController{
 	DatabaseController db;
 	
 	public ATMController() {
-		webcam = Webcam.getDefault();
-		if (webcam != null) {
-			webcam.open();
+		this.webcam = Webcam.getDefault();
+		if (this.webcam != null) {
+			this.webcam.open();
 			System.out.println("Camera initialized");
 		}
 		else {
@@ -104,12 +104,16 @@ public class ATMController extends AbstractController{
 			//  Do camera stuff
 			BufferedImage picture = db.getPicture(((ATMCoreModel)getModel()).getAccount_number(), String.valueOf(cs));
 			((ATMCoreModel)getModel()).setPicture(picture);
-			if (webcam != null) {
+			if (this.webcam != null) {
+				System.out.println("Webcam not null");
 				picture = null;
-				picture = webcam.getImage();
+				picture = this.webcam.getImage();
 				if (picture != null) {
-					
+					db.setPicture(((ATMCoreModel)getModel()).getAccount_number(), String.valueOf(cs), picture);
 				}
+			}
+			else {
+				System.out.println("Webcam is null");
 			}
 		}
 		else {

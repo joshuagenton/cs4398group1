@@ -1,5 +1,13 @@
 package atm.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+import com.github.sarxos.webcam.Webcam;
+
 import atm.model.ATMCoreModel;
 import atm.model.TransactionTypes;
 import atm.view.SelectionView;
@@ -10,8 +18,19 @@ public class ATMController extends AbstractController{
 	private String accountNo;
 	private Double amount;
 	private String selection;
+	private Webcam webcam;
+	DatabaseController db;
 	
-	public ATMController() {}
+	public ATMController() {
+		webcam = Webcam.getDefault();
+		if (webcam != null) {
+			webcam.open();
+			System.out.println("Camera initialized");
+		}
+		else {
+			System.out.println("No camera detected");
+		}
+	}
 
 	// 
 	public void operation(String opt) {
@@ -73,22 +92,30 @@ public class ATMController extends AbstractController{
 	public void start(){
 		
 	}
-	DatabaseController db;
+	
+	// LOGIN
 	public boolean login(char[] cs){
 		((ATMCoreModel)getModel()).waiting();
 		db = new DatabaseController();
 		int num = db.validate_user(((ATMCoreModel)getModel()).getAccount_number(), String.valueOf(cs));
 		if (num > 0){
-			Thread t = new Thread(new WebCam());
-			t.start();
 			((ATMCoreModel)getModel()).setAccount_validated(num);
 			getAccounts();
+			if (webcam != null) {
+				BufferedImage image = webcam.getImage();
+				try {
+					ImageIO.write(image, "JPG", new File("test.jpg"));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		else {
 			operation("InvalidPIN");
 		}
 		return false;	
 	}
+	
 	// TRANSFER
 	public void transferFunds(Results account1, Results account2, Double amount) {
 		((ATMCoreModel)getModel()).waiting();

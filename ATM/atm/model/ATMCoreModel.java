@@ -3,6 +3,7 @@
  */
 package atm.model;
 
+import java.awt.image.BufferedImage;
 import java.util.Set;
 
 import javax.swing.SwingUtilities;
@@ -28,6 +29,11 @@ public class ATMCoreModel extends AbstractModel{
 	private Results toAccount = null;
 	public TransactionTypes type;
 	private int pinTries = 0;
+	private BufferedImage picture = null;
+	
+	public void setPicture(BufferedImage picture) {
+		this.picture = picture;
+	}
 	
 	public synchronized void withdrawComplete(){
 		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.AmountWithdrawUpdate, AgentStatus.WithdrawComplete);

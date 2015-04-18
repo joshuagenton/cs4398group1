@@ -19,7 +19,7 @@ public class ATMController extends AbstractController{
 	private Double amount;
 	private String selection;
 	private Webcam webcam;
-	DatabaseController db;
+	DatabaseController db = new DatabaseController();
 	
 	public ATMController() {
 		this.webcam = Webcam.getDefault();
@@ -96,7 +96,6 @@ public class ATMController extends AbstractController{
 	// LOGIN
 	public boolean login(char[] cs){
 		((ATMCoreModel)getModel()).waiting();
-		db = new DatabaseController();
 		int num = db.validate_user(((ATMCoreModel)getModel()).getAccount_number(), String.valueOf(cs));
 		if (num > 0){
 			((ATMCoreModel)getModel()).setAccount_validated(num);
@@ -125,7 +124,6 @@ public class ATMController extends AbstractController{
 	// TRANSFER
 	public void transferFunds(Results account1, Results account2, Double amount) {
 		((ATMCoreModel)getModel()).waiting();
-		db = new DatabaseController();
 		if(db.transfer(account1.getAccountNum(), account2.getAccountNum(), amount))		
 			((ATMCoreModel)getModel()).withdrawComplete();
 		else
@@ -143,7 +141,6 @@ public class ATMController extends AbstractController{
 	// WITHDRAW
 	public void withdrawFunds(Results account, Double amount) {
 		((ATMCoreModel)getModel()).waiting();
-		db = new DatabaseController();
 		if(db.withdrawl(account.getAccountNum(), amount))		
 			((ATMCoreModel)getModel()).withdrawComplete();
 		else

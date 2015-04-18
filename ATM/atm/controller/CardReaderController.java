@@ -20,7 +20,7 @@ public class CardReaderController extends AbstractController {
 	// PARSE
 	public Integer readCard(String input) {
 		try {
-			card.read(input);
+			card.readcont(input);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

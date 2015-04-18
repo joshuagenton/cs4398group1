@@ -59,24 +59,6 @@ public class CardReaderModel extends AbstractModel {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void read_card() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	public void read() throws IOException {
-		BufferedReader track_data = new BufferedReader(new InputStreamReader(
-				System.in));
-		String s = track_data.readLine();
-		readcont(s);
-		//System.out.println(s);
-	}
-
-	public void read(String s) throws IOException {
-		readcont(s);
-	}
 
 	public void readcont(String s) throws IOException {
 		String track1 = "";

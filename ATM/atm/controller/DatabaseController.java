@@ -3,9 +3,14 @@
  */
 package atm.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.sql.*;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.imageio.ImageIO;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -34,7 +39,7 @@ public class DatabaseController {
 	 */
 	private String connectionString;
 	private String CCN;
-	
+
 	public Set<Results> getAccounts(){
 		Set<Results> accounts = new HashSet<Results>();
 		String query = "Select a.name,a.account_bal,a.account_num from account a, Users u, User_Accounts ua Where ua.CCN = u.CCN AND ua.account_num = a.account_num AND u.CCN = '" + CCN +"'";
@@ -55,7 +60,36 @@ public class DatabaseController {
 		}
 		System.out.println("DB CONTROLLER ACCOUNTS SIZE: " + accounts.size());
 		return accounts;
-		
+	}
+	
+	public BufferedImage getPicture(Object account, String PIN) {
+		Connection conn = null;
+		Statement stmt = null;
+		CCN = (String) account;
+		BufferedImage picture = null;
+		try {
+			Class.forName(JDBC_DRIVER);
+			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			stmt = conn.createStatement();
+			String query = "SELECT * FROM Users WHERE CCN = '" + account + "' AND PIN = '"+ PIN+"'";
+			ResultSet rs= stmt.executeQuery(query);
+			if(rs.next()){
+				Blob blob = rs.getBlob("Picture");
+				byte[] blobAsBytes = blob.getBytes(1, (int) blob.length());
+				picture = ImageIO.read(new ByteArrayInputStream(blobAsBytes));
+				return picture;
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return picture;
 	}
 
 	/** 

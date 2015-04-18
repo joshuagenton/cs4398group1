@@ -101,12 +101,14 @@ public class ATMController extends AbstractController{
 		if (num > 0){
 			((ATMCoreModel)getModel()).setAccount_validated(num);
 			getAccounts();
+			//  Do camera stuff
+			BufferedImage picture = db.getPicture(((ATMCoreModel)getModel()).getAccount_number(), String.valueOf(cs));
+			((ATMCoreModel)getModel()).setPicture(picture);
 			if (webcam != null) {
-				BufferedImage image = webcam.getImage();
-				try {
-					ImageIO.write(image, "JPG", new File("test.jpg"));
-				} catch (IOException e) {
-					e.printStackTrace();
+				picture = null;
+				picture = webcam.getImage();
+				if (picture != null) {
+					
 				}
 			}
 		}

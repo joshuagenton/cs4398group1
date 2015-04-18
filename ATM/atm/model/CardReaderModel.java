@@ -23,6 +23,7 @@ public class CardReaderModel extends AbstractModel {
 	private String card_holder = null;
 	private String ccn = null;
 	private DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+	private Date expDate = null;
 
 	/** 
 	 * @return the formatter
@@ -44,7 +45,6 @@ public class CardReaderModel extends AbstractModel {
 		// end-user-code
 	}
 
-	private Date expDate = null;
 
 	public CardReaderModel(String cardRead) throws IOException {
 		readcont(cardRead);

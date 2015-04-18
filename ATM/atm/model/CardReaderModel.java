@@ -208,8 +208,8 @@ public class CardReaderModel extends AbstractModel {
 				//endregion
 			}
 		}
-		setCard_holder(track1_cardholder);
-		setCcn(track1_ccn);
+		setCard_holder(track1_cardholder.trim());
+		setCcn(track1_ccn.trim());
 		setExpDate(track1_expmo + "/" + 1 + "/" + track1_expyr);
 	}
 

@@ -142,7 +142,7 @@ public class DatabaseController {
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
 			stmt = conn.createStatement();
-			String query = "SELECT COUNT(1) AS BIT FROM Users WHERE CCN = '" + account + "' AND PIN = '"+ PIN+"'";
+			String query = "SELECT COUNT(1) AS BIT FROM Users WHERE CCN = '" + CCN + "' AND PIN = '"+ PIN+"'";
 			ResultSet rs= stmt.executeQuery(query);
 			if(rs.next())
 				System.out.println(query + "\nreturned: "+ rs.getInt("BIT"));

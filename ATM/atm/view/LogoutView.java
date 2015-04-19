@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import atm.controller.Controller;
-import atm.controller.MainController;
 import atm.model.Model;
 import atm.model.ModelEvent;
 import java.awt.Color;
@@ -42,7 +41,6 @@ public class LogoutView extends JFrameView {
 
 	private class Handler implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
-			((MainController)getController()).operation(evt.getActionCommand());
 		}
 	}
 }

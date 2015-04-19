@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 
 import atm.controller.ATMController;
 import atm.controller.Controller;
-import atm.controller.WebCam;
 import atm.model.AbstractModel;
 import atm.model.AgentStatus;
 import atm.model.Model;

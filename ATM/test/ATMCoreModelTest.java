@@ -1,3 +1,4 @@
+package test;
 
 
 import static org.junit.Assert.*;
@@ -7,8 +8,11 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import atm.controller.*;
+import atm.model.*;
+import atm.view.*;
 
-public class DatabaseControllerTest {
+public class ATMCoreModelTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -27,45 +31,27 @@ public class DatabaseControllerTest {
 	}
 
 	@Test
-	public final void testGetAccounts() {
+	public final void testInsufficientFunds() {
 		fail("Not yet implemented"); // TODO
 	}
 
 	@Test
-	public final void testGetPicture() {
+	public final void testWithdraw() {
 		fail("Not yet implemented"); // TODO
 	}
 
 	@Test
-	public final void testSetPicture() {
+	public final void testWaiting() {
 		fail("Not yet implemented"); // TODO
 	}
 
 	@Test
-	public final void testValidate_user() {
-		
-		
-		
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testDeposit() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testWithdrawl() {
+	public final void testCancel() {
 		fail("Not yet implemented"); // TODO
 	}
 
 	@Test
 	public final void testTransfer() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testTransaction_history() {
 		fail("Not yet implemented"); // TODO
 	}
 

@@ -233,18 +233,7 @@ public class LoginView extends JFrameView {
 		}
 		return cardinfo;
 	}
-	public static void main(String[] args) {
-		final ATMCoreModel account = new ATMCoreModel();
-		final ATMController contr = new ATMController();
-		contr.setModel(account);
-	    SwingUtilities.invokeLater(new Runnable() {
-	      public void run() {
-	    	  LoginView start = new LoginView(account, contr);
-	    	  contr.setView(start);
-	    	  start.setVisible(true);
-	      }
-	    });
-	  }
+
 	private JLabel getLblWelcome() {
 		if (lblWelcome == null) {
 			lblWelcome = new JLabel("Welcome to Group 1's ATM");

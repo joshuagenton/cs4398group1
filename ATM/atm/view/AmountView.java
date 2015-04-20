@@ -142,6 +142,19 @@ public class AmountView extends JFrameView {
 	
 	DecimalFormat dec = new DecimalFormat("'$'0.00");
 	
+	private void setMsg(){
+		JLabel msg = new JLabel();
+		msg = new JLabel();
+		msg.setBounds(104, 461, 300, 100);
+		
+		msg.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		msg.setText("<html>Please Enter amount in<br> increments of $20.00</html>");
+		msg.setPreferredSize(new Dimension(200, 20));
+		add(msg);
+		revalidate();
+		repaint();
+	}
+	
 	private JLabel getLblAmount(){
 		if(lblAmount == null){
 			lblAmount = new JLabel();
@@ -196,7 +209,14 @@ public class AmountView extends JFrameView {
 			submitButton.addActionListener(handler);
 			submitButton.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					((ATMController)getController()).withdrawFunds(((ATMCoreModel)getModel()).getFromAccount(), (double)textAmount.getValue());;
+					if ((double)textAmount.getValue()%20 != 0){
+						setMsg();
+						textAmount.setValue(0.0);
+						textAmount.setText("$0.00");
+						IdleTimeController.runTimer((ATMController)getController());
+					}
+					else
+						((ATMController)getController()).withdrawFunds(((ATMCoreModel)getModel()).getFromAccount(), (double)textAmount.getValue());;
 				}
 			});
 		}

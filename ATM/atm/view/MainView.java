@@ -1,8 +1,12 @@
 package atm.view;
 
 import java.awt.EventQueue;
+import java.util.concurrent.TimeUnit;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import atm.controller.ATMController;
@@ -39,12 +43,15 @@ public class MainView extends JFrame implements View, ModelListener{
 		setController(controller);
 		((ATMController)getController()).operation("Start");
 	}
-
+	JButton b1;
+	JLabel l1;
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		frame = new JPanel();
+		JLabel background=new JLabel(new ImageIcon("ATM.jpg"));
+		add(background);
 		frame.setBounds(100, 100, 450, 300);
 	}
 	PINScreen PIN;
@@ -112,6 +119,7 @@ public class MainView extends JFrame implements View, ModelListener{
 			Misc misc = new Misc(getModel(), getController());
 			misc.insufFunds();
 			add(misc);
+			((ATMController)getController()).operation("logout");
 		}
 		this.revalidate();
 		this.repaint();

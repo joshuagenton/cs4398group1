@@ -1,5 +1,9 @@
 package atm.view;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+
 import javax.swing.JPanel;
 
 import atm.controller.*;
@@ -52,6 +56,13 @@ public abstract class JFrameView extends JPanel implements View, ModelListener {
 	public void setModel(Model model) {
 		this.model = model;
 		//registerWithModel();
+	}
+	
+	@Override
+	  protected void paintComponent(Graphics g) {
+		Image background = Toolkit.getDefaultToolkit().createImage("atm/view/ATM.jpg");
+	    super.paintComponent(g);
+	        g.drawImage(background, 0, 0, null);
 	}
 
 }

@@ -182,8 +182,8 @@ public class DatabaseController {
 			//calculate new balance
 			double newBal = amount + curBal;
 			//set new balance
-			String query1 = "UPDATE account SET account_bal " + newBal +"'";
-			ResultSet rs1 = stmt.executeQuery(query1);
+			String query1 = "UPDATE account SET account_bal = '" + newBal +"' Where account_num = '" +account+"'";
+			stmt.executeUpdate(query1);
 			//confirm & return new balance
 			String query2 = "SELECT account_bal AS CURBAL FROM account WHERE account_num = '" + account + "'";
 			ResultSet rs2= stmt.executeQuery(query2);

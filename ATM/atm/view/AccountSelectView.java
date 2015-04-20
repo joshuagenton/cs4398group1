@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -34,7 +35,7 @@ public class AccountSelectView extends JFrameView {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Handler handler = new Handler();
-	
+	DecimalFormat dec = new DecimalFormat("'$'0.00");
 	public AccountSelectView(Model model, Controller controller) {
 		super(model, controller);
 		setLayout(null);
@@ -67,7 +68,7 @@ public class AccountSelectView extends JFrameView {
 			Account.setFont(new Font("Dialog", Font.BOLD, 14));
 			Account.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 			Account.setHorizontalAlignment(SwingConstants.LEFT);
-			Account.setText("<html>" + a.getName() +"<br>$"+ a.getBalance() +"</html>");
+			Account.setText("<html>" + a.getName() +"<br>"+ dec.format(a.getBalance()) +"</html>");
 			Account.setFont(new Font("Tahoma", Font.PLAIN, 22));
 			Account.setActionCommand("SelectAccount");
 			Account.addActionListener(handler);

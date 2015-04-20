@@ -1,23 +1,31 @@
 package atm.view;
 
 import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.text.NumberFormatter;
 
 import atm.controller.ATMController;
 import atm.controller.CardReaderController;
 import atm.controller.Controller;
+import atm.controller.IdleTimeController;
 import atm.model.ATMCoreModel;
 import atm.model.Model;
 import atm.model.ModelEvent;
 import atm.model.TransactionTypes;
+
 import java.awt.Font;
 import java.awt.Color;
 
@@ -33,7 +41,7 @@ public class AmountView extends JFrameView {
 	
 	private JLabel lblAmount;
 	
-	private JTextField textAmount;
+	private JFormattedTextField textAmount;
 	
 	private JButton submitButton;
 	private JButton cancelButton;
@@ -62,8 +70,31 @@ public class AmountView extends JFrameView {
 	    add(getLblAmount());
 	    
 	    add (accountLabel());
+	    numPad();
 	    
-	    
+	}
+	
+	private void numPad() {
+		for (Integer i = 0; i<10 ; i++){
+			final Integer number = i;
+			JButton num = new JButton();
+			num.setFont(new Font("Tahoma", Font.PLAIN, 24));
+			num.setText(number.toString());
+			if (i == 0)
+				num.setBounds(new Rectangle(638, 383, 100, 100));
+			else
+				num.setBounds(new Rectangle(538+(i-1)%3*100, 83+(i-1)/3*100, 100, 100));
+			num.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					double amount = (double) textAmount.getValue()*10+number ;
+				
+					textAmount.setValue(amount);
+					textAmount.setText(dec.format(amount));
+					IdleTimeController.runTimer((ATMController)getController());
+				}
+			});
+			add(num);
+		}
 	}
 	
 	public JLabel accountLabel(){
@@ -85,7 +116,7 @@ public class AmountView extends JFrameView {
 	{
 		if(buttonPanel == null){
 			buttonPanel = new JPanel();
-			buttonPanel.setBounds(450, 361, 300, 100);
+			buttonPanel.setBounds(104, 361, 300, 100);
 			buttonPanel.add(getSubmitButton());
 			buttonPanel.setLayout(null);
 			buttonPanel.add(getCancelButton());
@@ -101,24 +132,19 @@ public class AmountView extends JFrameView {
 			
 			textPanel = new JPanel();
 			textPanel.setBackground(new Color(224, 255, 255));
-			textPanel.setBounds(450, 250, 300, 100);
+			textPanel.setBounds(104, 250, 300, 100);
 			textPanel.setLayout(null);
 			textPanel.add(getTextAmount());			
 		}
 		return textPanel;
 	}
 	
-	
-	
-	
-	
-	
 	DecimalFormat dec = new DecimalFormat("'$'0.00");
 	
 	private JLabel getLblAmount(){
 		if(lblAmount == null){
 			lblAmount = new JLabel();
-			lblAmount.setBounds(450, 209, 176, 29);
+			lblAmount.setBounds(104, 209, 176, 29);
 			lblAmount.setFont(new Font("Tahoma", Font.PLAIN, 20));
 			lblAmount.setText("Enter an amount:");
 			lblAmount.setPreferredSize(new Dimension(200, 20));
@@ -126,14 +152,25 @@ public class AmountView extends JFrameView {
 		return lblAmount;
 	}
 	
-	private JTextField getTextAmount() {
+	NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
+	NumberFormatter formatter = new NumberFormatter(format);
+	private JFormattedTextField getTextAmount() {
+		
 		if (textAmount == null) {
-			textAmount = new JTextField();
+			format.setMaximumFractionDigits(0);
+			formatter.setMinimum(0.0);
+			formatter.setMaximum(2000.00);
+			formatter.setAllowsInvalid(false);
+			formatter.setOverwriteMode(true);
+			
+			textAmount = new JFormattedTextField();
 			textAmount.setBackground(new Color(224, 255, 255));
 			textAmount.setBorder(null);
 			textAmount.setFont(new Font("Tahoma", Font.PLAIN, 32));
-			TextPrompt promptTextAmount = new TextPrompt("$0.00",textAmount);
-			promptTextAmount.setFont(new Font("Tahoma", Font.PLAIN, 32));
+			textAmount.setValue(0.0);
+			textAmount.setText("$0.00");
+			//TextPrompt promptTextAmount = new TextPrompt("$0.00",textAmount);
+			//promptTextAmount.setFont(new Font("Tahoma", Font.PLAIN, 32));
 			textAmount.setBounds(90, 24, 158, 42);
 			//textAmount.setText("$0.00");
 			textAmount.setColumns(10);
@@ -158,7 +195,7 @@ public class AmountView extends JFrameView {
 			submitButton.addActionListener(handler);
 			submitButton.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					((ATMController)getController()).withdrawFunds(((ATMCoreModel)getModel()).getFromAccount(), Double.parseDouble(getTextAmount().getText()));;
+					((ATMController)getController()).withdrawFunds(((ATMCoreModel)getModel()).getFromAccount(), (double)textAmount.getValue());;
 				}
 			});
 		}

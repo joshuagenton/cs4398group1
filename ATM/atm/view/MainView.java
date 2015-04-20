@@ -159,6 +159,7 @@ public class MainView extends JFrame implements View, ModelListener{
 			public void run() {
 				try {
 					MainView window = new MainView(account, contr);
+					
 					window.setVisible(true);
     		    	  contr.setView(window);
 			    	  window.setVisible(true);

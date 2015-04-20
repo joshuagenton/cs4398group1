@@ -14,6 +14,7 @@ import java.util.Set;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 import atm.controller.ATMController;
 import atm.controller.Controller;
@@ -57,6 +58,7 @@ public class AccountSelectView extends JFrameView {
 
 	public void addButtons (){
 		Set<Results> accounts = ((ATMCoreModel)getModel()).getAccounts();
+		UIManager.put("Button.disabled",UIManager.get("Button.enabled"));
 		System.out.println("SIZE: " + accounts.size());
 		int i = 0;
 		for(final Results a : accounts){
@@ -80,6 +82,11 @@ public class AccountSelectView extends JFrameView {
 			i++;
 			if(a == ((ATMCoreModel)getModel()).getFromAccount()) Account.setEnabled(false);
 			add(Account);
+			if (((ATMCoreModel)getModel()).getTransType() == null){
+				Account.setEnabled(false);
+
+				
+			}
 		}
 		JButton btnTransfer = new JButton("Transfer");
 		btnTransfer.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

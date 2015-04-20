@@ -45,7 +45,7 @@ public class AmountView extends JFrameView {
 	
 	private JButton submitButton;
 	private JButton cancelButton;
-	
+	private JButton Clear;
 	public CardReaderController card = new CardReaderController(getModel()); 
 	private Handler handler = new Handler();
 	
@@ -95,6 +95,7 @@ public class AmountView extends JFrameView {
 			});
 			add(num);
 		}
+		add(getClear());
 	}
 	
 	public JLabel accountLabel(){
@@ -221,7 +222,27 @@ public class AmountView extends JFrameView {
 			((ATMController)getController()).operation(evt.getActionCommand());
 		}
 	}
-
+	
+	private JButton getClear() {
+		if (Clear == null) {
+			Clear = new JButton();
+			Clear.setFont(new Font("Tahoma", Font.PLAIN, 21));
+			Clear.setBounds(new Rectangle(538, 383, 100, 100));
+			Clear.setActionCommand("CancelScreen()");
+			Clear.setText("Clear");
+			Clear.setBackground(Color.yellow);
+			Clear.addActionListener(new java.awt.event.ActionListener() {
+				@Override
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					textAmount.setValue(0.0);
+					textAmount.setText("$0.00");
+					IdleTimeController.runTimer((ATMController)getController());
+					
+				}
+			});
+		}
+		return Clear;
+	}
 
 	@Override
 	public void modelChanged(ModelEvent me) {

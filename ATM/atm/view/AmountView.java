@@ -209,14 +209,18 @@ public class AmountView extends JFrameView {
 			submitButton.addActionListener(handler);
 			submitButton.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					if ((double)textAmount.getValue()%20 != 0){
+					if ((double)textAmount.getValue()%20 != 0 && ((ATMCoreModel)getModel()).type == TransactionTypes.Withdraw){
 						setMsg();
 						textAmount.setValue(0.0);
 						textAmount.setText("$0.00");
 						IdleTimeController.runTimer((ATMController)getController());
 					}
+					else if (((ATMCoreModel)getModel()).type == TransactionTypes.Withdraw)
+						((ATMController)getController()).withdrawFunds(((ATMCoreModel)getModel()).getFromAccount(), (double)textAmount.getValue());
+					else if (((ATMCoreModel)getModel()).type == TransactionTypes.Transfer)
+						((ATMController)getController()).transferFunds(((ATMCoreModel)getModel()).getFromAccount(), ((ATMCoreModel)getModel()).getToAccount(), (double)textAmount.getValue());
 					else
-						((ATMController)getController()).withdrawFunds(((ATMCoreModel)getModel()).getFromAccount(), (double)textAmount.getValue());;
+						System.out.println("ERROR");
 				}
 			});
 		}

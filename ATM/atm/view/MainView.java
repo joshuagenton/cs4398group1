@@ -1,6 +1,8 @@
 package atm.view;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
@@ -34,6 +36,7 @@ public class MainView extends JFrame implements View, ModelListener{
 	private JPanel frame;
 	public MainView (Model model, Controller controller){
 		super();
+
 		initialize();
 		this.setBounds(100, 100, 450, 300);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -50,8 +53,6 @@ public class MainView extends JFrame implements View, ModelListener{
 	 */
 	private void initialize() {
 		frame = new JPanel();
-		JLabel background=new JLabel(new ImageIcon("ATM.jpg"));
-		add(background);
 		frame.setBounds(100, 100, 450, 300);
 	}
 	PINScreen PIN;
@@ -119,6 +120,7 @@ public class MainView extends JFrame implements View, ModelListener{
 			Misc misc = new Misc(getModel(), getController());
 			misc.insufFunds();
 			add(misc);
+
 			((ATMController)getController()).operation("logout");
 		}
 		this.revalidate();
@@ -171,6 +173,7 @@ public class MainView extends JFrame implements View, ModelListener{
 					window.setVisible(true);
     		    	  contr.setView(window);
 			    	  window.setVisible(true);
+			    	  
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

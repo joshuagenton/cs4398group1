@@ -128,7 +128,7 @@ public class ATMController extends AbstractController{
 			((ATMCoreModel)getModel()).withdrawComplete();
 		else
 			((ATMCoreModel)getModel()).insufficientFunds();
-		
+		System.out.println("transferred");
 		
 	}
 	

@@ -59,7 +59,7 @@ public class LoginView extends JFrameView {
 	 */
 	private void initialize() {
 		//setSize(new Dimension(835, 518));
-		setOpaque(false);
+		
 		setLayout(null);
 	    add(getLblWelcome());
 	    add(getLblReaderImage());

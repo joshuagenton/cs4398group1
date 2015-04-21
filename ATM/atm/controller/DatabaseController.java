@@ -1,6 +1,3 @@
-/**
- * 
- */
 package atm.controller;
 
 import java.awt.image.BufferedImage;
@@ -13,38 +10,40 @@ import java.util.Set;
 
 import javax.imageio.ImageIO;
 
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author CSWells
+/**
+ * This is the DatabaseController that we use to interact with the database.
+ * 
+ * @author Chris Wells
+ * @since 2015-03-25
  */
 public class DatabaseController {
 	
 
-	   // JDBC driver name and database URL
-	   static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	   //static final String DB_URL = "jdbc:mysql://db4free.net/cs4398atm";
-	   static final String DB_URL = "jdbc:mysql://commo.de/cs4398atm";
-	   //static final String DB_URL = "jdbc:mysql://192.168.67.224/cs4398atm";
+	// JDBC driver name and database URL
+	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
+	static final String DB_URL = "jdbc:mysql://commo.de/cs4398atm";
 
-	   //  Database credentials
-	   static final String USER = "cs4398group1";
-	   static final String PASS = "cs4398group1";
+	//  Database credentials
+	static final String USER = "cs4398group1";
+	static final String PASS = "cs4398group1";
+   
+	Connection conn = null;
+	Statement stmt = null;
 	   
-	   Connection conn = null;
-	   Statement stmt = null;
-	   
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	private String connectionString;
 	private String CCN;
 
+	/**
+	 * The getAccounts function gets all the accounts associated with the user's swiped 
+	 * card and the PIN entered.
+	 * 
+	 * @return accounts that are associated with the user
+	 */
 	public Set<Results> getAccounts(){
 		Set<Results> accounts = new HashSet<Results>();
-		String query = "Select a.name,a.account_bal,a.account_num from account a, Users u, User_Accounts ua Where ua.CCN = u.CCN AND ua.account_num = a.account_num AND u.CCN = '" + CCN +"'";
+		String query = "Select a.name,a.account_bal,a.account_num from account a, "
+				+ "Users u, User_Accounts ua Where ua.CCN = u.CCN AND "
+				+ "ua.account_num = a.account_num AND u.CCN = '" + CCN +"'";
 		try {
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
@@ -54,16 +53,23 @@ public class DatabaseController {
 				accounts.add(new Results(rs.getString("name"), rs.getInt("account_num"),rs.getDouble("account_bal")));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("DB CONTROLLER ACCOUNTS SIZE: " + accounts.size());
 		return accounts;
 	}
 	
+	/**
+	 * The getPicture function allows the system to access the camera on the ATM and 
+	 * take a picture of the user.
+	 * 
+	 * @author Paul Bryson
+	 * @param account the account information associated with the user
+	 * @param PIN the PIN the user entered upon logging in
+	 * @return the image of the user
+	 */
 	public BufferedImage getPicture(Object account, String PIN) {
 		Connection conn = null;
 		Statement stmt = null;
@@ -84,18 +90,25 @@ public class DatabaseController {
 				return picture;
 			}
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return picture;
 	}
 	
+	/**
+	 * The setPicture function allows the system to use the picture that was taken and set it
+	 * for the user's session.  This is a photo of the user who is using the ATM and card/PIN
+	 * that is associated to the accounts.
+	 * 
+	 * @author Paul Bryson
+	 * @param account the account the user is interacting with
+	 * @param PIN the PIN that the user entered while logging in
+	 * @param picture the picture of the user
+	 */
 	public void setPicture(Object account, String PIN, BufferedImage picture) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -115,26 +128,25 @@ public class DatabaseController {
 			stmt.executeUpdate();
 			System.out.println("Updated picture");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @!generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	/**
+	 * The validate_user function validates the information that is entered (card information
+	 * from the swiped card, and the PIN entered from the user) against the database
+	 * to verify that the information matches in order to look at the associated accounts.
+	 * 
+	 * @author Chris Wells
+	 * @param account the accounts associated with the user
+	 * @param PIN the PIN they entered after swiping card
+	 * @return zero if the account is not found, and a 1+ if the account is found
 	 */
 	public int validate_user(Object account, String PIN) {
-		// begin-user-code
-		// returns 0 if account not found.
-		// returns 1+ if account(s) found.
 		Connection conn = null;
 		Statement stmt = null;
 		CCN = (String) account;
@@ -148,42 +160,43 @@ public class DatabaseController {
 				System.out.println(query + "\nreturned: "+ rs.getInt("BIT"));
 			return rs.getInt("BIT");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return 0;
-		
-		// end-user-code
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	/**
+	 * The deposit function allows the user the ability to deposit money into a specified account.
+	 * This function is not in use.
+	 * 
+	 * @param account the account which the money will be deposited to
+	 * @param amount of money that will be deposited
+	 * @return int for the response
 	 */
 	public int deposit(Integer account, double amount) {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		Connection conn = null;
 		Statement stmt = null;
 		try {
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
 			stmt = conn.createStatement();
+			
 			//get current account balance
 			String query = "SELECT account_bal AS CURBAL FROM account WHERE account_num = '" + account + "'";
 			ResultSet rs= stmt.executeQuery(query);
 			if(rs.next())
 				System.out.println(query + "\nreturned: "+ rs.getInt("CURBAL"));
 				int curBal = rs.getInt("CURBAL");
+			
 			//calculate new balance
 			double newBal = amount + curBal;
+			
 			//set new balance
 			String query1 = "UPDATE account SET account_bal = '" + newBal +"' Where account_num = '" +account+"'";
 			stmt.executeUpdate(query1);
+			
 			//confirm & return new balance
 			String query2 = "SELECT account_bal AS CURBAL FROM account WHERE account_num = '" + account + "'";
 			ResultSet rs2= stmt.executeQuery(query2);
@@ -192,32 +205,29 @@ public class DatabaseController {
 				int finBal = rs2.getInt("CURBAL");
 			return finBal;
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return 0;
-		// end-user-code
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	/**
+	 * The withdraw function allows a user to withdraw funds from a selected
+	 * account.
+	 * 
+	 * @param account the account with they would like to withdraw from
+	 * @param d the amount they would like to withdraw
+	 * @return boolean on if the withdraw was successful
 	 */
 	public boolean withdrawl(Integer account, double d) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		//returns new balance if current balance - amount is >= 0
-		//returns -1 if new balance would be < 0 after withdrawl
 		Connection conn = null;
 		Statement stmt = null;
 		try {
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
 			stmt = conn.createStatement();
+			
 			//get current account balance
 			double curBal = -1;
 			double	newBal = -1;
@@ -227,13 +237,16 @@ public class DatabaseController {
 				System.out.println(query + "\nreturned: "+ rs.getInt("CURBAL"));
 				curBal = rs.getInt("CURBAL");
 			}
+			
 			//calculate new balance
 			newBal = curBal - d;
 			if (newBal < 0){return false;}
+			
 			//set new balance
 			String query1 = "UPDATE account SET account_bal = '" + newBal +"' Where account_num = '" +account+"'"  ;
 			System.out.println(query1);
 			stmt.executeUpdate(query1);
+			
 			//confirm & return new balance
 			String query2 = "SELECT account_bal AS CURBAL FROM account WHERE account_num = '" + account + "'";
 			ResultSet rs2= stmt.executeQuery(query2);
@@ -242,45 +255,37 @@ public class DatabaseController {
 			}
 			return true;
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
-		// end-user-code
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	/**
+	 * The transfer function allows a user to transfer money from one account to another.
+	 * 
+	 * @param fromAccountNum the from account
+	 * @param toAccountNum the to account
+	 * @param amount the amount in which to transfer
+	 * @return boolean on if the transfer was successful
 	 */
 	public boolean transfer(Integer fromAccountNum, Integer toAccountNum, double amount) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		// returns set of accounts in Results class. 
-		// Withdrawal funds 
 		boolean account1Bal = withdrawl(fromAccountNum, amount);
 		if (account1Bal == true){
 			deposit(toAccountNum, amount);
-			return true;}
+			return true;
+		}
+		
 		//If transfer amount is not available to transfer			
 		return false;
-		
-		// end-user-code
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void transaction_history() {
-		// begin-user-code
-		// TODO Auto-generated method stub
+	public String getConnectionString() {
+		return connectionString;
+	}
 
-		// end-user-code
+	public void setConnectionString(String connectionString) {
+		this.connectionString = connectionString;
 	}
 }

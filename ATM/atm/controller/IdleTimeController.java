@@ -3,6 +3,14 @@ package atm.controller;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * This is the IdelTimeController that monitors the idle time of
+ * the user.  If the user is idle for too long they are automatically
+ * logged out of the system.
+ * 
+ * @author Stacie Christensen
+ * @since 2015-03-25
+ */
 public class IdleTimeController extends TimerTask {
 	
 	public IdleTimeController() {}
@@ -11,7 +19,11 @@ public class IdleTimeController extends TimerTask {
 	static TimerTask timerTask;
 	static ATMController controller;
 
-	// Any time an action is performed, reset the timer to 15 seconds
+	/**
+	 * The runTimer allows the sytem to run the timer for a set amount of time.
+	 * 
+	 * @param cont the ATM Controller
+	 */
 	public static void runTimer(ATMController cont) {
 		controller = cont;
 		if(timer != null)
@@ -21,12 +33,17 @@ public class IdleTimeController extends TimerTask {
 		timer.schedule(timerTask, 45000);
 	}
 
-	// If there is an action we need to cancel the timer.
+	/**
+	 * The cancelTimer allows the system the ability to cancel the timer if another
+	 * action is performed.
+	 */
 	public static void cancelTimer() {
 		timer.cancel();
 	}
 	
-	//  This function is automatically run by the timer when it runs out
+	/**
+	 * Run allows runTimer to initiate the timer.
+	 */
   	public void run() {
   		controller.operation("Logout");
   		timer.cancel();

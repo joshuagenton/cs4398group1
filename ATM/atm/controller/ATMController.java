@@ -176,6 +176,4 @@ public class ATMController extends AbstractController{
 		((ATMCoreModel)getModel()).setFromAccount(a);
 	}
 
-	public void setSelection(String selection) {
-	}	
 }

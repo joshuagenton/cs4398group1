@@ -1,20 +1,11 @@
 package atm.view;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.LayoutManager;
-import java.awt.Toolkit;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import atm.controller.ATMController;
 import atm.controller.Controller;
 import atm.model.AbstractModel;
@@ -37,7 +28,7 @@ public class MainView extends JFrame implements View, ModelListener{
 	private Model model;
 	private Controller controller;
 	LoginView login;
-	private JPanel frame;
+
 	
 	/**
 	 * Constructor for JFrameView
@@ -49,7 +40,6 @@ public class MainView extends JFrame implements View, ModelListener{
 		initialize();
 		setModel(model);
 		setController(controller);
-		//add(new Background());
 		((ATMController)getController()).operation("Start");
 	}
 

@@ -107,17 +107,6 @@ public class AccountSelectView extends JFrameView {
 		setLayout(null);
 		btnCancel.setActionCommand("Cancel");
 		add(btnCancel);
-		/*
-		JButton btnDeposit = new JButton("Deposit");
-		btnDeposit.addActionListener(handler);
-		btnDeposit.setActionCommand("Deposit");
-		GridBagConstraints gbc_btnDeposit = new GridBagConstraints();
-		gbc_btnDeposit.anchor = GridBagConstraints.NORTHWEST;
-		gbc_btnDeposit.insets = new Insets(0, 0, 5, 0);
-		gbc_btnDeposit.gridx = 4;
-		gbc_btnDeposit.gridy = 2;
-		add(btnDeposit, gbc_btnDeposit);
-		*/
 		
 		JButton btnWithdraw = new JButton("");
 		btnWithdraw.setIcon(new ImageIcon(TransactionTypeView.class.getResource("/atm/view/button_Withdraw.png")));

@@ -27,6 +27,13 @@ import atm.model.TransactionTypes;
 import java.awt.Font;
 import java.awt.Color;
 
+/**
+ * The AmountView view is where the user is allowed to enter the amoun they would like to
+ * transfer or withdraw.
+ * 
+ * @author Chris Wells
+ * @since 2015-03-25
+ */
 public class AmountView extends JFrameView {
 
 	private static final long serialVersionUID = 1L;
@@ -48,7 +55,12 @@ public class AmountView extends JFrameView {
 	private Handler handler = new Handler();
 	
 	
-	
+	/**
+	 * Constructor. 
+	 * 
+	 * @param model the ATMCoreModel
+	 * @param controller the ATMController
+	 */
 	public AmountView(Model model, Controller controller) {
 		super(model, controller);
 		setLayout(null);
@@ -56,7 +68,6 @@ public class AmountView extends JFrameView {
 		
 		this.setBounds(100, 100, 847, 588);	
 				
-		
 		Toolkit toolkit =  Toolkit.getDefaultToolkit();
 		Dimension dim = toolkit.getScreenSize();
 		
@@ -72,6 +83,9 @@ public class AmountView extends JFrameView {
 	    
 	}
 	
+	/**
+	 * The numeric pad for the user to enter an amount.
+	 */
 	private void numPad() {
 		for (Integer i = 0; i<10 ; i++){
 			final Integer number = i;
@@ -95,6 +109,9 @@ public class AmountView extends JFrameView {
 		}
 		add(getClear());
 	}
+	
+
+	// Getters/Setters
 	
 	public JLabel accountLabel(){
 		StringBuilder label = new StringBuilder();
@@ -166,8 +183,8 @@ public class AmountView extends JFrameView {
 	
 	NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
 	NumberFormatter formatter = new NumberFormatter(format);
+	
 	private JFormattedTextField getTextAmount() {
-		
 		if (textAmount == null) {
 			format.setMaximumFractionDigits(0);
 			formatter.setMinimum(0.0);
@@ -238,13 +255,6 @@ public class AmountView extends JFrameView {
 		return cancelButton;
 	}
 	
-	
-	private class Handler implements ActionListener {
-		public void actionPerformed(ActionEvent evt) {
-			((ATMController)getController()).operation(evt.getActionCommand());
-		}
-	}
-	
 	private JButton getClear() {
 		if (Clear == null) {
 			Clear = new JButton();
@@ -264,6 +274,16 @@ public class AmountView extends JFrameView {
 			});
 		}
 		return Clear;
+	}
+	
+	/**
+	 * Handles user's actions.
+	 *
+	 */
+	private class Handler implements ActionListener {
+		public void actionPerformed(ActionEvent evt) {
+			((ATMController)getController()).operation(evt.getActionCommand());
+		}
 	}
 
 	@Override

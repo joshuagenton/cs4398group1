@@ -18,24 +18,37 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 
+
+/**
+ * The BalanceView is the view the user sees when they are viewing the 
+ * balances of their accounts.
+ * 
+ * @author Chris Wells
+ * @since 2015-03-25
+ */
 public class BalanceView extends JFrameView {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Handler handler = new Handler();
+
+	/** 
+	 * Controller. 
+	 * 
+	 * @param model the ATMCoreModel
+	 * @param controller the ATMController
+	 */
 	public BalanceView(Model model, Controller controller) {
 		super(model, controller);
 		initGUI();
 	}
+
+	/**
+	 * Initializing the GUI interface.
+	 */
 	private void initGUI() {
 		setBackground(new Color(255, 255, 255));
 		setLayout(null);
 		
-		//this.setExtendedState(MAXIMIZED_BOTH);
-		//JPanel login = new JPanel();
-		//setBackground(new Color(122, 58, 255));
 		setSize(new Dimension(894, 441));
 		
 		Results account = ((ATMCoreModel)getModel()).getFromAccount();
@@ -78,17 +91,20 @@ public class BalanceView extends JFrameView {
 		start();
 	}
 	
-	public void start(){
-
-		
-	}
+	public void start(){}	// do we need this?
 	
+	/**
+	 * modelChanged -- do nothing
+	 */
 	@Override
-	public void modelChanged(ModelEvent me) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void modelChanged(ModelEvent me) {}
 
+	/**
+	 * The Handler for the user's actions.
+	 * 
+	 * @author Chris Wells
+	 *
+	 */
 	private class Handler implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
 			((ATMController)getController()).operation(evt.getActionCommand());

@@ -1,5 +1,12 @@
 package atm.view;
 
+
+/**
+ * These are the types of selections the ATM allows.
+ * 
+ * @author Chris Wells
+ * @since 2015-03-25
+ */
 public class SelectionView  {
 
 	public final static String Transfer = "Transfer";

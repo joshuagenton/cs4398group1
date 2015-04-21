@@ -15,13 +15,14 @@ import javax.swing.text.*;
  *  The Font and foreground Color of the prompt will default to those properties
  *  of the parent text component. You are free to change the properties after
  *  class construction.
+ *  
+ * @author Chris Wells
+ * @since 2015-03-25
  */
 public class TextPrompt extends JLabel
 	implements FocusListener, DocumentListener
 {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	public enum Show
@@ -38,11 +39,24 @@ public class TextPrompt extends JLabel
 	private boolean showPromptOnce;
 	private int focusLost;
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param text the text to display
+	 * @param component the JTextComponent
+	 */
 	public TextPrompt(String text, JTextComponent component)
 	{
 		this(text, component, Show.ALWAYS);
 	}
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param text the text to display
+	 * @param component the JText Component
+	 * @param show show the view
+	 */
 	public TextPrompt(String text, JTextComponent component, Show show)
 	{
 		this.component = component;
@@ -65,7 +79,7 @@ public class TextPrompt extends JLabel
 
 	/**
 	 *  Convenience method to change the alpha value of the current foreground
-	 *  Color to the specifice value.
+	 *  Color to the specific value.
 	 *
 	 *  @param alpha value in the range of 0 - 1.0.
 	 */
@@ -161,7 +175,6 @@ public class TextPrompt extends JLabel
 	private void checkForPrompt()
 	{
 		//  Text has been entered, remove the prompt
-
 		if (document.getLength() > 0)
 		{
 			setVisible( false );
@@ -169,7 +182,6 @@ public class TextPrompt extends JLabel
 		}
 
 		//  Prompt has already been shown once, remove it
-
 		if (showPromptOnce && focusLost > 0)
 		{
 			setVisible(false);
@@ -178,7 +190,6 @@ public class TextPrompt extends JLabel
 
 		//  Check the Show property and component focus to determine if the
 		//  prompt should be displayed.
-
         if (component.hasFocus())
         {
         	if (show == Show.ALWAYS
@@ -197,8 +208,6 @@ public class TextPrompt extends JLabel
         }
 	}
 
-//  Implement FocusListener
-
 	public void focusGained(FocusEvent e)
 	{
 		checkForPrompt();
@@ -209,8 +218,6 @@ public class TextPrompt extends JLabel
 		focusLost++;
 		checkForPrompt();
 	}
-
-//  Implement DocumentListener
 
 	public void insertUpdate(DocumentEvent e)
 	{

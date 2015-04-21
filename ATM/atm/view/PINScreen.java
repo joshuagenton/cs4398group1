@@ -25,6 +25,13 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The PIN Screen allows the user to enter their 4-digit PIN that is 
+ * associated to their card.
+ * 
+ * @author Chris Wells
+ * @since 2015-03-25
+ */
 public class PINScreen extends JFrameView {
 	
 	private static final long serialVersionUID = 1L;
@@ -49,8 +56,13 @@ public class PINScreen extends JFrameView {
 	private JLabel aniImage = new JLabel(icon);
 	static final int MAX_CHARS = 4;
 	private Handler handler = new Handler();
+
+	
 	/**
-	 * This is the default constructor
+	 * Constructor.
+	 * 
+	 * @param model the ATMCoreModel
+	 * @param controller the ATMController
 	 */
 	public PINScreen(Model model, Controller controller) {
 		super(model, controller);
@@ -79,12 +91,20 @@ public class PINScreen extends JFrameView {
 		initialize();
 	}
 	
+	/**
+	 * The Handler that handles the user's actions.
+	 * 
+	 * @author Chris Wells
+	 *
+	 */
 	private class Handler implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
 			((ATMController)getController()).operation(evt.getActionCommand());
 			IdleTimeController.runTimer((ATMController)getController());
 		}
 	}
+	
+	// Button Getters
 	
 	private JButton getNum1() {
 		if (num1 == null) {
@@ -102,11 +122,6 @@ public class PINScreen extends JFrameView {
 		return num1;
 	}
 
-	/**
-	 * This method initializes num4	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
 	private JButton getNum4() {
 		if (num4 == null) {
 			num4 = new JButton();
@@ -123,11 +138,6 @@ public class PINScreen extends JFrameView {
 		return num4;
 	}
 
-	/**
-	 * This method initializes num2	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
 	private JButton getNum2() {
 		if (num2 == null) {
 			num2 = new JButton();
@@ -144,11 +154,6 @@ public class PINScreen extends JFrameView {
 		return num2;
 	}
 
-	/**
-	 * This method initializes num3	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
 	private JButton getNum3() {
 		if (num3 == null) {
 			num3 = new JButton();
@@ -165,11 +170,6 @@ public class PINScreen extends JFrameView {
 		return num3;
 	}
 
-	/**
-	 * This method initializes num5	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
 	private JButton getNum5() {
 		if (num5 == null) {
 			num5 = new JButton();
@@ -186,11 +186,6 @@ public class PINScreen extends JFrameView {
 		return num5;
 	}
 
-	/**
-	 * This method initializes num6	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
 	private JButton getNum6() {
 		if (num6 == null) {
 			num6 = new JButton();
@@ -207,11 +202,6 @@ public class PINScreen extends JFrameView {
 		return num6;
 	}
 
-	/**
-	 * This method initializes num7	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
 	private JButton getNum7() {
 		if (num7 == null) {
 			num7 = new JButton();
@@ -228,11 +218,6 @@ public class PINScreen extends JFrameView {
 		return num7;
 	}
 
-	/**
-	 * This method initializes num8	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
 	private JButton getNum8() {
 		if (num8 == null) {
 			num8 = new JButton();
@@ -249,11 +234,6 @@ public class PINScreen extends JFrameView {
 		return num8;
 	}
 
-	/**
-	 * This method initializes num9	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
 	private JButton getNum9() {
 		if (num9 == null) {
 			num9 = new JButton();
@@ -270,11 +250,6 @@ public class PINScreen extends JFrameView {
 		return num9;
 	}
 
-	/**
-	 * This method initializes num0	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
 	private JButton getNum0() {
 		if (num0 == null) {
 			num0 = new JButton();
@@ -293,9 +268,7 @@ public class PINScreen extends JFrameView {
 
 
 	/**
-	 * This method initializes this
-	 * 
-	 * @return void
+	 * The initialization of the view.
 	 */
 	private void initialize() {
 		GridBagConstraints gridBagConstraints = new GridBagConstraints();
@@ -324,9 +297,9 @@ public class PINScreen extends JFrameView {
 	}
 
 	/**
-	 * This method initializes PIN	
-	 * 	
-	 * @return javax.swing.JPasswordField	
+	 * Gets the user's PIN.
+	 * 
+	 * @return the PIN
 	 */
 	private JPasswordField getPIN() {
 		if (PIN == null) {
@@ -338,11 +311,8 @@ public class PINScreen extends JFrameView {
 		return PIN;
 	}
 
-	/**
-	 * This method initializes Cancel	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
+	// Button Getters
+	
 	private JButton getCancel() {
 		if (Cancel == null) {
 			Cancel = new JButton();
@@ -363,11 +333,6 @@ public class PINScreen extends JFrameView {
 		return Cancel;
 	}
 
-	/**
-	 * This method initializes Clear	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
 	private JButton getClear() {
 		if (Clear == null) {
 			Clear = new JButton();
@@ -388,11 +353,6 @@ public class PINScreen extends JFrameView {
 		return Clear;
 	}
 
-	/**
-	 * This method initializes Enter	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
 	private JButton getEnter() {
 		if (Enter == null) {
 			Enter = new JButton();
@@ -414,11 +374,6 @@ public class PINScreen extends JFrameView {
 		return Enter;
 	}
 
-	/**
-	 * This method initializes NameInfo	
-	 * 	
-	 * @return javax.swing.JTextPane	
-	 */
 	private JLabel getNameInfo() {
 		if (NameInfo == null) {
 			NameInfo = new JLabel();
@@ -430,10 +385,9 @@ public class PINScreen extends JFrameView {
 		return NameInfo;
 	}
 
-
+	/**
+	 * modelChanged - do nothing.
+	 */
 	@Override
-	public void modelChanged(ModelEvent me) {
-		// TODO Auto-generated method stub
-		
-	}
-}  //  @jve:decl-index=0:visual-constraint="-518,13"
+	public void modelChanged(ModelEvent me) {}
+}

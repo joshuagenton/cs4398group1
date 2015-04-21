@@ -27,36 +27,47 @@ import atm.model.ModelEvent;
 
 import javax.swing.JLabel;
 
-
+/**
+ * The AccountSelectView allows the user to select an account they
+ * would like to interact with.
+ * 
+ * @author Chris Wells
+ * @since 2015-03-25
+ */
 public class AccountSelectView extends JFrameView {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Handler handler = new Handler();
 	DecimalFormat dec = new DecimalFormat("'$'0.00");
+	
+	/**
+	 * Constructor.
+	 * 
+	 * @param model the ATMCoreModel
+	 * @param controller the ATMController
+	 */
 	public AccountSelectView(Model model, Controller controller) {
 		super(model, controller);
 		setLayout(null);
-		
 
 		start();
 	}
 	
 	ArrayList<JButton> accountButtons;
 	
+	/**
+	 * Start assembles the content of the page.
+	 */
 	public void start(){
-		//this.setExtendedState(MAXIMIZED_BOTH);
-		//JPanel login = new JPanel();
-		//setBackground(new Color(122, 58, 255));
 		setSize(new Dimension(1002, 679));
-		//this.setTitle("Welcome");
 		addButtons();
 		setVisible(true);
 	
 	}
 
+	/**
+	 * Adds the button to the page.
+	 */
 	public void addButtons (){
 		Set<Results> accounts = ((ATMCoreModel)getModel()).getAccounts();
 		UIManager.put("Button.disabled",UIManager.get("Button.enabled"));
@@ -89,6 +100,7 @@ public class AccountSelectView extends JFrameView {
 				
 			}
 		}
+		
 		JButton btnTransfer = new JButton("Transfer");
 		btnTransfer.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnTransfer.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -118,6 +130,9 @@ public class AccountSelectView extends JFrameView {
 		add(btnWithdraw);
 	}
 	
+	/**
+	 * The account the user wants to transfer from.
+	 */
 	public void SelectFrom(){
 		JLabel lblSelectFromAccount = new JLabel("Select Account");
 		
@@ -127,6 +142,9 @@ public class AccountSelectView extends JFrameView {
 		add(lblSelectFromAccount);
 	}
 	
+	/** 
+	 * The account the user wants to transfer to.
+	 */
 	public void SelectTo(){
 		JLabel lblSelectFromAccount = new JLabel("Select the account to transfer to");
 		
@@ -135,12 +153,14 @@ public class AccountSelectView extends JFrameView {
 		lblSelectFromAccount.setBounds(500, 27, 450, 50);
 		add(lblSelectFromAccount);
 	}
+	
 	@Override
-	public void modelChanged(ModelEvent me) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void modelChanged(ModelEvent me) {}
 
+	/**
+	 * Handling the user's actions.
+	 *
+	 */
 	private class Handler implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
 			((ATMController)getController()).operation(evt.getActionCommand());

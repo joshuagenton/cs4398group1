@@ -20,6 +20,14 @@ import atm.model.Model;
 import atm.model.ModelEvent;
 import atm.model.TransactionTypes;
 
+
+/**
+ * The WithdrawView is the view the user will see when they select the withdraw
+ * option on the ATM.
+ * 
+ * @author Stacie.Christensen
+ * @since 2015-03-05
+ */
 public class WithdrawView extends JFrameView {
 
 	private static final long serialVersionUID = 1L;
@@ -38,16 +46,17 @@ public class WithdrawView extends JFrameView {
 	private Handler handler = new Handler();
 	
 	
-	
-	
-	
+	/**
+	 * Constructor.
+	 * 
+	 * @param model the ATMCoreModel
+	 * @param controller the ATMController
+	 */
 	public WithdrawView(Model model, Controller controller) {
 		super(model, controller);
 		
 		this.setBounds(100, 100, 450, 300);
 		setLayout(null);
-		//add(getContent());
-		
 		
 		Toolkit toolkit =  Toolkit.getDefaultToolkit();
 		Dimension dim = toolkit.getScreenSize();
@@ -56,30 +65,15 @@ public class WithdrawView extends JFrameView {
 	    int y = (int) ((dim.getHeight() - this.getHeight()) * 0.5f);
 	    this.setLocation(x, y);
 	    add(getButtonPanel());
-	    add(getTextFieldPanel());
-	    
+	    add(getTextFieldPanel()); 
 	}
-
 	
-/*	private JPanel getContent() {
-		if (topPanel == null) {
-			topPanel = new JPanel();
-			topPanel.setBounds(125, 5, 200, 106);
-			GridLayout layout = new GridLayout(0, 1);
-			topPanel.setLayout(layout);
-			//topPanel.setPreferredSize(new Dimension(300, 100));
-			GridBagConstraints ps = new GridBagConstraints();
-			ps.gridx = 0;
-			ps.gridy = 3;
-			ps.fill = GridBagConstraints.HORIZONTAL;
-			
-			GridBagConstraints bs = new GridBagConstraints();
-			bs.gridx = 0;
-			bs.gridy = 3;
-		}
-		return topPanel;
-	}*/
-	
+	/**
+	 * The getButtonPanel is a panel on the view that contains all the buttons
+	 * for the window.
+	 * 
+	 * @return the panel
+	 */
 	private JPanel getButtonPanel()
 	{
 		if(buttonPanel == null){
@@ -96,6 +90,12 @@ public class WithdrawView extends JFrameView {
 		return buttonPanel;
 	}
 
+	/**
+	 * The getTextFieldPanel is a panel on the view that contains all the text
+	 * fields for the window.
+	 * 
+	 * @return the panel
+	 */
 	private JPanel getTextFieldPanel()
 	{
 		if(textPanel == null){
@@ -115,9 +115,7 @@ public class WithdrawView extends JFrameView {
 		return textPanel;
 	}
 	
-	
-	
-	
+	// Label Getters
 	
 	private JLabel getTransferCompleteLabel(){
 		if(takeCashLabel == null){
@@ -139,14 +137,6 @@ public class WithdrawView extends JFrameView {
 		return takeCashLabel;
 	}
 	
-	private JButton getLogoutButton(){
-		if(logoutButton == null){
-			logoutButton = new JButton(LOGOUT);
-			logoutButton.addActionListener(handler);
-		}
-		return logoutButton;
-	}
-	
 	private JLabel getLblMoneyGif() {
 		if (moneyGif == null) {
 			moneyGif = new JLabel();
@@ -156,14 +146,31 @@ public class WithdrawView extends JFrameView {
 		return moneyGif;
 	}
 	
+	// Button Getters
 	
+	private JButton getLogoutButton(){
+		if(logoutButton == null){
+			logoutButton = new JButton(LOGOUT);
+			logoutButton.addActionListener(handler);
+		}
+		return logoutButton;
+	}
+	
+	/**
+	 * The handler for the user's action
+	 * 
+	 * @author Stacie.Christensen
+	 * @since 2015-03-05
+	 */
 	private class Handler implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
 			((ATMController)getController()).operation(evt.getActionCommand());
 		}
 	}
 
-
+	/**
+	 * Takes action based on the user's action.
+	 */
 	@Override
 	public void modelChanged(ModelEvent me) {
 		LogoutView lv = new LogoutView(getModel(),getController());

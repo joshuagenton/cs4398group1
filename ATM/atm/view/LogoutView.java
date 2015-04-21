@@ -8,17 +8,24 @@ import java.awt.BorderLayout;
 import java.awt.Label;
 import java.awt.Font;
 
+/**
+ * The LogoutView is the view the user sees when logging out of the system.
+ * 
+ * @author Chris Wells
+ * @since 2015-03-25
+ */
 public class LogoutView extends JFrameView {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
-
+	/**
+	 * Controller.
+	 * 
+	 * @param model the ATMCoreModel
+	 * @param controller the ATMController
+	 */
 	public LogoutView(Model model, Controller controller) {
 		super(model, controller);
-		//setBackground(new Color(0, 0, 255));
 		setLayout(new BorderLayout(0, 0));
 		
 		Label label = new Label("You have been logged out");
@@ -26,13 +33,12 @@ public class LogoutView extends JFrameView {
 		label.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 24));
 		label.setForeground(new Color(255, 0, 0));
 		add(label, BorderLayout.CENTER);
-		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * modelChanged -- Do nothing
+	 */
 	@Override
-	public void modelChanged(ModelEvent me) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void modelChanged(ModelEvent me) {}
 
 }

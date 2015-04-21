@@ -22,6 +22,13 @@ import java.awt.Color;
 import javax.swing.border.BevelBorder;
 import java.awt.Cursor;
 
+
+/**
+ *  The TransferView is the view the user sees when selecting the transfer function.
+ *  
+ * @author Stacie Christensen
+ * @since 2015-03-25
+ */
 public class TransferView extends JFrameView {
 
 	private static final long serialVersionUID = 1L;
@@ -38,6 +45,12 @@ public class TransferView extends JFrameView {
 	
 	public CardReaderController card = new CardReaderController(getModel()); 
 	
+	/**
+	 * Constructor.
+	 * 
+	 * @param model the ATMCoreModel
+	 * @param controller the ATMController
+	 */
 	public TransferView(Model model, Controller controller) {
 		super(model, controller);
 		setBackground(new Color(255, 255, 255));
@@ -45,23 +58,24 @@ public class TransferView extends JFrameView {
 		this.setBounds(100, 100, 450, 300);
 		add(getContent());
 		
-		
 		Toolkit toolkit =  Toolkit.getDefaultToolkit();
 		Dimension dim = toolkit.getScreenSize();
 		
 		int x = (int) ((dim.getWidth() - this.getWidth()) * 0.5f);
 	    int y = (int) ((dim.getHeight() - this.getHeight()) * 0.5f);
 	    this.setLocation(x, y);
-	    
 	}
 
-	
+	/**
+	 * Gets the panels and assembles them together.
+	 * 
+	 * @return the panel
+	 */
 	private JPanel getContent() {
 		if (topPanel == null) {
 			topPanel = new JPanel();
 			GridLayout layout = new GridLayout(0, 1);
 			topPanel.setLayout(layout);
-			//topPanel.setPreferredSize(new Dimension(300, 100));
 			GridBagConstraints ps = new GridBagConstraints();
 			ps.gridx = 0;
 			ps.gridy = 3;
@@ -76,6 +90,11 @@ public class TransferView extends JFrameView {
 		return topPanel;
 	}
 	
+	/**
+	 * Gets the button panel which is all the buttons organized on a panel.
+	 * 
+	 * @return the button panel
+	 */
 	private JPanel getButtonPanel()
 	{
 		if(buttonPanel == null){
@@ -99,6 +118,11 @@ public class TransferView extends JFrameView {
 		return buttonPanel;
 	}
 
+	/**
+	 * Gets the text panel which is all the text organized on a panel.
+	 * 
+	 * @return the text panel
+	 */
 	private JPanel getTextFieldPanel()
 	{
 		if(textPanel == null){
@@ -119,12 +143,7 @@ public class TransferView extends JFrameView {
 		return textPanel;
 	}
 	
-	
-	
-	
-	
-	
-	
+	// Label Getters
 	
 	private JLabel getTransferCompleteLabel(){
 		if(transferCompleteLabel == null){
@@ -136,6 +155,8 @@ public class TransferView extends JFrameView {
 		}
 		return transferCompleteLabel;
 	}
+	
+	// Button Getters
 	
 	private JButton getLogoutButton(){
 		if(logoutButton == null){

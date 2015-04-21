@@ -9,19 +9,31 @@ import atm.controller.Controller;
 import atm.model.Model;
 import atm.model.ModelEvent;
 
+/**
+ * The Misc class contains all the misc. actions the user sees on the
+ * screen. 
+ * 
+ * @author Chris Wells
+ * @since 2015-03-25
+ */
 public class Misc extends JFrameView {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Constructor.
+	 * 
+	 * @param model the ATMCoreModel
+	 * @param controller the ATMController
+	 */
 	public Misc(Model model, Controller controller) {
 		super(model, controller);
 	}
 
+	/**
+	 * The logout function logs the user out of their session.
+	 */
 	public void logout(){
-		//setBackground(new Color(0, 0, 255));
 		setLayout(new BorderLayout(0, 0));
 		
 		Label label = new Label("You have been logged out");
@@ -34,8 +46,11 @@ public class Misc extends JFrameView {
 		((ATMController)getController()).operation("Logout");
 		
 	}
+
+	/**
+	 * The system is waiting for an action from the user.
+	 */
 	public void waiting(){
-		//setBackground(new Color(0, 0, 255));
 		setLayout(new BorderLayout(0, 0));
 		
 		Label label = new Label("Please Wait...");
@@ -47,8 +62,10 @@ public class Misc extends JFrameView {
 		repaint();
 	}
 
+	/**
+	 * An error that the user entered an invalid PIN for the card they swiped.
+	 */
 	public void invalidPIN(){
-		//setBackground(new Color(0, 0, 255));
 		setLayout(new BorderLayout(0, 0));
 		
 		Label label = new Label("Invalid PIN");
@@ -60,8 +77,11 @@ public class Misc extends JFrameView {
 		repaint();
 	}
 
+	/**
+	 * An error that the user does not have sufficient funds for the action they
+	 * are trying to perform.
+	 */
 	public void insufFunds(){
-		//setBackground(new Color(0, 0, 255));
 		setLayout(new BorderLayout(0, 0));
 		
 		Label label = new Label("Insufficient Funds");
@@ -73,8 +93,11 @@ public class Misc extends JFrameView {
 		repaint();
 	}
 
+	/**
+	 * The user can cancel out of an action at any time which will log them
+	 * out of the system.
+	 */
 	public void cancelled(){
-		//setBackground(new Color(0, 0, 255));
 		setLayout(new BorderLayout(0, 0));
 		
 		Label label = new Label("Invalid PIN");
@@ -85,11 +108,14 @@ public class Misc extends JFrameView {
 		setVisible(true);
 		repaint();
 	}
+	
+	/**
+	 * The transComplete is a successful transfer from one account to another.
+	 */
 	public void transComplete(){
-		//setBackground(new Color(0, 0, 255));
 		setLayout(new BorderLayout(0, 0));
 		
-		Label label = new Label("Thank you for using Group1 ATM");
+		Label label = new Label("Thank you for using Texas State Bank ATM");
 		label.setAlignment(Label.CENTER);
 		label.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 24));
 		label.setForeground(new Color(255, 0, 0));
@@ -97,9 +123,10 @@ public class Misc extends JFrameView {
 		setVisible(true);
 		repaint();
 	}
+	
+	/**
+	 * ModelChanged -- do nothing
+	 */
 	@Override
-	public void modelChanged(ModelEvent me) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void modelChanged(ModelEvent me) {}
 }

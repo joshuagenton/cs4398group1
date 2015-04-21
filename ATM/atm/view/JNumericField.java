@@ -4,6 +4,13 @@ import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.text.*;
 
+
+/**
+ * NEED DESCRIPTION OF WHAT THIS DOES
+ * 
+ * @author Chris Wells
+ * @since 2015-03-25
+ */
 public class JNumericField extends JTextField {
     private static final long serialVersionUID = 1L;
 
@@ -27,15 +34,26 @@ public class JNumericField extends JTextField {
 
     protected PlainDocument numberFieldFilter;
 
+    /**
+     * Default Constructor.
+     */
     public JNumericField() {
-
         this(10, DECIMAL);
     }
 
+    /**
+     * Constructor.
+     * @param iMaxLen the max length
+     */
     public JNumericField(int iMaxLen) {
         this(iMaxLen, NUMERIC);
     }
 
+    /**
+     * Constructor
+     * @param iMaxLen the max length
+     * @param iFormat the format type
+     */
     public JNumericField(int iMaxLen, int iFormat) {
         setAllowNegative(true);
         setMaxLength(iMaxLen);
@@ -45,6 +63,9 @@ public class JNumericField extends JTextField {
         super.setDocument(numberFieldFilter);
     }
 
+    
+    // Getters/Setters
+    
     public void setMaxLength(int maxLen) {
         if (maxLen > 0)
             maxLength = maxLen;
@@ -169,6 +190,13 @@ public class JNumericField extends JTextField {
     public void setDocument(Document document) {
     }
 
+    
+    /**
+     * The JNumberFieldFiler ..... NEED INFO
+     * 
+     * @author Chris Wells
+     *
+     */
     class JNumberFieldFilter extends PlainDocument {
         private static final long serialVersionUID = 1L;
 

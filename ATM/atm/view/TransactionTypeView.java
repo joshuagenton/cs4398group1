@@ -17,12 +17,24 @@ import java.awt.Cursor;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
+/**
+ * The TransactionView is the view users see inbetween transactions.
+ * 
+ * @author Chris Wells
+ * @since 2015-03-25
+ */
 public class TransactionTypeView extends JFrameView {
 
 
 	private static final long serialVersionUID = 1L;
 	private Handler handler = new Handler();
 	
+	/**
+	 * Contructor.
+	 * 
+	 * @param model the ATMCoreModel
+	 * @param controller the ATMController
+	 */
 	public TransactionTypeView(Model model, Controller controller) {
 		super(model, controller);
 		
@@ -51,15 +63,17 @@ public class TransactionTypeView extends JFrameView {
 		btnCheckBalance.addActionListener(handler);
 		btnCheckBalance.setActionCommand("Balance");
 		add(btnCheckBalance);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void modelChanged(ModelEvent me) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void modelChanged(ModelEvent me) {}
 	
+	/**
+	 * The Handler for the user's actions.
+	 * 
+	 * @author Chris Wells
+	 *
+	 */
 	private class Handler implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
 			((ATMController)getController()).operation(evt.getActionCommand());

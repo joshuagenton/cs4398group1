@@ -19,14 +19,16 @@ import atm.model.ModelEvent;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
+
+/**
+ * The LoginView is what the user sees when logging into the ATM.
+ * 
+ * @author Chris Wells
+ * @since 2015-03-25
+ */
 public class LoginView extends JFrameView {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-//	private JButton TestPhilip = null;
-//	private JButton ChrisTest = null;
 	public JTextField cardinfo = null;
 	public CardReaderController card = new CardReaderController(getModel()); 
 	private Handler handler = new Handler();
@@ -34,27 +36,24 @@ public class LoginView extends JFrameView {
 	private JLabel readerImage;
 	private JLabel lblScanCard;
 	
-	
+	/**
+	 * Constructor.
+	 * 
+	 * @param model the ATMCoreModel
+	 * @param controller the ATMController
+	 */
 	public LoginView(Model model, Controller controller) {
 		super(model, controller);
 		setBackground(new Color(255, 255, 255));
 		initialize();
 		this.setBounds(100, 100, 800, 600);
-
-		//	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 	}
 
 	
 	/**
-	 * This method initializes this
-	 * 
-	 * @return void
+	 * Initializes this.
 	 */
 	private void initialize() {
-		//this.setExtendedState(MAXIMIZED_BOTH);
-		//JPanel login = new JPanel();
-		//setBackground(new Color(122, 58, 255));
 		setSize(new Dimension(835, 518));
 		setLayout(null);
 	    add(getLblWelcome());
@@ -79,9 +78,8 @@ public class LoginView extends JFrameView {
 			}
 		});
 		cardinfo.requestFocus();
-	//	this.add(test);
-	//	test.setVisible(true);
 	}
+
 	@Override
 	public void modelChanged(ModelEvent me) {
 		//change to PIN Screen
@@ -90,17 +88,23 @@ public class LoginView extends JFrameView {
 		repaint();
 	}
 
-	
+	/**
+	 * Handles user's actions.
+	 * 
+	 * @author Chris Wells
+	 *
+	 */
 	private class Handler implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
 			((ATMController)getController()).operation(evt.getActionCommand());
 			System.out.println(evt.getActionCommand());
 		}
 	}
+	
 	/**
 	 * This method initializes TestPhilip	
 	 * 	
-	 * @return javax.swing.JButton	
+	 * @return button for use
 	 */
 	private JButton getTestPhilip() {
 		JButton TestPhilip = null;
@@ -126,9 +130,9 @@ public class LoginView extends JFrameView {
 	}
 
 	/**
-	 * This method initializes ChrisTest	
+	 * This method initializes TestChris
 	 * 	
-	 * @return javax.swing.JButton	
+	 * @return button for use
 	 */
 	private JButton getChrisTest() {
 		JButton ChrisTest = null;
@@ -150,6 +154,11 @@ public class LoginView extends JFrameView {
 		return ChrisTest;
 	}
 	
+	/**
+	 * This method initializes TestPaul
+	 * 	
+	 * @return button for use
+	 */
 	private JButton getPaulTest() {
 		JButton ChrisTest = null;
 		if (ChrisTest == null) {
@@ -170,6 +179,11 @@ public class LoginView extends JFrameView {
 		return ChrisTest;
 	}
 	
+	/**
+	 * This method initializes TestJosh
+	 * 	
+	 * @return button for use
+	 */
 	private JButton getJoshTest() {
 		JButton ChrisTest = null;
 		if (ChrisTest == null) {
@@ -190,6 +204,11 @@ public class LoginView extends JFrameView {
 		return ChrisTest;
 	}
 	
+	/**
+	 * This method initializes TestStacie	
+	 * 	
+	 * @return button for use
+	 */
 	private JButton getStacieTest() {
 		JButton ChrisTest = null;
 		if (ChrisTest == null) {
@@ -209,11 +228,9 @@ public class LoginView extends JFrameView {
 		}
 		return ChrisTest;
 	}
-	/**
-	 * This method initializes cardinfo	
-	 * 	
-	 * @return javax.swing.JTextField	
-	 */
+	
+	// Getters / Setters
+	
 	private JTextField getCardinfo() {
 		if (cardinfo == null) {
 			cardinfo = new JTextField();

@@ -9,26 +9,31 @@ import javax.swing.JPanel;
 import atm.controller.ATMController;
 import atm.controller.Controller;
 import atm.model.AbstractModel;
-import atm.model.AgentStatus;
 import atm.model.Model;
 import atm.model.ModelEvent;
 import atm.model.ATMCoreModel;
 import atm.model.ModelListener;
 
+
+/**
+ * The MainView the user sees when using the application.
+ * 
+ * @author Chris Wells
+ * @since 2015-03-25
+ */
 public class MainView extends JFrame implements View, ModelListener{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private Model model;
 	private Controller controller;
 	LoginView login;
+	private JPanel frame;
+	
 	/**
 	 * Constructor for JFrameView
 	 * @param model - model to be set to view.
 	 * @param controller controller to be set to view.
 	 */
-	private JPanel frame;
 	public MainView (Model model, Controller controller){
 		super();
 
@@ -41,8 +46,10 @@ public class MainView extends JFrame implements View, ModelListener{
 		setController(controller);
 		((ATMController)getController()).operation("Start");
 	}
+	
 	JButton b1;
 	JLabel l1;
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -50,47 +57,56 @@ public class MainView extends JFrame implements View, ModelListener{
 		frame = new JPanel();
 		frame.setBounds(100, 100, 450, 300);
 	}
+	
 	PINScreen PIN;
+	
+	/**
+	 * Takes care of the model is there is a change.
+	 */
 	public void modelChanged(ModelEvent me) {
 		this.getContentPane().removeAll();
 
 		this.revalidate();
 		this.repaint();
 	}
+	
 	/**
 	 * registers the view with the model.
 	 */
 	public void registerWithModel(){
 		((AbstractModel)model).addModelListener(this);
 	}
+	
+	/**
+	 * unregisters the view with the model.
+	 */
 	public void unregisterWithModel(){
 		((AbstractModel)model).removeModelListener(this);
 	}
-	/**
-	 * getter for the view's controller.
-	 */
-	public Controller getController(){return controller;}
+
+
+	// Getters/Setters
 	
-	/**
-	 * setter for the view's controller.
-	 */
+	public Controller getController(){
+		return controller;
+	}
+	
 	public void setController(Controller controller){
 		this.controller = controller;
 	}
-	/**
-	 * getter for the view's model.
-	 */
-	public Model getModel(){return model;}
+
+	public Model getModel(){
+		return model;
+	}
 	
-	/**
-	 * setter for the view's model.
-	 */
 	public void setModel(Model model) {
 		this.model = model;
 		registerWithModel();
 	}
+	
 	/**
-	 * Launch the application.
+	 * Main function - Launch the application.
+	 * @param args for the main function
 	 */
 	public static void main(String[] args) {
 		final ATMCoreModel account = new ATMCoreModel();

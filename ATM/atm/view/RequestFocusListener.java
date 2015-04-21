@@ -18,14 +18,17 @@ import javax.swing.event.*;
  *  from the component once the AncestorEvent is generated. A second constructor
  *  allows you to specify a boolean value of false to prevent the
  *  AncestorListener from being removed when the event is generated. This will
- *  allow you to reuse the listener each time the event is generated.
+ *  allow you to reuse the listener each time the event is generated.'
+ *  
+ * @author Chris Wells
+ * @since 2015-03-25
  */
 public class RequestFocusListener implements AncestorListener
 {
 	private boolean removeListener;
 
-	/*
-	 *  Convenience constructor. The listener is only used once and then it is
+	/**
+	 * Convenience constructor. The listener is only used once and then it is
 	 *  removed from the component.
 	 */
 	public RequestFocusListener()
@@ -33,12 +36,12 @@ public class RequestFocusListener implements AncestorListener
 		this(true);
 	}
 
-	/*
-	 *  Constructor that controls whether this listen can be used once or
-	 *  multiple times.
-	 *
-	 *  @param removeListener when true this listener is only invoked once
-	 *                        otherwise it can be invoked multiple times.
+	/**
+	 * Constructor that controls whether this listen can be used once or
+	 *  multiple times
+	 * 
+	 * @param removeListener when true this listener is only invoked once
+	 * otherwise it can be invoked multiple times.
 	 */
 	public RequestFocusListener(boolean removeListener)
 	{

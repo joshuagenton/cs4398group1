@@ -19,6 +19,14 @@ import atm.controller.Controller;
 import atm.model.Model;
 import atm.model.ModelEvent;
 
+
+/**
+ *  The TransferAmountView allows the user to enter in the total amount
+ *  they'd like to transfer.
+ *  
+ * @author Stacie Christensen
+ * @since 2015-03-25
+ */
 public class TransferAmountView extends JFrameView {
 
 	private static final long serialVersionUID = 1L;
@@ -42,13 +50,17 @@ public class TransferAmountView extends JFrameView {
 	private Handler handler = new Handler();
 	
 	
-	
+	/**
+	 * Controller. 
+	 * 
+	 * @param model the ATMCoreModel
+	 * @param controller the ATMController
+	 */
 	public TransferAmountView(Model model, Controller controller) {
 		super(model, controller);
 		
 		this.setBounds(100, 100, 450, 300);
 		add(getContent());
-		
 		
 		Toolkit toolkit =  Toolkit.getDefaultToolkit();
 		Dimension dim = toolkit.getScreenSize();
@@ -59,13 +71,16 @@ public class TransferAmountView extends JFrameView {
 	    
 	}
 
-	
+	/**
+	 * Gets the content for the main window and assembles it.
+	 * 
+	 * @return the main panel
+	 */
 	private JPanel getContent() {
 		if (topPanel == null) {
 			topPanel = new JPanel();
 			GridLayout layout = new GridLayout(0, 1);
 			topPanel.setLayout(layout);
-			//topPanel.setPreferredSize(new Dimension(300, 100));
 			GridBagConstraints ps = new GridBagConstraints();
 			ps.gridx = 0;
 			ps.gridy = 3;
@@ -80,6 +95,11 @@ public class TransferAmountView extends JFrameView {
 		return topPanel;
 	}
 	
+	/**
+	 * Gets the button panel which is all the button arranged on one panel.
+	 * 
+	 * @return the button panel
+	 */
 	private JPanel getButtonPanel()
 	{
 		if(buttonPanel == null){
@@ -100,6 +120,11 @@ public class TransferAmountView extends JFrameView {
 		return buttonPanel;
 	}
 
+	/**
+	 * Gets the text panel which is all the text arranged on one panel.
+	 * 
+	 * @return text panel
+	 */
 	private JPanel getTextFieldPanel()
 	{
 		if(textPanel == null){
@@ -121,11 +146,7 @@ public class TransferAmountView extends JFrameView {
 	}
 	
 	
-	
-	
-	
-	
-	
+	// Label and Field Getters
 	
 	private JLabel getLblAmount(){
 		if(lblAmount == null){
@@ -145,6 +166,9 @@ public class TransferAmountView extends JFrameView {
 		return textAmount;
 	}
 	
+	
+	// Button Setters
+	
 	private JButton getTransferButton(){
 		if(transferButton == null){
 			transferButton = new JButton(TRANSFER);
@@ -161,13 +185,17 @@ public class TransferAmountView extends JFrameView {
 		return cancelButton;
 	}
 	
-	
+	/**
+	 * Handler for user's actions.
+	 * 
+	 * @author Stacie.Christensen
+	 *
+	 */
 	private class Handler implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
 			((ATMController)getController()).operation(evt.getActionCommand());
 		}
 	}
-
 
 	@Override
 	public void modelChanged(ModelEvent me) {

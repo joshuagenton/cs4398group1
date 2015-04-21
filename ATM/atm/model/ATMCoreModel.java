@@ -184,6 +184,7 @@ public class ATMCoreModel extends AbstractModel{
 	 * when the user starts a session.
 	 */
 	public synchronized void start(){
+		System.out.println("Start: Model");
 		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.Start, AgentStatus.Start);
 		SwingUtilities.invokeLater(
 				new Runnable() {

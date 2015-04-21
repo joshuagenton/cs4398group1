@@ -1,6 +1,7 @@
 package atm.view;
 
 import java.awt.EventQueue;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -9,6 +10,7 @@ import javax.swing.JPanel;
 import atm.controller.ATMController;
 import atm.controller.Controller;
 import atm.model.AbstractModel;
+import atm.model.AgentStatus;
 import atm.model.Model;
 import atm.model.ModelEvent;
 import atm.model.ATMCoreModel;
@@ -65,7 +67,71 @@ public class MainView extends JFrame implements View, ModelListener{
 	 */
 	public void modelChanged(ModelEvent me) {
 		this.getContentPane().removeAll();
+		System.out.println("CHANGE TO VIEW: " + me.getAgStatus());
+		if (me.getAgStatus() == AgentStatus.Start){
+			login = new LoginView(getModel(), getController());
+			add(login);		
+		}
+		else if (me.getAgStatus() == AgentStatus.NeedPIN){
+			PIN = new PINScreen(getModel(), getController());
+			add(PIN);
+		}
+		else if (me.getAgStatus() == AgentStatus.Cancel){
+			Misc cancel = new Misc(getModel(), getController());
+			cancel.logout();
+			add(cancel);
+		}
+		else if (me.getAgStatus() == AgentStatus.Wait){
+			Misc wait = new Misc(getModel(), getController());
+			wait.waiting();
+			add(wait);
+		}
+		else if (me.getAgStatus() == AgentStatus.InvalidPIN){
+			Misc misc = new Misc(getModel(), getController());
+			misc.invalidPIN();
+			add(misc);
+			this.revalidate();
+			this.repaint();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			((ATMController)getController()).operation("newTransaction");
+		}
+		else if (me.getAgStatus() == AgentStatus.Verified){
+			add(new AccountSelectView(getModel(), getController()));
+		}
+		else if (me.getAgStatus() == AgentStatus.SelectFromAccount){
+			AccountSelectView account = new AccountSelectView(getModel(), getController());
+			account.SelectFrom();
+			add(account);
+		}
+		else if (me.getAgStatus() == AgentStatus.SelectToAccount){
+			AccountSelectView account = new AccountSelectView(getModel(), getController());
+			account.SelectTo();
+			add(account);
+		}
+		else if (me.getAgStatus() == AgentStatus.CheckBalance){
+			BalanceView balance = new BalanceView(getModel(), getController());
+			add(balance);
+		}
+		else if (me.getAgStatus() == AgentStatus.Withdraw) {
+			add(new AmountView(getModel(), getController()));
+		}
+		else if (me.getAgStatus() == AgentStatus.WithdrawComplete){
+			add (new WithdrawView(getModel(), getController()));
+		}
+		else if (me.getAgStatus() == AgentStatus.Transfer){
+			add (new AmountView(getModel(), getController()));
+		}
+		else if (me.getAgStatus() == AgentStatus.InsufFunds){
+			Misc misc = new Misc(getModel(), getController());
+			misc.insufFunds();
+			add(misc);
 
+			((ATMController)getController()).operation("logout");
+		}
 		this.revalidate();
 		this.repaint();
 	}

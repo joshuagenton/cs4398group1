@@ -1,16 +1,19 @@
 package atm.controller;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
 import com.github.sarxos.webcam.Webcam;
-
 import atm.model.ATMCoreModel;
 import atm.model.TransactionTypes;
 import atm.view.SelectionView;
+
+
+/**
+ * This is the ATMController for the views.  This contains the actions that the user
+ * can perform once they have logged into their account.
+ * 
+ * @author Chris Wells
+ * @since 2015-03-25
+ */
 
 public class ATMController extends AbstractController{
 
@@ -32,7 +35,12 @@ public class ATMController extends AbstractController{
 		}
 	}
 
-	// 
+	/**
+	 * The function operation initiates what function the user has selected
+	 * to perform (withdraw, cancel, etc.)
+	 * 
+	 * @param opt String that is passed from the view
+	 */
 	public void operation(String opt) {
 		
 		IdleTimeController.runTimer(this);
@@ -89,11 +97,15 @@ public class ATMController extends AbstractController{
 		
 	}
 	
-	public void start(){
-		
-	}
 	
-	// LOGIN
+	/**
+	 * The login function allows the user to login to their account based on a 
+	 * card swipe and the correct PIN entered into the system.  The card number
+	 * and PIN are validated against the database to look for a match.
+	 * 
+	 * @param cs the card swipe information
+	 * @return boolean if the login was a success or not
+	 */
 	public boolean login(char[] cs){
 		((ATMCoreModel)getModel()).waiting();
 		int num = db.validate_user(((ATMCoreModel)getModel()).getAccount_number(), String.valueOf(cs));
@@ -121,7 +133,15 @@ public class ATMController extends AbstractController{
 		return false;	
 	}
 	
-	// TRANSFER
+	/** 
+	 * The transferFunds function allows the user to transfer funds from one account
+	 * to another.  The user must select two accounts (to, from) and pass in the
+	 * amount they'd like to transfer.
+	 * 
+	 * @param account1 The from account
+	 * @param account2 The to account
+	 * @param amount The amount they'd like to transfer
+	 */
 	public void transferFunds(Results account1, Results account2, Double amount) {
 		((ATMCoreModel)getModel()).waiting();
 		if(db.transfer(account1.getAccountNum(), account2.getAccountNum(), amount))		
@@ -132,13 +152,13 @@ public class ATMController extends AbstractController{
 		
 	}
 	
-	// BALANCE
-	public void showBalance(Integer accountNo) {
-		
-		
-	}
-	
-	// WITHDRAW
+	/**
+	 * The withdrawFunds function allows the user to withdraw funds from one account
+	 * they select from their available accounts.  
+	 * 
+	 * @param account The account that the money will be withdrawn from
+	 * @param amount The amount that will be withdrawn
+	 */
 	public void withdrawFunds(Results account, Double amount) {
 		((ATMCoreModel)getModel()).waiting();
 		if(db.withdrawl(account.getAccountNum(), amount))		
@@ -147,51 +167,32 @@ public class ATMController extends AbstractController{
 			((ATMCoreModel)getModel()).insufficientFunds();
 	}
 	
-	// SUFFICIENT FUNDS
-	public boolean sufficientFunds(Double amount, Integer accountNo) {
-		return false;
-		
-		
-	}
 
-
+	//  Getters/Setters
 	
-
 	public Integer getUserID() {
 		return userID;
 	}
-
-
 
 	public void setUserID(Integer userID) {
 		this.userID = userID;
 	}
 
-
-
 	public String getAccountNo() {
 		return accountNo;
 	}
-
-
 
 	public void getAccounts() {
 		((ATMCoreModel)getModel()).setAccounts(db.getAccounts());
 	}
 
-
-
 	public Double getAmount() {
 		return amount;
 	}
 
-
-
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
-
-
 
 	public String getSelection() {
 		return selection;

@@ -46,6 +46,7 @@ public class ATMController extends AbstractController{
 		IdleTimeController.runTimer(this);
 		
 		if (opt == SelectionView.Start){
+			System.out.println("Start");
 			((ATMCoreModel)getModel()).start();
 		}
 		else if (opt == "newTransaction"){

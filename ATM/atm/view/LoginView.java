@@ -4,18 +4,22 @@ import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
 import atm.controller.ATMController;
 import atm.controller.CardReaderController;
 import atm.controller.Controller;
 import atm.model.Model;
 import atm.model.ModelEvent;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
@@ -44,7 +48,7 @@ public class LoginView extends JFrameView {
 	 */
 	public LoginView(Model model, Controller controller) {
 		super(model, controller);
-		setBackground(new Color(255, 255, 255));
+		//setBackground(new Color(255, 255, 255,0));
 		initialize();
 		this.setBounds(100, 100, 800, 600);
 	}
@@ -54,7 +58,8 @@ public class LoginView extends JFrameView {
 	 * Initializes this.
 	 */
 	private void initialize() {
-		setSize(new Dimension(835, 518));
+		//setSize(new Dimension(835, 518));
+		setOpaque(false);
 		setLayout(null);
 	    add(getLblWelcome());
 	    add(getLblReaderImage());

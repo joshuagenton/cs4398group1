@@ -11,17 +11,14 @@ import javax.swing.SwingUtilities;
 import atm.controller.DatabaseController;
 import atm.controller.Results;
 
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author CSWells
+/**
+ * The ATMCoreModel houses all the core functionality for the ATM.
+ * 
+ * @author Chris Wells
+ *
  */
 public class ATMCoreModel extends AbstractModel{
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
 	private String account_number;
 	private String PIN;
 	private String name;
@@ -30,11 +27,14 @@ public class ATMCoreModel extends AbstractModel{
 	public TransactionTypes type;
 	private int pinTries = 0;
 	private BufferedImage picture = null;
+	private int account_validated;
+	private DatabaseController data_baseinterface;
 	
-	public void setPicture(BufferedImage picture) {
-		this.picture = picture;
-	}
-	
+
+	/**
+	 * The withdrawComplete is a synchronized function that refreshes the view
+	 * when the action is complete.
+	 */
 	public synchronized void withdrawComplete(){
 		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.AmountWithdrawUpdate, AgentStatus.WithdrawComplete);
 		SwingUtilities.invokeLater(
@@ -45,6 +45,11 @@ public class ATMCoreModel extends AbstractModel{
 				});
 		notifyAll();
 	}
+	
+	/**
+	 * The insufficientFunds is a synchronized function that refreshes the view
+	 * when insufficients funds are found.  This is an error to the user.
+	 */
 	public synchronized void insufficientFunds(){
 		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.AmountWithdrawUpdate, AgentStatus.InsufFunds);
 		SwingUtilities.invokeLater(
@@ -55,6 +60,11 @@ public class ATMCoreModel extends AbstractModel{
 				});
 		notifyAll();
 	}
+	
+	/**
+	 * The withdraw is a synchronized function that refreshes the view
+	 * when the the withdraw action is fired.
+	 */
 	public synchronized void withdraw(){
 		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.AmountWithdrawUpdate, AgentStatus.Withdraw);
 		SwingUtilities.invokeLater(
@@ -66,6 +76,10 @@ public class ATMCoreModel extends AbstractModel{
 		notifyAll();
 	}
 	
+	/**
+	 * The doTransType is a synchronized function that refreshes the view
+	 * when the the withdraw action is fired.
+	 */
 	public synchronized void doTransType(){
 		if(type == TransactionTypes.Withdraw){
 			final ModelEvent me = new ModelEvent(ModelEvent.EventKind.AmountWithdrawUpdate, AgentStatus.Withdraw);
@@ -98,6 +112,12 @@ public class ATMCoreModel extends AbstractModel{
 		notifyAll();
 	}
 	
+	/**
+	 * The setTranType is a synchronized function that refreshes the view
+	 * when the transaction type is selected.
+	 * 
+	 * @param incoming the selection made by the user
+	 */
 	public synchronized void setTranType(TransactionTypes incoming){
 		type = incoming;
 		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.SelectAccount, AgentStatus.SelectFromAccount);
@@ -110,9 +130,19 @@ public class ATMCoreModel extends AbstractModel{
 		notifyAll();
 	}
 	
+	/**
+	 * The TransactionTypes is a synchronized function that refreshes the view.
+	 * 
+	 * @return type the transaction type
+	 */
 	public synchronized TransactionTypes getTransType(){
 		return type;
 	}
+	
+	/**
+	 * The invalidPIN is a synchronized function that refreshes the view
+	 * when an invalid PIN is entered.
+	 */
 	public synchronized void invalidPIN(){
 		if (pinTries < 3){
 			pinTries ++;
@@ -128,6 +158,11 @@ public class ATMCoreModel extends AbstractModel{
 		notifyAll();
 				
 	}
+	
+	/**
+	 * The newTransaction is a synchronized function that refreshes the view
+	 * when another transaction is requested by the user.
+	 */
 	public synchronized void newTransaction(){
 		PIN = null;
 		fromAccount = null;
@@ -143,6 +178,11 @@ public class ATMCoreModel extends AbstractModel{
 		notifyAll();
 				
 	}
+	
+	/**
+	 * The start is a synchronized function that refreshes the view
+	 * when the user starts a session.
+	 */
 	public synchronized void start(){
 		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.Start, AgentStatus.Start);
 		SwingUtilities.invokeLater(
@@ -153,11 +193,23 @@ public class ATMCoreModel extends AbstractModel{
 				});
 	}
 	
+	/**
+	 * The accountSelect is a synchronized function that refreshes the view
+	 * when the user selects an account to interact with.
+	 * 
+	 * @param account the account the user selected
+	 */
 	public synchronized void accountSelect(Results account){
 		if (type == TransactionTypes.Balance)
 			checkBalance(account);
 	}
 	
+	/**
+	 * The checkBalance is a synchronized function that refreshes the view
+	 * when the user selects an account to view the balance of.
+	 * 
+	 * @param account the account the user selected
+	 */
 	public synchronized void checkBalance(Results account){
 		fromAccount = account;
 
@@ -170,6 +222,116 @@ public class ATMCoreModel extends AbstractModel{
 				});
 		notifyAll();
 	}
+
+	/**
+	 * The reset functions resets the user information including the name, account, etc.
+	 * 
+	 */
+	public void reset(){
+		account_number = null;
+		PIN = null;
+		name = null;
+		type = null;
+		fromAccount = null;
+		toAccount = null;
+		pinTries = 0;
+		start();
+	}
+	
+	/**
+	 * The waiting function is a synchronized function that allows the system
+	 * to wait for the user to make an action.
+	 * 
+	 */
+	public synchronized void waiting(){
+		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.Wait, AgentStatus.Wait);
+    	notifyChanged(me);
+		notifyAll();
+	}
+	
+	/**
+	 * The cancel is a synchronized function that allows the user the ability to cancel their 
+	 * interaction with the system.
+	 */
+	public synchronized void cancel() {
+		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.Cancel, AgentStatus.Cancel);
+		SwingUtilities.invokeLater(
+				new Runnable() {
+				    public void run() {
+				    	notifyChanged(me);
+				    }
+				});
+		notifyAll();
+	}
+	
+	/**
+	 * The transfer is a synchronized function that allows the user the ability to transfer
+	 * funds from one account to another.
+	 */
+	public synchronized void transfer(){
+		type = TransactionTypes.Transfer;
+		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.SelectAccount, AgentStatus.SelectFromAccount);
+		SwingUtilities.invokeLater(
+				new Runnable() {
+				    public void run() {
+				    	notifyChanged(me);
+				    }
+				});
+		notifyAll();
+	}
+
+	
+	// Getters/Setters
+	
+	public void setPicture(BufferedImage picture) {
+		this.picture = picture;
+	}
+	
+	private Set<Results> accounts;
+	
+	public void setAccounts(Set<Results> set) {
+		this.accounts = set;	
+	}
+	public Set<Results> getAccounts(){
+		return accounts;
+	}
+	
+	public DatabaseController getData_baseinterface() {
+		return data_baseinterface;
+	}
+
+	public void setData_baseinterface(DatabaseController data_baseinterface) {
+		this.data_baseinterface = data_baseinterface;
+		data_baseinterface.validate_user(account_number, PIN);
+	}
+	
+	public int getAccount_validated() {
+		return account_validated;
+	}
+
+	public synchronized void setAccount_validated(int i) {
+		this.account_validated = i;
+		
+		if (i > 0){
+		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.Verified, AgentStatus.Verified);
+		SwingUtilities.invokeLater(
+				new Runnable() {
+				    public void run() {
+				    	notifyChanged(me);
+				    }
+				});
+		}
+		notifyAll();
+	}
+	
+	public String getAccount_number() {
+		return account_number;
+	}
+
+	public String getName() {
+		return name;
+	}
+	
 	public synchronized void setFromAccount(Results a){
 		if (fromAccount == null)
 			fromAccount = a;
@@ -194,40 +356,8 @@ public class ATMCoreModel extends AbstractModel{
 	public Results getToAccount(){
 		return toAccount;
 	}
-	public void reset(){
-		account_number = null;
-		PIN = null;
-		name = null;
-		type = null;
-		fromAccount = null;
-		toAccount = null;
-		pinTries = 0;
-		start();
-	}
-	/** 
-	 * @return the account_number
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public String getAccount_number() {
-		// begin-user-code
-		return account_number;
-		// end-user-code
-	}
-	/** 
-	 * @return the name
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public String getName() {
-		// begin-user-code
-		return name;
-		// end-user-code
-	}
-	/** 
-	 * @param account_number the account_number to set
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+	
 	public synchronized void setAccount_info(String account_number, String name) {
-		// begin-user-code
 		this.account_number = account_number;
 		this.name = name;
 		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.Login, AgentStatus.NeedPIN);
@@ -238,118 +368,5 @@ public class ATMCoreModel extends AbstractModel{
 				    }
 				});
 		notifyAll();
-		// end-user-code
-	}
-	
-	public synchronized void waiting(){
-		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.Wait, AgentStatus.Wait);
-    	notifyChanged(me);
-		notifyAll();
-	}
-	
-	public synchronized void cancel() {
-		// begin-user-code
-		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.Cancel, AgentStatus.Cancel);
-		SwingUtilities.invokeLater(
-				new Runnable() {
-				    public void run() {
-				    	notifyChanged(me);
-				    }
-				});
-		notifyAll();
-		// end-user-code
-	}
-	
-	public synchronized void transfer(){
-		type = TransactionTypes.Transfer;
-		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.SelectAccount, AgentStatus.SelectFromAccount);
-		SwingUtilities.invokeLater(
-				new Runnable() {
-				    public void run() {
-				    	notifyChanged(me);
-				    }
-				});
-		notifyAll();
-	}
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private int account_validated;
-
-	/** 
-	 * @return the account_validated
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public int getAccount_validated() {
-		// begin-user-code
-		return account_validated;
-		// end-user-code
-	}
-
-	/** 
-	 * @param i the account_validated to set
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public synchronized void setAccount_validated(int i) {
-		this.account_validated = i;
-		
-		if (i > 0){
-		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.Verified, AgentStatus.Verified);
-		SwingUtilities.invokeLater(
-				new Runnable() {
-				    public void run() {
-				    	notifyChanged(me);
-				    }
-				});
-		}
-		notifyAll();
-		// end-user-code
-	}
-
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private DatabaseController data_baseinterface;
-
-	/** 
-	 * @return the data_baseinterface
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public DatabaseController getData_baseinterface() {
-		return data_baseinterface;
-	}
-
-	/** 
-	 * @param data_baseinterface the data_baseinterface to set
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setData_baseinterface(DatabaseController data_baseinterface) {
-		this.data_baseinterface = data_baseinterface;
-		data_baseinterface.validate_user(account_number, PIN);
-	}
-
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void start_session() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-	private Set<Results> accounts;
-	public void setAccounts(Set<Results> set) {
-		this.accounts = set;	
-	}
-	public Set<Results> getAccounts(){
-		return accounts;
 	}
 }

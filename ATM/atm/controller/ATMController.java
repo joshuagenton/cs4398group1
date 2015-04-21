@@ -17,10 +17,6 @@ import atm.view.SelectionView;
 
 public class ATMController extends AbstractController{
 
-	private Integer userID;
-	private String accountNo;
-	private Double amount;
-	private String selection;
 	private Webcam webcam;
 	DatabaseController db = new DatabaseController();
 	
@@ -170,40 +166,16 @@ public class ATMController extends AbstractController{
 	
 
 	//  Getters/Setters
-	
-	public Integer getUserID() {
-		return userID;
-	}
-
-	public void setUserID(Integer userID) {
-		this.userID = userID;
-	}
-
-	public String getAccountNo() {
-		return accountNo;
-	}
 
 	public void getAccounts() {
 		((ATMCoreModel)getModel()).setAccounts(db.getAccounts());
 	}
 
-	public Double getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Double amount) {
-		this.amount = amount;
-	}
-
-	public String getSelection() {
-		return selection;
-	}
 
 	public void SetFromAccount(Results a){
 		((ATMCoreModel)getModel()).setFromAccount(a);
 	}
 
 	public void setSelection(String selection) {
-		this.selection = selection;
 	}	
 }

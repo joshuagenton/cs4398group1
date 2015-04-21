@@ -60,7 +60,7 @@ public class AccountSelectView extends JFrameView {
 	 * Start assembles the content of the page.
 	 */
 	public void start(){
-		setSize(new Dimension(1002, 679));
+		setSize(new Dimension(1434, 1062));
 		addButtons();
 		setVisible(true);
 	
@@ -105,7 +105,7 @@ public class AccountSelectView extends JFrameView {
 		JButton btnTransfer = new JButton(transIcon);
 		btnTransfer.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnTransfer.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		btnTransfer.setBounds(25, 232, 300, 100);
+		btnTransfer.setBounds(25, 520, 300, 100);
 		btnTransfer.addActionListener(handler);
 		setLayout(null);
 		btnTransfer.setActionCommand("Transfer");
@@ -115,7 +115,7 @@ public class AccountSelectView extends JFrameView {
 		btnCancel.setBackground(Color.RED);
 		btnCancel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		btnCancel.setBounds(1025, 537, 275, 106);
+		btnCancel.setBounds(1028, 625, 275, 106);
 		btnCancel.addActionListener(handler);
 		setLayout(null);
 		btnCancel.setActionCommand("Cancel");
@@ -125,7 +125,7 @@ public class AccountSelectView extends JFrameView {
 		JButton btnWithdraw = new JButton(withIcon);
 		btnWithdraw.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnWithdraw.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		btnWithdraw.setBounds(25, 443, 300, 100);
+		btnWithdraw.setBounds(25, 631, 300, 100);
 		btnWithdraw.addActionListener(handler);
 		btnWithdraw.setActionCommand("Withdraw");
 		add(btnWithdraw);

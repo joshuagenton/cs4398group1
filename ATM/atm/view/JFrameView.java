@@ -21,6 +21,7 @@ public abstract class JFrameView extends JPanel implements View, ModelListener {
 	public JFrameView (Model model, Controller controller){
 		setModel(model);
 		setController(controller);
+		setOpaque(false);
 	}
 
 	public void registerWithModel(){

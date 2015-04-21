@@ -75,7 +75,7 @@ public class MainView extends JFrame implements View, ModelListener{
 	 * Takes care of the model is there is a change.
 	 */
 	public void modelChanged(ModelEvent me) {
-		//this.getContentPane().removeAll();
+		this.getContentPane().removeAll();
 		System.out.println("CHANGE TO VIEW: " + me.getAgStatus());
 		if (me.getAgStatus() == AgentStatus.Start){
 			login = new LoginView(getModel(), getController());

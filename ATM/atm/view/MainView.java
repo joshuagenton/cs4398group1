@@ -1,7 +1,15 @@
 package atm.view;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.LayoutManager;
+import java.awt.Toolkit;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -38,17 +46,13 @@ public class MainView extends JFrame implements View, ModelListener{
 	 */
 	public MainView (Model model, Controller controller){
 		super();
-
 		initialize();
-		this.setBounds(100, 100, 450, 300);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		setUndecorated(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setModel(model);
 		setController(controller);
+		//add(new Background());
 		((ATMController)getController()).operation("Start");
 	}
-	
+
 	JButton b1;
 	JLabel l1;
 	
@@ -56,8 +60,13 @@ public class MainView extends JFrame implements View, ModelListener{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JPanel();
-		frame.setBounds(100, 100, 450, 300);
+		//this.setBounds(100, 100, 450, 300);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		setUndecorated(true);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Image img = new ImageIcon(this.getClass().getResource("/atm/view/ATM.jpg")).getImage();
+		BackgroundPanel panel = new BackgroundPanel(img);
+		setContentPane(panel);
 	}
 	
 	PINScreen PIN;
@@ -66,30 +75,30 @@ public class MainView extends JFrame implements View, ModelListener{
 	 * Takes care of the model is there is a change.
 	 */
 	public void modelChanged(ModelEvent me) {
-		this.getContentPane().removeAll();
+		//this.getContentPane().removeAll();
 		System.out.println("CHANGE TO VIEW: " + me.getAgStatus());
 		if (me.getAgStatus() == AgentStatus.Start){
 			login = new LoginView(getModel(), getController());
-			add(login);		
+			getContentPane().add(login);		
 		}
 		else if (me.getAgStatus() == AgentStatus.NeedPIN){
 			PIN = new PINScreen(getModel(), getController());
-			add(PIN);
+			getContentPane().add(PIN);
 		}
 		else if (me.getAgStatus() == AgentStatus.Cancel){
 			Misc cancel = new Misc(getModel(), getController());
 			cancel.logout();
-			add(cancel);
+			getContentPane().add(cancel);
 		}
 		else if (me.getAgStatus() == AgentStatus.Wait){
 			Misc wait = new Misc(getModel(), getController());
 			wait.waiting();
-			add(wait);
+			getContentPane().add(wait);
 		}
 		else if (me.getAgStatus() == AgentStatus.InvalidPIN){
 			Misc misc = new Misc(getModel(), getController());
 			misc.invalidPIN();
-			add(misc);
+			getContentPane().add(misc);
 			this.revalidate();
 			this.repaint();
 			try {
@@ -100,38 +109,39 @@ public class MainView extends JFrame implements View, ModelListener{
 			((ATMController)getController()).operation("newTransaction");
 		}
 		else if (me.getAgStatus() == AgentStatus.Verified){
-			add(new AccountSelectView(getModel(), getController()));
+			getContentPane().add(new AccountSelectView(getModel(), getController()));
 		}
 		else if (me.getAgStatus() == AgentStatus.SelectFromAccount){
 			AccountSelectView account = new AccountSelectView(getModel(), getController());
 			account.SelectFrom();
-			add(account);
+			getContentPane().add(account);
 		}
 		else if (me.getAgStatus() == AgentStatus.SelectToAccount){
 			AccountSelectView account = new AccountSelectView(getModel(), getController());
 			account.SelectTo();
-			add(account);
+			getContentPane().add(account);
 		}
 		else if (me.getAgStatus() == AgentStatus.CheckBalance){
 			BalanceView balance = new BalanceView(getModel(), getController());
-			add(balance);
+			getContentPane().add(balance);
 		}
 		else if (me.getAgStatus() == AgentStatus.Withdraw) {
-			add(new AmountView(getModel(), getController()));
+			getContentPane().add(new AmountView(getModel(), getController()));
 		}
 		else if (me.getAgStatus() == AgentStatus.WithdrawComplete){
-			add (new WithdrawView(getModel(), getController()));
+			getContentPane().add (new WithdrawView(getModel(), getController()));
 		}
 		else if (me.getAgStatus() == AgentStatus.Transfer){
-			add (new AmountView(getModel(), getController()));
+			getContentPane().add (new AmountView(getModel(), getController()));
 		}
 		else if (me.getAgStatus() == AgentStatus.InsufFunds){
 			Misc misc = new Misc(getModel(), getController());
 			misc.insufFunds();
-			add(misc);
+			getContentPane().add(misc);
 
 			((ATMController)getController()).operation("logout");
 		}
+		
 		this.revalidate();
 		this.repaint();
 	}
@@ -169,7 +179,7 @@ public class MainView extends JFrame implements View, ModelListener{
 		this.model = model;
 		registerWithModel();
 	}
-	
+
 	/**
 	 * Main function - Launch the application.
 	 * @param args for the main function

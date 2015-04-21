@@ -3,9 +3,7 @@
  */
 package atm.model;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -61,19 +59,10 @@ public class CardReaderModel extends AbstractModel {
 	 */
 
 	public void readcont(String s) throws IOException {
-		String track1 = "";
-		String track2 = "";
-		String track3 = "";
 		String track1_cardholder = "";
 		String track1_expmo = "";
 		String track1_expyr = "";
-		String track1_cvv = "";
 		String track1_ccn = "";
-		String track2_ccn = "";
-		String track2_expmo = "";
-		String track2_expyr = "";
-		String track2_encpin = "";
-
 		Boolean in_track_1 = true;
 		Boolean in_track_2 = false;
 		Boolean in_track_3 = false;
@@ -96,7 +85,6 @@ public class CardReaderModel extends AbstractModel {
 
 					if (c == '^') {
 						track1_caret1_found = true;
-						track1 += c;
 						continue;
 					}
 
@@ -110,7 +98,6 @@ public class CardReaderModel extends AbstractModel {
 						track1_cardholder += c;
 					} else {
 						track1_caret2_found = true;
-						track1 += c;
 						continue;
 					}
 
@@ -128,18 +115,17 @@ public class CardReaderModel extends AbstractModel {
 						track1_expmo += c;
 					if (track1_leg3_count == 3)
 						track1_expmo += c;
-					if (track1_leg3_count == 22)
-						track1_cvv += c;
-					if (track1_leg3_count == 23)
-						track1_cvv += c;
-					if (track1_leg3_count == 24)
-						track1_cvv += c;
+					if (track1_leg3_count == 22) {
+					}
+					if (track1_leg3_count == 23) {
+					}
+					if (track1_leg3_count == 24) {
+					}
 					track1_leg3_count++;
 
 					//endregion
 				}
 
-				track1 += c;
 				if (c == '?') {
 					in_track_1 = false;
 					in_track_2 = true;
@@ -156,12 +142,10 @@ public class CardReaderModel extends AbstractModel {
 					//region Get-Track2-CCN
 
 					if ((c != ';') && (c != '=')) {
-						track2_ccn += c;
 					}
 
 					if (c == '=') {
 						track2_equals_found = true;
-						track2 += c;
 						continue;
 					}
 
@@ -171,26 +155,25 @@ public class CardReaderModel extends AbstractModel {
 				if (track2_equals_found) {
 					//region Get-Expiration-and-Encrypted-PIN
 
-					if (track2_leg2_count == 0)
-						track2_expyr += c;
-					if (track2_leg2_count == 1)
-						track2_expyr += c;
-					if (track2_leg2_count == 2)
-						track2_expmo += c;
-					if (track2_leg2_count == 3)
-						track2_expmo += c;
-					if (track2_leg2_count == 8)
-						track2_encpin += c;
-					if (track2_leg2_count == 9)
-						track2_encpin += c;
-					if (track2_leg2_count == 10)
-						track2_encpin += c;
+					if (track2_leg2_count == 0) {
+					}
+					if (track2_leg2_count == 1) {
+					}
+					if (track2_leg2_count == 2) {
+					}
+					if (track2_leg2_count == 3) {
+					}
+					if (track2_leg2_count == 8) {
+					}
+					if (track2_leg2_count == 9) {
+					}
+					if (track2_leg2_count == 10) {
+					}
 					track2_leg2_count++;
 
 					//endregion
 				}
 
-				track2 += c;
 				if (c == '?') {
 					in_track_2 = false;
 					in_track_3 = true;
@@ -203,7 +186,7 @@ public class CardReaderModel extends AbstractModel {
 			if (in_track_3) {
 				//region Track3
 
-				track3 += c;
+				
 
 				//endregion
 			}

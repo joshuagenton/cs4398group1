@@ -4,9 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Label;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import atm.controller.ATMController;
 import atm.controller.Controller;
 import atm.model.Model;
@@ -18,7 +15,6 @@ public class Misc extends JFrameView {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Handler handler = new Handler();
 	
 	public Misc(Model model, Controller controller) {
 		super(model, controller);
@@ -106,13 +102,4 @@ public class Misc extends JFrameView {
 		// TODO Auto-generated method stub
 		
 	}
-
-
-	private class Handler implements ActionListener {
-		public void actionPerformed(ActionEvent evt) {
-			System.out.println(evt.getActionCommand());
-		}
-	}
-
-
 }

@@ -26,7 +26,6 @@ public class WithdrawView extends JFrameView {
 
 	public final static String LOGOUT = "Logout";
 	
-	
 	private JPanel textPanel;
 	private JPanel buttonPanel;
 	
@@ -39,11 +38,16 @@ public class WithdrawView extends JFrameView {
 	private Handler handler = new Handler();
 	
 	
+	
+	
+	
 	public WithdrawView(Model model, Controller controller) {
 		super(model, controller);
 		
 		this.setBounds(100, 100, 450, 300);
 		setLayout(null);
+		//add(getContent());
+		
 		
 		Toolkit toolkit =  Toolkit.getDefaultToolkit();
 		Dimension dim = toolkit.getScreenSize();
@@ -56,6 +60,26 @@ public class WithdrawView extends JFrameView {
 	    
 	}
 
+	
+/*	private JPanel getContent() {
+		if (topPanel == null) {
+			topPanel = new JPanel();
+			topPanel.setBounds(125, 5, 200, 106);
+			GridLayout layout = new GridLayout(0, 1);
+			topPanel.setLayout(layout);
+			//topPanel.setPreferredSize(new Dimension(300, 100));
+			GridBagConstraints ps = new GridBagConstraints();
+			ps.gridx = 0;
+			ps.gridy = 3;
+			ps.fill = GridBagConstraints.HORIZONTAL;
+			
+			GridBagConstraints bs = new GridBagConstraints();
+			bs.gridx = 0;
+			bs.gridy = 3;
+		}
+		return topPanel;
+	}*/
+	
 	private JPanel getButtonPanel()
 	{
 		if(buttonPanel == null){
@@ -90,7 +114,10 @@ public class WithdrawView extends JFrameView {
 		}
 		return textPanel;
 	}
-
+	
+	
+	
+	
 	
 	private JLabel getTransferCompleteLabel(){
 		if(takeCashLabel == null){

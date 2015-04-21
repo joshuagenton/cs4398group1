@@ -12,6 +12,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Set;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -120,8 +121,8 @@ public class AccountSelectView extends JFrameView {
 		btnCancel.setActionCommand("Cancel");
 		add(btnCancel);
 		
-		JButton btnWithdraw = new JButton("");
-		btnWithdraw.setIcon(new ImageIcon(TransactionTypeView.class.getResource("/atm/view/button_Withdraw.png")));
+		Icon withIcon = new ImageIcon(this.getClass().getResource("/atm/view/button_Withdraw.png"));
+		JButton btnWithdraw = new JButton(withIcon);
 		btnWithdraw.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnWithdraw.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		btnWithdraw.setBounds(49, 443, 200, 200);

@@ -76,7 +76,7 @@ public class PINScreen extends JFrameView {
 				first = name.substring(i);
 			
 		}
-		firstname = first.replaceAll("\\s+","");
+		firstname = first; //.replaceAll("\\s+","");
 		lastname= last.replaceAll("\\s+", "");
 		initialize();
 	}

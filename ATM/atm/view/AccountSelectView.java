@@ -101,11 +101,11 @@ public class AccountSelectView extends JFrameView {
 				
 			}
 		}
-		
-		JButton btnTransfer = new JButton("Transfer");
+		Icon transIcon = new ImageIcon(this.getClass().getResource("/atm/view/transfer.jpg"));
+		JButton btnTransfer = new JButton(transIcon);
 		btnTransfer.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnTransfer.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		btnTransfer.setBounds(49, 232, 200, 200);
+		btnTransfer.setBounds(25, 232, 300, 100);
 		btnTransfer.addActionListener(handler);
 		setLayout(null);
 		btnTransfer.setActionCommand("Transfer");
@@ -121,11 +121,11 @@ public class AccountSelectView extends JFrameView {
 		btnCancel.setActionCommand("Cancel");
 		add(btnCancel);
 		
-		Icon withIcon = new ImageIcon(this.getClass().getResource("/atm/view/button_Withdraw.png"));
+		Icon withIcon = new ImageIcon(this.getClass().getResource("/atm/view/withdraw.jpg"));
 		JButton btnWithdraw = new JButton(withIcon);
 		btnWithdraw.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnWithdraw.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		btnWithdraw.setBounds(49, 443, 200, 200);
+		btnWithdraw.setBounds(25, 443, 300, 100);
 		btnWithdraw.addActionListener(handler);
 		btnWithdraw.setActionCommand("Withdraw");
 		add(btnWithdraw);

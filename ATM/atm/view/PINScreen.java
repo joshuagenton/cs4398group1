@@ -42,8 +42,8 @@ public class PINScreen extends JFrameView {
 	private String firstname = null;
 	private String lastname = null;
 	private JLabel NameInfo = null;
-	Icon icon = new ImageIcon(this.getClass().getResource("trap.gif"));
-	private JLabel aniImage = new JLabel(icon);
+	//Icon icon = new ImageIcon(this.getClass().getResource("trap.gif"));
+	//private JLabel aniImage = new JLabel(icon);
 	static final int MAX_CHARS = 4;
 	private Handler handler = new Handler();
 
@@ -131,8 +131,8 @@ public class PINScreen extends JFrameView {
 		this.add(getCancel(), null);
 		this.add(getNameInfo(), null);
 		numPad();
-		aniImage.setBounds(50, 400, 800, 500);
-		this.add(aniImage);
+		//aniImage.setBounds(50, 400, 800, 500);
+		//this.add(aniImage);
 	}
 
 	/**

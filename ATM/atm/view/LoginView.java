@@ -264,7 +264,7 @@ public class LoginView extends JFrameView {
 	private JLabel getLblReaderImage() {
 		if (readerImage == null) {
 			readerImage = new JLabel();
-			readerImage.setIcon(new ImageIcon(LoginView.class.getResource("/atm/view/pos_mag_swipe_reader_msr.jpg")));
+			readerImage.setIcon(new ImageIcon(LoginView.class.getResource("/atm/view/pos_mag_swipe_reader_msr.png")));
 			readerImage.setBounds(1000, 500, 244, 241);	
 		}
 		return readerImage;

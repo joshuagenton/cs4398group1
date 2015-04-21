@@ -254,9 +254,9 @@ public class LoginView extends JFrameView {
 			lblWelcome.setHorizontalAlignment(SwingConstants.LEFT);
 			lblWelcome.setBackground(Color.CYAN);
 			lblWelcome.setSize(650, 150);
-			lblWelcome.setLocation(408, 26);
-			lblWelcome.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 32));
-			lblWelcome.setForeground(new Color(255, 0, 0));
+			lblWelcome.setLocation(547, 187);
+			lblWelcome.setFont(new Font("Gill Sans MT Ext Condensed Bold", Font.PLAIN, 75));
+			lblWelcome.setForeground(Color.BLACK);
 		}
 		return lblWelcome;
 	}
@@ -265,7 +265,7 @@ public class LoginView extends JFrameView {
 		if (readerImage == null) {
 			readerImage = new JLabel();
 			readerImage.setIcon(new ImageIcon(LoginView.class.getResource("/atm/view/pos_mag_swipe_reader_msr.jpg")));
-			readerImage.setBounds(800, 300, 244, 241);	
+			readerImage.setBounds(1000, 500, 244, 241);	
 		}
 		return readerImage;
 	}
@@ -273,10 +273,10 @@ public class LoginView extends JFrameView {
 		
 	private JLabel getLblScanCard() {
 		if (lblScanCard == null) {
-			lblScanCard = new JLabel("Scan card to continue...");
-			lblScanCard.setBounds(520, 424, 348, 50);
-			lblScanCard.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 21));
-			lblScanCard.setForeground(new Color(255, 0, 0));
+			lblScanCard = new JLabel("Swipe card to continue...");
+			lblScanCard.setBounds(594, 349, 348, 50);
+			lblScanCard.setFont(new Font("Gill Sans MT Condensed", Font.PLAIN, 28));
+			lblScanCard.setForeground(Color.RED);
 		}
 		return lblScanCard;
 	}

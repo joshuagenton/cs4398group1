@@ -250,7 +250,7 @@ public class LoginView extends JFrameView {
 
 	private JLabel getLblWelcome() {
 		if (lblWelcome == null) {
-			lblWelcome = new JLabel("Welcome to Group 1's ATM");
+			lblWelcome = new JLabel("Welcome to Texas State Bank's ATM");
 			lblWelcome.setHorizontalAlignment(SwingConstants.LEFT);
 			lblWelcome.setBackground(Color.CYAN);
 			lblWelcome.setSize(650, 150);

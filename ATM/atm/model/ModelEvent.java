@@ -18,8 +18,4 @@ public class ModelEvent {
 	public EventKind getKind(){
 		return kind;
 	}
-	
-	public AgentStatus getAgStatus(){
-		return agSt;
-	}
 }

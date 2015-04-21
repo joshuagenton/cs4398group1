@@ -11,21 +11,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-
 import atm.controller.ATMController;
 import atm.controller.CardReaderController;
 import atm.controller.Controller;
 import atm.model.Model;
 import atm.model.ModelEvent;
-import atm.model.ATMCoreModel;
-
 import javax.swing.JLabel;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import java.awt.Button;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class LoginView extends JFrameView {
 

@@ -1,8 +1,5 @@
 package atm.view;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import atm.controller.Controller;
 import atm.model.Model;
 import atm.model.ModelEvent;
@@ -38,9 +35,4 @@ public class LogoutView extends JFrameView {
 		
 	}
 
-
-	private class Handler implements ActionListener {
-		public void actionPerformed(ActionEvent evt) {
-		}
-	}
 }

@@ -5,16 +5,11 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import atm.controller.ATMController;
 import atm.controller.CardReaderController;
 import atm.controller.Controller;
 import atm.model.Model;
@@ -24,7 +19,6 @@ import javax.swing.SwingConstants;
 
 import java.awt.Font;
 import java.awt.Color;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.Cursor;
 
@@ -43,9 +37,6 @@ public class TransferView extends JFrameView {
 	private JButton logoutButton;
 	
 	public CardReaderController card = new CardReaderController(getModel()); 
-	private Handler handler = new Handler();
-	
-	
 	
 	public TransferView(Model model, Controller controller) {
 		super(model, controller);
@@ -157,14 +148,6 @@ public class TransferView extends JFrameView {
 		}
 		return logoutButton;
 	}
-	
-	
-	private class Handler implements ActionListener {
-		public void actionPerformed(ActionEvent evt) {
-			((ATMController)getController()).operation(evt.getActionCommand());
-		}
-	}
-
 
 	@Override
 	public void modelChanged(ModelEvent me) {

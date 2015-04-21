@@ -35,16 +35,6 @@ import java.awt.event.ActionListener;
 public class PINScreen extends JFrameView {
 	
 	private static final long serialVersionUID = 1L;
-	private JButton num1 = null;
-	private JButton num2 = null;
-	private JButton num3 = null;
-	private JButton num4 = null;
-	private JButton num5 = null;
-	private JButton num6 = null;
-	private JButton num7 = null;
-	private JButton num8 = null;
-	private JButton num9 = null;
-	private JButton num0 = null;
 	private JPasswordField PIN = null;
 	private JButton Cancel = null;
 	private JButton Clear = null;
@@ -106,166 +96,27 @@ public class PINScreen extends JFrameView {
 	
 	// Button Getters
 	
-	private JButton getNum1() {
-		if (num1 == null) {
-			num1 = new JButton();
-			num1.setFont(new Font("Tahoma", Font.PLAIN, 24));
-			num1.setText("1");
-			num1.setBounds(new Rectangle(538, 83, 100, 100));
-			num1.addActionListener(new java.awt.event.ActionListener() {
+	private void numPad() {
+		for (Integer i = 0; i<10 ; i++){
+			final Integer number = i;
+			JButton num = new JButton();
+			num.setFont(new Font("Tahoma", Font.PLAIN, 24));
+			num.setText(number.toString());
+			if (i == 0)
+				num.setBounds(new Rectangle(638, 383, 100, 100));
+			else
+				num.setBounds(new Rectangle(538+(i-1)%3*100, 83+(i-1)/3*100, 100, 100));
+			num.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					PIN.setText(String.valueOf(PIN.getPassword())+"1");
+					PIN.setText(String.valueOf(PIN.getPassword())+number);
 					IdleTimeController.runTimer((ATMController)getController());
 				}
 			});
+			add(num);
 		}
-		return num1;
+		add(getClear());
+		add(getEnter());
 	}
-
-	private JButton getNum4() {
-		if (num4 == null) {
-			num4 = new JButton();
-			num4.setFont(new Font("Tahoma", Font.PLAIN, 24));
-			num4.setText("4");
-			num4.setBounds(new Rectangle(538, 183, 100, 100));
-			num4.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					PIN.setText(String.valueOf(PIN.getPassword())+"4");
-					IdleTimeController.runTimer((ATMController)getController());
-				}
-			});
-		}
-		return num4;
-	}
-
-	private JButton getNum2() {
-		if (num2 == null) {
-			num2 = new JButton();
-			num2.setFont(new Font("Tahoma", Font.PLAIN, 24));
-			num2.setText("2");
-			num2.setBounds(new Rectangle(638, 83, 100, 100));
-			num2.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					PIN.setText(String.valueOf(PIN.getPassword())+"2");
-					IdleTimeController.runTimer((ATMController)getController());
-				}
-			});
-		}
-		return num2;
-	}
-
-	private JButton getNum3() {
-		if (num3 == null) {
-			num3 = new JButton();
-			num3.setFont(new Font("Tahoma", Font.PLAIN, 24));
-			num3.setText("3");
-			num3.setBounds(new Rectangle(738, 83, 100, 100));
-			num3.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					PIN.setText(String.valueOf(PIN.getPassword())+"3");
-					IdleTimeController.runTimer((ATMController)getController());
-				}
-			});
-		}
-		return num3;
-	}
-
-	private JButton getNum5() {
-		if (num5 == null) {
-			num5 = new JButton();
-			num5.setFont(new Font("Tahoma", Font.PLAIN, 24));
-			num5.setText("5");
-			num5.setBounds(new Rectangle(638, 183, 100, 100));
-			num5.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					PIN.setText(String.valueOf(PIN.getPassword())+"5");
-					IdleTimeController.runTimer((ATMController)getController());
-				}
-			});
-		}
-		return num5;
-	}
-
-	private JButton getNum6() {
-		if (num6 == null) {
-			num6 = new JButton();
-			num6.setFont(new Font("Tahoma", Font.PLAIN, 24));
-			num6.setText("6");
-			num6.setBounds(new Rectangle(738, 183, 100, 100));
-			num6.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					PIN.setText(String.valueOf(PIN.getPassword())+"6");
-					IdleTimeController.runTimer((ATMController)getController());
-				}
-			});
-		}
-		return num6;
-	}
-
-	private JButton getNum7() {
-		if (num7 == null) {
-			num7 = new JButton();
-			num7.setFont(new Font("Tahoma", Font.PLAIN, 24));
-			num7.setText("7");
-			num7.setBounds(new Rectangle(538, 283, 100, 100));
-			num7.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					PIN.setText(String.valueOf(PIN.getPassword())+"7");
-					IdleTimeController.runTimer((ATMController)getController());
-				}
-			});
-		}
-		return num7;
-	}
-
-	private JButton getNum8() {
-		if (num8 == null) {
-			num8 = new JButton();
-			num8.setFont(new Font("Tahoma", Font.PLAIN, 24));
-			num8.setText("8");
-			num8.setBounds(new Rectangle(638, 283, 100, 100));
-			num8.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					PIN.setText(String.valueOf(PIN.getPassword())+"8");
-					IdleTimeController.runTimer((ATMController)getController());
-				}
-			});
-		}
-		return num8;
-	}
-
-	private JButton getNum9() {
-		if (num9 == null) {
-			num9 = new JButton();
-			num9.setFont(new Font("Tahoma", Font.PLAIN, 24));
-			num9.setText("9");
-			num9.setBounds(new Rectangle(738, 283, 100, 100));
-			num9.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					PIN.setText(String.valueOf(PIN.getPassword())+"9");
-					IdleTimeController.runTimer((ATMController)getController());
-				}
-			});
-		}
-		return num9;
-	}
-
-	private JButton getNum0() {
-		if (num0 == null) {
-			num0 = new JButton();
-			num0.setFont(new Font("Tahoma", Font.PLAIN, 24));
-			num0.setText("0");
-			num0.setBounds(new Rectangle(638, 383, 100, 100));
-			num0.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					PIN.setText(String.valueOf(PIN.getPassword())+"0");
-					IdleTimeController.runTimer((ATMController)getController());
-				}
-			});
-		}
-		return num0;
-	}
-
 
 	/**
 	 * The initialization of the view.
@@ -277,21 +128,9 @@ public class PINScreen extends JFrameView {
 		this.setLayout(null);
 		this.setBounds(new Rectangle(0, 0, 1024, 768));
 		this.add(getPIN(), null);
-		this.add(getNum1(), null);
-		this.add(getNum2(), null);
-		this.add(getNum4(), null);
-		this.add(getNum3(), null);
-		this.add(getNum6(), null);
-		this.add(getNum8(), null);
-		this.add(getNum5(), null);
-		this.add(getNum0(), null);
-		this.add(getNum9(), null);
-		this.add(getNum7(), null);
 		this.add(getCancel(), null);
-		this.add(getClear(), null);
-		this.add(getEnter(), null);
 		this.add(getNameInfo(), null);
-		
+		numPad();
 		aniImage.setBounds(50, 400, 800, 500);
 		this.add(aniImage);
 	}

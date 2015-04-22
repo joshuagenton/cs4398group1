@@ -20,11 +20,12 @@ public abstract class JFrameView extends JPanel implements View, ModelListener {
 	private static final long serialVersionUID = 1L;
 	private Model model;
 	private Controller controller;
-	
+
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	double width = screenSize.getWidth();
 	double height = screenSize.getHeight();
 	public FixLabelSize fixLabel = new FixLabelSize();
+	
 	
 	public JFrameView (Model model, Controller controller){
 		setModel(model);

@@ -2,10 +2,12 @@ package atm.view;
 
 import java.awt.EventQueue;
 import java.awt.Image;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
 import atm.controller.ATMController;
 import atm.controller.Controller;
 import atm.model.AbstractModel;
@@ -28,7 +30,6 @@ public class MainView extends JFrame implements View, ModelListener{
 	private Model model;
 	private Controller controller;
 	LoginView login;
-
 	
 	/**
 	 * Constructor for JFrameView
@@ -120,6 +121,7 @@ public class MainView extends JFrame implements View, ModelListener{
 		}
 		else if (me.getAgStatus() == AgentStatus.WithdrawComplete){
 			getContentPane().add (new WithdrawView(getModel(), getController()));
+			
 		}
 		else if (me.getAgStatus() == AgentStatus.Transfer){
 			getContentPane().add (new AmountView(getModel(), getController()));

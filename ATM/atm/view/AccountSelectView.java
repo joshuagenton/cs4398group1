@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Set;
@@ -71,6 +72,7 @@ public class AccountSelectView extends JFrameView {
 	 */
 	public void addButtons (){
 		Set<Results> accounts = ((ATMCoreModel)getModel()).getAccounts();
+		BufferedImage picture = ((ATMCoreModel)getModel()).getPicture();
 		UIManager.put("Button.disabled",UIManager.get("Button.enabled"));
 		System.out.println("SIZE: " + accounts.size());
 		int i = 0;
@@ -129,6 +131,12 @@ public class AccountSelectView extends JFrameView {
 		btnWithdraw.addActionListener(handler);
 		btnWithdraw.setActionCommand("Withdraw");
 		add(btnWithdraw);
+		
+		JLabel userImage = new JLabel();
+		userImage.setIcon(new ImageIcon(picture));
+		userImage.setBounds(1028, 300, picture.getWidth(), picture.getHeight());
+		add(userImage);
+		
 	}
 	
 	/**

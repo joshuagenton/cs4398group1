@@ -2,10 +2,23 @@ package atm.view;
 
 import java.awt.Font;
 
+/**
+ * The FixLabelSize adjusts the sizing of the labels.
+ * 
+ * @author Chris Wells
+ * @since 2015-04-21
+ */
+
 import javax.swing.JLabel;
 
 public class FixLabelSize {
 	
+	/**
+	 * Constructor. 
+	 * 
+	 * @param label the label to be adjusted
+	 * @return the label
+	 */
 	public JLabel fix(JLabel label){
 		Font labelFont = label.getFont();
 		String labelText = label.getText();

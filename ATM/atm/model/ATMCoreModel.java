@@ -283,9 +283,13 @@ public class ATMCoreModel extends AbstractModel{
 
 	
 	// Getters/Setters
-	
+
 	public void setPicture(BufferedImage picture) {
 		this.picture = picture;
+	}
+	
+	public BufferedImage getPicture() {
+		return this.picture;
 	}
 	
 	private Set<Results> accounts;

@@ -24,6 +24,8 @@ import atm.model.ATMCoreModel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 /**
  * The PIN Screen allows the user to enter their 4-digit PIN that is 
@@ -56,7 +58,7 @@ public class PINScreen extends JFrameView {
 	 */
 	public PINScreen(Model model, Controller controller) {
 		super(model, controller);
-		setBackground(new Color(255, 255, 255));
+
 		int i = 0;
 		Boolean mark = false;
 		String first = null, last = null;
@@ -98,24 +100,31 @@ public class PINScreen extends JFrameView {
 	
 	private void numPad() {
 		for (Integer i = 0; i<10 ; i++){
+			GridBagConstraints gbc_num = new GridBagConstraints();
 			final Integer number = i;
 			JButton num = new JButton();
 			num.setFont(new Font("Tahoma", Font.PLAIN, 24));
 			num.setText(number.toString());
-			if (i == 0)
-				num.setBounds(new Rectangle(638, 383, 100, 100));
-			else
-				num.setBounds(new Rectangle(538+(i-1)%3*100, 83+(i-1)/3*100, 100, 100));
+			if (i == 0){
+				gbc_num.fill = GridBagConstraints.BOTH;
+				gbc_num.gridx = 4;
+				gbc_num.gridy = 4;
+				gbc_num.insets = new Insets(0, 0, 0, 0);
+			}
+			else{
+				gbc_num.fill = GridBagConstraints.BOTH;
+				gbc_num.insets = new Insets(0, 0, 0, 0);
+				gbc_num.gridx = (i-1)%3 + 3;
+				gbc_num.gridy = (i-1)/3 + 1;
+			}
 			num.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					PIN.setText(String.valueOf(PIN.getPassword())+number);
 					IdleTimeController.runTimer((ATMController)getController());
 				}
 			});
-			add(num);
+			this.add(num, gbc_num);
 		}
-		add(getClear());
-		add(getEnter());
 	}
 
 	/**
@@ -125,11 +134,48 @@ public class PINScreen extends JFrameView {
 		GridBagConstraints gridBagConstraints = new GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 0;
-		this.setLayout(null);
 		this.setBounds(new Rectangle(0, 0, 1024, 768));
-		this.add(getPIN(), null);
-		this.add(getCancel(), null);
-		this.add(getNameInfo(), null);
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{300, 100, 110, 110, 110, 100, 100, 100, 100};
+		gridBagLayout.rowHeights = new int[]{100, 100, 100, 100, 100, 100, 100};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0, 0, 0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		setLayout(gridBagLayout);
+		GridBagConstraints gbc_PIN = new GridBagConstraints();
+		gbc_PIN.fill = GridBagConstraints.HORIZONTAL;
+		gbc_PIN.anchor = GridBagConstraints.SOUTH;
+		gbc_PIN.insets = new Insets(0, 0, 5, 5);
+		gbc_PIN.gridwidth = 3;
+		gbc_PIN.gridx = 3;
+		gbc_PIN.gridy = 0;
+		this.add(getPIN(), gbc_PIN);
+		GridBagConstraints gbc_NameInfo = new GridBagConstraints();
+		gbc_NameInfo.gridwidth = 2;
+		gbc_NameInfo.gridheight = 2;
+		gbc_NameInfo.fill = GridBagConstraints.BOTH;
+		gbc_NameInfo.insets = new Insets(0, 0, 5, 5);
+		gbc_NameInfo.gridx = 0;
+		gbc_NameInfo.gridy = 3;
+		this.add(getNameInfo(), gbc_NameInfo);
+		GridBagConstraints gbc_Clear = new GridBagConstraints();
+		gbc_Clear.fill = GridBagConstraints.BOTH;
+		gbc_Clear.insets = new Insets(0, 0, 0, 0);
+		gbc_Clear.gridx = 3;
+		gbc_Clear.gridy = 4;
+		add(getClear(), gbc_Clear);
+		GridBagConstraints gbc_Enter = new GridBagConstraints();
+		gbc_Enter.fill = GridBagConstraints.BOTH;
+		gbc_Enter.insets = new Insets(0, 0, 0, 0);
+		gbc_Enter.gridx = 5;
+		gbc_Enter.gridy = 4;
+		add(getEnter(), gbc_Enter);
+		GridBagConstraints gbc_Cancel = new GridBagConstraints();
+		gbc_Cancel.anchor = GridBagConstraints.SOUTH;
+		gbc_Cancel.gridwidth = 3;
+		gbc_Cancel.insets = new Insets(0, 0, 0, 0);
+		gbc_Cancel.gridx = 3;
+		gbc_Cancel.gridy = 5;
+		this.add(getCancel(), gbc_Cancel);
 		numPad();
 		//aniImage.setBounds(50, 400, 800, 500);
 		//this.add(aniImage);
@@ -143,7 +189,6 @@ public class PINScreen extends JFrameView {
 	private JPasswordField getPIN() {
 		if (PIN == null) {
 			PIN = new JPasswordField();
-			PIN.setBounds(new Rectangle(538, 27, 300, 45));
 			PIN.setFont(new Font("Dialog", Font.PLAIN, 36));
 
 		}
@@ -156,12 +201,12 @@ public class PINScreen extends JFrameView {
 		if (Cancel == null) {
 			Icon cancelIcon = new ImageIcon(this.getClass().getResource("/atm/view/cancel.jpg"));
 			Cancel = new JButton(cancelIcon);
-			//Cancel.setBackground(Color.RED);
 			Cancel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			//Cancel.setFont(new Font("Tahoma", Font.PLAIN, 40));
-			Cancel.setBounds(1025, 537, 275, 106);
 			//Cancel.setText("Cancel");
+			Cancel.setBorderPainted(false);
+			Cancel.setContentAreaFilled(false);
 			Cancel.setActionCommand("Cancel");
+			
 			Cancel.addActionListener(handler);
 			Cancel.addActionListener(new java.awt.event.ActionListener() {
 				@Override
@@ -177,7 +222,6 @@ public class PINScreen extends JFrameView {
 		if (Clear == null) {
 			Clear = new JButton();
 			Clear.setFont(new Font("Tahoma", Font.PLAIN, 21));
-			Clear.setBounds(new Rectangle(538, 383, 100, 100));
 			Clear.setActionCommand("CancelScreen()");
 			Clear.setText("Clear");
 			Clear.setBackground(Color.yellow);
@@ -197,7 +241,6 @@ public class PINScreen extends JFrameView {
 		if (Enter == null) {
 			Enter = new JButton();
 			Enter.setFont(new Font("Tahoma", Font.PLAIN, 21));
-			Enter.setBounds(new Rectangle(738, 383, 100, 100));
 			Enter.setActionCommand("Enter");
 			Enter.setText("Enter");
 			Enter.setBackground(Color.green);
@@ -217,10 +260,9 @@ public class PINScreen extends JFrameView {
 	private JLabel getNameInfo() {
 		if (NameInfo == null) {
 			NameInfo = new JLabel();
-			NameInfo.setBounds(67, 83, 407, 174);
 			NameInfo.setBackground(new Color(238, 238, 238));
 			NameInfo.setFont(new Font("Californian FB", Font.PLAIN, 24));
-			NameInfo.setText("Welcome, " + firstname + " " + lastname);
+			NameInfo.setText("    Welcome, " + firstname + " " + lastname);
 		}
 		return NameInfo;
 	}

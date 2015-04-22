@@ -3,12 +3,14 @@ package atm.view;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -35,7 +37,6 @@ public class WithdrawView extends JFrameView {
 	public final static String LOGOUT = "Logout";
 	
 	private JPanel textPanel;
-	private JPanel buttonPanel;
 	
 	private JLabel takeCashLabel;
 	
@@ -55,39 +56,17 @@ public class WithdrawView extends JFrameView {
 	public WithdrawView(Model model, Controller controller) {
 		super(model, controller);
 		
-		this.setBounds(100, 100, 450, 300);
+		this.setBounds(100, 100, 607, 589);
 		setLayout(null);
-		
+
 		Toolkit toolkit =  Toolkit.getDefaultToolkit();
 		Dimension dim = toolkit.getScreenSize();
 		
 		int x = (int) ((dim.getWidth() - this.getWidth()) * 0.5f);
 	    int y = (int) ((dim.getHeight() - this.getHeight()) * 0.5f);
 	    this.setLocation(x, y);
-	    add(getButtonPanel());
 	    add(getTextFieldPanel()); 
-	}
-	
-	/**
-	 * The getButtonPanel is a panel on the view that contains all the buttons
-	 * for the window.
-	 * 
-	 * @return the panel
-	 */
-	private JPanel getButtonPanel()
-	{
-		if(buttonPanel == null){
-			GridBagConstraints wButtonCtr = new GridBagConstraints();
-			wButtonCtr.gridx = 0;
-			wButtonCtr.gridy = 1;
-			
-			buttonPanel = new JPanel();
-			buttonPanel.setBounds(125, 400, 200, 53);
-			buttonPanel.setLayout(new GridBagLayout());
-			buttonPanel.add(getLogoutButton(), wButtonCtr);
-		}
-		
-		return buttonPanel;
+	    add(getLogoutButton());
 	}
 
 	/**
@@ -104,7 +83,8 @@ public class WithdrawView extends JFrameView {
 			bl.gridy = 0;
 			
 			textPanel = new JPanel();
-			textPanel.setBounds(125, 300, 200, 106);
+			textPanel.setOpaque(false);
+			textPanel.setBounds(379, 275, 200, 106);
 			textPanel.setLayout(new GridBagLayout());
 			if (((ATMCoreModel)getModel()).type == TransactionTypes.Withdraw) {
 				textPanel.add(getTakeCashLabel(), bl);
@@ -140,8 +120,8 @@ public class WithdrawView extends JFrameView {
 	private JLabel getLblMoneyGif() {
 		if (moneyGif == null) {
 			moneyGif = new JLabel();
-			moneyGif.setIcon(new ImageIcon(LoginView.class.getResource("/atm/view/moneyDispensed.gif")));
-			moneyGif.setBounds(500, 300, 250, 150);	
+			moneyGif.setIcon(new ImageIcon(this.getClass().getResource("/atm/view/moneyDispensed.gif")));
+			moneyGif.setBounds(500, 300, 500, 400);	
 		}
 		return moneyGif;
 	}
@@ -151,6 +131,9 @@ public class WithdrawView extends JFrameView {
 	private JButton getLogoutButton(){
 		if(logoutButton == null){
 			logoutButton = new JButton(LOGOUT);
+			logoutButton.setBounds(445, 209, 101, 23);
+			logoutButton.setOpaque(false);
+			logoutButton.setBorderPainted(false);
 			logoutButton.addActionListener(handler);
 		}
 		return logoutButton;

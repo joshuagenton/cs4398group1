@@ -154,12 +154,13 @@ public class PINScreen extends JFrameView {
 	
 	private JButton getCancel() {
 		if (Cancel == null) {
-			Cancel = new JButton();
-			Cancel.setBackground(Color.RED);
+			Icon cancelIcon = new ImageIcon(this.getClass().getResource("/atm/view/cancel.jpg"));
+			Cancel = new JButton(cancelIcon);
+			//Cancel.setBackground(Color.RED);
 			Cancel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			Cancel.setFont(new Font("Tahoma", Font.PLAIN, 40));
+			//Cancel.setFont(new Font("Tahoma", Font.PLAIN, 40));
 			Cancel.setBounds(1025, 537, 275, 106);
-			Cancel.setText("Cancel");
+			//Cancel.setText("Cancel");
 			Cancel.setActionCommand("Cancel");
 			Cancel.addActionListener(handler);
 			Cancel.addActionListener(new java.awt.event.ActionListener() {

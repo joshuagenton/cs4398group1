@@ -83,7 +83,7 @@ public class AccountSelectView extends JFrameView {
 			Account.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 			Account.setHorizontalAlignment(SwingConstants.LEFT);
 			Account.setText("<html>" + a.getName() +"<br>"+ dec.format(a.getBalance()) +"</html>");
-			Account.setFont(new Font("Tahoma", Font.PLAIN, 22));
+			Account.setFont(new Font("Gill Sans MT Condensed", Font.PLAIN, 22));
 			Account.setActionCommand("SelectAccount");
 			Account.addActionListener(handler);
 			Account.setBounds(new Rectangle(i%2*300+350, (i/2)* 300+150, 250, 150));
@@ -106,17 +106,18 @@ public class AccountSelectView extends JFrameView {
 		Icon transIcon = new ImageIcon(this.getClass().getResource("/atm/view/transfer.jpg"));
 		JButton btnTransfer = new JButton(transIcon);
 		btnTransfer.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnTransfer.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		btnTransfer.setFont(new Font("Gill Sans MT Ext Condensed Bold", Font.PLAIN, 40));
 		btnTransfer.setBounds(25, 520, 300, 100);
 		btnTransfer.addActionListener(handler);
 		setLayout(null);
 		btnTransfer.setActionCommand("Transfer");
 		add(btnTransfer);
 		
-		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setBackground(Color.RED);
+		Icon cancelIcon = new ImageIcon(this.getClass().getResource("/atm/view/cancel.jpg"));
+		JButton btnCancel = new JButton(cancelIcon);
+		//btnCancel.setBackground(Color.RED);
 		btnCancel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		//btnCancel.setFont(new Font("Gill Sans MT Ext Condensed Bold", Font.PLAIN, 40));
 		btnCancel.setBounds(1028, 625, 275, 106);
 		btnCancel.addActionListener(handler);
 		setLayout(null);
@@ -126,7 +127,7 @@ public class AccountSelectView extends JFrameView {
 		Icon withIcon = new ImageIcon(this.getClass().getResource("/atm/view/withdraw.jpg"));
 		JButton btnWithdraw = new JButton(withIcon);
 		btnWithdraw.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnWithdraw.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		btnWithdraw.setFont(new Font("Gill Sans MT Ext Condensed Bold", Font.PLAIN, 40));
 		btnWithdraw.setBounds(25, 631, 300, 100);
 		btnWithdraw.addActionListener(handler);
 		btnWithdraw.setActionCommand("Withdraw");
@@ -145,7 +146,7 @@ public class AccountSelectView extends JFrameView {
 	public void SelectFrom(){
 		JLabel lblSelectFromAccount = new JLabel("Select Account");
 		
-		lblSelectFromAccount.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 24));
+		lblSelectFromAccount.setFont(new Font("Gill Sans MT Ext Condensed Bold", Font.PLAIN, 24));
 		lblSelectFromAccount.setForeground(new Color(255, 0, 0));
 		lblSelectFromAccount.setBounds(500, 27, 300, 50);
 		add(lblSelectFromAccount);
@@ -157,7 +158,7 @@ public class AccountSelectView extends JFrameView {
 	public void SelectTo(){
 		JLabel lblSelectFromAccount = new JLabel("Select the account to transfer to");
 		
-		lblSelectFromAccount.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 24));
+		lblSelectFromAccount.setFont(new Font("Gill Sans MT Ext Condensed Bold", Font.PLAIN, 24));
 		lblSelectFromAccount.setForeground(new Color(255, 0, 0));
 		lblSelectFromAccount.setBounds(500, 27, 450, 50);
 		add(lblSelectFromAccount);

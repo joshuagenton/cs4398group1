@@ -10,15 +10,13 @@ import java.util.Set;
 
 import javax.imageio.ImageIO;
 
-import atm.model.ATMCoreModel;
-
 /**
  * This is the DatabaseController that we use to interact with the database.
  * 
  * @author Chris Wells
  * @since 2015-03-25
  */
-public class DatabaseController extends AbstractController {
+public class DatabaseController {
 	
 
 	// JDBC driver name and database URL
@@ -55,7 +53,7 @@ public class DatabaseController extends AbstractController {
 				accounts.add(new Results(rs.getString("name"), rs.getInt("account_num"),rs.getDouble("account_bal")));
 			}
 		} catch (SQLException e) {
-			((ATMCoreModel)getModel()).dbError();
+			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -74,13 +72,13 @@ public class DatabaseController extends AbstractController {
 	 * @throws ClassNotFoundException 
 	 * @throws SQLException 
 	 * @throws IOException 
+	 * @throws Exception 
 	 */
-	public BufferedImage getPicture(Object account, String PIN) throws ClassNotFoundException, SQLException, IOException {
+	public BufferedImage getPicture(Object account, String PIN) throws ClassNotFoundException, SQLException, IOException  {
 		Connection conn = null;
 		Statement stmt = null;
 		CCN = (String) account;
 		BufferedImage picture = null;
-	
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
 			stmt = conn.createStatement();
@@ -94,7 +92,6 @@ public class DatabaseController extends AbstractController {
 				}
 				return picture;
 			}
-		
 		return picture;
 	}
 	
@@ -107,12 +104,14 @@ public class DatabaseController extends AbstractController {
 	 * @param account the account the user is interacting with
 	 * @param PIN the PIN that the user entered while logging in
 	 * @param picture the picture of the user
+	 * @throws SQLException 
+	 * @throws Exception 
 	 */
-	public void setPicture(Object account, String PIN, BufferedImage picture) {
+	public void setPicture(Object account, String PIN, BufferedImage picture) throws SQLException, Exception {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		CCN = (String) account;
-		try {
+
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -126,13 +125,6 @@ public class DatabaseController extends AbstractController {
 			stmt.setString(3, PIN);
 			stmt.executeUpdate();
 			System.out.println("Updated picture");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			((ATMCoreModel)getModel()).dbError();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 	/**
@@ -144,12 +136,13 @@ public class DatabaseController extends AbstractController {
 	 * @param account the accounts associated with the user
 	 * @param PIN the PIN they entered after swiping card
 	 * @return zero if the account is not found, and a 1+ if the account is found
+	 * @throws SQLException 
+	 * @throws Exception 
 	 */
-	public int validate_user(Object account, String PIN) {
+	public int validate_user(Object account, String PIN) throws SQLException, Exception {
 		Connection conn = null;
 		Statement stmt = null;
 		CCN = (String) account;
-		try {
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
 			stmt = conn.createStatement();
@@ -158,12 +151,6 @@ public class DatabaseController extends AbstractController {
 			if(rs.next())
 				System.out.println(query + "\nreturned: "+ rs.getInt("BIT"));
 			return rs.getInt("BIT");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			((ATMCoreModel)getModel()).dbError();
-		}
-		return 0;
 	}
 
 	/**
@@ -173,11 +160,12 @@ public class DatabaseController extends AbstractController {
 	 * @param account the account which the money will be deposited to
 	 * @param amount of money that will be deposited
 	 * @return int for the response
+	 * @throws SQLException 
+	 * @throws Exception 
 	 */
-	public int deposit(Integer account, double amount) {
+	public int deposit(Integer account, double amount) throws SQLException, Exception {
 		Connection conn = null;
 		Statement stmt = null;
-		try {
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
 			stmt = conn.createStatement();
@@ -203,12 +191,6 @@ public class DatabaseController extends AbstractController {
 				System.out.println(query2 + "\nreturned: "+ rs2.getInt("CURBAL"));
 				int finBal = rs2.getInt("CURBAL");
 			return finBal;
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			((ATMCoreModel)getModel()).dbError();
-		}
-		return 0;
 	}
 
 	/**
@@ -218,11 +200,12 @@ public class DatabaseController extends AbstractController {
 	 * @param account the account with they would like to withdraw from
 	 * @param d the amount they would like to withdraw
 	 * @return boolean on if the withdraw was successful
+	 * @throws SQLException 
+	 * @throws Exception 
 	 */
-	public boolean withdrawl(Integer account, double d) {
+	public boolean withdrawl(Integer account, double d) throws SQLException, Exception {
 		Connection conn = null;
 		Statement stmt = null;
-		try {
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
 			stmt = conn.createStatement();
@@ -253,12 +236,6 @@ public class DatabaseController extends AbstractController {
 				System.out.println(query2 + "\nreturned: "+ rs2.getInt("CURBAL"));
 			}
 			return true;
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			((ATMCoreModel)getModel()).dbError();
-		}
-		return false;
 	}
 
 	/**
@@ -268,8 +245,10 @@ public class DatabaseController extends AbstractController {
 	 * @param toAccountNum the to account
 	 * @param amount the amount in which to transfer
 	 * @return boolean on if the transfer was successful
+	 * @throws Exception 
+	 * @throws SQLException 
 	 */
-	public boolean transfer(Integer fromAccountNum, Integer toAccountNum, double amount) {
+	public boolean transfer(Integer fromAccountNum, Integer toAccountNum, double amount) throws SQLException, Exception {
 		boolean account1Bal = withdrawl(fromAccountNum, amount);
 		if (account1Bal == true){
 			deposit(toAccountNum, amount);

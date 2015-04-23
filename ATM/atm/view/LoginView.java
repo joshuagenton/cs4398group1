@@ -121,7 +121,7 @@ public class LoginView extends JFrameView {
 			TestNone.setFont(new Font("Dialog", Font.BOLD, 8));
 			TestNone.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 			TestNone.setHorizontalAlignment(SwingConstants.LEFT);
-			TestNone.setText("Many Test");
+			TestNone.setText("None Test");
 			TestNone.setActionCommand("Login");
 			TestNone.addActionListener(handler);
 			

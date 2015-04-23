@@ -2,6 +2,7 @@ package atm.view;
 
 import java.awt.EventQueue;
 import java.awt.Image;
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -169,6 +170,14 @@ public class MainView extends JFrame implements View, ModelListener{
 		}
 		this.revalidate();
 		this.repaint();
+		if (me.getAgStatus() == AgentStatus.DBCommError) {
+			try {
+				System.in.read();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	/**

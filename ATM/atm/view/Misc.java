@@ -113,7 +113,7 @@ public class Misc extends JFrameView {
 	public void databaseCommError(){
 		setLayout(new BorderLayout(0, 0));
 		
-		Label label = new Label("Network Communication Error.\nPaul probably tripped over the power\nccable or something.");
+		Label label = new Label("Network Communication Error. Paul probably tripped over a cable or something.");
 		label.setAlignment(Label.CENTER);
 		label.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 24));
 		label.setForeground(new Color(255, 0, 0));

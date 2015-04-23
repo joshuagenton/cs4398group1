@@ -61,7 +61,7 @@ public class AccountSelectView extends JFrameView {
 	 * Start assembles the content of the page.
 	 */
 	public void start(){
-		setSize(new Dimension(1434, 1062));
+		//setSize(new Dimension(1434, 1062));
 		addButtons();
 		setVisible(true);
 	
@@ -107,7 +107,7 @@ public class AccountSelectView extends JFrameView {
 		JButton btnTransfer = new JButton(transIcon);
 		btnTransfer.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnTransfer.setFont(new Font("Gill Sans MT Ext Condensed Bold", Font.PLAIN, 40));
-		btnTransfer.setBounds(25, 520, 300, 100);
+		btnTransfer.setBounds(25, 472, 300, 100);
 		btnTransfer.addActionListener(handler);
 		setLayout(null);
 		btnTransfer.setActionCommand("Transfer");
@@ -118,7 +118,7 @@ public class AccountSelectView extends JFrameView {
 		//btnCancel.setBackground(Color.RED);
 		btnCancel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		//btnCancel.setFont(new Font("Gill Sans MT Ext Condensed Bold", Font.PLAIN, 40));
-		btnCancel.setBounds(1028, 625, 275, 106);
+		btnCancel.setBounds(25, 694, 300, 100);
 		btnCancel.addActionListener(handler);
 		setLayout(null);
 		btnCancel.setActionCommand("Cancel");
@@ -128,14 +128,14 @@ public class AccountSelectView extends JFrameView {
 		JButton btnWithdraw = new JButton(withIcon);
 		btnWithdraw.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnWithdraw.setFont(new Font("Gill Sans MT Ext Condensed Bold", Font.PLAIN, 40));
-		btnWithdraw.setBounds(25, 631, 300, 100);
+		btnWithdraw.setBounds(25, 583, 300, 100);
 		btnWithdraw.addActionListener(handler);
 		btnWithdraw.setActionCommand("Withdraw");
 		add(btnWithdraw);
 		
 		JLabel userImage = new JLabel();
 		userImage.setIcon(new ImageIcon(picture));
-		userImage.setBounds(1028, 300, picture.getWidth(), picture.getHeight());
+		userImage.setBounds(25, 805, 0, 0);
 		add(userImage);
 		
 	}

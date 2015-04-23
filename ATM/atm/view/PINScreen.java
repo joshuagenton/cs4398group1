@@ -134,10 +134,10 @@ public class PINScreen extends JFrameView {
 		GridBagConstraints gridBagConstraints = new GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 0;
-		this.setBounds(new Rectangle(0, 0, 1024, 768));
+		//this.setBounds(new Rectangle(0, 0, 1024, 768));
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{300, 100, 110, 110, 110, 100, 100, 100, 100};
-		gridBagLayout.rowHeights = new int[]{100, 100, 100, 100, 100, 100, 100};
+		gridBagLayout.rowHeights = new int[]{200, 100, 100, 100, 100, 100, 100};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0, 0, 0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
@@ -153,7 +153,7 @@ public class PINScreen extends JFrameView {
 		gbc_NameInfo.gridwidth = 2;
 		gbc_NameInfo.gridheight = 2;
 		gbc_NameInfo.fill = GridBagConstraints.BOTH;
-		gbc_NameInfo.insets = new Insets(0, 0, 5, 5);
+		gbc_NameInfo.insets = new Insets(0, 0, 0, 0);
 		gbc_NameInfo.gridx = 0;
 		gbc_NameInfo.gridy = 3;
 		this.add(getNameInfo(), gbc_NameInfo);

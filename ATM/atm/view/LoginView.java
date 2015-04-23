@@ -71,6 +71,8 @@ public class LoginView extends JFrameView {
 		add(getStacieTest());
 		add(getPaulTest());
 		add(getJoshTest());
+		add(getNoneTest());
+		add(getManyTest());
 		cardinfo.requestFocusInWindow();
 		
 		cardinfo.addActionListener(new java.awt.event.ActionListener() {
@@ -103,6 +105,62 @@ public class LoginView extends JFrameView {
 			((ATMController)getController()).operation(evt.getActionCommand());
 			System.out.println(evt.getActionCommand());
 		}
+	}
+
+	/**
+	 * This method initializes NoneTest	
+	 * 	
+	 * @return button for use
+	 */
+	private JButton getNoneTest() {
+		JButton TestNone = null;
+		if (TestNone == null) {
+			TestNone = new JButton();
+			TestNone.setBounds(270, 41, 75, 20);
+			TestNone.setPreferredSize(new Dimension(75, 20));
+			TestNone.setFont(new Font("Dialog", Font.BOLD, 8));
+			TestNone.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+			TestNone.setHorizontalAlignment(SwingConstants.LEFT);
+			TestNone.setText("Many Test");
+			TestNone.setActionCommand("Login");
+			TestNone.addActionListener(handler);
+			
+			TestNone.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseClicked(java.awt.event.MouseEvent e) {
+					cardinfo.setText("%B0001  ^ACCOUNTS/NONE           ^4912120?;6391480100325586=4912120?+202=034903800=00?");
+					card.readCard(cardinfo.getText());
+				}
+			});
+		}
+		return TestNone;
+	}
+
+	/**
+	 * This method initializes ManyTest	
+	 * 	
+	 * @return button for use
+	 */
+	private JButton getManyTest() {
+		JButton TestMany = null;
+		if (TestMany == null) {
+			TestMany = new JButton();
+			TestMany.setBounds(270, 11, 75, 20);
+			TestMany.setPreferredSize(new Dimension(75, 20));
+			TestMany.setFont(new Font("Dialog", Font.BOLD, 8));
+			TestMany.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+			TestMany.setHorizontalAlignment(SwingConstants.LEFT);
+			TestMany.setText("Many Test");
+			TestMany.setActionCommand("Login");
+			TestMany.addActionListener(handler);
+			
+			TestMany.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseClicked(java.awt.event.MouseEvent e) {
+					cardinfo.setText("%B0002  ^ACCOUNTS/MANY           ^4912120?;6391480100325586=4912120?+202=034903800=00?");
+					card.readCard(cardinfo.getText());
+				}
+			});
+		}
+		return TestMany;
 	}
 	
 	/**

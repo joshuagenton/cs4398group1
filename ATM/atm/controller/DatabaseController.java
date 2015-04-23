@@ -10,13 +10,15 @@ import java.util.Set;
 
 import javax.imageio.ImageIO;
 
+import atm.model.ATMCoreModel;
+
 /**
  * This is the DatabaseController that we use to interact with the database.
  * 
  * @author Chris Wells
  * @since 2015-03-25
  */
-public class DatabaseController {
+public class DatabaseController extends AbstractController {
 	
 
 	// JDBC driver name and database URL
@@ -53,7 +55,7 @@ public class DatabaseController {
 				accounts.add(new Results(rs.getString("name"), rs.getInt("account_num"),rs.getDouble("account_bal")));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			((ATMCoreModel)getModel()).dbError();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -69,13 +71,16 @@ public class DatabaseController {
 	 * @param account the account information associated with the user
 	 * @param PIN the PIN the user entered upon logging in
 	 * @return the image of the user
+	 * @throws ClassNotFoundException 
+	 * @throws SQLException 
+	 * @throws IOException 
 	 */
-	public BufferedImage getPicture(Object account, String PIN) {
+	public BufferedImage getPicture(Object account, String PIN) throws ClassNotFoundException, SQLException, IOException {
 		Connection conn = null;
 		Statement stmt = null;
 		CCN = (String) account;
 		BufferedImage picture = null;
-		try {
+	
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
 			stmt = conn.createStatement();
@@ -89,13 +94,7 @@ public class DatabaseController {
 				}
 				return picture;
 			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 		return picture;
 	}
 	
@@ -130,7 +129,7 @@ public class DatabaseController {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			((ATMCoreModel)getModel()).dbError();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -162,7 +161,7 @@ public class DatabaseController {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			((ATMCoreModel)getModel()).dbError();
 		}
 		return 0;
 	}
@@ -207,7 +206,7 @@ public class DatabaseController {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			((ATMCoreModel)getModel()).dbError();
 		}
 		return 0;
 	}
@@ -257,7 +256,7 @@ public class DatabaseController {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			((ATMCoreModel)getModel()).dbError();
 		}
 		return false;
 	}

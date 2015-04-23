@@ -135,7 +135,7 @@ public class AccountSelectView extends JFrameView {
 		
 		JLabel userImage = new JLabel();
 		userImage.setIcon(new ImageIcon(picture));
-		userImage.setBounds(25, 805, 0, 0);
+		userImage.setBounds(350, 600, 200, 200);
 		add(userImage);
 		
 	}

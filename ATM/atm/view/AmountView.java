@@ -1,6 +1,10 @@
 package atm.view;
 
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -9,6 +13,8 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
@@ -26,6 +32,7 @@ import atm.model.TransactionTypes;
 
 import java.awt.Font;
 import java.awt.Color;
+import javax.swing.SwingConstants;
 
 /**
  * The AmountView view is where the user is allowed to enter the amoun they would like to
@@ -41,15 +48,13 @@ public class AmountView extends JFrameView {
 	public final static String WITHDRAW = "Withdraw";
 	public final static String TRANSFER = "Transfer";
 	public final static String CANCEL = "Cancel";
-	private JPanel textPanel;
-	private JPanel buttonPanel;
 	
 	private JLabel lblAmount;
 	
 	private JFormattedTextField textAmount;
 	
 	private JButton submitButton;
-	private JButton cancelButton;
+	private JButton Cancel;
 	private JButton Clear;
 	public CardReaderController card = new CardReaderController(getModel()); 
 	private Handler handler = new Handler();
@@ -66,51 +71,107 @@ public class AmountView extends JFrameView {
 		setLayout(null);
 		setBackground(Color.WHITE);
 		
-		this.setBounds(100, 100, 847, 588);	
-				
-		Toolkit toolkit =  Toolkit.getDefaultToolkit();
-		Dimension dim = toolkit.getScreenSize();
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{300, 100, 110, 110, 110, 100, 100, 100, 100};
+		gridBagLayout.rowHeights = new int[]{200, 100, 100, 100, 100, 100, 100};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0, 0, 0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		setLayout(gridBagLayout);
+		GridBagConstraints gbc_textAmount = new GridBagConstraints();
+		gbc_textAmount.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textAmount.anchor = GridBagConstraints.SOUTH;
+		gbc_textAmount.gridwidth = 3;
+		gbc_textAmount.insets = new Insets(0, 0, 5, 5);
+		gbc_textAmount.gridx = 3;
+		gbc_textAmount.gridy = 0;
+		add(getTextAmount(), gbc_textAmount);
 		
-		int x = (int) ((dim.getWidth() - this.getWidth()) * 0.5f);
-	    int y = (int) ((dim.getHeight() - this.getHeight()) * 0.5f);
-	    this.setLocation(x, y);
-	    add(getButtonPanel());
-	    add(getTextFieldPanel());
-	    add(getLblAmount());
+		
+		GridBagConstraints gbc_Clear = new GridBagConstraints();
+		gbc_Clear.insets = new Insets(0, 0, 5, 5);
+		gbc_Clear.fill = GridBagConstraints.BOTH;
+		gbc_Clear.gridx = 3;
+		gbc_Clear.gridy = 4;
+		add(getClear(), gbc_Clear);
+		GridBagConstraints gbc_Enter = new GridBagConstraints();
+		gbc_Enter.fill = GridBagConstraints.BOTH;
+		gbc_Enter.insets = new Insets(0, 0, 0, 0);
+		gbc_Enter.gridx = 5;
+		gbc_Enter.gridy = 4;
+		add(getSubmitButton(), gbc_Enter);
+		GridBagConstraints gbc_Cancel = new GridBagConstraints();
+		gbc_Cancel.anchor = GridBagConstraints.SOUTH;
+		gbc_Cancel.gridwidth = 3;
+		gbc_Cancel.insets = new Insets(0, 0, 0, 5);
+		gbc_Cancel.gridx = 3;
+		gbc_Cancel.gridy = 5;
+		this.add(getCancel(), gbc_Cancel);
+		
+		GridBagConstraints amount_size = new GridBagConstraints();
+		gbc_Cancel.anchor = GridBagConstraints.SOUTH;
+		gbc_Cancel.gridwidth = 3;
+		gbc_Cancel.insets = new Insets(0, 0, 0, 0);
+		gbc_Cancel.gridx = 0;
+		gbc_Cancel.gridy = 3;
+		this.add(getSubmitButton(), amount_size);
+		numPad();
+
+	    GridBagConstraints gbc_lblAmount = new GridBagConstraints();
+	    gbc_lblAmount.anchor = GridBagConstraints.SOUTHEAST;
+	    gbc_lblAmount.gridwidth = 2;
+	    gbc_lblAmount.insets = new Insets(0, 0, 5, 5);
+	    gbc_lblAmount.gridx = 1;
+	    gbc_lblAmount.gridy = 0;
+	    add(getLblAmount(), gbc_lblAmount);
 	    
-	    add (accountLabel());
+	    GridBagConstraints gbc_lbl = new GridBagConstraints();
+	    gbc_lbl.anchor = GridBagConstraints.NORTH;
+	    gbc_lbl.gridwidth = 2;
+	    gbc_lbl.insets = new Insets(0, 0, 5, 5);
+	    gbc_lbl.gridx = 0;
+	    gbc_lbl.gridy = 0;
+	    add (accountLabel(), gbc_lbl);
+
+	    add(getSubmitButton(),gbc_Enter);
 	    numPad();
-	    
+	    setMsg();
 	}
-	
+
 	/**
 	 * The numeric pad for the user to enter an amount.
 	 */
+
+	
 	private void numPad() {
 		for (Integer i = 0; i<10 ; i++){
+			GridBagConstraints gbc_num = new GridBagConstraints();
 			final Integer number = i;
 			JButton num = new JButton();
 			num.setFont(new Font("Tahoma", Font.PLAIN, 24));
 			num.setText(number.toString());
-			if (i == 0)
-				num.setBounds(new Rectangle(638, 383, 100, 100));
-			else
-				num.setBounds(new Rectangle(538+(i-1)%3*100, 83+(i-1)/3*100, 100, 100));
+			if (i == 0){
+				gbc_num.fill = GridBagConstraints.BOTH;
+				gbc_num.gridx = 4;
+				gbc_num.gridy = 4;
+				gbc_num.insets = new Insets(0, 0, 0, 0);
+			}
+			else{
+				gbc_num.fill = GridBagConstraints.BOTH;
+				gbc_num.insets = new Insets(0, 0, 0, 0);
+				gbc_num.gridx = (i-1)%3 + 3;
+				gbc_num.gridy = (i-1)/3 + 1;
+			}
 			num.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					double amount = (double) textAmount.getValue()*10+number ;
-				
 					textAmount.setValue(amount);
 					textAmount.setText(dec.format(amount));
 					IdleTimeController.runTimer((ATMController)getController());
 				}
 			});
-			add(num);
+			this.add(num, gbc_num);
 		}
-		add(getClear());
 	}
-	
-
 	// Getters/Setters
 	
 	public JLabel accountLabel(){
@@ -128,44 +189,23 @@ public class AmountView extends JFrameView {
 		return lbl;
 	}
 	
-	private JPanel getButtonPanel()
-	{
-		if(buttonPanel == null){
-			buttonPanel = new JPanel();
-			buttonPanel.setBounds(104, 361, 300, 100);
-			buttonPanel.add(getSubmitButton());
-			buttonPanel.setLayout(null);
-			buttonPanel.add(getCancelButton());
-		}
-		
-		return buttonPanel;
-	}
-
-	private JPanel getTextFieldPanel()
-	{
-		if(textPanel == null){
-			
-			
-			textPanel = new JPanel();
-			textPanel.setBackground(new Color(224, 255, 255));
-			textPanel.setBounds(104, 250, 300, 100);
-			textPanel.setLayout(null);
-			textPanel.add(getTextAmount());			
-		}
-		return textPanel;
-	}
-	
 	DecimalFormat dec = new DecimalFormat("'$'0.00");
 	
 	private void setMsg(){
 		JLabel msg = new JLabel();
 		msg = new JLabel();
 		msg.setBounds(104, 461, 300, 100);
-		
+	    GridBagConstraints gbc_lbl = new GridBagConstraints();
+	    gbc_lbl.anchor = GridBagConstraints.NORTH;
+	    gbc_lbl.gridwidth = 2;
+	    gbc_lbl.gridheight =2;
+	    gbc_lbl.insets = new Insets(0, 0, 5, 5);
+	    gbc_lbl.gridx = 1;
+	    gbc_lbl.gridy = 2;
+	    add (msg, gbc_lbl);
 		msg.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		msg.setText("<html>Please Enter amount in<br> increments of $20.00</html>");
+		msg.setText("<html>Please Enter amount in increments of $20.00</html>");
 		msg.setPreferredSize(new Dimension(200, 20));
-		add(msg);
 		revalidate();
 		repaint();
 	}
@@ -193,32 +233,49 @@ public class AmountView extends JFrameView {
 			formatter.setOverwriteMode(true);
 			
 			textAmount = new JFormattedTextField();
+			textAmount.setHorizontalAlignment(SwingConstants.CENTER);
 			textAmount.setBackground(new Color(224, 255, 255));
 			textAmount.setBorder(null);
 			textAmount.setFont(new Font("Tahoma", Font.PLAIN, 32));
 			textAmount.setValue(0.0);
 			textAmount.setText("$0.00");
-			//TextPrompt promptTextAmount = new TextPrompt("$0.00",textAmount);
-			//promptTextAmount.setFont(new Font("Tahoma", Font.PLAIN, 32));
-			textAmount.setBounds(90, 24, 158, 42);
 			//textAmount.setText("$0.00");
 			textAmount.setColumns(10);
 		}
 		return textAmount;
 	}
-	
+	private JButton getCancel() {
+		if (Cancel == null) {
+			Icon cancelIcon = new ImageIcon(this.getClass().getResource("/atm/view/cancel.jpg"));
+			Cancel = new JButton(cancelIcon);
+			Cancel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			//Cancel.setText("Cancel");
+			Cancel.setBorderPainted(false);
+			Cancel.setContentAreaFilled(false);
+			Cancel.setActionCommand("Cancel");
+			
+			Cancel.addActionListener(handler);
+			Cancel.addActionListener(new java.awt.event.ActionListener() {
+				@Override
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					IdleTimeController.runTimer((ATMController)getController());
+				}
+			});
+		}
+		return Cancel;
+	}
 	private JButton getSubmitButton(){
 		if(submitButton == null){
 			if (((ATMCoreModel)getModel()).type == TransactionTypes.Withdraw){
 				submitButton = new JButton(WITHDRAW);
 				submitButton.setBackground(new Color(0, 128, 0));
-				submitButton.setBounds(0, 0, 140, 75);
+				submitButton.setBounds(738, 400, 100, 100);
 				submitButton.setActionCommand("processWithdraw");
 			}
 			else if (((ATMCoreModel)getModel()).type == TransactionTypes.Transfer){
 				submitButton = new JButton(TRANSFER);
 				submitButton.setBackground(new Color(0, 128, 0));
-				submitButton.setBounds(0, 0, 140, 75);
+				submitButton.setBounds(738, 400, 100, 100);
 				submitButton.setActionCommand("processTransfer");
 			}
 			submitButton.addActionListener(handler);
@@ -241,25 +298,13 @@ public class AmountView extends JFrameView {
 		}
 		return submitButton;
 	}
-	
-	private JButton getCancelButton(){
-		if(cancelButton == null){
-			cancelButton = new JButton(CANCEL);
-			cancelButton.setForeground(new Color(102, 0, 0));
-			cancelButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			cancelButton.setBackground(new Color(255, 51, 51));
-			cancelButton.setBounds(160, 0, 140, 75);
-			cancelButton.setActionCommand("Cancel");
-			cancelButton.addActionListener(handler);
-		}
-		return cancelButton;
-	}
+
 	
 	private JButton getClear() {
 		if (Clear == null) {
 			Clear = new JButton();
 			Clear.setFont(new Font("Tahoma", Font.PLAIN, 21));
-			Clear.setBounds(new Rectangle(538, 383, 100, 100));
+			Clear.setBounds(new Rectangle(538, 389, 100, 100));
 			Clear.setActionCommand("CancelScreen()");
 			Clear.setText("Clear");
 			Clear.setBackground(Color.yellow);

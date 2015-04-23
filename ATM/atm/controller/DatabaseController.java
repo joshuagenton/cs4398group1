@@ -38,13 +38,14 @@ public class DatabaseController {
 	 * card and the PIN entered.
 	 * 
 	 * @return accounts that are associated with the user
+	 * @throws SQLException 
+	 * @throws Exception 
 	 */
-	public Set<Results> getAccounts(){
+	public Set<Results> getAccounts() throws SQLException, Exception{
 		Set<Results> accounts = new HashSet<Results>();
 		String query = "Select a.name,a.account_bal,a.account_num from account a, "
 				+ "Users u, User_Accounts ua Where ua.CCN = u.CCN AND "
 				+ "ua.account_num = a.account_num AND u.CCN = '" + CCN +"'";
-		try {
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
 			stmt = conn.createStatement();
@@ -52,11 +53,6 @@ public class DatabaseController {
 			while(rs.next()){
 				accounts.add(new Results(rs.getString("name"), rs.getInt("account_num"),rs.getDouble("account_bal")));
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
 		System.out.println("DB CONTROLLER ACCOUNTS SIZE: " + accounts.size());
 		return accounts;
 	}

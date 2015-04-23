@@ -19,6 +19,8 @@ import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.text.NumberFormatter;
 
 import atm.controller.ATMController;
@@ -32,6 +34,7 @@ import atm.model.TransactionTypes;
 
 import java.awt.Font;
 import java.awt.Color;
+
 import javax.swing.SwingConstants;
 
 /**
@@ -88,7 +91,7 @@ public class AmountView extends JFrameView {
 		
 		
 		GridBagConstraints gbc_Clear = new GridBagConstraints();
-		gbc_Clear.insets = new Insets(0, 0, 5, 5);
+		gbc_Clear.insets = new Insets(0, 0, 0, 0);
 		gbc_Clear.fill = GridBagConstraints.BOTH;
 		gbc_Clear.gridx = 3;
 		gbc_Clear.gridy = 4;
@@ -102,7 +105,7 @@ public class AmountView extends JFrameView {
 		GridBagConstraints gbc_Cancel = new GridBagConstraints();
 		gbc_Cancel.anchor = GridBagConstraints.SOUTH;
 		gbc_Cancel.gridwidth = 3;
-		gbc_Cancel.insets = new Insets(0, 0, 0, 5);
+		gbc_Cancel.insets = new Insets(0, 0, 0, 0);
 		gbc_Cancel.gridx = 3;
 		gbc_Cancel.gridy = 5;
 		this.add(getCancel(), gbc_Cancel);
@@ -119,7 +122,7 @@ public class AmountView extends JFrameView {
 	    GridBagConstraints gbc_lblAmount = new GridBagConstraints();
 	    gbc_lblAmount.anchor = GridBagConstraints.SOUTHEAST;
 	    gbc_lblAmount.gridwidth = 2;
-	    gbc_lblAmount.insets = new Insets(0, 0, 5, 5);
+	    gbc_lblAmount.insets = new Insets(0, 0, 0, 0);
 	    gbc_lblAmount.gridx = 1;
 	    gbc_lblAmount.gridy = 0;
 	    add(getLblAmount(), gbc_lblAmount);
@@ -127,14 +130,13 @@ public class AmountView extends JFrameView {
 	    GridBagConstraints gbc_lbl = new GridBagConstraints();
 	    gbc_lbl.anchor = GridBagConstraints.NORTH;
 	    gbc_lbl.gridwidth = 2;
-	    gbc_lbl.insets = new Insets(0, 0, 5, 5);
+	    gbc_lbl.insets = new Insets(0, 0, 0, 0);
 	    gbc_lbl.gridx = 0;
 	    gbc_lbl.gridy = 0;
 	    add (accountLabel(), gbc_lbl);
 
 	    add(getSubmitButton(),gbc_Enter);
 	    numPad();
-	    setMsg();
 	}
 
 	/**
@@ -192,20 +194,14 @@ public class AmountView extends JFrameView {
 	DecimalFormat dec = new DecimalFormat("'$'0.00");
 	
 	private void setMsg(){
-		JLabel msg = new JLabel();
-		msg = new JLabel();
+		JTextArea msg = new JTextArea(5,15);
+		msg.setOpaque(false);
+		setLayout(null);
+		//msg.setLineWrap(true);
 		msg.setBounds(104, 461, 300, 100);
-	    GridBagConstraints gbc_lbl = new GridBagConstraints();
-	    gbc_lbl.anchor = GridBagConstraints.NORTH;
-	    gbc_lbl.gridwidth = 2;
-	    gbc_lbl.gridheight =2;
-	    gbc_lbl.insets = new Insets(0, 0, 5, 5);
-	    gbc_lbl.gridx = 1;
-	    gbc_lbl.gridy = 2;
-	    add (msg, gbc_lbl);
-		msg.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		msg.setText("<html>Please Enter amount in increments of $20.00</html>");
-		msg.setPreferredSize(new Dimension(200, 20));
+	    add (msg);
+		msg.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		msg.setText("Please Enter\nan amount in \nincrements of\n$20.00");
 		revalidate();
 		repaint();
 	}

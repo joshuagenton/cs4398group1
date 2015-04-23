@@ -2,6 +2,7 @@ package atm.view;
 
 import java.awt.EventQueue;
 import java.awt.Image;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -55,11 +56,37 @@ public class MainView extends JFrame implements View, ModelListener{
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setUndecorated(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Image img = new ImageIcon(this.getClass().getResource("/atm/view/ATM.jpg")).getImage();
+		getPic();
+	}
+	
+	private void getPic(){
+		Random rand = new Random();
+		String picName = null;
+		int randomNum = rand.nextInt((5 + 1));
+		switch (randomNum){
+		case 1:
+			picName = "/atm/view/ATM.jpg";
+			break;
+		case 2:
+			picName ="/atm/view/ATM2.jpg";
+			break;
+		case 3:
+			picName = "/atm/view/ATM3.jpg";
+			break;
+		case 4:
+			picName = "/atm/view/ATM4.jpg";
+			break;
+		case 5:
+			picName = "/atm/view/ATM5.jpg";
+			break;
+		default:
+			picName = "/atm/view/ATM.jpg";
+				
+		}
+		Image img = new ImageIcon(this.getClass().getResource(picName)).getImage();
 		BackgroundPanel panel = new BackgroundPanel(img);
 		setContentPane(panel);
 	}
-	
 	PINScreen PIN;
 	
 	/**
@@ -69,6 +96,7 @@ public class MainView extends JFrame implements View, ModelListener{
 		this.getContentPane().removeAll();
 		System.out.println("CHANGE TO VIEW: " + me.getAgStatus());
 		if (me.getAgStatus() == AgentStatus.Start){
+			getPic();
 			login = new LoginView(getModel(), getController());
 			getContentPane().add(login);		
 		}

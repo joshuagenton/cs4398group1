@@ -198,7 +198,7 @@ public class AmountView extends JFrameView {
 		msg.setOpaque(false);
 		setLayout(null);
 		//msg.setLineWrap(true);
-		msg.setBounds(104, 461, 300, 100);
+		msg.setBounds(404, 461, 300, 100);
 	    add (msg);
 		msg.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		msg.setText("Please Enter\nan amount in \nincrements of\n$20.00");

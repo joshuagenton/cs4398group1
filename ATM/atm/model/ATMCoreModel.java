@@ -31,6 +31,19 @@ public class ATMCoreModel extends AbstractModel{
 	private DatabaseController data_baseinterface;
 	
 
+	
+	
+	public synchronized void dbError(){
+		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.Wait, AgentStatus.DBCommError);
+		reset();
+		SwingUtilities.invokeLater(
+				new Runnable() {
+				    public void run() {
+				    	notifyChanged(me);
+				    }
+				});
+		notifyAll();
+	}
 	/**
 	 * The withdrawComplete is a synchronized function that refreshes the view
 	 * when the action is complete.

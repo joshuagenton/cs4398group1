@@ -3,6 +3,7 @@ package atm.view;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.util.Random;
+import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -161,7 +162,11 @@ public class MainView extends JFrame implements View, ModelListener{
 
 			((ATMController)getController()).operation("logout");
 		}
-		
+		else if (me.getAgStatus() == AgentStatus.DBCommError) {
+			Misc misc = new Misc(getModel(), getController());
+			misc.databaseCommError();
+			getContentPane().add(misc);
+		}
 		this.revalidate();
 		this.repaint();
 	}

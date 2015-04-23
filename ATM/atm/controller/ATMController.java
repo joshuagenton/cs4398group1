@@ -1,7 +1,11 @@
 package atm.controller;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.sql.SQLException;
+
 import com.github.sarxos.webcam.Webcam;
+
 import atm.model.ATMCoreModel;
 import atm.model.TransactionTypes;
 import atm.view.SelectionView;
@@ -105,12 +109,19 @@ public class ATMController extends AbstractController{
 	 */
 	public boolean login(char[] cs){
 		((ATMCoreModel)getModel()).waiting();
+		db.setModel(getModel());
 		int num = db.validate_user(((ATMCoreModel)getModel()).getAccount_number(), String.valueOf(cs));
 		if (num > 0){
 			((ATMCoreModel)getModel()).setAccount_validated(num);
 			getAccounts();
 			//  Do camera stuff
-			BufferedImage picture = db.getPicture(((ATMCoreModel)getModel()).getAccount_number(), String.valueOf(cs));
+			BufferedImage picture = null;
+			try {
+				picture = db.getPicture(((ATMCoreModel)getModel()).getAccount_number(), String.valueOf(cs));
+			} catch (ClassNotFoundException | SQLException | IOException e) {
+				((ATMCoreModel)getModel()).dbError();
+				return false;
+			}
 			((ATMCoreModel)getModel()).setPicture(picture);
 			if (this.webcam != null) {
 				System.out.println("Webcam not null");

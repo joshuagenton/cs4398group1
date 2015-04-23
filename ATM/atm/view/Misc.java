@@ -100,7 +100,7 @@ public class Misc extends JFrameView {
 	public void cancelled(){
 		setLayout(new BorderLayout(0, 0));
 		
-		Label label = new Label("Invalid PIN");
+		Label label = new Label("Your Transaction has\nbeen cancelled");
 		label.setAlignment(Label.CENTER);
 		label.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 24));
 		label.setForeground(new Color(255, 0, 0));
@@ -109,6 +109,17 @@ public class Misc extends JFrameView {
 		repaint();
 	}
 	
+	public void databaseCommError(){
+		setLayout(new BorderLayout(0, 0));
+		
+		Label label = new Label("Network Communication Error.\nPaul probably tripped over the power\nccable or something.");
+		label.setAlignment(Label.CENTER);
+		label.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 24));
+		label.setForeground(new Color(255, 0, 0));
+		add(label, BorderLayout.CENTER);
+		setVisible(true);
+		repaint();
+	}
 	/**
 	 * The transComplete is a successful transfer from one account to another.
 	 */

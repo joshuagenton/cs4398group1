@@ -28,6 +28,7 @@ public class Misc extends JFrameView {
 	 */
 	public Misc(Model model, Controller controller) {
 		super(model, controller);
+		this.setOpaque(false);
 	}
 
 	/**

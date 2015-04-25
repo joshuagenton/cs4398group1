@@ -10,6 +10,7 @@ import java.util.SortedMap;
 
 import simpleAccount.model.AccountModel;
 import simpleAccount.view.AccountView;
+import simpleAccount.view.AgentView;
 import simpleAccount.view.ErrorView;
 import simpleAccount.view.JFrameView;
 import simpleAccount.view.TransferView;
@@ -36,6 +37,14 @@ public class AccountController extends AbstractController {
 		}else if(option.equals("Edit in Yuan")){
 			TransferView transferView = new TransferView((AccountModel)getModel(), this);
 			transferView.setValues(id, "Yuan");
+			((AccountModel)getModel()).refresh();
+		}else if(option.equals("Create deposit agent")){
+			AgentView agentView = new AgentView((AccountModel)getModel(), this);
+			agentView.setValues(id, "Deposit");
+			((AccountModel)getModel()).refresh();
+		}else if(option.equals("Create withdraw agent")){
+			AgentView agentView = new AgentView((AccountModel)getModel(), this);
+			agentView.setValues(id, "Withdraw");
 			((AccountModel)getModel()).refresh();
 		}else if(option.equals("Save") || option.equals("Exit")){
 			WriteFile();

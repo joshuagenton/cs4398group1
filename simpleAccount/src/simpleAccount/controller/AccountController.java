@@ -40,11 +40,11 @@ public class AccountController extends AbstractController {
 			((AccountModel)getModel()).refresh();
 		}else if(option.equals("Create deposit agent")){
 			AgentView agentView = new AgentView((AccountModel)getModel(), this);
-			agentView.setValues(id, "Deposit");
+			agentView.setValues(id, "deposit");
 			((AccountModel)getModel()).refresh();
 		}else if(option.equals("Create withdraw agent")){
 			AgentView agentView = new AgentView((AccountModel)getModel(), this);
-			agentView.setValues(id, "Withdraw");
+			agentView.setValues(id, "withdraw");
 			((AccountModel)getModel()).refresh();
 		}else if(option.equals("Save") || option.equals("Exit")){
 			WriteFile();

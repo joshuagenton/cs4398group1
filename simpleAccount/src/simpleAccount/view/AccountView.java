@@ -68,6 +68,16 @@ public class AccountView extends JFrameView {
 		btnExit.addActionListener(handler);
 		btnExit.setBounds(143, 110, 123, 23);
 		frame.getContentPane().add(btnExit);
+		
+		JButton btnCreateDepositAgent = new JButton("Create deposit agent");
+		btnCreateDepositAgent.addActionListener(handler);
+		btnCreateDepositAgent.setBounds(10, 76, 190, 23);
+		frame.getContentPane().add(btnCreateDepositAgent);
+		
+		JButton btnCreateWithdrawAgent = new JButton("Create withdraw agent");
+		btnCreateWithdrawAgent.addActionListener(handler);
+		btnCreateWithdrawAgent.setBounds(210, 76, 189, 23);
+		frame.getContentPane().add(btnCreateWithdrawAgent);
 	}
 
 	@Override
@@ -109,5 +119,4 @@ public class AccountView extends JFrameView {
 		initialize();
 		this.frame.setVisible(true);
 	}
-
 }

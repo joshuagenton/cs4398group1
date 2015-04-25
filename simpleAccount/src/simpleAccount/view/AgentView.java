@@ -40,7 +40,7 @@ public class AgentView extends JFrameView {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setTitle("");
-		frame.setBounds(100, 100, 426, 276);
+		frame.setBounds(100, 100, 474, 307);
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
@@ -48,71 +48,71 @@ public class AgentView extends JFrameView {
 		
 		JButton btnStartAgent = new JButton("Start Agent");
 		btnStartAgent.addActionListener(handler);
-		btnStartAgent.setBounds(10, 197, 123, 23);
+		btnStartAgent.setBounds(10, 231, 139, 23);
 		frame.getContentPane().add(btnStartAgent);
 		
 		JButton btnStopAgent = new JButton("Stop Agent");
 		btnStopAgent.setEnabled(false);
 		btnStopAgent.addActionListener(handler);
-		btnStopAgent.setBounds(143, 197, 123, 23);
+		btnStopAgent.setBounds(159, 231, 139, 23);
 		frame.getContentPane().add(btnStopAgent);
 		
 		JButton btnDismiss = new JButton("Dismiss");
 		btnDismiss.addActionListener(handler);
-		btnDismiss.setBounds(276, 197, 123, 23);
+		btnDismiss.setBounds(309, 231, 139, 23);
 		frame.getContentPane().add(btnDismiss);
 		
 		JLabel lblAgentID = new JLabel("Agent ID:");
-		lblAgentID.setBounds(10, 14, 123, 14);
+		lblAgentID.setBounds(10, 14, 139, 14);
 		frame.getContentPane().add(lblAgentID);
 		
 		JLabel lblEnterAmountIn = new JLabel("Amount in $");
-		lblEnterAmountIn.setBounds(10, 45, 123, 14);
+		lblEnterAmountIn.setBounds(10, 45, 139, 14);
 		frame.getContentPane().add(lblEnterAmountIn);
 		
 		NumberFormat amountFormat = NumberFormat.getNumberInstance();
 		JFormattedTextField frmtdtxtfldTransferamount = new JFormattedTextField(amountFormat);
 		frmtdtxtfldTransferamount.setText("0.0");
-		frmtdtxtfldTransferamount.setBounds(143, 42, 123, 20);
+		frmtdtxtfldTransferamount.setBounds(159, 42, 139, 20);
 		frame.getContentPane().add(frmtdtxtfldTransferamount);
 		
 		agentID = new JTextField();
-		agentID.setBounds(143, 11, 123, 20);
+		agentID.setBounds(159, 11, 139, 20);
 		agentID.setText(Integer.toString((new Random()).nextInt(100)));
 		frame.getContentPane().add(agentID);
 		agentID.setColumns(10);
 		
 		JFormattedTextField frmtdtxtOpspersec = new JFormattedTextField(amountFormat);
 		frmtdtxtOpspersec.setText("0");
-		frmtdtxtOpspersec.setBounds(143, 73, 123, 20);
+		frmtdtxtOpspersec.setBounds(159, 73, 139, 20);
 		frame.getContentPane().add(frmtdtxtOpspersec);
 		
 		JLabel lblOperationsPerSecond = new JLabel("Operations per second");
-		lblOperationsPerSecond.setBounds(10, 74, 123, 14);
+		lblOperationsPerSecond.setBounds(10, 74, 139, 14);
 		frame.getContentPane().add(lblOperationsPerSecond);
 		
 		JLabel lblAmountIn = new JLabel("Amount in $ transferred");
-		lblAmountIn.setBounds(10, 104, 123, 14);
+		lblAmountIn.setBounds(10, 104, 139, 14);
 		frame.getContentPane().add(lblAmountIn);
 		
 		txtAmounttransferred = new JTextField();
 		txtAmounttransferred.setEditable(false);
 		txtAmounttransferred.setText("0");
-		txtAmounttransferred.setBounds(143, 104, 123, 20);
+		txtAmounttransferred.setBounds(159, 101, 139, 20);
 		frame.getContentPane().add(txtAmounttransferred);
 		txtAmounttransferred.setColumns(10);
 		
 		txtStatedisplay = new JTextField();
 		txtStatedisplay.setEditable(false);
 		txtStatedisplay.setText("Stopped");
-		txtStatedisplay.setBounds(143, 135, 123, 20);
+		txtStatedisplay.setBounds(159, 135, 139, 20);
 		frame.getContentPane().add(txtStatedisplay);
 		txtStatedisplay.setColumns(10);
 		
 		txtOpscompleted = new JTextField();
 		txtOpscompleted.setEditable(false);
 		txtOpscompleted.setText("0");
-		txtOpscompleted.setBounds(143, 166, 123, 20);
+		txtOpscompleted.setBounds(159, 166, 139, 20);
 		frame.getContentPane().add(txtOpscompleted);
 		txtOpscompleted.setColumns(10);
 		
@@ -121,7 +121,7 @@ public class AgentView extends JFrameView {
 		frame.getContentPane().add(lblState);
 		
 		JLabel lblOperationsCompleted = new JLabel("Operations Completed");
-		lblOperationsCompleted.setBounds(10, 169, 123, 14);
+		lblOperationsCompleted.setBounds(10, 169, 139, 14);
 		frame.getContentPane().add(lblOperationsCompleted);
 	}
 
@@ -129,14 +129,6 @@ public class AgentView extends JFrameView {
 	public void modelChanged(ModelEvent event) {
 		HashMap<String, Object> account = event.getAccounts().get(Integer.parseInt(id));
 		frame.setTitle("Start " + this.agentType + " agent for account: " + account.get("id"));
-		
-		Double amount = (Double) account.get("amount");
-		if (agentType.equals("Euros"))
-			amount = amount * 0.92;
-		else if (agentType.equals("Yuan"))
-			amount = amount * 6.23;
-		
-		((JTextField) frame.getContentPane().getComponent(3)).setText(String.format("%.2f", amount));
 	}
 	
 	 // Inner classes for Event Handling 
@@ -166,7 +158,6 @@ public class AgentView extends JFrameView {
 	public void setValues (String id, String agentType) {
 		this.id = id;
 		this.agentType = agentType;
-		((JLabel) frame.getContentPane().getComponent(5)).setText("Enter amount in " + this.agentType);
 	}
 	
 	//  This function has the sole purpose of allowing the design window to work

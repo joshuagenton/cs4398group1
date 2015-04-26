@@ -6,8 +6,6 @@ package atm.model;
 import java.awt.image.BufferedImage;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Set;
-
 import javax.swing.SwingUtilities;
 
 import atm.controller.DatabaseController;

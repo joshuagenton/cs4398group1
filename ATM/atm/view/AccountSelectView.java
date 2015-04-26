@@ -1,10 +1,12 @@
 package atm.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Label;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +14,7 @@ import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -73,6 +76,18 @@ public class AccountSelectView extends JFrameView {
 	 */
 	public void addButtons (){
 		List<Results> accounts = ((ATMCoreModel)getModel()).getAccounts();
+		if(accounts.size() == 0){
+			setLayout(new BorderLayout(0, 0));
+			
+			Label label = new Label("There are no accounts associated with your card.");
+			label.setAlignment(Label.CENTER);
+			label.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 24));
+			label.setForeground(new Color(255, 0, 0));
+			add(label, BorderLayout.CENTER);
+			setVisible(true);
+			repaint();
+			return;
+		}
 		total_pages = (int)Math.ceil(accounts.size()/4);
 		if (total_pages > 1){
 			System.out.println("Adding next page button");
@@ -105,6 +120,7 @@ public class AccountSelectView extends JFrameView {
 		if (current_page == total_pages){
 			lastResult = accounts.size();
 		}
+		
 		for(final Results a : accounts.subList(current_page*4, lastResult)){
 			JButton Account = new JButton();
 			Account.setPreferredSize(new Dimension(200, 200));
@@ -131,15 +147,17 @@ public class AccountSelectView extends JFrameView {
 			}
 		}
 		
-		Icon transIcon = new ImageIcon(this.getClass().getResource("/atm/view/transfer.jpg"));
-		JButton btnTransfer = new JButton(transIcon);
-		btnTransfer.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnTransfer.setFont(new Font("Gill Sans MT Ext Condensed Bold", Font.PLAIN, 40));
-		btnTransfer.setBounds(25, 472, 300, 100);
-		btnTransfer.addActionListener(handler);
-		setLayout(null);
-		btnTransfer.setActionCommand("Transfer");
-		add(btnTransfer);
+		if (accounts.size() > 1){
+			Icon transIcon = new ImageIcon(this.getClass().getResource("/atm/view/transfer.jpg"));
+			JButton btnTransfer = new JButton(transIcon);
+			btnTransfer.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			btnTransfer.setFont(new Font("Gill Sans MT Ext Condensed Bold", Font.PLAIN, 40));
+			btnTransfer.setBounds(25, 472, 300, 100);
+			btnTransfer.addActionListener(handler);
+			setLayout(null);
+			btnTransfer.setActionCommand("Transfer");
+			add(btnTransfer);
+		}
 		
 		Icon cancelIcon = new ImageIcon(this.getClass().getResource("/atm/view/cancel.jpg"));
 		JButton btnCancel = new JButton(cancelIcon);

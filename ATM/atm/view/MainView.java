@@ -4,8 +4,6 @@ import java.awt.EventQueue;
 import java.awt.Image;
 import java.io.IOException;
 import java.util.Random;
-import java.util.Scanner;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;

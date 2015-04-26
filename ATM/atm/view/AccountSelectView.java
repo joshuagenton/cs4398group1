@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.swing.Icon;
@@ -71,7 +72,7 @@ public class AccountSelectView extends JFrameView {
 	 * Adds the button to the page.
 	 */
 	public void addButtons (){
-		Set<Results> accounts = ((ATMCoreModel)getModel()).getAccounts();
+		List<Results> accounts = ((ATMCoreModel)getModel()).getAccounts();
 		BufferedImage picture = ((ATMCoreModel)getModel()).getPicture();
 		UIManager.put("Button.disabled",UIManager.get("Button.enabled"));
 		System.out.println("SIZE: " + accounts.size());
@@ -86,7 +87,7 @@ public class AccountSelectView extends JFrameView {
 			Account.setFont(new Font("Gill Sans MT Condensed", Font.PLAIN, 22));
 			Account.setActionCommand("SelectAccount");
 			Account.addActionListener(handler);
-			Account.setBounds(new Rectangle(i%2*300+350, (i/2)* 300+150, 250, 150));
+			Account.setBounds(new Rectangle(i%2*300+350, (i/2)* 250+150, 250, 150));
 			Account.addActionListener(new java.awt.event.ActionListener() {
 				@Override
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -99,8 +100,6 @@ public class AccountSelectView extends JFrameView {
 			add(Account);
 			if (((ATMCoreModel)getModel()).getTransType() == null){
 				Account.setEnabled(false);
-
-				
 			}
 		}
 		Icon transIcon = new ImageIcon(this.getClass().getResource("/atm/view/transfer.jpg"));

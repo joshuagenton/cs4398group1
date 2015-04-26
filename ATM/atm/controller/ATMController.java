@@ -113,7 +113,7 @@ public class ATMController extends AbstractController{
 		try {
 			num = db.validate_user(((ATMCoreModel)getModel()).getAccount_number(), String.valueOf(cs));
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
+			((ATMCoreModel)getModel()).dbError();
 			e1.printStackTrace();
 		}
 		if (num > 0){
@@ -136,7 +136,7 @@ public class ATMController extends AbstractController{
 					try {
 						db.setPicture(((ATMCoreModel)getModel()).getAccount_number(), String.valueOf(cs), picture);
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
+						((ATMCoreModel)getModel()).dbError();
 						e.printStackTrace();
 					}
 				}
@@ -168,8 +168,7 @@ public class ATMController extends AbstractController{
 			else
 				((ATMCoreModel)getModel()).insufficientFunds();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			((ATMCoreModel)getModel()).dbError();
 		}
 		System.out.println("transferred");
 		
@@ -190,8 +189,7 @@ public class ATMController extends AbstractController{
 			else
 				((ATMCoreModel)getModel()).insufficientFunds();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			((ATMCoreModel)getModel()).dbError();
 		}
 	}
 	
@@ -202,8 +200,7 @@ public class ATMController extends AbstractController{
 		try {
 			((ATMCoreModel)getModel()).setAccounts(db.getAccounts());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			((ATMCoreModel)getModel()).dbError();
 		}
 	}
 

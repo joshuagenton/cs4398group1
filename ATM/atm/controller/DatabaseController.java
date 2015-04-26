@@ -5,7 +5,10 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.imageio.ImageIO;
@@ -41,8 +44,8 @@ public class DatabaseController {
 	 * @throws SQLException 
 	 * @throws Exception 
 	 */
-	public Set<Results> getAccounts() throws SQLException, Exception{
-		Set<Results> accounts = new HashSet<Results>();
+	public List<Results> getAccounts() throws SQLException, Exception{
+		List<Results> accounts = new ArrayList<Results>();
 		String query = "Select a.name,a.account_bal,a.account_num from account a, "
 				+ "Users u, User_Accounts ua Where ua.CCN = u.CCN AND "
 				+ "ua.account_num = a.account_num AND u.CCN = '" + CCN +"'";
@@ -53,6 +56,7 @@ public class DatabaseController {
 			while(rs.next()){
 				accounts.add(new Results(rs.getString("name"), rs.getInt("account_num"),rs.getDouble("account_bal")));
 			}
+		Collections.sort(accounts, new AccountCompare());
 		System.out.println("DB CONTROLLER ACCOUNTS SIZE: " + accounts.size());
 		return accounts;
 	}

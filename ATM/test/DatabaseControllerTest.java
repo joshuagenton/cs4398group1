@@ -4,6 +4,7 @@ package test;
 import static org.junit.Assert.*;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.After;
@@ -37,7 +38,7 @@ public class DatabaseControllerTest {
 	public final void testGetAccounts() throws SQLException, Exception {
 		DatabaseController db = new DatabaseController();
 		db.validate_user("6391480001052388", "1234");
-		Set<Results> results = db.getAccounts();
+		List<Results> results = db.getAccounts();
 		for (Results r : results){
 			assertNotNull(r);
 		}
@@ -69,7 +70,7 @@ public class DatabaseControllerTest {
 	public final void testDeposit() throws SQLException, Exception {
 		DatabaseController db = new DatabaseController();
 		db.validate_user("6391480001052388", "1234");
-		Set<Results> results = db.getAccounts();
+		List<Results> results = db.getAccounts();
 		for (Results r : results){
 			double balance = db.deposit(r.getAccountNum(), 100);
 			assertEquals(r.getBalance(), balance, 100);
@@ -81,7 +82,7 @@ public class DatabaseControllerTest {
 	public final void testWithdrawl() throws SQLException, Exception {
 		DatabaseController db = new DatabaseController();
 		db.validate_user("6391480001052388", "1234");
-		Set<Results> results = db.getAccounts();
+		List<Results> results = db.getAccounts();
 		for (Results r : results){
 			boolean balance = db.withdrawl(r.getAccountNum(), 100);
 			assertEquals(true, balance);
@@ -92,7 +93,7 @@ public class DatabaseControllerTest {
 	public final void testTransfer() throws SQLException, Exception {
 		DatabaseController db = new DatabaseController();
 		db.validate_user("6391480001052388", "1234");
-		Set<Results> results = db.getAccounts();
+		List<Results> results = db.getAccounts();
 		Object[] account = results.toArray();
 		boolean test = db.transfer(((Results) account[0]).getAccountNum(), ((Results) account[1]).getAccountNum(), 100);
 		assertEquals(true,test);

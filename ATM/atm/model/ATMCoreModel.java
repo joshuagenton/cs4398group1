@@ -5,6 +5,7 @@ package atm.model;
 
 import java.awt.image.BufferedImage;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Set;
 
 import javax.swing.SwingUtilities;
@@ -306,12 +307,12 @@ public class ATMCoreModel extends AbstractModel{
 		return this.picture;
 	}
 	
-	private Set<Results> accounts;
+	private List<Results> accounts;
 	
-	public void setAccounts(Set<Results> set) {
-		this.accounts = set;	
+	public void setAccounts(List<Results> list) {
+		this.accounts = list;	
 	}
-	public Set<Results> getAccounts(){
+	public List<Results> getAccounts(){
 		return accounts;
 	}
 	

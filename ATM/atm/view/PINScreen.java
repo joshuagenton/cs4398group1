@@ -1,8 +1,6 @@
 package atm.view;
 
 import java.awt.Cursor;
-import java.awt.Rectangle;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;

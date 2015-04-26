@@ -109,8 +109,13 @@ public class ATMController extends AbstractController{
 	 */
 	public boolean login(char[] cs){
 		((ATMCoreModel)getModel()).waiting();
-		db.setModel(getModel());
-		int num = db.validate_user(((ATMCoreModel)getModel()).getAccount_number(), String.valueOf(cs));
+		int num = 0;
+		try {
+			num = db.validate_user(((ATMCoreModel)getModel()).getAccount_number(), String.valueOf(cs));
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		if (num > 0){
 			((ATMCoreModel)getModel()).setAccount_validated(num);
 			getAccounts();
@@ -128,7 +133,12 @@ public class ATMController extends AbstractController{
 				picture = null;
 				picture = this.webcam.getImage();
 				if (picture != null) {
-					db.setPicture(((ATMCoreModel)getModel()).getAccount_number(), String.valueOf(cs), picture);
+					try {
+						db.setPicture(((ATMCoreModel)getModel()).getAccount_number(), String.valueOf(cs), picture);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 			else {
@@ -152,10 +162,15 @@ public class ATMController extends AbstractController{
 	 */
 	public void transferFunds(Results account1, Results account2, Double amount) {
 		((ATMCoreModel)getModel()).waiting();
-		if(db.transfer(account1.getAccountNum(), account2.getAccountNum(), amount))		
-			((ATMCoreModel)getModel()).withdrawComplete();
-		else
-			((ATMCoreModel)getModel()).insufficientFunds();
+		try {
+			if(db.transfer(account1.getAccountNum(), account2.getAccountNum(), amount))		
+				((ATMCoreModel)getModel()).withdrawComplete();
+			else
+				((ATMCoreModel)getModel()).insufficientFunds();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println("transferred");
 		
 	}
@@ -169,17 +184,27 @@ public class ATMController extends AbstractController{
 	 */
 	public void withdrawFunds(Results account, Double amount) {
 		((ATMCoreModel)getModel()).waiting();
-		if(db.withdrawl(account.getAccountNum(), amount))		
-			((ATMCoreModel)getModel()).withdrawComplete();
-		else
-			((ATMCoreModel)getModel()).insufficientFunds();
+		try {
+			if(db.withdrawl(account.getAccountNum(), amount))		
+				((ATMCoreModel)getModel()).withdrawComplete();
+			else
+				((ATMCoreModel)getModel()).insufficientFunds();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 
 	//  Getters/Setters
 
 	public void getAccounts() {
-		((ATMCoreModel)getModel()).setAccounts(db.getAccounts());
+		try {
+			((ATMCoreModel)getModel()).setAccounts(db.getAccounts());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 

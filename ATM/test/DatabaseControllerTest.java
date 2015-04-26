@@ -3,6 +3,7 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.sql.SQLException;
 import java.util.Set;
 
 import org.junit.After;
@@ -33,7 +34,7 @@ public class DatabaseControllerTest {
 	}
 
 	@Test
-	public final void testGetAccounts() {
+	public final void testGetAccounts() throws SQLException, Exception {
 		DatabaseController db = new DatabaseController();
 		db.validate_user("6391480001052388", "1234");
 		Set<Results> results = db.getAccounts();
@@ -54,7 +55,7 @@ public class DatabaseControllerTest {
 	}
 
 	@Test
-	public final void testValidate_user() {
+	public final void testValidate_user() throws SQLException, Exception {
 		DatabaseController db = new DatabaseController();
 		int test1= db.validate_user("6391480001052388", "1234");
 		assertEquals(1, test1);
@@ -65,7 +66,7 @@ public class DatabaseControllerTest {
 	}
 
 	@Test
-	public final void testDeposit() {
+	public final void testDeposit() throws SQLException, Exception {
 		DatabaseController db = new DatabaseController();
 		db.validate_user("6391480001052388", "1234");
 		Set<Results> results = db.getAccounts();
@@ -77,7 +78,7 @@ public class DatabaseControllerTest {
 	}
 
 	@Test
-	public final void testWithdrawl() {
+	public final void testWithdrawl() throws SQLException, Exception {
 		DatabaseController db = new DatabaseController();
 		db.validate_user("6391480001052388", "1234");
 		Set<Results> results = db.getAccounts();
@@ -88,7 +89,7 @@ public class DatabaseControllerTest {
 	}
 
 	@Test
-	public final void testTransfer() {
+	public final void testTransfer() throws SQLException, Exception {
 		DatabaseController db = new DatabaseController();
 		db.validate_user("6391480001052388", "1234");
 		Set<Results> results = db.getAccounts();

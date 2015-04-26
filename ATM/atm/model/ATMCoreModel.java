@@ -4,6 +4,7 @@
 package atm.model;
 
 import java.awt.image.BufferedImage;
+import java.sql.SQLException;
 import java.util.Set;
 
 import javax.swing.SwingUtilities;
@@ -318,7 +319,7 @@ public class ATMCoreModel extends AbstractModel{
 		return data_baseinterface;
 	}
 
-	public void setData_baseinterface(DatabaseController data_baseinterface) {
+	public void setData_baseinterface(DatabaseController data_baseinterface) throws SQLException, Exception {
 		this.data_baseinterface = data_baseinterface;
 		data_baseinterface.validate_user(account_number, PIN);
 	}

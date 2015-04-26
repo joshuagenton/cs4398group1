@@ -65,17 +65,47 @@ public class AccountSelectView extends JFrameView {
 		setVisible(true);
 	
 	}
-
+	
+	int current_page = 0;
+	int total_pages = 0;
 	/**
 	 * Adds the button to the page.
 	 */
 	public void addButtons (){
 		List<Results> accounts = ((ATMCoreModel)getModel()).getAccounts();
+		total_pages = (int)Math.ceil(accounts.size()/4);
+		if (total_pages > 1){
+			System.out.println("Adding next page button");
+			Icon nextIcon = new ImageIcon(this.getClass().getResource("/atm/view/next_page_arrow.gif"));
+			JButton nextPage = new JButton(nextIcon);
+			nextPage.setBounds(750, 650, 250, 150);
+			nextPage.setOpaque(false);
+			nextPage.setBorderPainted(false);
+			nextPage.setContentAreaFilled(false);
+			nextPage.addActionListener(new java.awt.event.ActionListener() {
+				@Override
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					removeAll();
+					current_page = current_page + 1;
+					if (current_page == total_pages)
+						current_page = 0;
+					addButtons();
+					revalidate();
+					repaint();
+				}
+			});
+			add(nextPage);
+		}
+		
 		BufferedImage picture = ((ATMCoreModel)getModel()).getPicture();
 		UIManager.put("Button.disabled",UIManager.get("Button.enabled"));
 		System.out.println("SIZE: " + accounts.size());
 		int i = 0;
-		for(final Results a : accounts){
+		int lastResult = current_page*4+4;
+		if (current_page == total_pages){
+			lastResult = accounts.size();
+		}
+		for(final Results a : accounts.subList(current_page*4, lastResult)){
 			JButton Account = new JButton();
 			Account.setPreferredSize(new Dimension(200, 200));
 			Account.setFont(new Font("Dialog", Font.BOLD, 14));
@@ -100,6 +130,7 @@ public class AccountSelectView extends JFrameView {
 				Account.setEnabled(false);
 			}
 		}
+		
 		Icon transIcon = new ImageIcon(this.getClass().getResource("/atm/view/transfer.jpg"));
 		JButton btnTransfer = new JButton(transIcon);
 		btnTransfer.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

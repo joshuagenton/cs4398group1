@@ -6,7 +6,7 @@ import java.util.SortedMap;
 public class ModelEvent extends ActionEvent {
 	private int amount;
 	private SortedMap<Integer, HashMap> accounts;
-	public ModelEvent(Object obj, int id, String message, int amount, SortedMap<Integer, HashMap> accts){
+	public ModelEvent(Object obj, int id, String message, int amount, SortedMap<Integer, HashMap> accts, SortedMap<String, Agent> agents){
 		super(obj, id, message);
 		this.amount = amount;
 		this.accounts = accts;

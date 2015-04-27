@@ -16,12 +16,12 @@ public class AccountModel extends AbstractModel {
 	
 	public void store(int value){
 		current = value;
-		ModelEvent me = new ModelEvent(this, 1, "", current, accounts);
+		ModelEvent me = new ModelEvent(this, 1, "", current, accounts, agents);
 		notifyChanged(me);
 	}
 	
 	public void refresh(){
-		ModelEvent me = new ModelEvent(this, 1, "", current, accounts);
+		ModelEvent me = new ModelEvent(this, 1, "", current, accounts, agents);
 		notifyChanged(me);
 	}
 	
@@ -39,7 +39,7 @@ public class AccountModel extends AbstractModel {
 			total -= current;
 		}
 		current = total;
-		ModelEvent me = new ModelEvent(this, 1, "", total, accounts);
+		ModelEvent me = new ModelEvent(this, 1, "", total, accounts, agents);
 		notifyChanged(me);
 	}
 
@@ -73,7 +73,10 @@ public class AccountModel extends AbstractModel {
 	public synchronized Boolean AddAmount (Agent agent) {
 		while ((Double) accounts.get(agent.accountID).get("amount") + agent.amount < 0.0 && agent.agentRunning) {
 			try {
-				agent.agentStatus = "Blocked";
+				if (!agent.agentStatus.equals("Blocked")) {
+					agent.agentStatus = "Blocked";
+					refresh();
+				}
 				wait();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -94,6 +97,13 @@ public class AccountModel extends AbstractModel {
 			return true;
 		}
 		return false;
+	}
+	
+	public void StartAgent(String accountID, double amount, double ops, String agentID) {
+		if (!agents.containsKey(agentID)) {
+			//Thread T1 = new Thread(new Agent(accountID, amount, ops, agentID, this));
+			//agents.put(agentID, T1);
+		}
 	}
 
 	public SortedMap<Integer, HashMap> getAccounts() {

@@ -38,7 +38,9 @@ public class CardReaderController extends AbstractController {
 		try {
 			card.readcont(input);
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("IO Thrown in Card Reader");
+			((ATMCoreModel)getModel()).cardError();
+			return;
 		}
 		((ATMCoreModel)getModel()).setAccount_info(card.getCcn(),card.getCard_holder());
 	}

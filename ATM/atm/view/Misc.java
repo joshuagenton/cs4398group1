@@ -121,6 +121,18 @@ public class Misc extends JFrameView {
 		setVisible(true);
 		repaint();
 	}
+	
+	public void cardReadError(){
+		setLayout(new BorderLayout(0, 0));
+		
+		Label label = new Label("There was an error reading your card.  Please try again.");
+		label.setAlignment(Label.CENTER);
+		label.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 24));
+		label.setForeground(new Color(255, 0, 0));
+		add(label, BorderLayout.CENTER);
+		setVisible(true);
+		repaint();
+	}
 	/**
 	 * The transComplete is a successful transfer from one account to another.
 	 */

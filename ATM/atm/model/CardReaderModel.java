@@ -166,6 +166,9 @@ public class CardReaderModel extends AbstractModel {
 		setCard_holder(track1_cardholder.trim());
 		setCcn(track1_ccn.trim());
 		setExpDate(track1_expmo + "/" + 1 + "/" + track1_expyr);
+		System.out.println(getCcn().length());
+		if (getCcn().length() != 16)
+			throw new IOException("Invalid Card");
 	}
 
 	// Getters/Setters

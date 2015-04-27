@@ -88,9 +88,10 @@ public class AccountSelectView extends JFrameView {
 			repaint();
 			return;
 		}
-		total_pages = (int)Math.ceil(accounts.size()/4);
+		total_pages = (int) Math.ceil((double)accounts.size()/4);
+		
 		if (total_pages > 1){
-			System.out.println("Adding next page button");
+			System.out.println("Total Pages: " + total_pages+ " \nAccounts: " + accounts.size());
 			Icon nextIcon = new ImageIcon(this.getClass().getResource("/atm/view/next_page_arrow.gif"));
 			JButton nextPage = new JButton(nextIcon);
 			nextPage.setBounds(750, 650, 250, 150);
@@ -117,7 +118,8 @@ public class AccountSelectView extends JFrameView {
 		System.out.println("SIZE: " + accounts.size());
 		int i = 0;
 		int lastResult = current_page*4+4;
-		if (current_page == total_pages){
+		System.out.println("Current Page: "+ current_page);
+		if (current_page +1 == total_pages){
 			lastResult = accounts.size();
 		}
 		

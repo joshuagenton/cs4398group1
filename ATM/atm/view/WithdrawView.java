@@ -1,6 +1,7 @@
 package atm.view;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
@@ -77,16 +78,18 @@ public class WithdrawView extends JFrameView {
 	{
 		if(textPanel == null){
 			GridBagConstraints bl = new GridBagConstraints();
+			GridBagConstraints b2 = new GridBagConstraints();
 			bl.gridx = 0;
 			bl.gridy = 0;
-			
+			b2.gridx = 0;
+			b2.gridy = 1;
 			textPanel = new JPanel();
 			textPanel.setOpaque(false);
-			textPanel.setBounds(379, 275, 200, 106);
+			textPanel.setBounds(379, 275, 550, 480);
 			textPanel.setLayout(new GridBagLayout());
 			if (((ATMCoreModel)getModel()).type == TransactionTypes.Withdraw) {
 				textPanel.add(getTakeCashLabel(), bl);
-				add(getLblMoneyGif());
+				textPanel.add(getLblMoneyGif(),b2);
 			}
 			else if (((ATMCoreModel)getModel()).type == TransactionTypes.Transfer) textPanel.add(getTransferCompleteLabel(), bl);
 		}
@@ -99,7 +102,8 @@ public class WithdrawView extends JFrameView {
 		if(takeCashLabel == null){
 			takeCashLabel = new JLabel();
 			takeCashLabel.setText("Transfer Complete");
-			takeCashLabel.setPreferredSize(new Dimension(200, 20));
+			takeCashLabel.setFont(new Font("Tahoma", Font.PLAIN, 32));
+			takeCashLabel.setPreferredSize(new Dimension(300, 35));
 		}
 		return takeCashLabel;
 	}
@@ -109,7 +113,8 @@ public class WithdrawView extends JFrameView {
 		if(takeCashLabel == null){
 			takeCashLabel = new JLabel();
 			takeCashLabel.setText("Please Take Your Cash");
-			takeCashLabel.setPreferredSize(new Dimension(200, 20));
+			takeCashLabel.setFont(new Font("Tahoma", Font.PLAIN, 26));
+			takeCashLabel.setPreferredSize(new Dimension(300, 35));
 			
 		}
 		return takeCashLabel;
@@ -129,7 +134,7 @@ public class WithdrawView extends JFrameView {
 	private JButton getLogoutButton(){
 		if(logoutButton == null){
 			logoutButton = new JButton(LOGOUT);
-			logoutButton.setBounds(445, 209, 101, 23);
+			logoutButton.setBounds(572, 241, 101, 23);
 			logoutButton.setOpaque(false);
 			logoutButton.setBorderPainted(false);
 			logoutButton.addActionListener(handler);

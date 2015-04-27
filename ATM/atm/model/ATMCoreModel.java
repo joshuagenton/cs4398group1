@@ -31,7 +31,17 @@ public class ATMCoreModel extends AbstractModel{
 	private DatabaseController data_baseinterface;
 	
 
-	
+	public synchronized void cardError(){
+		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.Wait, AgentStatus.CardReadError);
+		reset();
+		SwingUtilities.invokeLater(
+				new Runnable() {
+				    public void run() {
+				    	notifyChanged(me);
+				    }
+				});
+		notifyAll();
+	}
 	
 	public synchronized void dbError(){
 		final ModelEvent me = new ModelEvent(ModelEvent.EventKind.Wait, AgentStatus.DBCommError);

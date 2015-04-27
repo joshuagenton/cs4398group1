@@ -165,17 +165,14 @@ public class MainView extends JFrame implements View, ModelListener{
 			Misc misc = new Misc(getModel(), getController());
 			misc.databaseCommError();
 			getContentPane().add(misc);
+		}		
+		else if (me.getAgStatus() == AgentStatus.CardReadError) {
+			Misc misc = new Misc(getModel(), getController());
+			misc.cardReadError();
+			getContentPane().add(misc);
 		}
 		this.revalidate();
 		this.repaint();
-		if (me.getAgStatus() == AgentStatus.DBCommError) {
-			try {
-				System.in.read();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 	}
 	
 	/**

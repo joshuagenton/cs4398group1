@@ -6,6 +6,7 @@ import java.util.TreeMap;
 
 public class AccountModel extends AbstractModel {
 	private SortedMap<Integer, HashMap> accounts = new TreeMap<Integer, HashMap>();
+	private SortedMap<String, Agent> agents = new TreeMap<String, Agent>();
 
 	private int total = 0;
 	private int current = 0;
@@ -67,6 +68,32 @@ public class AccountModel extends AbstractModel {
 			accounts.put(Integer.parseInt(id), account);
 			refresh();
 		}
+	}
+	
+	public synchronized Boolean AddAmount (Agent agent) {
+		while ((Double) accounts.get(agent.accountID).get("amount") + agent.amount < 0.0 && agent.agentRunning) {
+			try {
+				agent.agentStatus = "Blocked";
+				wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		if (!agent.agentRunning)
+			return false;
+		
+		agent.agentStatus = "Running";
+		Double amount = (Double) accounts.get(agent.accountID).get("amount");
+		accounts.get(agent.accountID).put("amount", ((Double) accounts.get(agent.accountID).get("amount") + agent.amount));
+		if ((Double) accounts.get(agent.accountID).get("amount") >= 0.0) {
+			System.out.println("Added amount "+ agent.amount + " for " + ((Double) accounts.get(agent.accountID).get("amount")) + " to " + accounts.get(agent.accountID).get("id"));
+			refresh();
+			notifyAll();
+			return true;
+		}
+		return false;
 	}
 
 	public SortedMap<Integer, HashMap> getAccounts() {

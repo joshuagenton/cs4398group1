@@ -9,7 +9,7 @@ class Agent implements Runnable {
 	Double transferred = 0.0;
 	String type;
 	AccountModel accountModel;
-	Boolean agentRunning = false;
+	Boolean agentRunning = true;
 	String agentStatus = "Stopped";
 	//Accounts accounts;
 

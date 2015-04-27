@@ -33,6 +33,13 @@ public class IdleTimeController extends TimerTask {
 		timer.schedule(timerTask, 45000);
 	}
 
+	public static void setTime(int newTime){
+		if(timer != null)
+			cancelTimer();
+		timerTask = new IdleTimeController();
+		timer = new Timer();
+		timer.schedule(timerTask, newTime);
+	}
 	/**
 	 * The cancelTimer allows the system the ability to cancel the timer if another
 	 * action is performed.

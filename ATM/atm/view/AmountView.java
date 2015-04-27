@@ -189,16 +189,16 @@ public class AmountView extends JFrameView {
 	}
 	
 	DecimalFormat dec = new DecimalFormat("'$'0.00");
-	
-	private void setMsg(){
-		JTextArea msg = new JTextArea(5,15);
+	JTextArea msg = new JTextArea(5,15);
+	private void setMsg(String notice){
+		
 		msg.setOpaque(false);
 		setLayout(null);
 		//msg.setLineWrap(true);
 		msg.setBounds(404, 461, 300, 100);
 	    add (msg);
 		msg.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		msg.setText("Please Enter\nan amount in \nincrements of\n$20.00");
+		msg.setText(notice);
 		revalidate();
 		repaint();
 	}
@@ -232,6 +232,7 @@ public class AmountView extends JFrameView {
 			textAmount.setFont(new Font("Tahoma", Font.PLAIN, 32));
 			textAmount.setValue(0.0);
 			textAmount.setText("$0.00");
+			textAmount.setEditable(false);
 			//textAmount.setText("$0.00");
 			textAmount.setColumns(10);
 		}
@@ -275,9 +276,15 @@ public class AmountView extends JFrameView {
 			submitButton.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					if ((double)textAmount.getValue()%20 != 0 && ((ATMCoreModel)getModel()).type == TransactionTypes.Withdraw){
-						setMsg();
+						setMsg("Please Enter\nan amount in \nincrements of\n$20.00");
 						textAmount.setValue(0.0);
-						textAmount.setText("$0.00");
+						textAmount.setText("$0.00" );
+						IdleTimeController.runTimer((ATMController)getController());
+					}
+					else if ((double)textAmount.getValue() > 800.0 && ((ATMCoreModel)getModel()).type == TransactionTypes.Withdraw){
+						setMsg("Please Enter\nan amount less \nthan $800.00");
+						textAmount.setValue(0.0);
+						textAmount.setText("$0.00" );
 						IdleTimeController.runTimer((ATMController)getController());
 					}
 					else if (((ATMCoreModel)getModel()).type == TransactionTypes.Withdraw)

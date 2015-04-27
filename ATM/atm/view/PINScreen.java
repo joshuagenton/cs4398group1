@@ -117,7 +117,8 @@ public class PINScreen extends JFrameView {
 			}
 			num.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					PIN.setText(String.valueOf(PIN.getPassword())+number);
+					if (PIN.getPassword().length < 4)
+						PIN.setText(String.valueOf(PIN.getPassword())+number);
 					IdleTimeController.runTimer((ATMController)getController());
 				}
 			});
@@ -186,9 +187,9 @@ public class PINScreen extends JFrameView {
 	 */
 	private JPasswordField getPIN() {
 		if (PIN == null) {
-			PIN = new JPasswordField();
+			PIN = new JPasswordField(4);
 			PIN.setFont(new Font("Dialog", Font.PLAIN, 36));
-
+			PIN.setEditable(false);
 		}
 		return PIN;
 	}

@@ -4,8 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Label;
+
+import javax.swing.JLabel;
+
 import atm.controller.ATMController;
 import atm.controller.Controller;
+import atm.controller.IdleTimeController;
 import atm.model.Model;
 import atm.model.ModelEvent;
 
@@ -29,6 +33,8 @@ public class Misc extends JFrameView {
 	public Misc(Model model, Controller controller) {
 		super(model, controller);
 		this.setOpaque(false);
+		IdleTimeController.cancelTimer();
+		IdleTimeController.setTime(5000);
 	}
 
 	/**
@@ -125,8 +131,7 @@ public class Misc extends JFrameView {
 	public void cardReadError(){
 		setLayout(new BorderLayout(0, 0));
 		
-		Label label = new Label("There was an error reading your card.  Please try again.");
-		label.setAlignment(Label.CENTER);
+		JLabel label = new JLabel("      There was an error reading your card.  Please try again.");
 		label.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 24));
 		label.setForeground(new Color(255, 0, 0));
 		add(label, BorderLayout.CENTER);
@@ -139,10 +144,11 @@ public class Misc extends JFrameView {
 	public void transComplete(){
 		setLayout(new BorderLayout(0, 0));
 		
-		Label label = new Label("Thank you for using Texas State Bank ATM");
+		Label label = new Label("                Thank you for using Texas State Bank ATM");
 		label.setAlignment(Label.CENTER);
 		label.setFont(new Font("Lucida Calligraphy", Font.PLAIN, 24));
 		label.setForeground(new Color(255, 0, 0));
+		
 		add(label, BorderLayout.CENTER);
 		setVisible(true);
 		repaint();

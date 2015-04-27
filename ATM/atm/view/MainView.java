@@ -170,6 +170,7 @@ public class MainView extends JFrame implements View, ModelListener{
 			Misc misc = new Misc(getModel(), getController());
 			misc.cardReadError();
 			getContentPane().add(misc);
+			
 		}
 		this.revalidate();
 		this.repaint();

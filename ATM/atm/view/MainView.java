@@ -94,6 +94,7 @@ public class MainView extends JFrame implements View, ModelListener{
 	 */
 	public void modelChanged(ModelEvent me) {
 		this.getContentPane().removeAll();
+		
 		System.out.println("CHANGE TO VIEW: " + me.getAgStatus());
 		if (me.getAgStatus() == AgentStatus.Start){
 			getPic();

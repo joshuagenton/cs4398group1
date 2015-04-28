@@ -83,7 +83,8 @@ public class AccountModel extends AbstractModel {
 	 */
 	public void PrintAccounts() {
 		for (Integer key : accounts.keySet()) {
-			System.out.println(accounts.get(key).get("id") + " " + accounts.get(key).get("name") + " " + String.format("%.2f", accounts.get(key).get("amount")));
+			System.out.println(accounts.get(key).get("id") + " " + accounts.get(key).get("name") + " " 
+					+ String.format("%.2f", accounts.get(key).get("amount")));
 		}
 	}
 	
@@ -102,7 +103,8 @@ public class AccountModel extends AbstractModel {
 		System.out.println(amount);
 		
 		if (((Double) account.get("amount")) + amount < 0) {
-			throw new Exception("Insufficient funds: amount to withdraw is " + (-1 * (((Double) account.get("amount")) + amount)) + " greater than available funds: " + ((Double) account.get("amount")));
+			throw new Exception("Insufficient funds: amount to withdraw is " + (-1 * (((Double) account.get("amount")) + amount)) 
+					+ " greater than available funds: " + ((Double) account.get("amount")));
 		}
 		else {
 			account.put("amount", (((Double) account.get("amount")) + amount));
@@ -138,7 +140,8 @@ public class AccountModel extends AbstractModel {
 		Double amount = (Double) accounts.get(agent.accountID).get("amount");
 		accounts.get(agent.accountID).put("amount", ((Double) accounts.get(agent.accountID).get("amount") + agent.amount));
 		if ((Double) accounts.get(agent.accountID).get("amount") >= 0.0) {
-			System.out.println("Added amount "+ agent.amount + " for " + ((Double) accounts.get(agent.accountID).get("amount")) + " to " + accounts.get(agent.accountID).get("id"));
+			System.out.println("Added amount "+ agent.amount + " for " + ((Double) accounts.get(agent.accountID).get("amount")) 
+					+ " to " + accounts.get(agent.accountID).get("id"));
 			refresh();
 			notifyAll();
 			return true;

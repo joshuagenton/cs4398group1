@@ -18,11 +18,15 @@ import simpleAccount.model.ModelEvent;
 import simpleAccount.view.TransferView.Handler;
 import javax.swing.JTextArea;
 
+
+/**
+ * This is the ErrorView for if an error is encountered in the view.
+ * 
+ * @author Paul Bryson
+ * @since 2015-04-05
+ */
 public class ErrorView extends JFrameView {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	
@@ -57,7 +61,11 @@ public class ErrorView extends JFrameView {
 	public void modelChanged(ModelEvent event) {
 	}
 	
-	 // Inner classes for Event Handling 
+	/**
+	 * Inner classes for Event Handling 
+	 * @author Paul Bryson
+	 *
+	 */
 	class Handler implements ActionListener { 
 		// Event handling is handled locally
 		public void actionPerformed(ActionEvent e) {
@@ -66,17 +74,28 @@ public class ErrorView extends JFrameView {
 	    }
 	}
 	
+	/**
+	 * Sets up the error view.
+	 * @param model the AccountModel
+	 * @param controller the AccountController
+	 */
 	public ErrorView (AccountModel model, AccountController controller){
 		super(model, controller);
 		initialize();
 		this.frame.setVisible(true);
 	}
 	
+	/**
+	 * Sets the error message.
+	 * @param msg the error message
+	 */
 	public void setError (String msg) {
 		((JTextArea) frame.getContentPane().getComponent(1)).setText(msg);
 	}
 	
-	//  This function has the sole purpose of allowing the design window to work
+	/**
+	 * This function has the sole purpose of allowing the design window to work
+	 */
 	public ErrorView (){
 		super(new AccountModel(), new AccountController());
 		initialize();

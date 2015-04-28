@@ -13,11 +13,17 @@ import simpleAccount.model.Model;
 import simpleAccount.model.ModelEvent;
 import simpleAccount.view.JFrameView;
 
+
+/**
+ * This is the MainView.  This is the initial view that is created
+ * when the program is launched.  This allows the user to interact
+ * with funds in different currencies, save their changes, or exit.
+ * 
+ * @author Paul Bryson
+ * @since 2015-04-05
+ */
 public class MainView extends JFrameView {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 
@@ -83,6 +89,11 @@ public class MainView extends JFrameView {
 		
 	}
 	
+	/**
+	 * Sets up the main view.
+	 * @param model the AccountModel
+	 * @param controller the AccountController
+	 */
 	public MainView (Model model, Controller controller){
 		super(model, controller);
 		initialize();

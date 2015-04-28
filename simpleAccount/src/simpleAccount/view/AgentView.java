@@ -21,11 +21,16 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JFormattedTextField;
 
+
+/**
+ * This is the AgentView.  This is the secondary window that pops up
+ * when the user selects that they want a deposit/withdraw agent.
+ * 
+ * @author Paul Bryson/Stacie Christensen
+ * @since 2015-04-05
+ */
 public class AgentView extends JFrameView {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	private String id = "", agentType = "";
@@ -131,7 +136,11 @@ public class AgentView extends JFrameView {
 		frame.setTitle("Start " + this.agentType + " agent for account: " + account.get("id"));
 	}
 	
-	 // Inner classes for Event Handling 
+	/**
+	 * Inner classes for Event Handling 
+	 * @author Paul Bryson
+	 *
+	 */
 	class Handler implements ActionListener { 
 		// Event handling is handled locally
 		public void actionPerformed(ActionEvent e) {
@@ -149,18 +158,30 @@ public class AgentView extends JFrameView {
 	    }
 	}
 	
+	/**
+	 * Sets up the AgentView
+	 * @param model the AccountModel
+	 * @param controller the AccountController
+	 */
 	public AgentView (AccountModel model, AccountController controller){
 		super(model, controller);
 		initialize();
 		this.frame.setVisible(true);
 	}
 	
+	/**
+	 * Sets the agent values.
+	 * @param id the agentID
+	 * @param agentType the agent type (deposit/withdraw)
+	 */
 	public void setValues (String id, String agentType) {
 		this.id = id;
 		this.agentType = agentType;
 	}
 	
-	//  This function has the sole purpose of allowing the design window to work
+	/**
+	 * This function has the sole purpose of allowing the design window to work
+	 */
 	public AgentView (){
 		super(new AccountModel(), new AccountController());
 		initialize();

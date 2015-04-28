@@ -98,6 +98,9 @@ public class AccountModel extends AbstractModel {
 	 */
 	public void deposit (String id, String currency, Double amount) throws Exception {
 		HashMap<String, Object> account = accounts.get(Integer.parseInt(id));
+		
+		System.out.println(amount);
+		
 		if (((Double) account.get("amount")) + amount < 0) {
 			throw new Exception("Insufficient funds: amount to withdraw is " + (-1 * (((Double) account.get("amount")) + amount)) + " greater than available funds: " + ((Double) account.get("amount")));
 		}

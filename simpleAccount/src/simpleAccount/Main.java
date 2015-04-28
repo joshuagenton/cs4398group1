@@ -16,7 +16,7 @@ import simpleAccount.view.TestView;
 public class Main {
 
 	public static void main(String[] args) {
-		String datafile = "testfileHW4.txt";
+		String datafile = "testFileHW4.txt";
 		if (!(args.length == 0))
 			datafile = args[0];
 		

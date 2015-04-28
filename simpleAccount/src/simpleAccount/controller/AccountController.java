@@ -76,7 +76,7 @@ public class AccountController extends AbstractController {
 	 * @param currency the currency in which the user is editing in
 	 * @param amount the amount the user would like to deposit/withdraw
 	 */
-	public void operationTransfer(String id, String currency, Double amount){
+	public void operationTransfer(String id, String currency, Double amount) {
 		Double transAmount = amount;
 		if (currency.equals("Euros"))
 			transAmount = amount / 0.92;

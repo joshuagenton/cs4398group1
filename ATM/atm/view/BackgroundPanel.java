@@ -118,7 +118,7 @@ public class BackgroundPanel extends JPanel
 	/**
 	 *  Specify the horizontal alignment of the image when using ACTUAL style
 	 *  
-	 *  @param aligmentX is the x coordinate
+	 *  @param alignmentX is the x coordinate
 	 */
 	public void setImageAlignmentX(float alignmentX)
 	{

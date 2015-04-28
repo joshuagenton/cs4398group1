@@ -38,8 +38,8 @@ public class DatabaseController {
 	 * card and the PIN entered.
 	 * 
 	 * @return accounts that are associated with the user
-	 * @throws SQLException 
-	 * @throws Exception 
+	 * @throws SQLException for the SQL query
+	 * @throws Exception for the account call
 	 */
 	public List<Results> getAccounts() throws SQLException, Exception{
 		List<Results> accounts = new ArrayList<Results>();
@@ -66,10 +66,9 @@ public class DatabaseController {
 	 * @param account the account information associated with the user
 	 * @param PIN the PIN the user entered upon logging in
 	 * @return the image of the user
-	 * @throws ClassNotFoundException 
-	 * @throws SQLException 
-	 * @throws IOException 
-	 * @throws Exception 
+	 * @throws ClassNotFoundException for the class check
+	 * @throws SQLException for the SQL query
+	 * @throws IOException for the IO exception
 	 */
 	public BufferedImage getPicture(Object account, String PIN) throws ClassNotFoundException, SQLException, IOException  {
 		Connection conn = null;
@@ -101,8 +100,8 @@ public class DatabaseController {
 	 * @param account the account the user is interacting with
 	 * @param PIN the PIN that the user entered while logging in
 	 * @param picture the picture of the user
-	 * @throws SQLException 
-	 * @throws Exception 
+	 * @throws SQLException for the SQL query
+	 * @throws Exception for the account call
 	 */
 	public void setPicture(Object account, String PIN, BufferedImage picture) throws SQLException, Exception {
 		Connection conn = null;
@@ -133,8 +132,8 @@ public class DatabaseController {
 	 * @param account the accounts associated with the user
 	 * @param PIN the PIN they entered after swiping card
 	 * @return zero if the account is not found, and a 1+ if the account is found
-	 * @throws SQLException 
-	 * @throws Exception 
+	 * @throws SQLException for the SQL query
+	 * @throws Exception for the account call
 	 */
 	public int validate_user(Object account, String PIN) throws SQLException, Exception {
 		Connection conn = null;
@@ -157,8 +156,8 @@ public class DatabaseController {
 	 * @param account the account which the money will be deposited to
 	 * @param amount of money that will be deposited
 	 * @return int for the response
-	 * @throws SQLException 
-	 * @throws Exception 
+	 * @throws SQLException for the SQL query
+	 * @throws Exception for the account call
 	 */
 	public int deposit(Integer account, double amount) throws SQLException, Exception {
 		Connection conn = null;
@@ -197,8 +196,8 @@ public class DatabaseController {
 	 * @param account the account with they would like to withdraw from
 	 * @param d the amount they would like to withdraw
 	 * @return boolean on if the withdraw was successful
-	 * @throws SQLException 
-	 * @throws Exception 
+	 * @throws SQLException for the SQL query
+	 * @throws Exception for the account call
 	 */
 	public boolean withdrawl(Integer account, double d) throws SQLException, Exception {
 		Connection conn = null;
@@ -242,8 +241,8 @@ public class DatabaseController {
 	 * @param toAccountNum the to account
 	 * @param amount the amount in which to transfer
 	 * @return boolean on if the transfer was successful
-	 * @throws Exception 
-	 * @throws SQLException 
+	 * @throws Exception for the account call
+	 * @throws SQLException for the SQL query
 	 */
 	public boolean transfer(Integer fromAccountNum, Integer toAccountNum, double amount) throws SQLException, Exception {
 		boolean account1Bal = withdrawl(fromAccountNum, amount);

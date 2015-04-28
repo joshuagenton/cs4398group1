@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.awt.Image;
 import java.io.IOException;
 import java.util.Random;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,6 +12,7 @@ import javax.swing.JLabel;
 
 import atm.controller.ATMController;
 import atm.controller.Controller;
+import atm.controller.IdleTimeController;
 import atm.model.AbstractModel;
 import atm.model.AgentStatus;
 import atm.model.Model;
@@ -94,7 +96,6 @@ public class MainView extends JFrame implements View, ModelListener{
 	 */
 	public void modelChanged(ModelEvent me) {
 		this.getContentPane().removeAll();
-		
 		System.out.println("CHANGE TO VIEW: " + me.getAgStatus());
 		if (me.getAgStatus() == AgentStatus.Start){
 			getPic();

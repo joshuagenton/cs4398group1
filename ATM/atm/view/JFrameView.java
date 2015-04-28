@@ -24,7 +24,7 @@ public abstract class JFrameView extends JPanel implements View, ModelListener {
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	double width = screenSize.getWidth();
 	double height = screenSize.getHeight();
-	public FixLabelSize fixLabel = new FixLabelSize();
+	//public FixLabelSize fixLabel = new FixLabelSize();
 	
 	
 	public JFrameView (Model model, Controller controller){

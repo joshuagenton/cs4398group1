@@ -42,7 +42,7 @@ public class ATMController extends AbstractController{
 	 * @param opt String that is passed from the view
 	 */
 	public void operation(String opt) {
-		
+		IdleTimeController.cancelTimer();
 		IdleTimeController.runTimer(this);
 		
 		if (opt == SelectionView.Start){
@@ -109,6 +109,7 @@ public class ATMController extends AbstractController{
 	 */
 	public boolean login(char[] cs){
 		((ATMCoreModel)getModel()).waiting();
+		IdleTimeController.cancelTimer();
 		IdleTimeController.runTimer(this);
 		int num = 0;
 		try {
@@ -162,6 +163,7 @@ public class ATMController extends AbstractController{
 	 * @param amount The amount they'd like to transfer
 	 */
 	public void transferFunds(Results account1, Results account2, Double amount) {
+		IdleTimeController.cancelTimer();
 		IdleTimeController.runTimer(this);
 		((ATMCoreModel)getModel()).waiting();
 		try {
@@ -184,6 +186,7 @@ public class ATMController extends AbstractController{
 	 * @param amount The amount that will be withdrawn
 	 */
 	public void withdrawFunds(Results account, Double amount) {
+		IdleTimeController.cancelTimer();
 		IdleTimeController.runTimer(this);
 		((ATMCoreModel)getModel()).waiting();
 		try {
@@ -200,6 +203,7 @@ public class ATMController extends AbstractController{
 	//  Getters/Setters
 
 	public void getAccounts() {
+		IdleTimeController.cancelTimer();
 		IdleTimeController.runTimer(this);
 		try {
 			((ATMCoreModel)getModel()).setAccounts(db.getAccounts());
@@ -210,6 +214,7 @@ public class ATMController extends AbstractController{
 
 
 	public void SetFromAccount(Results a){
+		IdleTimeController.cancelTimer();
 		IdleTimeController.runTimer(this);
 		((ATMCoreModel)getModel()).setFromAccount(a);
 	}

@@ -21,11 +21,16 @@ import simpleAccount.model.AccountModel;
 import simpleAccount.model.ModelEvent;
 import simpleAccount.view.JFrameView;
 
+/**
+ * This is the AccountView.  This is the secondary window that pops up
+ * when the user selects a currency they would like to use to interact
+ * with the account data.
+ * 
+ * @author Paul Bryson
+ * @since 2015-04-05
+ */
 public class AccountView extends JFrameView {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	
@@ -94,7 +99,12 @@ public class AccountView extends JFrameView {
 		
 		
 	}
-	 // Inner classes for Event Handling 
+	
+	/**
+	 * Inner classes for Event Handling 
+	 * @author Paul Bryson
+	 *
+	 */
 	class Handler implements ActionListener { 
 		// Event handling is handled locally
 		public void actionPerformed(ActionEvent e) {
@@ -107,13 +117,20 @@ public class AccountView extends JFrameView {
 	    }
 	}
 	
+	/**
+	 * Sets up the view.
+	 * @param model the AccountModel
+	 * @param controller the AccountController
+	 */
 	public AccountView (AccountModel model, AccountController controller){
 		super(model, controller);
 		initialize();
 		this.frame.setVisible(true);
 	}
 	
-	//  This function has the sole purpose of allowing the design window to work
+	/**
+	 * This function has the sole purpose of allowing the design window to work
+	 */
 	public AccountView (){
 		super(new AccountModel(), new AccountController());
 		initialize();

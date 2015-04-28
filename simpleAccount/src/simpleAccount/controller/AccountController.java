@@ -15,15 +15,31 @@ import simpleAccount.view.ErrorView;
 import simpleAccount.view.JFrameView;
 import simpleAccount.view.TransferView;
 
+/**
+ * This is the main AccountController for both the accounting and main views.
+ * This contains the operations they perform.
+ * 
+ * @author Paul Bryson
+ * @since 2015-04-05
+ */
 public class AccountController extends AbstractController {
 	private String datafile;
 	
+	/**
+	 * AccountController Constructor.
+	 */
 	public AccountController(){
 		setModel(new AccountModel());
 		//  View is instantiated after the data file is successfully read in
 		//((JFrameView)getView()).setVisible(true);
 	}
 	
+	/**
+	 * This is the main operation operation() from the main account view.  This is a list
+	 * of actions the user can select from.
+	 * @param option the user's selection
+	 * @param id the user's ID
+	 */
 	public void operation(String option, String id){
 		System.out.println("Operation: " + option);
 		if(option.equals("Edit in USD")){
@@ -53,6 +69,13 @@ public class AccountController extends AbstractController {
 		}
 	}
 	
+	/**
+	 * This is the account operation operationTransfer() from the edit currency view. 
+	 * This is a list of the actions the user can select from.
+	 * @param id the user's ID
+	 * @param currency the currency in which the user is editing in
+	 * @param amount the amount the user would like to deposit/withdraw
+	 */
 	public void operationTransfer(String id, String currency, Double amount){
 		Double transAmount = amount;
 		if (currency.equals("Euros"))
@@ -68,7 +91,14 @@ public class AccountController extends AbstractController {
 		}
 	}
 	
-	public Boolean ReadFile (String file) {
+	/**
+	 * This is the ReadFile() function that is called to read in the text file
+	 * that the system is interacting with.  The file contains an account number,
+	 * a user name, and a total.
+	 * @param file location of the file
+	 * @return boolean if the read was successful
+	 */
+	public boolean ReadFile (String file) {
 		this.datafile = file;
 		int lineCount = 0;
         String line, name, id;
@@ -128,7 +158,13 @@ public class AccountController extends AbstractController {
         return true;
 	}
 	
-	public Boolean WriteFile () {
+	/**
+	 * This is the WriteFile() function that writes back out the data the user
+	 * has been interacting with.  It contains all changes that were made to the 
+	 * account balances.
+	 * @return boolean if the write was successful
+	 */
+	public boolean WriteFile () {
 		SortedMap<Integer, HashMap> accounts = ((AccountModel)getModel()).getAccounts();
         // write the file
         try {

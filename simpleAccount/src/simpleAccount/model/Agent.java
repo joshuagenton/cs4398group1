@@ -1,6 +1,12 @@
 package simpleAccount.model;
 
-
+/**
+ * This is the Agent class.  This is how we create and setup
+ * the agent.
+ * 
+ * @author Paul Bryson/Stacie Christensen
+ * @since 2015-4-26
+ */
 class Agent implements Runnable {
 	String accountID;
 	String agentID;
@@ -13,6 +19,15 @@ class Agent implements Runnable {
 	String agentStatus = "Stopped";
 	//Accounts accounts;
 
+	/**
+	 * Agent constructor.
+	 * 
+	 * @param accountID the accountID that we are interacting with
+	 * @param amount the amount we are depositing/withdrawing
+	 * @param ops the operation
+	 * @param agentID the agentID
+	 * @param accountModel the accountModel for the account we are interacting with
+	 */
 	public Agent (String accountID, double amount, double ops, String agentID, AccountModel accountModel) {
         this.accountID = accountID;
         this.amount = amount;
@@ -36,6 +51,9 @@ class Agent implements Runnable {
     	}
     }
     
+    /**
+     * AddAmount() adds the amount to the transferred balance.
+     */
     public void AddAmount() {
     	if (accountModel.AddAmount(this)) {
     		transferred = transferred + amount;

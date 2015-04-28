@@ -20,11 +20,17 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JFormattedTextField;
 
+
+/**
+ * This is the TransferView.  This is the secondary window that pops up
+ * when the user selects a currency they would like to use to interact
+ * with the account data.
+ * 
+ * @author Paul Bryson
+ * @since 2015-04-05
+ */
 public class TransferView extends JFrameView {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	private JTextField txtAvailableFunds;
@@ -93,7 +99,11 @@ public class TransferView extends JFrameView {
 		((JTextField) frame.getContentPane().getComponent(3)).setText(String.format("%.2f", amount));
 	}
 	
-	 // Inner classes for Event Handling 
+	/**
+	 * Inner classes for Event Handling 
+	 * @author Paul Bryson
+	 *
+	 */
 	class Handler implements ActionListener { 
 		// Event handling is handled locally
 		public void actionPerformed(ActionEvent e) {
@@ -111,19 +121,31 @@ public class TransferView extends JFrameView {
 	    }
 	}
 	
+	/**
+	 * Sets up the transfer view.
+	 * @param model the AccountModel
+	 * @param controller the AccountController
+	 */
 	public TransferView (AccountModel model, AccountController controller){
 		super(model, controller);
 		initialize();
 		this.frame.setVisible(true);
 	}
 	
+	/**
+	 * Sets the values for the transfer
+	 * @param id the accountID
+	 * @param currency the currency selected
+	 */
 	public void setValues (String id, String currency) {
 		this.id = id;
 		this.currency = currency;
 		((JLabel) frame.getContentPane().getComponent(5)).setText("Enter amount in " + this.currency);
 	}
 	
-	//  This function has the sole purpose of allowing the design window to work
+	/**
+	 * This function has the sole purpose of allowing the design window to work
+	 */
 	public TransferView (){
 		super(new AccountModel(), new AccountController());
 		initialize();

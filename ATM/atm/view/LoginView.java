@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 
 
+
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -16,6 +17,7 @@ import javax.swing.SwingConstants;
 import atm.controller.ATMController;
 import atm.controller.CardReaderController;
 import atm.controller.Controller;
+import atm.controller.IdleTimeController;
 import atm.model.Model;
 import atm.model.ModelEvent;
 
@@ -50,6 +52,7 @@ public class LoginView extends JFrameView {
 		//setBackground(new Color(255, 255, 255,0));
 		initialize();
 		this.setBounds(100, 100, 800, 600);
+		IdleTimeController.cancelTimer();
 	}
 
 	
@@ -132,6 +135,7 @@ public class LoginView extends JFrameView {
 					card.readCard(cardinfo.getText());
 				}
 			});
+		
 		}
 		return TestNone;
 	}

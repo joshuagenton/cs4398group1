@@ -109,6 +109,7 @@ public class ATMController extends AbstractController{
 	 */
 	public boolean login(char[] cs){
 		((ATMCoreModel)getModel()).waiting();
+		IdleTimeController.runTimer(this);
 		int num = 0;
 		try {
 			num = db.validate_user(((ATMCoreModel)getModel()).getAccount_number(), String.valueOf(cs));
@@ -161,6 +162,7 @@ public class ATMController extends AbstractController{
 	 * @param amount The amount they'd like to transfer
 	 */
 	public void transferFunds(Results account1, Results account2, Double amount) {
+		IdleTimeController.runTimer(this);
 		((ATMCoreModel)getModel()).waiting();
 		try {
 			if(db.transfer(account1.getAccountNum(), account2.getAccountNum(), amount))		
@@ -182,6 +184,7 @@ public class ATMController extends AbstractController{
 	 * @param amount The amount that will be withdrawn
 	 */
 	public void withdrawFunds(Results account, Double amount) {
+		IdleTimeController.runTimer(this);
 		((ATMCoreModel)getModel()).waiting();
 		try {
 			if(db.withdrawl(account.getAccountNum(), amount))		
@@ -197,6 +200,7 @@ public class ATMController extends AbstractController{
 	//  Getters/Setters
 
 	public void getAccounts() {
+		IdleTimeController.runTimer(this);
 		try {
 			((ATMCoreModel)getModel()).setAccounts(db.getAccounts());
 		} catch (Exception e) {
@@ -206,6 +210,7 @@ public class ATMController extends AbstractController{
 
 
 	public void SetFromAccount(Results a){
+		IdleTimeController.runTimer(this);
 		((ATMCoreModel)getModel()).setFromAccount(a);
 	}
 

@@ -1,3 +1,8 @@
-Program can either be run directly without arguments if testfileHW4.txt is in the same directory, 
-or by passing just the name of the file as the program's argument.
+Original Author:  Paul Bryson
+HW#5 Contributors:  Paul Bryson and Stacie Christensen
+
+
+How to run program:
+	Program can either be run directly without arguments if testfileHW4.txt is in the same directory, 
+	or by passing just the name of the file as the program's argument.
 

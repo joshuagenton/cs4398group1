@@ -30,7 +30,7 @@ public class IdleTimeController extends TimerTask {
 			cancelTimer();
 		timerTask = new IdleTimeController();
 		timer = new Timer();
-		timer.schedule(timerTask, 45000);
+		timer.schedule(timerTask, 15000);
 	}
 
 	public static void setTime(int newTime){
@@ -45,7 +45,8 @@ public class IdleTimeController extends TimerTask {
 	 * action is performed.
 	 */
 	public static void cancelTimer() {
-		timer.cancel();
+		if(timer != null)
+			timer.cancel();
 	}
 	
 	/**

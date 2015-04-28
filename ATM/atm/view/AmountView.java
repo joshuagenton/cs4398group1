@@ -35,7 +35,7 @@ import java.awt.Color;
 import javax.swing.SwingConstants;
 
 /**
- * The AmountView view is where the user is allowed to enter the amoun they would like to
+ * The AmountView view is where the user is allowed to enter the amount they would like to
  * transfer or withdraw.
  * 
  * @author Chris Wells

@@ -17,17 +17,11 @@ import atm.controller.DatabaseController;
 import atm.controller.Results;
 
 public class DatabaseControllerTest {
-
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
+	DatabaseController db;
 
 	@Before
 	public void setUp() throws Exception {
+		db = new DatabaseController();
 	}
 
 	@After
@@ -36,7 +30,7 @@ public class DatabaseControllerTest {
 
 	@Test
 	public final void testGetAccounts() throws SQLException, Exception {
-		DatabaseController db = new DatabaseController();
+		//DatabaseController db = new DatabaseController();
 		db.validate_user("6391480001052388", "1234");
 		List<Results> results = db.getAccounts();
 		for (Results r : results){
@@ -46,29 +40,25 @@ public class DatabaseControllerTest {
 	}
 
 	@Test
-	public final void testGetPicture() {
-		//fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testSetPicture() {
-		//fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testValidate_user() throws SQLException, Exception {
-		DatabaseController db = new DatabaseController();
+	public final void testValidate_user_ValidInfo() throws SQLException, Exception {
 		int test1= db.validate_user("6391480001052388", "1234");
 		assertEquals(1, test1);
-		test1= db.validate_user("6391480001052388", "0000");
-		assertEquals(0, test1);
-		test1= db.validate_user("63914800010523", "9876");
-		assertEquals(0, test1);
+	}
+	
+	@Test
+	public final void testValidate_user_WrongPin() throws SQLException, Exception {
+		int test2= db.validate_user("6391480001052388", "0000");
+		assertEquals(0, test2);
+	}
+		
+	@Test
+	public final void testValidate_user_WrongPinAndCCN() throws SQLException, Exception {
+		int test4= db.validate_user("63914800010523", "9876");
+		assertEquals(0, test4);
 	}
 
 	@Test
 	public final void testDeposit() throws SQLException, Exception {
-		DatabaseController db = new DatabaseController();
 		db.validate_user("6391480001052388", "1234");
 		List<Results> results = db.getAccounts();
 		for (Results r : results){
@@ -80,7 +70,6 @@ public class DatabaseControllerTest {
 
 	@Test
 	public final void testWithdrawl() throws SQLException, Exception {
-		DatabaseController db = new DatabaseController();
 		db.validate_user("6391480001052388", "1234");
 		List<Results> results = db.getAccounts();
 		for (Results r : results){
@@ -91,7 +80,7 @@ public class DatabaseControllerTest {
 
 	@Test
 	public final void testTransfer() throws SQLException, Exception {
-		DatabaseController db = new DatabaseController();
+		//DatabaseController db = new DatabaseController();
 		db.validate_user("6391480001052388", "1234");
 		List<Results> results = db.getAccounts();
 		Object[] account = results.toArray();
@@ -99,9 +88,5 @@ public class DatabaseControllerTest {
 		assertEquals(true,test);
 	}
 
-	@Test
-	public final void testTransaction_history() {
-		//fail("Not yet implemented"); // TODO
-	}
 
 }

@@ -38,6 +38,7 @@ public class AgentView extends JFrameView {
 	private JTextField txtAmounttransferred;
 	private JTextField txtStatedisplay;
 	private JTextField txtOpscompleted;
+	private JFormattedTextField frmtdtxtfldTransferamount;
 	
 	/**
 	 * Initialize the contents of the frame.
@@ -76,7 +77,7 @@ public class AgentView extends JFrameView {
 		frame.getContentPane().add(lblEnterAmountIn);
 		
 		NumberFormat amountFormat = NumberFormat.getNumberInstance();
-		JFormattedTextField frmtdtxtfldTransferamount = new JFormattedTextField(amountFormat);
+		frmtdtxtfldTransferamount = new JFormattedTextField(amountFormat);
 		frmtdtxtfldTransferamount.setText("0.0");
 		frmtdtxtfldTransferamount.setBounds(159, 42, 139, 20);
 		frame.getContentPane().add(frmtdtxtfldTransferamount);
@@ -149,11 +150,18 @@ public class AgentView extends JFrameView {
 				frame.setVisible(false);
 			}
 			else {
-				Double amount = Double.parseDouble(((JTextField) frame.getContentPane().getComponent(6)).getText().toString().replace(",", ""));
+				//Double amount = Double.parseDouble(((JTextField) frame.getContentPane().getComponent(6)).getText().toString().replace(",", ""));
+				Double amount = Double.parseDouble(frmtdtxtfldTransferamount.getText());
 				if (e.getActionCommand().equals("Withdraw"))
 					amount = -amount;
+				
+				System.out.println("ID: " + id);
+				System.out.println("agentType: " + agentType);
+				System.out.println("Amount: " + amount);
+				
+				
 				((AccountController)getController()).operationTransfer(id, agentType, amount);
-				((JTextField) frame.getContentPane().getComponent(6)).setText("0.0");
+				//((JTextField) frame.getContentPane().getComponent(6)).setText("0.0");
 			}
 	    }
 	}

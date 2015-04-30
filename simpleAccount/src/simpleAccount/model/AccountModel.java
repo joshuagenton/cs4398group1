@@ -89,7 +89,7 @@ public class AccountModel extends AbstractModel {
 	}
 	
 	/**
-	 * The deposit() function allows users to withdraw (pass in negative value) or deposit an
+	 * The synchronized deposit() function allows users to withdraw (pass in negative value) or deposit an
 	 * amount into the selected account.
 	 * 
 	 * @param id the accountID
@@ -97,10 +97,12 @@ public class AccountModel extends AbstractModel {
 	 * @param amount the amount the user wants to deposit/withdraw
 	 * @throws Exception for the parsing of the ID
 	 */
-	public void deposit (String id, String currency, Double amount) throws Exception {
+	public synchronized void deposit (String id, String currency, Double amount) throws Exception {
 		HashMap<String, Object> account = accounts.get(Integer.parseInt(id));
 		
+		System.out.println("I AM HERE.");
 		System.out.println(amount);
+		System.out.println(id);
 		
 		if (((Double) account.get("amount")) + amount < 0) {
 			throw new Exception("Insufficient funds: amount to withdraw is " + (-1 * (((Double) account.get("amount")) + amount)) 

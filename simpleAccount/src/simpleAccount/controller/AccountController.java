@@ -8,7 +8,11 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.SortedMap;
 
+import javax.swing.SwingUtilities;
+
 import simpleAccount.model.Account;
+import simpleAccount.model.Agent;
+import simpleAccount.model.AgentCreator;
 import simpleAccount.model.OverdrawException;
 import simpleAccount.view.AccountView;
 import simpleAccount.view.AgentView;
@@ -102,8 +106,26 @@ public class AccountController extends AbstractController {
 	public void operationAgent(String id, Double amount, String agentID, String agentType) throws OverdrawException {
 		
 		if (agentType.equals("deposit")) {
-			
+			// Need to create an agent
 			// Need to start the deposit agent
+			
+			
+			
+			final AgentView acView = (AgentView)getView();
+			
+			final Agent ag = AgentCreator.createDepAgent(((Account)getModel()), amount);
+			
+			
+			
+			//agContr.setModel(ag);
+			SwingUtilities.invokeLater(new Runnable() {
+			      public void run() {
+			    	  //acView.createAgentView(ag, this);
+			      }
+			    });
+			
+			
+			
 			
 			
 			((Account)getModel()).agentDeposit(amount);

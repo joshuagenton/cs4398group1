@@ -3,6 +3,7 @@ package simpleAccount.model;
 
 import java.util.HashMap;
 import java.util.SortedMap;
+import java.util.TreeMap;
 
 import javax.swing.SwingUtilities;
 
@@ -17,8 +18,12 @@ public class DepositAgent extends AbstractModel implements Runnable, Agent {
 	private double transferred;
 	private String name = new String("Default");
 	private AgentStatus status;
+	private int acctID;
 	
-	public DepositAgent(Account account, double amount){
+	private SortedMap<Integer, HashMap> accounts = new TreeMap<Integer, HashMap>();
+	private SortedMap<String, AgentModel> agents = new TreeMap<String, AgentModel>();
+	
+	public DepositAgent(Account account, double amount, int acctID){
 		this.account = account;
 		this.amount = amount;
 		this.transferred = 0;
@@ -26,6 +31,7 @@ public class DepositAgent extends AbstractModel implements Runnable, Agent {
 		this.active = true;
 		this.paused = false;
 		this.pauseLock = new Object();
+		this.acctID = acctID;
 	}
 	public void run() {
 		while(active) {
@@ -40,8 +46,11 @@ public class DepositAgent extends AbstractModel implements Runnable, Agent {
             }
 			account.agentDeposit(amount);
 			this.transferred += amount;
-			final ModelEvent me = new ModelEvent(ModelEvent.EventKind.AmountTransferredUpdate, transferred, AgentStatus.NA);
-			//Object obj, int id, String message, int amount, SortedMap<Integer, HashMap> accts, SortedMap<String, AgentModel> agents, AgentStatus agSt, EventKind kind
+			
+			int iTrans = (int) transferred;
+			
+			final ModelEvent me = new ModelEvent(account, acctID, "", iTrans, accounts, agents, AgentStatus.NA, ModelEvent.EventKind.AmountTransferredUpdate);
+					//ModelEvent.EventKind.AmountTransferredUpdate, transferred, AgentStatus.NA);
 			SwingUtilities.invokeLater(
 					new Runnable() {
 					    public void run() {
@@ -73,7 +82,7 @@ public class DepositAgent extends AbstractModel implements Runnable, Agent {
     }
     public void setStatus(AgentStatus agSt) {
     	status = agSt;
-    	final ModelEvent me = new ModelEvent(ModelEvent.EventKind.AgentStatusUpdate, 0.0, agSt);
+    	final ModelEvent me = new ModelEvent(account, acctID, "", 0, accounts, agents, agSt, ModelEvent.EventKind.AgentStatusUpdate);
     	SwingUtilities.invokeLater(
 				new Runnable() {
 				    public void run() {

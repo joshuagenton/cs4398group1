@@ -109,11 +109,11 @@ public class AccountController extends AbstractController {
 			// Need to create an agent
 			
 			
-			
+			double dID = Double.parseDouble(id);
+			int iID = (int) dID;
 			
 			final AgentView acView = (AgentView)getView();
-			
-			final Agent ag = AgentCreator.createDepAgent(((Account)getModel()), amount);
+			final Agent ag = AgentCreator.createDepAgent(((Account)getModel()), amount, iID);
 			
 			
 			

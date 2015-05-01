@@ -46,25 +46,31 @@ public class AccountController extends AbstractController {
 			TransferView transferView = new TransferView((AccountModel)getModel(), this);
 			transferView.setValues(id, "USD");
 			((AccountModel)getModel()).refresh();
-		}else if(option.equals("Edit in Euros")){
+		
+		} else if(option.equals("Edit in Euros")){
 			TransferView transferView = new TransferView((AccountModel)getModel(), this);
 			transferView.setValues(id, "Euros");
 			((AccountModel)getModel()).refresh();
-		}else if(option.equals("Edit in Yuan")){
+		
+		} else if(option.equals("Edit in Yuan")){
 			TransferView transferView = new TransferView((AccountModel)getModel(), this);
 			transferView.setValues(id, "Yuan");
 			((AccountModel)getModel()).refresh();
-		}else if(option.equals("Create deposit agent")){
+		
+		} else if(option.equals("Create deposit agent")){
 			AgentView agentView = new AgentView((AccountModel)getModel(), this);
 			agentView.setValues(id, "deposit");
 			((AccountModel)getModel()).refresh();
-		}else if(option.equals("Create withdraw agent")){
+		
+		} else if(option.equals("Create withdraw agent")){
 			AgentView agentView = new AgentView((AccountModel)getModel(), this);
 			agentView.setValues(id, "withdraw");
 			((AccountModel)getModel()).refresh();
-		}else if(option.equals("Save") || option.equals("Exit")){
+		
+		} else if(option.equals("Save") || option.equals("Exit")){
 			WriteFile();
-		}else {
+		
+		} else {
 			((AccountModel)getModel()).store(Integer.parseInt(option));
 		}
 	}
@@ -90,6 +96,20 @@ public class AccountController extends AbstractController {
 			errorView.setError(ex.getMessage());
 		}
 	}
+	
+	
+	public void operationAgent(String id, String currency, Double amount, String agentID, String agentType) {
+	
+		try {
+			((AccountModel)getModel()).deposit(id, currency, amount);
+		} catch(Exception ex) {
+			System.out.println(ex.getMessage());
+			ErrorView errorView = new ErrorView((AccountModel)getModel(), this);
+			errorView.setError(ex.getMessage());
+		}
+	}
+	
+	
 	
 	/**
 	 * This is the ReadFile() function that is called to read in the text file

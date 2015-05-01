@@ -14,7 +14,7 @@ import java.util.TreeMap;
  */
 public class AccountModel extends AbstractModel {
 	private SortedMap<Integer, HashMap> accounts = new TreeMap<Integer, HashMap>();
-	private SortedMap<String, Agent> agents = new TreeMap<String, Agent>();
+	private SortedMap<String, AgentModel> agents = new TreeMap<String, AgentModel>();
 
 	private int total = 0;
 	private int current = 0;
@@ -28,7 +28,7 @@ public class AccountModel extends AbstractModel {
 	 */
 	public void store(int value){
 		current = value;
-		ModelEvent me = new ModelEvent(this, 1, "", current, accounts, agents);
+		ModelEvent me = new ModelEvent(this, 1, "", current, accounts, agents, AgentStatus.NA, ModelEvent.EventKind.BalanceUpdate);
 		notifyChanged(me);
 	}
 	
@@ -36,7 +36,7 @@ public class AccountModel extends AbstractModel {
 	 * Refresh the values in the view.
 	 */
 	public void refresh(){
-		ModelEvent me = new ModelEvent(this, 1, "", current, accounts, agents);
+		ModelEvent me = new ModelEvent(this, 1, "", current, accounts, agents, AgentStatus.NA, ModelEvent.EventKind.BalanceUpdate);
 		notifyChanged(me);
 	}
 	
@@ -61,7 +61,7 @@ public class AccountModel extends AbstractModel {
 			total -= current;
 		}
 		current = total;
-		ModelEvent me = new ModelEvent(this, 1, "", total, accounts, agents);
+		ModelEvent me = new ModelEvent(this, 1, "", total, accounts, agents, AgentStatus.NA, ModelEvent.EventKind.BalanceUpdate);
 		notifyChanged(me);
 	}
 
@@ -121,7 +121,7 @@ public class AccountModel extends AbstractModel {
 	 * @param agent the agent that is running
 	 * @return boolean for if the add was successful
 	 */
-	public synchronized boolean AddAmount (Agent agent) {
+	public synchronized boolean AddAmount (AgentModel agent) {
 		while ((Double) accounts.get(agent.accountID).get("amount") + agent.amount < 0.0 && agent.agentRunning) {
 			try {
 				if (!agent.agentStatus.equals("Blocked")) {

@@ -1,6 +1,6 @@
     name          | id     |   amount 
 --------------------------------------
- Peter   Benjamin | 078910 | $652.05     
+ Peter   Benjamin | 078910 | $682.05     
  Malapa  Bushra   | 123456 | $100.00     
  Goday   Priya    | 125671 | $0.50       
  John   Smith     | 444451 | $3007.00    

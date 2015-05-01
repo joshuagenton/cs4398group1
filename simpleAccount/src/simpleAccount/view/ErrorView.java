@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
 import simpleAccount.controller.AccountController;
-import simpleAccount.model.AccountModel;
+import simpleAccount.model.Account;
 import simpleAccount.model.ModelEvent;
 import simpleAccount.view.TransferView.Handler;
 import javax.swing.JTextArea;
@@ -79,7 +79,7 @@ public class ErrorView extends JFrameView {
 	 * @param model the AccountModel
 	 * @param controller the AccountController
 	 */
-	public ErrorView (AccountModel model, AccountController controller){
+	public ErrorView (Account model, AccountController controller){
 		super(model, controller);
 		initialize();
 		this.frame.setVisible(true);
@@ -97,7 +97,7 @@ public class ErrorView extends JFrameView {
 	 * This function has the sole purpose of allowing the design window to work
 	 */
 	public ErrorView (){
-		super(new AccountModel(), new AccountController());
+		super(new Account(), new AccountController());
 		initialize();
 		this.frame.setVisible(true);
 	}

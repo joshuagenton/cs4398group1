@@ -107,7 +107,7 @@ public class AccountController extends AbstractController {
 		
 		if (agentType.equals("deposit")) {
 			// Need to create an agent
-			// Need to start the deposit agent
+			
 			
 			
 			
@@ -121,14 +121,15 @@ public class AccountController extends AbstractController {
 			SwingUtilities.invokeLater(new Runnable() {
 			      public void run() {
 			    	  //acView.createAgentView(ag, this);
+			    	
+			    	// Need to start the deposit agent
+			    	  
+			    	  ((Account)getModel()).agentDeposit(amount);
 			      }
 			    });
+
 			
 			
-			
-			
-			
-			((Account)getModel()).agentDeposit(amount);
 		} else if (agentType.equals("withdraw")) {
 			
 			// Need to start the withdraw agent

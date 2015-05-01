@@ -1,9 +1,14 @@
 package simpleAccount.model;
 
 
+import java.util.HashMap;
+import java.util.SortedMap;
+
 import javax.swing.SwingUtilities;
 
-public class DepositAgent extends AbstractModel implements Runnable, AgentModel {
+import simpleAccount.model.ModelEvent.EventKind;
+
+public class DepositAgent extends AbstractModel implements Runnable, Agent {
 	private Object pauseLock;
 	private boolean paused;
 	public volatile boolean active;
@@ -33,9 +38,10 @@ public class DepositAgent extends AbstractModel implements Runnable, AgentModel 
                     }
                 }
             }
-			account.deposit(amount);
+			account.agentDeposit(amount);
 			this.transferred += amount;
 			final ModelEvent me = new ModelEvent(ModelEvent.EventKind.AmountTransferredUpdate, transferred, AgentStatus.NA);
+			//Object obj, int id, String message, int amount, SortedMap<Integer, HashMap> accts, SortedMap<String, AgentModel> agents, AgentStatus agSt, EventKind kind
 			SwingUtilities.invokeLater(
 					new Runnable() {
 					    public void run() {

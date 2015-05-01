@@ -14,7 +14,7 @@ class AgentModel implements Runnable {
 	Double ops;
 	Double transferred = 0.0;
 	String type;
-	AccountModel accountModel;
+	Account accountModel;
 	Boolean agentRunning = true;
 	String agentStatus = "Stopped";
 	//Accounts accounts;
@@ -28,7 +28,7 @@ class AgentModel implements Runnable {
 	 * @param agentID the agentID
 	 * @param accountModel the accountModel for the account we are interacting with
 	 */
-	public AgentModel (String accountID, double amount, double ops, String agentID, AccountModel accountModel) {
+	public AgentModel (String accountID, double amount, double ops, String agentID, Account accountModel) {
         this.accountID = accountID;
         this.amount = amount;
         this.ops = ops;

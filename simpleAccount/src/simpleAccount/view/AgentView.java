@@ -13,7 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
 import simpleAccount.controller.AccountController;
-import simpleAccount.model.AccountModel;
+import simpleAccount.model.Account;
 import simpleAccount.model.ModelEvent;
 import simpleAccount.view.AccountView.Handler;
 
@@ -171,7 +171,7 @@ public class AgentView extends JFrameView {
 	 * @param model the AccountModel
 	 * @param controller the AccountController
 	 */
-	public AgentView (AccountModel model, AccountController controller){
+	public AgentView (Account model, AccountController controller){
 		super(model, controller);
 		initialize();
 		this.frame.setVisible(true);
@@ -191,7 +191,7 @@ public class AgentView extends JFrameView {
 	 * This function has the sole purpose of allowing the design window to work
 	 */
 	public AgentView (){
-		super(new AccountModel(), new AccountController());
+		super(new Account(), new AccountController());
 		initialize();
 		this.frame.setVisible(true);
 	}

@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.SortedMap;
 
-import simpleAccount.model.AccountModel;
+import simpleAccount.model.Account;
 import simpleAccount.view.AccountView;
 import simpleAccount.view.AgentView;
 import simpleAccount.view.ErrorView;
@@ -29,7 +29,7 @@ public class AccountController extends AbstractController {
 	 * AccountController Constructor.
 	 */
 	public AccountController(){
-		setModel(new AccountModel());
+		setModel(new Account());
 		//  View is instantiated after the data file is successfully read in
 		//((JFrameView)getView()).setVisible(true);
 	}
@@ -43,35 +43,35 @@ public class AccountController extends AbstractController {
 	public void operation(String option, String id){
 		System.out.println("Operation: " + option);
 		if(option.equals("Edit in USD")){
-			TransferView transferView = new TransferView((AccountModel)getModel(), this);
+			TransferView transferView = new TransferView((Account)getModel(), this);
 			transferView.setValues(id, "USD");
-			((AccountModel)getModel()).refresh();
+			((Account)getModel()).refresh();
 		
 		} else if(option.equals("Edit in Euros")){
-			TransferView transferView = new TransferView((AccountModel)getModel(), this);
+			TransferView transferView = new TransferView((Account)getModel(), this);
 			transferView.setValues(id, "Euros");
-			((AccountModel)getModel()).refresh();
+			((Account)getModel()).refresh();
 		
 		} else if(option.equals("Edit in Yuan")){
-			TransferView transferView = new TransferView((AccountModel)getModel(), this);
+			TransferView transferView = new TransferView((Account)getModel(), this);
 			transferView.setValues(id, "Yuan");
-			((AccountModel)getModel()).refresh();
+			((Account)getModel()).refresh();
 		
 		} else if(option.equals("Create deposit agent")){
-			AgentView agentView = new AgentView((AccountModel)getModel(), this);
+			AgentView agentView = new AgentView((Account)getModel(), this);
 			agentView.setValues(id, "deposit");
-			((AccountModel)getModel()).refresh();
+			((Account)getModel()).refresh();
 		
 		} else if(option.equals("Create withdraw agent")){
-			AgentView agentView = new AgentView((AccountModel)getModel(), this);
+			AgentView agentView = new AgentView((Account)getModel(), this);
 			agentView.setValues(id, "withdraw");
-			((AccountModel)getModel()).refresh();
+			((Account)getModel()).refresh();
 		
 		} else if(option.equals("Save") || option.equals("Exit")){
 			WriteFile();
 		
 		} else {
-			((AccountModel)getModel()).store(Integer.parseInt(option));
+			((Account)getModel()).store(Integer.parseInt(option));
 		}
 	}
 	
@@ -89,10 +89,10 @@ public class AccountController extends AbstractController {
 		else if (currency.equals("Yuan"))
 			transAmount = amount / 6.23;
 		try {
-			((AccountModel)getModel()).deposit(id, currency, transAmount);
+			((Account)getModel()).deposit(id, currency, transAmount);
 		} catch(Exception ex) {
 			System.out.println(ex.getMessage());
-			ErrorView errorView = new ErrorView((AccountModel)getModel(), this);
+			ErrorView errorView = new ErrorView((Account)getModel(), this);
 			errorView.setError(ex.getMessage());
 		}
 	}
@@ -101,10 +101,10 @@ public class AccountController extends AbstractController {
 	public void operationAgent(String id, String currency, Double amount, String agentID, String agentType) {
 	
 		try {
-			((AccountModel)getModel()).deposit(id, currency, amount);
+			((Account)getModel()).deposit(id, currency, amount);
 		} catch(Exception ex) {
 			System.out.println(ex.getMessage());
-			ErrorView errorView = new ErrorView((AccountModel)getModel(), this);
+			ErrorView errorView = new ErrorView((Account)getModel(), this);
 			errorView.setError(ex.getMessage());
 		}
 	}
@@ -154,7 +154,7 @@ public class AccountController extends AbstractController {
                     account.put("id", id);
                     account.put("name", name);
                     account.put("amount", amount);
-                    ((AccountModel)getModel()).AddAccount(account);
+                    ((Account)getModel()).AddAccount(account);
                     lineCount++;
                 }
             }
@@ -173,8 +173,8 @@ public class AccountController extends AbstractController {
         	return false;
         }
 
-		setView(new AccountView((AccountModel)getModel(), this));
-        ((AccountModel)getModel()).store(1);
+		setView(new AccountView((Account)getModel(), this));
+        ((Account)getModel()).store(1);
         return true;
 	}
 	
@@ -185,7 +185,7 @@ public class AccountController extends AbstractController {
 	 * @return boolean if the write was successful
 	 */
 	public boolean WriteFile () {
-		SortedMap<Integer, HashMap> accounts = ((AccountModel)getModel()).getAccounts();
+		SortedMap<Integer, HashMap> accounts = ((Account)getModel()).getAccounts();
         // write the file
         try {
             String name = "", id = "";

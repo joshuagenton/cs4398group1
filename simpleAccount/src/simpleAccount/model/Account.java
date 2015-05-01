@@ -186,7 +186,7 @@ public class Account extends AbstractModel {
 	
 	public double getBalance(){return balance;}
 	
-	public synchronized void deposit(double amount) {
+	public synchronized void agentDeposit(double amount) {
 		double oldB = balance;
 		balance += amount;
 		
@@ -203,7 +203,7 @@ public class Account extends AbstractModel {
 		notifyAll();
 	}
 	
-	public synchronized void withdraw(double amount) throws OverdrawException {
+	public synchronized void agentWithdraw(double amount) throws OverdrawException {
 		double newB = balance - amount;
 		if(newB < 0.0) throw new OverdrawException(newB);
 		balance = newB;

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.SortedMap;
 
 import simpleAccount.model.Account;
+import simpleAccount.model.OverdrawException;
 import simpleAccount.view.AccountView;
 import simpleAccount.view.AgentView;
 import simpleAccount.view.ErrorView;
@@ -98,15 +99,22 @@ public class AccountController extends AbstractController {
 	}
 	
 	
-	public void operationAgent(String id, String currency, Double amount, String agentID, String agentType) {
-	
-		try {
-			((Account)getModel()).deposit(id, currency, amount);
-		} catch(Exception ex) {
-			System.out.println(ex.getMessage());
-			ErrorView errorView = new ErrorView((Account)getModel(), this);
-			errorView.setError(ex.getMessage());
+	public void operationAgent(String id, Double amount, String agentID, String agentType) throws OverdrawException {
+		
+		if (agentType.equals("deposit")) {
+			
+			// Need to start the deposit agent
+			
+			
+			((Account)getModel()).agentDeposit(amount);
+		} else if (agentType.equals("withdraw")) {
+			
+			// Need to start the withdraw agent
+			
+			
+			((Account)getModel()).agentWithdraw(amount);
 		}
+		
 	}
 	
 	

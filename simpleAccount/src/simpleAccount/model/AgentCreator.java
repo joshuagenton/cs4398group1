@@ -12,9 +12,9 @@ public class AgentCreator {
 	private static List<Thread> agentThreads = new ArrayList<Thread>(10);
 	
 	
-	public static Agent createDepAgent(Account account, double amount) {
+	public static Agent createDepAgent(Account account, double amount, int id) {
 		
-		DepositAgent depAg = new DepositAgent(account, amount);
+		DepositAgent depAg = new DepositAgent(account, amount, id);
 		Thread depAgT = new Thread(depAg);
 		
 		String name = "Deposit Agent " + depAgCnt;
@@ -29,9 +29,9 @@ public class AgentCreator {
 		return depAg;
 	}
 	
-	public static Agent createWithdrawAgent(Account account, double amount) {
+	public static Agent createWithdrawAgent(Account account, double amount, int id) {
 		
-		WithdrawAgent wAg = new WithdrawAgent(account, amount);
+		WithdrawAgent wAg = new WithdrawAgent(account, amount, id);
 		Thread wAgT = new Thread(wAg);
 		
 		String name = "Withdraw Agent " + withdrawAgCnt;

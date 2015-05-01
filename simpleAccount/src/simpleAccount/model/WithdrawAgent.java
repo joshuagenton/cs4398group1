@@ -3,7 +3,7 @@ package simpleAccount.model;
 
 import javax.swing.SwingUtilities;
 
-public class WithdrawAgent extends AbstractModel implements Runnable, AgentModel {
+public class WithdrawAgent extends AbstractModel implements Runnable, Agent {
 	private Object pauseLock;
 	private volatile boolean paused;
 	public volatile boolean active;

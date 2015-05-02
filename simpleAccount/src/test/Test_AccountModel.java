@@ -106,7 +106,7 @@ public class Test_AccountModel {
 			agent.setAmount(123456);
 		} catch (Exception e) {
 			fail("Valid, should have been successful.");
-		}		
+		}	
 	}
 	
 	@Test

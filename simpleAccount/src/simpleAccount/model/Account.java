@@ -17,53 +17,12 @@ import javax.swing.SwingUtilities;
 public class Account extends AbstractModel {
 	private SortedMap<Integer, HashMap> accounts = new TreeMap<Integer, HashMap>();
 	private SortedMap<String, AgentModel> agents = new TreeMap<String, AgentModel>();
-
-	private int total = 0;
-	private int current = 0;
-	private String state = "add";
-	
-	public void clear(){total = 0; store(0);}
-	
-	/**
-	 * This stores the intial value before updating.
-	 * @param value the value we are storing.
-	 */
-	public void store(int value){
-		current = value;
-		ModelEvent me = new ModelEvent(this, 1, "", current, accounts, agents, ModelEvent.EventKind.BalanceUpdate);
-		notifyChanged(me);
-	}
 	
 	/**
 	 * Refresh the values in the view.
 	 */
 	public void refresh(){
-		ModelEvent me = new ModelEvent(this, 1, "", current, accounts, agents, ModelEvent.EventKind.BalanceUpdate);
-		notifyChanged(me);
-	}
-	
-	/**
-	 * 
-	 * @throws Exception method add class CalculatorModel: current is 5
-	 */
-	public void add()throws Exception
-	{if(current == 5) throw new Exception("method add class CalculatorModel: current is 5");
-		state = "add"; total = current;}
-	
-	/**
-	 * 
-	 */
-	public void subtract(){state = "subtract"; total = current;}
-	
-	public void equals(){
-		if(state == "add"){
-			total += current;
-		}
-		else {
-			total -= current;
-		}
-		current = total;
-		ModelEvent me = new ModelEvent(this, 1, "", total, accounts, agents, ModelEvent.EventKind.BalanceUpdate);
+		ModelEvent me = new ModelEvent(this, 1, "", accounts, agents, ModelEvent.EventKind.BalanceUpdate);
 		notifyChanged(me);
 	}
 
@@ -102,9 +61,6 @@ public class Account extends AbstractModel {
 	public synchronized void deposit (String id, String currency, Double amount) throws Exception {
 		HashMap<String, Object> account = accounts.get(Integer.parseInt(id));
 		
-		System.out.println("I AM HERE.");
-		System.out.println(amount);
-		System.out.println(id);
 		
 		if (((Double) account.get("amount")) + amount < 0) {
 			throw new Exception("Insufficient funds: amount to withdraw is " + (-1 * (((Double) account.get("amount")) + amount)) 
@@ -113,6 +69,7 @@ public class Account extends AbstractModel {
 		else {
 			account.put("amount", (((Double) account.get("amount")) + amount));
 			accounts.put(Integer.parseInt(id), account);
+			System.out.println("Modified account " + id + " by " + amount + " to a total of " + account.get("amount"));
 			refresh();
 		}
 	}
@@ -138,6 +95,7 @@ public class Account extends AbstractModel {
 			}
 		}
 		
+		//  If the agent is no longer supposed to be running, then bail
 		if (!agent.agentRunning)
 			return false;
 		

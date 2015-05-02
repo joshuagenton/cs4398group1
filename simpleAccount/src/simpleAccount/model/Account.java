@@ -130,6 +130,7 @@ public class Account extends AbstractModel {
 					agent.agentStatus = "Blocked";
 					refresh();
 				}
+				System.out.println("Agent waiting " + agent.agentID);
 				wait();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -153,20 +154,29 @@ public class Account extends AbstractModel {
 		return false;
 	}
 	
+	public synchronized void AddAgent (AgentModel agent) {
+		agents.put(agent.agentID, agent);
+		refresh();
+	}
+	
+	public synchronized void RemoveAgent (AgentModel agent) {
+		agents.remove(agent.agentID);
+	}
+	
 	public synchronized void SetAgent (String accountID, double amount, double ops, String agentID, Boolean agentRunning, String agentStatus) {
 		if (!agents.containsKey(agentID)) {
-			AgentModel agent = new AgentModel(accountID, amount, ops, agentID, this);
+			System.out.println("Created new agent " + agentID);
+			AgentModel agent = new AgentModel(accountID, amount, ops, agentID, agentRunning, agentStatus, this);
 			Thread agentThread = new Thread(agent);
 			agentThread.start();
-			agents.put(agentID, agent);
 		} else {
-			accounts.get(Integer.parseInt(accountID)).put("accountID", accountID);
-			accounts.get(Integer.parseInt(accountID)).put("amount", amount);
-			accounts.get(Integer.parseInt(accountID)).put("ops", ops);
-			accounts.get(Integer.parseInt(accountID)).put("agentRunning", agentRunning);
-			accounts.get(Integer.parseInt(accountID)).put("agentStatus", agentStatus);
+			System.out.println("Updated agent " + agentID);
+			agents.get(agentID).amount = amount;
+			agents.get(agentID).ops = ops;
+			agents.get(agentID).agentRunning = agentRunning;
+			agents.get(agentID).agentStatus = agentStatus;
+			refresh();
 		}
-		refresh();
 	}
 	
 	

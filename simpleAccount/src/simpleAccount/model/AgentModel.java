@@ -16,7 +16,7 @@ public class AgentModel implements Runnable {
 	String type;
 	Account accountModel;
 	Boolean agentRunning = true;
-	String agentStatus = "Stopped";
+	String agentStatus;
 	Integer opsCompleted = 0;
 	//Accounts accounts;
 
@@ -29,18 +29,22 @@ public class AgentModel implements Runnable {
 	 * @param agentID the agentID
 	 * @param accountModel the accountModel for the account we are interacting with
 	 */
-	public AgentModel (String accountID, double amount, double ops, String agentID, Account accountModel) {
+	public AgentModel (String accountID, double amount, double ops, String agentID, Boolean agentRunning, String agentStatus, Account accountModel) {
         this.accountID = accountID;
         this.amount = amount;
         this.ops = ops;
         //this.accounts = accounts;
         this.agentID = agentID;
         this.accountModel = accountModel;
+        this.agentStatus = agentStatus;
+        this.agentRunning = agentRunning;
     }
 
     public void run() {
+    	accountModel.AddAgent(this);
     	while(!agentStatus.equals("Dismiss")) {
-	    	while(agentRunning) {
+	    	while(agentRunning && ops > 0.0) {
+		    //while(true) {
 	    		AddAmount();
 	    		try {
 					Thread.sleep((long) (1/ops*1000));
@@ -48,8 +52,18 @@ public class AgentModel implements Runnable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+	    		//System.out.println("Agent Status: " + agentStatus + " " + agentRunning.toString());
 	    	}
+    		//System.out.println("Agent Status: " + agentStatus + " " + agentRunning.toString());
+    		try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
     	}
+		System.out.println("Dismissed agent " + agentID);
+		accountModel.RemoveAgent(this);
     }
     
     /**

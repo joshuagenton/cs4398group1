@@ -28,6 +28,8 @@ public class AgentModel implements Runnable {
 	 * @param amount the amount we are depositing/withdrawing
 	 * @param ops the operation
 	 * @param agentID the agentID
+	 * @param agentRunning is a boolean if the agent is running
+	 * @param agentStatus is the current status of the agent
 	 * @param accountModel the accountModel for the account we are interacting with
 	 */
 	public AgentModel (String accountID, double amount, double ops, String agentID, Boolean agentRunning, String agentStatus, Account accountModel) {

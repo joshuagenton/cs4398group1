@@ -82,12 +82,7 @@ public class MainView extends JFrameView {
 	}
 
 	@Override
-	public void modelChanged(ModelEvent event) {
-		// TODO Auto-generated method stub
-		//String msg = event.getAmount() + "";
-		//textField.setText(msg);
-		
-	}
+	public void modelChanged(ModelEvent event) {}
 	
 	/**
 	 * Sets up the main view.

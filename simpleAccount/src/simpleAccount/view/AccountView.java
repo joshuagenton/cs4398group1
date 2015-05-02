@@ -1,6 +1,5 @@
 package simpleAccount.view;
 
-import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,15 +7,11 @@ import java.awt.event.WindowEvent;
 import java.util.HashMap;
 import java.util.SortedMap;
 
-import javax.swing.AbstractButton;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
-import simpleAccount.controller.Controller;
 import simpleAccount.controller.AccountController;
-import simpleAccount.model.Model;
 import simpleAccount.model.Account;
 import simpleAccount.model.ModelEvent;
 import simpleAccount.view.JFrameView;

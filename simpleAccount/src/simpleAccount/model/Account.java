@@ -160,11 +160,11 @@ public class Account extends AbstractModel {
 			agentThread.start();
 			agents.put(agentID, agent);
 		} else {
-			accounts.get(accountID).put("accountID", accountID);
-			accounts.get(accountID).put("amount", amount);
-			accounts.get(accountID).put("ops", ops);
-			accounts.get(accountID).put("agentRunning", agentRunning);
-			accounts.get(accountID).put("agentStatus", agentStatus);
+			accounts.get(Integer.parseInt(accountID)).put("accountID", accountID);
+			accounts.get(Integer.parseInt(accountID)).put("amount", amount);
+			accounts.get(Integer.parseInt(accountID)).put("ops", ops);
+			accounts.get(Integer.parseInt(accountID)).put("agentRunning", agentRunning);
+			accounts.get(Integer.parseInt(accountID)).put("agentStatus", agentStatus);
 		}
 		refresh();
 	}

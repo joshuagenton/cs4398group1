@@ -2,7 +2,6 @@ package simpleAccount;
 
 import java.awt.EventQueue;
 import simpleAccount.controller.AccountController;
-import simpleAccount.view.TestView;
 
 
 /**
@@ -22,20 +21,6 @@ public class Main {
 		
 		AccountController controller = new AccountController();
 		controller.ReadFile(datafile);
-		
-		// TODO Auto-generated method stub
-		/*
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TestView window = new TestView();
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		*/
 
 	}
 

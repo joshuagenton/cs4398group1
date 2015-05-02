@@ -12,7 +12,6 @@ import javax.swing.SwingUtilities;
 
 import simpleAccount.model.Account;
 import simpleAccount.model.AgentModel;
-import simpleAccount.model.OverdrawException;
 import simpleAccount.view.AccountView;
 import simpleAccount.view.AgentView;
 import simpleAccount.view.ErrorView;

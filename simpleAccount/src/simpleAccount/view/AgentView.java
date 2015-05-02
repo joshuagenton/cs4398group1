@@ -16,7 +16,6 @@ import simpleAccount.controller.AccountController;
 import simpleAccount.model.Account;
 import simpleAccount.model.AgentModel;
 import simpleAccount.model.ModelEvent;
-import simpleAccount.model.OverdrawException;
 import simpleAccount.view.AccountView.Handler;
 
 import javax.swing.JTextField;

@@ -30,7 +30,7 @@ public class Account extends AbstractModel {
 	 */
 	public void store(int value){
 		current = value;
-		ModelEvent me = new ModelEvent(this, 1, "", current, accounts, agents, AgentStatus.NA, ModelEvent.EventKind.BalanceUpdate);
+		ModelEvent me = new ModelEvent(this, 1, "", current, accounts, agents, ModelEvent.EventKind.BalanceUpdate);
 		notifyChanged(me);
 	}
 	
@@ -38,7 +38,7 @@ public class Account extends AbstractModel {
 	 * Refresh the values in the view.
 	 */
 	public void refresh(){
-		ModelEvent me = new ModelEvent(this, 1, "", current, accounts, agents, AgentStatus.NA, ModelEvent.EventKind.BalanceUpdate);
+		ModelEvent me = new ModelEvent(this, 1, "", current, accounts, agents, ModelEvent.EventKind.BalanceUpdate);
 		notifyChanged(me);
 	}
 	
@@ -63,7 +63,7 @@ public class Account extends AbstractModel {
 			total -= current;
 		}
 		current = total;
-		ModelEvent me = new ModelEvent(this, 1, "", total, accounts, agents, AgentStatus.NA, ModelEvent.EventKind.BalanceUpdate);
+		ModelEvent me = new ModelEvent(this, 1, "", total, accounts, agents, ModelEvent.EventKind.BalanceUpdate);
 		notifyChanged(me);
 	}
 

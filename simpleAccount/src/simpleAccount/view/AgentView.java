@@ -145,6 +145,7 @@ public class AgentView extends JFrameView {
 			txtStatedisplay.setText(agent.GetAgentStatus());
 			txtOpscompleted.setText((agent.GetOpsCompleted().toString()));
 		}
+		System.out.println("Received event");
 	}
 	
 	/**
@@ -156,7 +157,7 @@ public class AgentView extends JFrameView {
 		// Event handling is handled locally
 		public void actionPerformed(ActionEvent e) {
 			if (e.getActionCommand().equals("Dismiss")) {
-				((AccountController)getController()).SetAgent(id, 0.0, 1, agentID.getText(), false, "Dismissed");
+				((AccountController)getController()).SetAgent(id, 0.0, 1, agentID.getText(), false, "Dismiss");
 				unregisterWithModel();
 				frame.setVisible(false);
 			}

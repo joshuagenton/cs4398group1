@@ -162,7 +162,9 @@ public class AgentView extends JFrameView {
 				frame.setVisible(false);
 			}
 			else {
-				//  Set all of the fields to create/modify the agent
+				double ops = Double.parseDouble(frmtdtxtOpspersec.getText());
+				
+				//  If this is a withdraw window, then set the amount to negative and use the same deposit methods
 				Double amount = Double.parseDouble(frmtdtxtfldTransferamount.getText());
 				if (agentType.equals("withdraw"))
 					amount = -amount;
@@ -171,8 +173,9 @@ public class AgentView extends JFrameView {
 				if (agentID.getText().equals(""))
 					agentID.setText(Integer.toString((new Random()).nextInt(1000)));
 				
-				
-				double ops = Double.parseDouble(frmtdtxtOpspersec.getText());
+
+				//  Set all of the fields to create/modify the agent
+				//  Enable/disable fields and buttons as required
 				Boolean agentRunning;
 				String agentStatus;
 				if (e.getActionCommand().equals("Start Agent")) {

@@ -124,7 +124,7 @@ public class Account extends AbstractModel {
 	 * @return boolean for if the add was successful
 	 */
 	public synchronized boolean AddAmount (AgentModel agent) {
-		while ((Double) accounts.get(agent.accountID).get("amount") + agent.amount < 0.0 && agent.agentRunning) {
+		while ((Double) accounts.get(Integer.parseInt(agent.accountID)).get("amount") + agent.amount < 0.0 && agent.agentRunning) {
 			try {
 				if (!agent.agentStatus.equals("Blocked")) {
 					agent.agentStatus = "Blocked";
@@ -141,17 +141,34 @@ public class Account extends AbstractModel {
 			return false;
 		
 		agent.agentStatus = "Running";
-		Double amount = (Double) accounts.get(agent.accountID).get("amount");
-		accounts.get(agent.accountID).put("amount", ((Double) accounts.get(agent.accountID).get("amount") + agent.amount));
-		if ((Double) accounts.get(agent.accountID).get("amount") >= 0.0) {
-			System.out.println("Added amount "+ agent.amount + " for " + ((Double) accounts.get(agent.accountID).get("amount")) 
-					+ " to " + accounts.get(agent.accountID).get("id"));
+		Double amount = (Double) accounts.get(Integer.parseInt(agent.accountID)).get("amount");
+		accounts.get(Integer.parseInt(agent.accountID)).put("amount", ((Double) accounts.get(Integer.parseInt(agent.accountID)).get("amount") + agent.amount));
+		if ((Double) accounts.get(Integer.parseInt(agent.accountID)).get("amount") >= 0.0) {
+			System.out.println("Added amount "+ agent.amount + " for " + ((Double) accounts.get(Integer.parseInt(agent.accountID)).get("amount")) 
+					+ " to " + accounts.get(Integer.parseInt(agent.accountID)).get("id"));
 			refresh();
 			notifyAll();
 			return true;
 		}
 		return false;
 	}
+	
+	public synchronized void SetAgent (String accountID, double amount, double ops, String agentID, Boolean agentRunning, String agentStatus) {
+		if (!agents.containsKey(agentID)) {
+			AgentModel agent = new AgentModel(accountID, amount, ops, agentID, this);
+			Thread agentThread = new Thread(agent);
+			agentThread.start();
+			agents.put(agentID, agent);
+		} else {
+			accounts.get(accountID).put("accountID", accountID);
+			accounts.get(accountID).put("amount", amount);
+			accounts.get(accountID).put("ops", ops);
+			accounts.get(accountID).put("agentRunning", agentRunning);
+			accounts.get(accountID).put("agentStatus", agentStatus);
+		}
+		refresh();
+	}
+	
 	
 	/**
 	 * StartAgent() starts up the agent process.

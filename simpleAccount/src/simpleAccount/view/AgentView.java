@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 
 import simpleAccount.controller.AccountController;
 import simpleAccount.model.Account;
+import simpleAccount.model.AgentModel;
 import simpleAccount.model.ModelEvent;
 import simpleAccount.model.OverdrawException;
 import simpleAccount.view.AccountView.Handler;
@@ -40,6 +41,8 @@ public class AgentView extends JFrameView {
 	private JTextField txtStatedisplay;
 	private JTextField txtOpscompleted;
 	private JFormattedTextField frmtdtxtfldTransferamount;
+	private JFormattedTextField frmtdtxtOpspersec;
+	private JButton btnDismiss, btnStopAgent, btnStartAgent;
 	
 	/**
 	 * Initialize the contents of the frame.
@@ -53,18 +56,18 @@ public class AgentView extends JFrameView {
 
 		Handler handler = new Handler();
 		
-		JButton btnStartAgent = new JButton("Start Agent");
+		btnStartAgent = new JButton("Start Agent");
 		btnStartAgent.addActionListener(handler);
 		btnStartAgent.setBounds(10, 231, 139, 23);
 		frame.getContentPane().add(btnStartAgent);
 		
-		JButton btnStopAgent = new JButton("Stop Agent");
+		btnStopAgent = new JButton("Stop Agent");
 		btnStopAgent.setEnabled(false);
 		btnStopAgent.addActionListener(handler);
 		btnStopAgent.setBounds(159, 231, 139, 23);
 		frame.getContentPane().add(btnStopAgent);
 		
-		JButton btnDismiss = new JButton("Dismiss");
+		btnDismiss = new JButton("Dismiss");
 		btnDismiss.addActionListener(handler);
 		btnDismiss.setBounds(309, 231, 139, 23);
 		frame.getContentPane().add(btnDismiss);
@@ -89,7 +92,7 @@ public class AgentView extends JFrameView {
 		frame.getContentPane().add(agentID);
 		agentID.setColumns(10);
 		
-		JFormattedTextField frmtdtxtOpspersec = new JFormattedTextField(amountFormat);
+		frmtdtxtOpspersec = new JFormattedTextField(amountFormat);
 		frmtdtxtOpspersec.setText("0");
 		frmtdtxtOpspersec.setBounds(159, 73, 139, 20);
 		frame.getContentPane().add(frmtdtxtOpspersec);
@@ -136,6 +139,12 @@ public class AgentView extends JFrameView {
 	public void modelChanged(ModelEvent event) {
 		HashMap<String, Object> account = event.getAccounts().get(Integer.parseInt(id));
 		frame.setTitle("Start " + this.agentType + " agent for account: " + account.get("id"));
+		if (event.getAgents().containsKey(id)){
+			AgentModel agent = event.getAgents().get(id);
+			txtAmounttransferred.setText((agent.GetTransferred().toString()));
+			txtStatedisplay.setText(agent.GetAgentStatus());
+			txtOpscompleted.setText((agent.GetOpsCompleted().toString()));
+		}
 	}
 	
 	/**
@@ -147,6 +156,7 @@ public class AgentView extends JFrameView {
 		// Event handling is handled locally
 		public void actionPerformed(ActionEvent e) {
 			if (e.getActionCommand().equals("Dismiss")) {
+				((AccountController)getController()).SetAgent(id, 0.0, 1, agentID.getText(), false, "Dismissed");
 				unregisterWithModel();
 				frame.setVisible(false);
 			}
@@ -162,12 +172,30 @@ public class AgentView extends JFrameView {
 				
 				String sAgentID = agentID.getText();
 				
-				try {
-					((AccountController)getController()).operationAgent(id, amount, sAgentID, agentType);
-				} catch (OverdrawException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				double ops = Double.parseDouble(frmtdtxtOpspersec.getText());
+				Boolean agentRunning;
+				String agentStatus;
+				if (e.getActionCommand().equals("Start Agent")) {
+					agentStatus = "Running";
+					agentRunning = true;
+					btnDismiss.setEnabled(false);
+					btnStartAgent.setEnabled(false);
+					btnStopAgent.setEnabled(true);
+					agentID.setEnabled(false);
+					frmtdtxtOpspersec.setEnabled(false);
+					frmtdtxtfldTransferamount.setEnabled(false);
+				} else {
+					agentStatus = "Stopped";
+					agentRunning = false;
+					btnDismiss.setEnabled(true);
+					btnStartAgent.setEnabled(true);
+					btnStopAgent.setEnabled(false);
+					frmtdtxtOpspersec.setEnabled(true);
+					frmtdtxtfldTransferamount.setEnabled(true);
 				}
+				
+				
+				((AccountController)getController()).SetAgent(id, amount, ops, agentID.getText(), agentRunning, agentStatus);
 				//((JTextField) frame.getContentPane().getComponent(6)).setText("0.0");
 			}
 	    }

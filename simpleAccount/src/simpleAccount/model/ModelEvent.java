@@ -24,11 +24,13 @@ public class ModelEvent extends ActionEvent {
 	
 	private int amount;
 	private SortedMap<Integer, HashMap> accounts;
+	private SortedMap<String, AgentModel> agents;
 	
 	public ModelEvent(Object obj, int id, String message, int amount, SortedMap<Integer, HashMap> accts, SortedMap<String, AgentModel> agents, AgentStatus agSt, EventKind kind){
 		super(obj, id, message);
 		this.amount = amount;
 		this.accounts = accts;
+		this.agents = agents;
 		this.kind = kind;
 		this.agSt = agSt;
 		
@@ -46,6 +48,9 @@ public class ModelEvent extends ActionEvent {
 	}
 	public AgentStatus getAgStatus(){
 		return agSt;
+	}
+	public SortedMap<String, AgentModel> getAgents(){
+		return agents;
 	}
 	
 }

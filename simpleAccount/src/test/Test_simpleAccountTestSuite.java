@@ -10,6 +10,6 @@ import org.junit.runners.Suite.SuiteClasses;
  *
  */
 @RunWith(Suite.class)
-@SuiteClasses({ Test_AgentModel.class })
+@SuiteClasses({ Test_AccountModel.class, Test_AgentModel.class })
 
 public class Test_simpleAccountTestSuite {}

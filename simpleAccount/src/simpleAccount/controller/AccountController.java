@@ -74,7 +74,8 @@ public class AccountController extends AbstractController {
 			WriteFile();
 		
 		} else {
-			((Account)getModel()).store(Integer.parseInt(option));
+			//((Account)getModel()).store(Integer.parseInt(option));
+			((Account)getModel()).refresh();
 		}
 	}
 	
@@ -171,7 +172,8 @@ public class AccountController extends AbstractController {
         }
 
 		setView(new AccountView((Account)getModel(), this));
-        ((Account)getModel()).store(1);
+        //((Account)getModel()).store(1);
+		((Account)getModel()).refresh();
         return true;
 	}
 	

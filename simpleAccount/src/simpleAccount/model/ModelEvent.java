@@ -18,15 +18,11 @@ public class ModelEvent extends ActionEvent {
 	}
 	
 	private EventKind kind;
-	
-	
-	private int amount;
 	private SortedMap<Integer, HashMap> accounts;
 	private SortedMap<String, AgentModel> agents;
 	
-	public ModelEvent(Object obj, int id, String message, int amount, SortedMap<Integer, HashMap> accts, SortedMap<String, AgentModel> agents, EventKind kind){
+	public ModelEvent(Object obj, int id, String message, SortedMap<Integer, HashMap> accts, SortedMap<String, AgentModel> agents, EventKind kind){
 		super(obj, id, message);
-		this.amount = amount;
 		this.accounts = accts;
 		this.agents = agents;
 		this.kind = kind;

@@ -11,8 +11,6 @@ import java.util.SortedMap;
 import javax.swing.SwingUtilities;
 
 import simpleAccount.model.Account;
-import simpleAccount.model.Agent;
-import simpleAccount.model.AgentCreator;
 import simpleAccount.model.AgentModel;
 import simpleAccount.model.OverdrawException;
 import simpleAccount.view.AccountView;
@@ -107,44 +105,6 @@ public class AccountController extends AbstractController {
 	
 	public synchronized void SetAgent (String accountID, double amount, double ops, String agentID, Boolean agentRunning, String agentStatus) {
 		((Account)getModel()).SetAgent(accountID, amount, ops, agentID, agentRunning, agentStatus);
-	}
-	
-	
-	public void operationAgent(String id, Double amount, String agentID, String agentType) throws OverdrawException {
-		
-		if (agentType.equals("deposit")) {
-			// Need to create an agent
-			
-			
-			double dID = Double.parseDouble(id);
-			int iID = (int) dID;
-			
-			//final AgentView acView = (AgentView)getView();
-			//final Agent ag = AgentCreator.createDepAgent(((Account)getModel()), amount, iID);
-			
-			
-			
-			//agContr.setModel(ag);
-			SwingUtilities.invokeLater(new Runnable() {
-			      public void run() {
-			    	  //acView.createAgentView(ag, this);
-			    	
-			    	// Need to start the deposit agent
-			    	  
-			    	  ((Account)getModel()).agentDeposit(amount);
-			      }
-			    });
-
-			
-			
-		} else if (agentType.equals("withdraw")) {
-			
-			// Need to start the withdraw agent
-			
-			
-			((Account)getModel()).agentWithdraw(amount);
-		}
-		
 	}
 	
 	

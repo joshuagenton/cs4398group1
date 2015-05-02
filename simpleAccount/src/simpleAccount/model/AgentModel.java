@@ -7,7 +7,7 @@ package simpleAccount.model;
  * @author Paul Bryson/Stacie Christensen
  * @since 2015-4-26
  */
-class AgentModel implements Runnable {
+public class AgentModel implements Runnable {
 	String accountID;
 	String agentID;
 	Double amount;
@@ -17,6 +17,7 @@ class AgentModel implements Runnable {
 	Account accountModel;
 	Boolean agentRunning = true;
 	String agentStatus = "Stopped";
+	Integer opsCompleted = 0;
 	//Accounts accounts;
 
 	/**
@@ -38,7 +39,7 @@ class AgentModel implements Runnable {
     }
 
     public void run() {
-    	while(true) {
+    	while(!agentStatus.equals("Dismiss")) {
 	    	while(agentRunning) {
 	    		AddAmount();
 	    		try {
@@ -56,8 +57,17 @@ class AgentModel implements Runnable {
      */
     public void AddAmount() {
     	if (accountModel.AddAmount(this)) {
-    		transferred = transferred + amount;
+    		transferred += amount;
+    		opsCompleted++;
     	}
-    		
+    }
+    public Double GetTransferred() {
+    	return transferred;
+    }
+    public String GetAgentStatus() {
+    	return agentStatus;
+    }
+    public Integer GetOpsCompleted () {
+    	return opsCompleted;
     }
 }

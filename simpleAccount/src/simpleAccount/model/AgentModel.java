@@ -8,6 +8,7 @@ package simpleAccount.model;
  * @since 2015-4-26
  */
 public class AgentModel implements Runnable {
+
 	String accountID;
 	String agentID;
 	Double amount;
@@ -18,7 +19,7 @@ public class AgentModel implements Runnable {
 	Boolean agentRunning = true;
 	String agentStatus;
 	Integer opsCompleted = 0;
-	//Accounts accounts;
+
 
 	/**
 	 * Agent constructor.
@@ -33,7 +34,6 @@ public class AgentModel implements Runnable {
         this.accountID = accountID;
         this.amount = amount;
         this.ops = ops;
-        //this.accounts = accounts;
         this.agentID = agentID;
         this.accountModel = accountModel;
         this.agentStatus = agentStatus;
@@ -48,15 +48,14 @@ public class AgentModel implements Runnable {
 	    		try {
 					Thread.sleep((long) (1/ops*1000));
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 	    	}
+	    	
 	    	//  For some reason if the thread doesn't do anything here, it dies
     		try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
     	}
@@ -72,13 +71,24 @@ public class AgentModel implements Runnable {
     		opsCompleted++;
     	}
     }
+    
     public Double GetTransferred() {
     	return transferred;
     }
+    
     public String GetAgentStatus() {
     	return agentStatus;
     }
+    
     public Integer GetOpsCompleted () {
     	return opsCompleted;
+    }
+    
+    public void setAgentID(String AgentID) {
+    	this.agentID = AgentID;
+    }
+    
+    public void setAmount(double amount) {
+    	this.amount = amount;
     }
 }

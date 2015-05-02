@@ -143,7 +143,4 @@ public class Account extends AbstractModel {
 	public SortedMap<Integer, HashMap> getAccounts() {
 		return accounts;
 	}
-	
-	
-	
 }

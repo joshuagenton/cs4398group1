@@ -8,14 +8,10 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.SortedMap;
 
-import javax.swing.SwingUtilities;
-
 import simpleAccount.model.Account;
-import simpleAccount.model.AgentModel;
 import simpleAccount.view.AccountView;
 import simpleAccount.view.AgentView;
 import simpleAccount.view.ErrorView;
-import simpleAccount.view.JFrameView;
 import simpleAccount.view.TransferView;
 
 /**
@@ -33,8 +29,6 @@ public class AccountController extends AbstractController {
 	 */
 	public AccountController(){
 		setModel(new Account());
-		//  View is instantiated after the data file is successfully read in
-		//((JFrameView)getView()).setVisible(true);
 	}
 	
 	/**
@@ -74,7 +68,6 @@ public class AccountController extends AbstractController {
 			WriteFile();
 		
 		} else {
-			//((Account)getModel()).store(Integer.parseInt(option));
 			((Account)getModel()).refresh();
 		}
 	}
@@ -102,7 +95,15 @@ public class AccountController extends AbstractController {
 	}
 	
 
-	
+	/**
+	 * The SetAgent() function is what sets the agents to get everything running.
+	 * @param accountID the selected account ID
+	 * @param amount the amount of money that is being withdrawn/deposited
+	 * @param ops the operation
+	 * @param agentID the agentID that is running
+	 * @param agentRunning if the agent is running
+	 * @param agentStatus the status of the agent
+	 */
 	public synchronized void SetAgent (String accountID, double amount, double ops, String agentID, Boolean agentRunning, String agentStatus) {
 		((Account)getModel()).SetAgent(accountID, amount, ops, agentID, agentRunning, agentStatus);
 	}
@@ -133,10 +134,13 @@ public class AccountController extends AbstractController {
             
             while ((line = br.readLine()) != null) {
                 if (line.contains("|")) {
-                    // do line by line parsing here
+                    
+                	// do line by line parsing here
                     line = line.trim();
+                    
                     // split the line
                     String[] parts = line.split("[|]");
+                    
                     // parse out the name and id
                     name = parts[0].trim();
                     id = parts[1].trim();
@@ -146,8 +150,7 @@ public class AccountController extends AbstractController {
                     	System.out.println("Data error in file " + datafile + " at line " + (lineCount + 3) + " " + id + " " + name);
                     	return false;
                     }
-                    // all done now, let's print the name and id
-                    //System.out.println(name + " " + id + " " + amount);
+
                     account = new HashMap<String, Object>();
                     account.put("id", id);
                     account.put("name", name);
@@ -156,13 +159,11 @@ public class AccountController extends AbstractController {
                     lineCount++;
                 }
             }
-            //((AccountModel)getModel()).PrintAccounts();
             
             br.close();
             
         } catch (Exception e) {
             System.out.println("Unable to read the file " + datafile);
-            //System.out.println(e);
             return false;
         }
         
@@ -172,7 +173,6 @@ public class AccountController extends AbstractController {
         }
 
 		setView(new AccountView((Account)getModel(), this));
-        //((Account)getModel()).store(1);
 		((Account)getModel()).refresh();
         return true;
 	}
@@ -185,7 +185,8 @@ public class AccountController extends AbstractController {
 	 */
 	public boolean WriteFile () {
 		SortedMap<Integer, HashMap> accounts = ((Account)getModel()).getAccounts();
-        // write the file
+        
+		// write the file
         try {
             String name = "", id = "";
             double amount = 0;

@@ -1,22 +1,18 @@
 package simpleAccount.view;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Random;
-import java.util.SortedMap;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
 import simpleAccount.controller.AccountController;
 import simpleAccount.model.Account;
 import simpleAccount.model.AgentModel;
 import simpleAccount.model.ModelEvent;
-import simpleAccount.view.AccountView.Handler;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;

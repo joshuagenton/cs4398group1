@@ -44,7 +44,6 @@ public class AgentModel implements Runnable {
     	accountModel.AddAgent(this);
     	while(!agentStatus.equals("Dismiss")) {
 	    	while(agentRunning && ops > 0.0) {
-		    //while(true) {
 	    		AddAmount();
 	    		try {
 					Thread.sleep((long) (1/ops*1000));
@@ -52,17 +51,15 @@ public class AgentModel implements Runnable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-	    		//System.out.println("Agent Status: " + agentStatus + " " + agentRunning.toString());
 	    	}
-    		//System.out.println("Agent Status: " + agentStatus + " " + agentRunning.toString());
+	    	//  For some reason if the thread doesn't do anything here, it dies
     		try {
-				Thread.sleep(500);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
     	}
-		System.out.println("Dismissed agent " + agentID);
 		accountModel.RemoveAgent(this);
     }
     

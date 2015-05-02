@@ -88,7 +88,7 @@ public class AgentView extends JFrameView {
 		
 		agentID = new JTextField();
 		agentID.setBounds(159, 11, 139, 20);
-		agentID.setText(Integer.toString((new Random()).nextInt(100)));
+		agentID.setText(Integer.toString((new Random()).nextInt(1000)));
 		frame.getContentPane().add(agentID);
 		agentID.setColumns(10);
 		
@@ -139,13 +139,14 @@ public class AgentView extends JFrameView {
 	public void modelChanged(ModelEvent event) {
 		HashMap<String, Object> account = event.getAccounts().get(Integer.parseInt(id));
 		frame.setTitle("Start " + this.agentType + " agent for account: " + account.get("id"));
-		if (event.getAgents().containsKey(id)){
-			AgentModel agent = event.getAgents().get(id);
+		
+		//  Update the various text fields
+		if (event.getAgents().containsKey(agentID.getText())){
+			AgentModel agent = event.getAgents().get(agentID.getText());
 			txtAmounttransferred.setText((agent.GetTransferred().toString()));
 			txtStatedisplay.setText(agent.GetAgentStatus());
 			txtOpscompleted.setText((agent.GetOpsCompleted().toString()));
 		}
-		System.out.println("Received event");
 	}
 	
 	/**
@@ -162,16 +163,15 @@ public class AgentView extends JFrameView {
 				frame.setVisible(false);
 			}
 			else {
-				//Double amount = Double.parseDouble(((JTextField) frame.getContentPane().getComponent(6)).getText().toString().replace(",", ""));
+				//  Set all of the fields to create/modify the agent
 				Double amount = Double.parseDouble(frmtdtxtfldTransferamount.getText());
-				if (e.getActionCommand().equals("Withdraw"))
+				if (agentType.equals("withdraw"))
 					amount = -amount;
 				
-				System.out.println("ID: " + id);
-				System.out.println("agentType: " + agentType);
-				System.out.println("Amount: " + amount);
+				// If the agentID field is blank, just fill it in
+				if (agentID.getText().equals(""))
+					agentID.setText(Integer.toString((new Random()).nextInt(1000)));
 				
-				String sAgentID = agentID.getText();
 				
 				double ops = Double.parseDouble(frmtdtxtOpspersec.getText());
 				Boolean agentRunning;
@@ -195,9 +195,8 @@ public class AgentView extends JFrameView {
 					frmtdtxtfldTransferamount.setEnabled(true);
 				}
 				
-				
+				//  Create/modify the agent
 				((AccountController)getController()).SetAgent(id, amount, ops, agentID.getText(), agentRunning, agentStatus);
-				//((JTextField) frame.getContentPane().getComponent(6)).setText("0.0");
 			}
 	    }
 	}

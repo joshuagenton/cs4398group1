@@ -145,8 +145,7 @@ public class Account extends AbstractModel {
 		Double amount = (Double) accounts.get(Integer.parseInt(agent.accountID)).get("amount");
 		accounts.get(Integer.parseInt(agent.accountID)).put("amount", ((Double) accounts.get(Integer.parseInt(agent.accountID)).get("amount") + agent.amount));
 		if ((Double) accounts.get(Integer.parseInt(agent.accountID)).get("amount") >= 0.0) {
-			System.out.println("Added amount "+ agent.amount + " for " + ((Double) accounts.get(Integer.parseInt(agent.accountID)).get("amount")) 
-					+ " to " + accounts.get(Integer.parseInt(agent.accountID)).get("id"));
+			System.out.println("Modified account " + accounts.get(Integer.parseInt(agent.accountID)).get("id") + " by "+ agent.amount + " to a total of " + ((Double) accounts.get(Integer.parseInt(agent.accountID)).get("amount")));
 			refresh();
 			notifyAll();
 			return true;
@@ -168,9 +167,9 @@ public class Account extends AbstractModel {
 			System.out.println("Created new agent " + agentID);
 			AgentModel agent = new AgentModel(accountID, amount, ops, agentID, agentRunning, agentStatus, this);
 			Thread agentThread = new Thread(agent);
+			agents.put(agentID, agent);
 			agentThread.start();
 		} else {
-			System.out.println("Updated agent " + agentID);
 			agents.get(agentID).amount = amount;
 			agents.get(agentID).ops = ops;
 			agents.get(agentID).agentRunning = agentRunning;
@@ -179,21 +178,6 @@ public class Account extends AbstractModel {
 		}
 	}
 	
-	
-	/**
-	 * StartAgent() starts up the agent process.
-	 * @param accountID the accountID we are interacting with
-	 * @param amount the amount we are incrementing by
-	 * @param ops the operation (withdraw/deposit)
-	 * @param agentID the agentID
-	 */
-	public void StartAgent(String accountID, double amount, double ops, String agentID) {
-		if (!agents.containsKey(agentID)) {
-			//Thread T1 = new Thread(new Agent(accountID, amount, ops, agentID, this));
-			//agents.put(agentID, T1);
-		}
-	}
-
 	/**
 	 * getAccounts() returns a list of the accounts from the text file.
 	 * @return StortedMap of the accounts.
@@ -204,85 +188,4 @@ public class Account extends AbstractModel {
 	
 	
 	
-	
-	private double balance;
-	
-	/*public Account(double balance){
-		this.balance = balance;
-	}*/
-	
-	public double getBalance(){return balance;}
-	
-	public synchronized void agentDeposit(double amount) {
-		double oldB = balance;
-		balance += amount;
-		
-		int iBalance = (int) balance;
-		
-		final ModelEvent me = new ModelEvent(this, 1, "", iBalance, accounts, agents, AgentStatus.NA, ModelEvent.EventKind.BalanceUpdate);
-		
-		SwingUtilities.invokeLater(
-				new Runnable() {
-				    public void run() {
-				    	notifyChanged(me);
-				    }
-				});
-		notifyAll();
-	}
-	
-	public synchronized void agentWithdraw(double amount) throws OverdrawException {
-		double newB = balance - amount;
-		if(newB < 0.0) throw new OverdrawException(newB);
-		balance = newB;
-		
-		int iBalance = (int) balance;
-		
-		final ModelEvent me = new ModelEvent(this, 1, "", iBalance, accounts, agents, AgentStatus.NA, ModelEvent.EventKind.BalanceUpdate);
-		
-		SwingUtilities.invokeLater(
-				new Runnable() {
-				    public void run() {
-				    	notifyChanged(me);
-				    }
-				});
-	}
-	public synchronized void autoWithdraw(double amount, Agent ag) {
-		try {
-			System.out.println("Trying to withdraw " + amount + " from balance " + balance);
-			
-			//if(balance - amount < 0.0) {
-				//System.out.println("Sending blocked");
-				//ag.setStatus(AgentStatus.Blocked);		
-			//}
-			
-			while(this.balance - amount < 0.0) {
-				ag.setStatus(AgentStatus.Blocked);	
-				wait();
-			}
-			if(ag.getStatus() == AgentStatus.Paused) return;
-			ag.setStatus(AgentStatus.Running);
-					
-			this.balance -= amount;
-			
-			int iBalance = (int) balance;
-			
-			final ModelEvent me = new ModelEvent(this, 1, "", iBalance, accounts, agents, AgentStatus.NA, ModelEvent.EventKind.BalanceUpdate);
-			SwingUtilities.invokeLater(
-				new Runnable() {
-				    public void run() {
-				    	notifyChanged(me);
-				    }
-				});
-		}
-		catch(InterruptedException ex){
-			System.out.println("Thread " + Thread.currentThread().getName() + " interrupted");
-		}
-		/*
-		catch(InvocationTargetException ex){
-			System.out.println("Thread " + Thread.currentThread().getName() + " " + ex.getMessage());
-			ex.printStackTrace();
-		}
-		*/
-	}
-
 }

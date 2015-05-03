@@ -158,10 +158,10 @@ public class AgentView extends JFrameView {
 				frame.setVisible(false);
 			}
 			else {
-				double ops = Double.parseDouble(frmtdtxtOpspersec.getText());
+				double ops = Double.parseDouble(frmtdtxtOpspersec.getText().replaceAll(",", ""));
 				
 				//  If this is a withdraw window, then set the amount to negative and use the same deposit methods
-				Double amount = Double.parseDouble(frmtdtxtfldTransferamount.getText());
+				Double amount = Double.parseDouble(frmtdtxtfldTransferamount.getText().replaceAll(",", ""));
 				if (agentType.equals("withdraw"))
 					amount = -amount;
 				

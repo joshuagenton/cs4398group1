@@ -21,8 +21,8 @@ public class Test_AccountModel {
 	@Before
 	public void setupEach() {
 		try {
-			agent = new AgentModel("078910", 10.0, 1, "0", true, "Running", account);
 			account = new Account();
+			agent = new AgentModel("078910", 10.0, 1, "0", true, "Running", account);
 		
 		} catch (Exception e) {
 			fail("Didn't set up the @Before.");
@@ -40,9 +40,7 @@ public class Test_AccountModel {
 	public void testAddAgent() {
 		try {
 			AgentModel agent2 = new AgentModel("078910", 10.0, 1, "0", true, "Blocked", account);
-			
 			account.AddAgent(agent2);
-			
 			
 		} catch (Exception e) {
 			fail("Exception " + e.getMessage());

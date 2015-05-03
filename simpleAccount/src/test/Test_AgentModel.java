@@ -20,8 +20,8 @@ public class Test_AgentModel {
 	@Before
 	public void setupEach() {
 		try {
-			agent = new AgentModel("078910", 10.0, 1, "0", true, "Running", account);
 			account = new Account();
+			agent = new AgentModel("078910", 10.0, 1, "0", true, "Running", account);
 		
 		} catch (Exception e) {
 			fail("Didn't set up the @Before.");

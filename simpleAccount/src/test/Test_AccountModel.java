@@ -24,7 +24,7 @@ public class Test_AccountModel {
 	public void setupEach() {
 		try {
 			account = new Account();
-			agent = new AgentModel("078910", 10.0, 1, "0", true, "Running", account);
+			agent = new AgentModel("078910", 10.0, 1.0, "0", true, "Running", account);
 		
 		} catch (Exception e) {
 			fail("Didn't set up the @Before.");
@@ -40,7 +40,6 @@ public class Test_AccountModel {
 	 */
 	@Test
 	public void testAddAccount() {
-		System.out.println("testAddAccount");
 		try {
 			HashMap<String, Object> acct = new HashMap<String, Object>();
             acct.put("id", "078910");
@@ -58,27 +57,10 @@ public class Test_AccountModel {
 	 */
 	@Test
 	public void testAddAgent() {
-		System.out.println("testAddAgent");
 		try {
-			AgentModel agent2 = new AgentModel("078910", 10.0, 1, "0", true, "Blocked", account);
+			AgentModel agent2 = new AgentModel("078910", 10.0, 1.0, "0", true, "Blocked", account);
 			account.AddAgent(agent2);
 			
-		} catch (Exception e) {
-			fail("Exception " + e.getMessage());
-		}
-	}
-
-	/**
-	 * Testing the RemoveAgent method in Account.
-	 */
-	@Test
-	public void testRemoveAgent() {
-		System.out.println("testRemoveAgent");
-		
-		agent.setAgentID("1");
-		
-		try{
-			account.RemoveAgent(agent);
 		} catch (Exception e) {
 			fail("Exception " + e.getMessage());
 		}
@@ -89,12 +71,22 @@ public class Test_AccountModel {
 	 */
 	@Test
 	public void testSetAgent() {
-		System.out.println("testSetAgent");
-		
-		agent.setAgentID("1");
 		
 		try {
-			account.SetAgent("078910", 10.0, 1, "1", true, "Running");
+			account.SetAgent("078910", 20.0, 1.0, "0", false, "Stopped");
+		} catch (Exception e) {
+			fail("Exception " + e.getMessage());
+		}
+	}
+
+	/**
+	 * Testing the RemoveAgent method in Account.
+	 */
+	@Test
+	public void testRemoveAgent() {
+		
+		try{
+			account.RemoveAgent(agent);
 		} catch (Exception e) {
 			fail("Exception " + e.getMessage());
 		}
@@ -105,7 +97,6 @@ public class Test_AccountModel {
 	 */
 	@Test
 	public void testAmount() {
-		System.out.println("testAmount");
 		try {
 			agent.setAmount(0);
 			
@@ -133,7 +124,6 @@ public class Test_AccountModel {
 	
 	@Test
 	public void testAddAmount() {
-		System.out.println("testAddAmount");
 		try {
 			account.AddAmount(agent);
 			fail("This should fail.");

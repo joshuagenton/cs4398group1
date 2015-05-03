@@ -2,6 +2,8 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
+
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,7 +39,26 @@ public class Test_AccountModel {
 	 * Testing the AddAgent method in Account.
 	 */
 	@Test
+	public void testAddAccount() {
+		System.out.println("testAddAccount");
+		try {
+			HashMap<String, Object> acct = new HashMap<String, Object>();
+            acct.put("id", "078910");
+            acct.put("name", "John Doe");
+            acct.put("amount", 30.0);
+			account.AddAccount(acct);
+			
+		} catch (Exception e) {
+			fail("Exception " + e.getMessage());
+		}
+	}
+
+	/**
+	 * Testing the AddAgent method in Account.
+	 */
+	@Test
 	public void testAddAgent() {
+		System.out.println("testAddAgent");
 		try {
 			AgentModel agent2 = new AgentModel("078910", 10.0, 1, "0", true, "Blocked", account);
 			account.AddAgent(agent2);
@@ -52,6 +73,7 @@ public class Test_AccountModel {
 	 */
 	@Test
 	public void testRemoveAgent() {
+		System.out.println("testRemoveAgent");
 		
 		agent.setAgentID("1");
 		
@@ -67,6 +89,7 @@ public class Test_AccountModel {
 	 */
 	@Test
 	public void testSetAgent() {
+		System.out.println("testSetAgent");
 		
 		agent.setAgentID("1");
 		
@@ -82,6 +105,7 @@ public class Test_AccountModel {
 	 */
 	@Test
 	public void testAmount() {
+		System.out.println("testAmount");
 		try {
 			agent.setAmount(0);
 			
@@ -109,6 +133,7 @@ public class Test_AccountModel {
 	
 	@Test
 	public void testAddAmount() {
+		System.out.println("testAddAmount");
 		try {
 			account.AddAmount(agent);
 			fail("This should fail.");
